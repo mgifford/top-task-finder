@@ -1,26 +1,29 @@
 ---
-work_package_id: "WP01"
-subtasks:
-  - "T001"
-  - "T002"
-  - "T003"
-  - "T004"
-  - "T005"
-title: "Foundation and Project Scaffolding"
-phase: "Phase 1 - Foundation"
-lane: "planned"
+work_package_id: WP01
+title: Foundation and Project Scaffolding
+lane: "doing"
 dependencies: []
-assignee: ""
-agent: ""
-shell_pid: ""
-review_status: ""
-reviewed_by: ""
+base_branch: main
+base_commit: ea7229cc59b376cad07925931528f3a5ebae0d84
+created_at: '2026-02-25T20:57:52.218673+00:00'
+subtasks:
+- T001
+- T002
+- T003
+- T004
+- T005
+phase: Phase 1 - Foundation
+assignee: ''
+agent: ''
+shell_pid: "9372"
+review_status: ''
+reviewed_by: ''
 history:
-  - timestamp: "2026-02-25T20:40:48Z"
-    lane: "planned"
-    agent: "system"
-    shell_pid: ""
-    action: "Prompt generated via /spec-kitty.tasks"
+- timestamp: '2026-02-25T20:40:48Z'
+  lane: planned
+  agent: system
+  shell_pid: ''
+  action: Prompt generated via /spec-kitty.tasks
 ---
 
 # Work Package Prompt: WP01 - Foundation and Project Scaffolding
