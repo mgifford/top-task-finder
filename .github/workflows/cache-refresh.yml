@@ -1,0 +1,55 @@
+name: Refresh URL Cache
+
+on:
+  workflow_dispatch:
+    inputs:
+      domain_url:
+        description: Optional domain/URL for a single on-demand cache build
+        required: false
+        type: string
+      requested_count:
+        description: URL count for manual run (used with domain_url)
+        required: false
+        default: '100'
+        type: string
+  schedule:
+    - cron: '23 3 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build cache from configured targets
+        if: ${{ github.event.inputs.domain_url == '' || github.event.inputs.domain_url == null }}
+        run: node scripts/build-cache.mjs --targets config/cache-targets.json --out cache
+
+      - name: Build cache for manual target
+        if: ${{ github.event.inputs.domain_url != '' && github.event.inputs.domain_url != null }}
+        run: |
+          node scripts/build-cache.mjs \
+            --domain-url "${{ github.event.inputs.domain_url }}" \
+            --requested-count "${{ github.event.inputs.requested_count }}" \
+            --out cache
+
+      - name: Commit cache updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add cache
+          if git diff --cached --quiet; then
+            echo "No cache changes to commit"
+            exit 0
+          fi
+          git commit -m "chore: refresh generated URL cache"
+          git push

@@ -1,0 +1,8 @@
+{
+  "targets": [
+    {
+      "domainUrl": "https://gsa.gov",
+      "requestedCount": 75
+    }
+  ]
+}

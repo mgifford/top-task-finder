@@ -31,6 +31,14 @@ const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
 const clearCacheButton = document.getElementById('clear-cache');
 
+function canonicalizeHost(hostname) {
+  const normalized = String(hostname || '').toLowerCase();
+  if (normalized.startsWith('www.')) {
+    return normalized.slice(4);
+  }
+  return normalized;
+}
+
 function renderStatus(kind, message) {
   statusRegion.className = `status ${kind}`;
   statusRegion.textContent = message;
@@ -146,6 +154,24 @@ function buildPlaceholderResult(scanRequest, usedCache) {
   });
 }
 
+async function loadGeneratedServerCache(scanRequest) {
+  const host = canonicalizeHost(scanRequest.canonicalHost);
+  const cachePath = `/cache/${host}-${scanRequest.requestedCount}.json`;
+
+  try {
+    const response = await fetch(cachePath, { cache: 'no-store' });
+    if (!response.ok) {
+      return null;
+    }
+
+    const payload = await response.json();
+    validateUrlSelectionResult(payload);
+    return payload;
+  } catch {
+    return null;
+  }
+}
+
 function buildResultFromDiscovery(scanRequest, discoveryOutput, usedCache) {
   const selectedUrls = discoveryOutput.candidates
     .map((candidate) => candidate.url)
@@ -202,6 +228,21 @@ async function handleSubmit(event) {
       bypassCache: bypassCacheInput.checked,
     });
     validateScanRequest(scanRequest);
+
+    if (!scanRequest.bypassCache) {
+      const generatedCache = await loadGeneratedServerCache(scanRequest);
+      if (generatedCache) {
+        renderResult(generatedCache);
+        saveCacheRecord(scanRequest, generatedCache);
+        renderStatus('success', 'Loaded generated server cache.');
+        const accepted = generatedCache.discoverySummary?.sourceCounts?.accepted ?? {};
+        const sitemapAccepted = accepted.sitemap ?? 0;
+        const searchAccepted = accepted.search ?? 0;
+        const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+        cacheState.textContent = `Cache state: generated file hit, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
+        return;
+      }
+    }
 
     const cached = loadCacheRecord(scanRequest);
     if (cached && !scanRequest.bypassCache) {

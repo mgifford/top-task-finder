@@ -32,3 +32,23 @@ Top Task Finder generates a representative list of URLs from a public website to
 
 - `index.md` uses Jekyll front matter (`layout: default`), so plain static servers may show raw Markdown instead of the final page shell.
 - For a GitHub Pages-like local preview, run via Jekyll (for example: `bundle exec jekyll serve`) and open the served site URL.
+
+## GitHub Action generated cache
+
+- Workflow: [.github/workflows/cache-refresh.yml](.github/workflows/cache-refresh.yml)
+- Generator script: [scripts/build-cache.mjs](scripts/build-cache.mjs)
+- Target config: [config/cache-targets.json](config/cache-targets.json)
+- Output files: [cache/index.json](cache/index.json) and host/count artifacts like `cache/gsa.gov-75.json`
+
+How it works:
+
+- A nightly workflow (and manual `workflow_dispatch`) builds URL selections server-side.
+- Generated JSON artifacts are committed to `main`.
+- The browser app first checks `/cache/{canonicalHost}-{requestedCount}.json`; when present, it uses that result before live browser discovery.
+
+Manual run options:
+
+- Run workflow from GitHub UI and optionally pass `domain_url` + `requested_count`.
+- Or run locally:
+	- `node scripts/build-cache.mjs --targets config/cache-targets.json --out cache`
+	- `node scripts/build-cache.mjs --domain-url https://gsa.gov --requested-count 75 --out cache`
