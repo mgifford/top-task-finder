@@ -14,10 +14,19 @@ import {
 
 const DEFAULT_REQUESTED_COUNT = 100;
 const FALLBACK_MAX_URLS = 200;
+const CACHE_DISPATCH_TIMEOUT_MS = 120000;
+const CACHE_RUN_TIMEOUT_MS = 900000;
+const GITHUB_TOKEN_STORAGE_KEY = 'ttf:github-token';
+const GITHUB_API_BASE = 'https://api.github.com';
+const FALLBACK_GITHUB_OWNER = 'mgifford';
+const FALLBACK_GITHUB_REPO = 'top-task-finder';
+const CACHE_WORKFLOW_FILE = 'cache-refresh.yml';
+const CACHE_WORKFLOW_REF = 'main';
 
 const state = {
   maxRequestedUrls: FALLBACK_MAX_URLS,
   currentResult: null,
+  githubContext: null,
 };
 
 const scanForm = document.getElementById('scan-form');
@@ -30,6 +39,9 @@ const cacheState = document.getElementById('cache-state');
 const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
 const clearCacheButton = document.getElementById('clear-cache');
+const githubTokenInput = document.getElementById('github-token');
+const runServerCrawlButton = document.getElementById('run-server-crawl');
+const serverCrawlStatus = document.getElementById('server-crawl-status');
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -46,6 +58,54 @@ function renderStatus(kind, message) {
 
 function renderError(errorMessage) {
   renderStatus('error', errorMessage);
+}
+
+function renderServerCrawlStatus(message) {
+  if (serverCrawlStatus) {
+    serverCrawlStatus.textContent = message;
+  }
+}
+
+function getGithubContext() {
+  if (state.githubContext) {
+    return state.githubContext;
+  }
+
+  const host = window.location.hostname || '';
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  let owner = FALLBACK_GITHUB_OWNER;
+  let repo = FALLBACK_GITHUB_REPO;
+
+  if (host.endsWith('.github.io')) {
+    owner = host.split('.')[0] || owner;
+    if (pathParts.length > 0) {
+      repo = pathParts[0] || repo;
+    }
+  }
+
+  state.githubContext = { owner, repo };
+  return state.githubContext;
+}
+
+function loadStoredGithubToken() {
+  try {
+    return localStorage.getItem(GITHUB_TOKEN_STORAGE_KEY) ?? '';
+  } catch {
+    return '';
+  }
+}
+
+function storeGithubToken(tokenValue) {
+  try {
+    const trimmed = String(tokenValue || '').trim();
+    if (!trimmed) {
+      localStorage.removeItem(GITHUB_TOKEN_STORAGE_KEY);
+      return;
+    }
+    localStorage.setItem(GITHUB_TOKEN_STORAGE_KEY, trimmed);
+  } catch {
+    renderServerCrawlStatus('Unable to persist token in this browser context.');
+  }
 }
 
 function parseRequestedCount(rawValue) {
@@ -96,6 +156,34 @@ function renderResult(result) {
   state.currentResult = result;
 }
 
+function updateUrlFromForm() {
+  const params = new URLSearchParams(window.location.search);
+  const domainValue = domainInput.value.trim();
+  const requestedValue = requestedCountInput.value.trim();
+
+  if (domainValue) {
+    params.set('domainUrl', domainValue);
+  } else {
+    params.delete('domainUrl');
+  }
+
+  if (/^\d+$/.test(requestedValue)) {
+    params.set('requestedCount', requestedValue);
+  } else {
+    params.delete('requestedCount');
+  }
+
+  if (bypassCacheInput.checked) {
+    params.set('bypassCache', '1');
+  } else {
+    params.delete('bypassCache');
+  }
+
+  const query = params.toString();
+  const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
+  window.history.replaceState({}, '', nextUrl);
+}
+
 function applyQueryParamsToForm() {
   const params = new URLSearchParams(window.location.search);
   const domainUrl = params.get('domainUrl');
@@ -120,6 +208,150 @@ function applyQueryParamsToForm() {
     hasDomainInput,
     shouldAutoRun: hasDomainInput,
   };
+}
+
+function encodeRepoPath(pathValue) {
+  return pathValue
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+}
+
+async function githubApiRequest(endpoint, token, options = {}) {
+  const response = await fetch(`${GITHUB_API_BASE}${endpoint}`, {
+    method: options.method ?? 'GET',
+    headers: {
+      Accept: 'application/vnd.github+json',
+      Authorization: `Bearer ${token}`,
+      'X-GitHub-Api-Version': '2022-11-28',
+      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+    },
+    body: options.body,
+  });
+
+  if (!response.ok) {
+    const message = response.status === 401 || response.status === 403
+      ? 'GitHub token rejected or missing required permissions.'
+      : `GitHub API error (${response.status}).`;
+    throw new Error(message);
+  }
+
+  if (response.status === 204) {
+    return null;
+  }
+
+  return response.json();
+}
+
+async function dispatchCacheWorkflow(scanRequest, token) {
+  const { owner, repo } = getGithubContext();
+  await githubApiRequest(
+    `/repos/${owner}/${repo}/actions/workflows/${CACHE_WORKFLOW_FILE}/dispatches`,
+    token,
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        ref: CACHE_WORKFLOW_REF,
+        inputs: {
+          domain_url: scanRequest.normalizedUrl.origin,
+          requested_count: String(scanRequest.requestedCount),
+        },
+      }),
+    },
+  );
+}
+
+async function sleep(ms) {
+  await new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+function findWorkflowRun(runsPayload, startedAtMs) {
+  const runs = Array.isArray(runsPayload?.workflow_runs)
+    ? runsPayload.workflow_runs
+    : [];
+
+  const candidates = runs
+    .filter((run) => run?.event === 'workflow_dispatch')
+    .filter((run) => Date.parse(run.created_at || 0) >= startedAtMs - 60000)
+    .sort((left, right) => Date.parse(right.created_at) - Date.parse(left.created_at));
+
+  return candidates[0] ?? null;
+}
+
+async function waitForWorkflowRun(token, startedAtMs) {
+  const { owner, repo } = getGithubContext();
+  const timeoutAt = Date.now() + CACHE_DISPATCH_TIMEOUT_MS;
+
+  while (Date.now() < timeoutAt) {
+    const runsPayload = await githubApiRequest(
+      `/repos/${owner}/${repo}/actions/workflows/${CACHE_WORKFLOW_FILE}/runs?event=workflow_dispatch&branch=${CACHE_WORKFLOW_REF}&per_page=20`,
+      token,
+    );
+
+    const run = findWorkflowRun(runsPayload, startedAtMs);
+    if (run) {
+      return run;
+    }
+
+    await sleep(4000);
+  }
+
+  throw new Error('Timed out waiting for dispatched workflow run.');
+}
+
+async function waitForRunCompletion(token, runId) {
+  const { owner, repo } = getGithubContext();
+  const timeoutAt = Date.now() + CACHE_RUN_TIMEOUT_MS;
+
+  while (Date.now() < timeoutAt) {
+    const run = await githubApiRequest(
+      `/repos/${owner}/${repo}/actions/runs/${runId}`,
+      token,
+    );
+
+    if (run?.status === 'completed') {
+      if (run.conclusion === 'success') {
+        return run;
+      }
+
+      throw new Error(`Workflow completed with conclusion: ${run.conclusion || 'unknown'}.`);
+    }
+
+    await sleep(6000);
+  }
+
+  throw new Error('Timed out waiting for workflow completion.');
+}
+
+function decodeBase64Json(base64Content) {
+  const clean = String(base64Content || '').replace(/\n/g, '');
+  const jsonText = atob(clean);
+  return JSON.parse(jsonText);
+}
+
+async function loadGeneratedCacheFromGithubApi(scanRequest, token) {
+  const { owner, repo } = getGithubContext();
+  const host = canonicalizeHost(scanRequest.canonicalHost);
+  const filePath = `cache/${host}-${scanRequest.requestedCount}.json`;
+
+  try {
+    const payload = await githubApiRequest(
+      `/repos/${owner}/${repo}/contents/${encodeRepoPath(filePath)}?ref=${CACHE_WORKFLOW_REF}`,
+      token,
+    );
+
+    if (!payload?.content) {
+      return null;
+    }
+
+    const parsed = decodeBase64Json(payload.content);
+    validateUrlSelectionResult(parsed);
+    return parsed;
+  } catch {
+    return null;
+  }
 }
 
 function buildPlaceholderResult(scanRequest, usedCache) {
@@ -216,6 +448,7 @@ async function handleSubmit(event) {
   event.preventDefault();
   try {
     renderStatus('info', 'Preparing scan request...');
+    updateUrlFromForm();
 
     const normalizedUrl = normalizeInputUrl(domainInput.value);
     const requestedCount = parseRequestedCount(requestedCountInput.value);
@@ -304,6 +537,70 @@ async function handleSubmit(event) {
   }
 }
 
+async function handleRunServerCrawl() {
+  runServerCrawlButton.disabled = true;
+  renderServerCrawlStatus('Starting server crawl workflow...');
+
+  try {
+    const token = githubTokenInput.value.trim();
+    if (!token) {
+      throw new Error('Enter a GitHub token to run server crawl.');
+    }
+
+    storeGithubToken(token);
+    updateUrlFromForm();
+
+    const normalizedUrl = normalizeInputUrl(domainInput.value);
+    const requestedCount = parseRequestedCount(requestedCountInput.value);
+    const scanRequest = createScanRequest({
+      rawInputUrl: domainInput.value,
+      normalizedUrl,
+      requestedCount,
+      effectiveCountLimit: state.maxRequestedUrls,
+      bypassCache: true,
+    });
+    validateScanRequest(scanRequest);
+
+    const dispatchStartedAt = Date.now();
+    await dispatchCacheWorkflow(scanRequest, token);
+    renderServerCrawlStatus('Workflow dispatched. Waiting for run to start...');
+
+    const run = await waitForWorkflowRun(token, dispatchStartedAt);
+    renderServerCrawlStatus(`Run started (#${run.run_number}). Waiting for completion...`);
+
+    await waitForRunCompletion(token, run.id);
+    renderServerCrawlStatus('Workflow complete. Loading generated cache result...');
+
+    let result = await loadGeneratedCacheFromGithubApi(scanRequest, token);
+    if (!result) {
+      result = await loadGeneratedServerCache(scanRequest);
+    }
+
+    if (!result) {
+      throw new Error('Workflow succeeded, but generated cache file was not readable yet. Retry in a moment.');
+    }
+
+    validateUrlSelectionResult(result);
+    renderResult(result);
+    saveCacheRecord(scanRequest, result);
+
+    const accepted = result.discoverySummary?.sourceCounts?.accepted ?? {};
+    const sitemapAccepted = accepted.sitemap ?? 0;
+    const searchAccepted = accepted.search ?? 0;
+    const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+    cacheState.textContent = `Cache state: server crawl completed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
+
+    renderStatus('success', 'Server crawl completed and results loaded.');
+    renderServerCrawlStatus('Done. Results loaded into the page.');
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Server crawl failed.';
+    renderError(message);
+    renderServerCrawlStatus(message);
+  } finally {
+    runServerCrawlButton.disabled = false;
+  }
+}
+
 async function handleCopy() {
   try {
     const text = outputArea.value.trim();
@@ -332,11 +629,19 @@ function handleClearCache() {
 async function initialize() {
   await loadLimitsConfig();
   updateLimitHelp();
+
+  const queryPrefill = applyQueryParamsToForm();
+
   if (!requestedCountInput.value) {
     requestedCountInput.value = String(DEFAULT_REQUESTED_COUNT);
   }
 
-  const queryPrefill = applyQueryParamsToForm();
+  const storedToken = loadStoredGithubToken();
+  if (storedToken) {
+    githubTokenInput.value = storedToken;
+  }
+
+  updateUrlFromForm();
   renderStatus('info', 'Ready.');
 
   if (queryPrefill.shouldAutoRun) {
@@ -348,5 +653,13 @@ async function initialize() {
 scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
 clearCacheButton.addEventListener('click', handleClearCache);
+runServerCrawlButton.addEventListener('click', handleRunServerCrawl);
+
+domainInput.addEventListener('input', updateUrlFromForm);
+requestedCountInput.addEventListener('input', updateUrlFromForm);
+bypassCacheInput.addEventListener('change', updateUrlFromForm);
+githubTokenInput.addEventListener('change', () => {
+  storeGithubToken(githubTokenInput.value);
+});
 
 initialize();

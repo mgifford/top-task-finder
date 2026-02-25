@@ -28,10 +28,18 @@ title: Accessible Top Task URL Finder
         </label>
       </div>
 
+      <div class="field">
+        <label for="github-token">GitHub token (stored only in your browser)</label>
+        <input id="github-token" name="githubToken" type="password" placeholder="ghp_..." autocomplete="off" />
+      </div>
+
       <div class="actions">
         <button id="run-scan" type="submit">Generate URLs</button>
+        <button id="run-server-crawl" type="button">Run server crawl</button>
         <button id="clear-cache" type="button">Clear cache</button>
       </div>
+
+      <p id="server-crawl-status" class="hint" aria-live="polite"></p>
     </form>
   </section>
 

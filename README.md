@@ -46,6 +46,18 @@ How it works:
 - Generated JSON artifacts are committed to `main`.
 - The browser app first checks `/cache/{canonicalHost}-{requestedCount}.json`; when present, it uses that result before live browser discovery.
 
+Interactive server crawl from the page:
+
+- Enter a domain and requested URL count.
+- Add a GitHub token in the `GitHub token` field (stored only in browser `localStorage`).
+- Click `Run server crawl`.
+- The page dispatches the workflow, waits for completion, and loads generated results directly into the results area.
+
+URL sync behavior:
+
+- Query params (`domainUrl`, `requestedCount`, `bypassCache`) prefill the form on load.
+- When form values change, the page updates the URL query string in place so links can be shared.
+
 Manual run options:
 
 - Run workflow from GitHub UI and optionally pass `domain_url` + `requested_count`.

@@ -1,4 +1,5 @@
 name: Refresh URL Cache
+run-name: Refresh URL Cache (${{ inputs.domain_url || 'scheduled' }})
 
 on:
   workflow_dispatch:

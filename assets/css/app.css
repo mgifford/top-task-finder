@@ -33,6 +33,7 @@ label {
 
 input[type="url"],
 input[type="number"],
+input[type="password"],
 textarea {
   width: 100%;
   box-sizing: border-box;
