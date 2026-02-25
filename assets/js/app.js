@@ -1,4 +1,4 @@
-import { normalizeInputUrl } from './discovery.js';
+import { discoverCandidates, normalizeInputUrl } from './discovery.js';
 import {
   createDiscoverySummary,
   createScanRequest,
@@ -120,6 +120,46 @@ function buildPlaceholderResult(scanRequest, usedCache) {
   });
 }
 
+function buildResultFromDiscovery(scanRequest, discoveryOutput, usedCache) {
+  const selectedUrls = discoveryOutput.candidates
+    .map((candidate) => candidate.url)
+    .slice(0, scanRequest.requestedCount);
+
+  const summary = createDiscoverySummary({
+    requestId: scanRequest.requestId,
+    sourcesAttempted: discoveryOutput.summary.sourcesAttempted,
+    fallbackUsed: discoveryOutput.summary.fallbackUsed,
+    fallbackTriggerReasons: discoveryOutput.summary.fallbackTriggerReasons,
+    cacheHit: usedCache,
+    cacheCleared: false,
+    warnings: discoveryOutput.summary.warnings,
+    sourceCounts: discoveryOutput.summary.sourceCounts,
+    priorityCoverage: discoveryOutput.summary.priorityCoverage,
+    scoreDiagnostics: discoveryOutput.summary.scoreDiagnostics,
+  });
+
+  return createUrlSelectionResult({
+    requestId: scanRequest.requestId,
+    selectedUrls,
+    requestedCount: scanRequest.requestedCount,
+    returnedCount: selectedUrls.length,
+    randomShareCount: 0,
+    shortfallCount: Math.max(0, scanRequest.requestedCount - selectedUrls.length),
+    priorityCoverage: {
+      homepage: selectedUrls.some((url) => /\/$/.test(url)) ? 1 : 0,
+      search: selectedUrls.some((url) => /\/search(?:\/|$)/.test(url)) ? 1 : 0,
+      accessibility: selectedUrls.some((url) => /accessibility/.test(url)) ? 1 : 0,
+      topTask: selectedUrls.some((url) => /top-?tasks?|services?|apply/.test(url)) ? 1 : 0,
+      other: selectedUrls.length,
+    },
+    languageDistribution: {
+      primary: selectedUrls.length,
+      additional: 0,
+    },
+    discoverySummary: summary,
+  });
+}
+
 async function handleSubmit(event) {
   event.preventDefault();
   try {
@@ -141,20 +181,47 @@ async function handleSubmit(event) {
     if (cached && !scanRequest.bypassCache) {
       validateUrlSelectionResult(cached);
       renderResult(cached);
-      renderStatus('success', 'Loaded cached placeholder result.');
-      cacheState.textContent = 'Cache state: hit';
+      renderStatus('success', 'Loaded cached result.');
+      const accepted = cached.discoverySummary?.sourceCounts?.accepted ?? {};
+      const sitemapAccepted = accepted.sitemap ?? 0;
+      const searchAccepted = accepted.search ?? 0;
+      const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+      cacheState.textContent = `Cache state: hit, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
       return;
     }
 
-    const placeholder = buildPlaceholderResult(scanRequest, false);
-    validateUrlSelectionResult(placeholder);
-    renderResult(placeholder);
-    saveCacheRecord(scanRequest, placeholder);
+    const discoveryOutput = await discoverCandidates(scanRequest);
+    let result = buildResultFromDiscovery(scanRequest, discoveryOutput, false);
 
-    renderStatus('success', 'Scan request validated. Placeholder output rendered.');
+    if (result.returnedCount === 0) {
+      result = buildPlaceholderResult(scanRequest, false);
+    }
+
+    validateUrlSelectionResult(result);
+    renderResult(result);
+    saveCacheRecord(scanRequest, result);
+
+    if (result.shortfallCount > 0) {
+      renderStatus(
+        'warning',
+        `Generated ${result.returnedCount} URL(s); short by ${result.shortfallCount}.`,
+      );
+    } else {
+      renderStatus('success', 'URL list generated from discovery sources.');
+    }
+
+    const warningsCount = result.discoverySummary?.warnings?.length ?? 0;
+    const fallbackReasons = result.discoverySummary?.fallbackTriggerReasons ?? [];
+    const accepted = result.discoverySummary?.sourceCounts?.accepted ?? {};
+    const sitemapAccepted = accepted.sitemap ?? 0;
+    const searchAccepted = accepted.search ?? 0;
+    const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+    const fallbackReasonText = fallbackReasons.length
+      ? `, fallback: ${fallbackReasons.join('|')}`
+      : '';
     cacheState.textContent = scanRequest.bypassCache
-      ? 'Cache state: bypassed'
-      : 'Cache state: miss then saved';
+      ? `Cache state: bypassed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`
+      : `Cache state: miss then saved, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected error.';
     renderError(message);
