@@ -1,0 +1,7 @@
+{
+  "defaultUrlCount": 100,
+  "maxRequestedUrls": 200,
+  "maxUrlCount": 200,
+  "randomShareTarget": 0.2,
+  "version": "1.0.0"
+}
