@@ -88,6 +88,32 @@ function renderResult(result) {
   state.currentResult = result;
 }
 
+function applyQueryParamsToForm() {
+  const params = new URLSearchParams(window.location.search);
+  const domainUrl = params.get('domainUrl');
+  const requestedCount = params.get('requestedCount');
+  const bypassCache = params.get('bypassCache');
+
+  let hasDomainInput = false;
+  if (domainUrl) {
+    domainInput.value = domainUrl;
+    hasDomainInput = true;
+  }
+
+  if (requestedCount && /^\d+$/.test(requestedCount)) {
+    requestedCountInput.value = requestedCount;
+  }
+
+  if (bypassCache && /^(1|true|yes)$/i.test(bypassCache)) {
+    bypassCacheInput.checked = true;
+  }
+
+  return {
+    hasDomainInput,
+    shouldAutoRun: hasDomainInput,
+  };
+}
+
 function buildPlaceholderResult(scanRequest, usedCache) {
   const summary = createDiscoverySummary({
     requestId: scanRequest.requestId,
@@ -216,9 +242,18 @@ async function handleSubmit(event) {
     const sitemapAccepted = accepted.sitemap ?? 0;
     const searchAccepted = accepted.search ?? 0;
     const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+    const acceptedTotal = sitemapAccepted + searchAccepted + fallbackAccepted;
     const fallbackReasonText = fallbackReasons.length
       ? `, fallback: ${fallbackReasons.join('|')}`
       : '';
+
+    if (acceptedTotal === 0 && warningsCount > 0) {
+      renderStatus(
+        'warning',
+        'Discovery sources were blocked or unavailable in this browser context. Try enabling bypass cache and rerun, or use a server-side fetch proxy for cross-site discovery.',
+      );
+    }
+
     cacheState.textContent = scanRequest.bypassCache
       ? `Cache state: bypassed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`
       : `Cache state: miss then saved, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`;
@@ -256,8 +291,17 @@ function handleClearCache() {
 async function initialize() {
   await loadLimitsConfig();
   updateLimitHelp();
-  requestedCountInput.value = String(DEFAULT_REQUESTED_COUNT);
+  if (!requestedCountInput.value) {
+    requestedCountInput.value = String(DEFAULT_REQUESTED_COUNT);
+  }
+
+  const queryPrefill = applyQueryParamsToForm();
   renderStatus('info', 'Ready.');
+
+  if (queryPrefill.shouldAutoRun) {
+    renderStatus('info', 'Loaded scan inputs from URL. Running scan...');
+    scanForm.requestSubmit();
+  }
 }
 
 scanForm.addEventListener('submit', handleSubmit);

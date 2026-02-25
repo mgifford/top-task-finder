@@ -27,3 +27,8 @@ Top Task Finder generates a representative list of URLs from a public website to
 - Works on one canonical host per run.
 - Treats `www.example.org` and `example.org` as the same host.
 - Subdomain expansion is intentionally out of scope for v1.
+
+## Local preview note
+
+- `index.md` uses Jekyll front matter (`layout: default`), so plain static servers may show raw Markdown instead of the final page shell.
+- For a GitHub Pages-like local preview, run via Jekyll (for example: `bundle exec jekyll serve`) and open the served site URL.
