@@ -1,18 +1,11 @@
 {
   "feature_number": "001",
   "slug": "001-accessible-top-task-url-finder",
+  "feature_slug": "001-accessible-top-task-url-finder",
   "friendly_name": "Accessible Top Task URL Finder",
   "mission": "software-dev",
   "source_description": "I want a GitHub pages site that allows me to put in a domain name (url) and get a list of URLs that reflect this. I've described it here: https://github.com/mgifford/o-hat-scanner/issues/1 But I want a stand-alone tool. I want pages that should be focused on accessibility. So they should contain popular pages, the home page, search pages, accessibility related content, and pages that are going to be top-tasks for whatever the site is for. This may be hard to determine without AI, but there are some things we can assume and check for. If there are multiple languages, there should be a sample of different urls with different content. I would like to have 20% of the total pages to be random pages that reflect actual pages, but hopefully are pulling from different areas of the site. This could be pulled from a sitemap.xml file. I want the form to default to 100 URLs but be able to pull in more or less. So there are two fields: Domain name/URL and Number of URLs. Using Duck Duck Go or some other service that doesn't require an API key for low volume crawls. This is for a fairly low volume site hosted on GitHub Pages.",
   "created_at": "2026-02-25T20:21:11Z",
   "target_branch": "main",
   "vcs": "git"
-}{
-  "feature_number": "001",
-  "slug": "001-accessible-top-task-url-finder",
-  "feature_slug": "001-accessible-top-task-url-finder",
-  "friendly_name": "accessible top task url finder",
-  "mission": "software-dev",
-  "target_branch": "main",
-  "created_at": "2026-02-25T20:20:57.377276+00:00"
 }
