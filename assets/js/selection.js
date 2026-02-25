@@ -62,17 +62,25 @@ export function createDiscoverySummary({
   requestId,
   sourcesAttempted,
   fallbackUsed,
+  fallbackTriggerReasons,
   cacheHit,
   cacheCleared,
   warnings,
+  sourceCounts,
+  priorityCoverage,
+  scoreDiagnostics,
 }) {
   return {
     requestId,
     sourcesAttempted: sourcesAttempted ?? [],
     fallbackUsed: Boolean(fallbackUsed),
+    fallbackTriggerReasons: fallbackTriggerReasons ?? [],
     cacheHit: Boolean(cacheHit),
     cacheCleared: Boolean(cacheCleared),
     warnings: warnings ?? [],
+    sourceCounts: sourceCounts ?? {},
+    priorityCoverage: priorityCoverage ?? {},
+    scoreDiagnostics: scoreDiagnostics ?? {},
   };
 }
 

@@ -129,9 +129,13 @@ function buildResultFromDiscovery(scanRequest, discoveryOutput, usedCache) {
     requestId: scanRequest.requestId,
     sourcesAttempted: discoveryOutput.summary.sourcesAttempted,
     fallbackUsed: discoveryOutput.summary.fallbackUsed,
+    fallbackTriggerReasons: discoveryOutput.summary.fallbackTriggerReasons,
     cacheHit: usedCache,
     cacheCleared: false,
     warnings: discoveryOutput.summary.warnings,
+    sourceCounts: discoveryOutput.summary.sourceCounts,
+    priorityCoverage: discoveryOutput.summary.priorityCoverage,
+    scoreDiagnostics: discoveryOutput.summary.scoreDiagnostics,
   });
 
   return createUrlSelectionResult({
@@ -178,7 +182,11 @@ async function handleSubmit(event) {
       validateUrlSelectionResult(cached);
       renderResult(cached);
       renderStatus('success', 'Loaded cached result.');
-      cacheState.textContent = 'Cache state: hit';
+      const accepted = cached.discoverySummary?.sourceCounts?.accepted ?? {};
+      const sitemapAccepted = accepted.sitemap ?? 0;
+      const searchAccepted = accepted.search ?? 0;
+      const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+      cacheState.textContent = `Cache state: hit, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
       return;
     }
 
@@ -203,9 +211,17 @@ async function handleSubmit(event) {
     }
 
     const warningsCount = result.discoverySummary?.warnings?.length ?? 0;
+    const fallbackReasons = result.discoverySummary?.fallbackTriggerReasons ?? [];
+    const accepted = result.discoverySummary?.sourceCounts?.accepted ?? {};
+    const sitemapAccepted = accepted.sitemap ?? 0;
+    const searchAccepted = accepted.search ?? 0;
+    const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+    const fallbackReasonText = fallbackReasons.length
+      ? `, fallback: ${fallbackReasons.join('|')}`
+      : '';
     cacheState.textContent = scanRequest.bypassCache
-      ? `Cache state: bypassed${warningsCount ? `, warnings: ${warningsCount}` : ''}`
-      : `Cache state: miss then saved${warningsCount ? `, warnings: ${warningsCount}` : ''}`;
+      ? `Cache state: bypassed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`
+      : `Cache state: miss then saved, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`;
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected error.';
     renderError(message);

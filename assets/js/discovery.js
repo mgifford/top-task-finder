@@ -48,10 +48,54 @@ export function isWithinCanonicalScope(candidateUrl, canonicalHost) {
 }
 
 const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|zip|gz|mp4|mp3|woff2?|ttf|eot|xml|json|csv)$/i;
+const SOURCE_BASE_WEIGHTS = {
+  sitemap: 40,
+  search: 28,
+  'homepage-fallback': 20,
+  unknown: 10,
+};
+
+function detectPrioritySignals(pathname) {
+  const normalized = pathname.toLowerCase();
+  return {
+    homepage: normalized === '/' || normalized === '',
+    search: /(^|\/)search(\/|$)|find/.test(normalized),
+    accessibility: /accessibility|a11y/.test(normalized),
+    topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
+  };
+}
 
 function isLikelyHtmlUrl(urlValue) {
   const parsed = typeof urlValue === 'string' ? new URL(urlValue) : new URL(urlValue.href);
   return !NON_HTML_EXTENSION_PATTERN.test(parsed.pathname);
+}
+
+function scoreCandidateUrl(normalizedUrl, source) {
+  const sourceWeight = SOURCE_BASE_WEIGHTS[source] ?? SOURCE_BASE_WEIGHTS.unknown;
+  const pathSegments = normalizedUrl.pathname.split('/').filter(Boolean).length;
+  const depthWeight = Math.max(0, 15 - pathSegments * 2);
+  const hasQueryPenalty = normalizedUrl.search ? -4 : 0;
+  const prioritySignals = detectPrioritySignals(normalizedUrl.pathname);
+
+  let priorityWeight = 0;
+  if (prioritySignals.homepage) {
+    priorityWeight += 35;
+  }
+  if (prioritySignals.search) {
+    priorityWeight += 18;
+  }
+  if (prioritySignals.accessibility) {
+    priorityWeight += 22;
+  }
+  if (prioritySignals.topTask) {
+    priorityWeight += 14;
+  }
+
+  return {
+    score: sourceWeight + depthWeight + priorityWeight + hasQueryPenalty,
+    prioritySignals,
+    pathDepth: pathSegments,
+  };
 }
 
 async function fetchText(url, requestInit) {
@@ -94,9 +138,25 @@ function extractHomepageLinks(htmlText, baseUrl) {
     .filter(Boolean);
 }
 
-function normalizeAndDeduplicateCandidates(candidates, canonicalHost) {
-  const accepted = [];
-  const seen = new Set();
+function aggregatePriorityCoverage(candidates) {
+  return candidates.reduce(
+    (coverage, candidate) => ({
+      homepage: coverage.homepage || Boolean(candidate.prioritySignals?.homepage),
+      search: coverage.search || Boolean(candidate.prioritySignals?.search),
+      accessibility: coverage.accessibility || Boolean(candidate.prioritySignals?.accessibility),
+      topTask: coverage.topTask || Boolean(candidate.prioritySignals?.topTask),
+    }),
+    {
+      homepage: false,
+      search: false,
+      accessibility: false,
+      topTask: false,
+    },
+  );
+}
+
+function normalizeAndScoreCandidates(candidates, canonicalHost) {
+  const acceptedByKey = new Map();
 
   candidates.forEach((candidate) => {
     const source = candidate?.source ?? 'unknown';
@@ -122,18 +182,102 @@ function normalizeAndDeduplicateCandidates(candidates, canonicalHost) {
 
     parsed.hash = '';
     const dedupeKey = buildNormalizedKey(parsed);
-    if (seen.has(dedupeKey)) {
+    const scoring = scoreCandidateUrl(parsed, source);
+    const existing = acceptedByKey.get(dedupeKey);
+    const candidateRecord = {
+      url: parsed.href,
+      source,
+      score: scoring.score,
+      prioritySignals: scoring.prioritySignals,
+      pathDepth: scoring.pathDepth,
+      sourceSet: [source],
+    };
+
+    if (!existing || candidateRecord.score > existing.score) {
+      acceptedByKey.set(dedupeKey, {
+        ...candidateRecord,
+        sourceSet: existing ? Array.from(new Set([...existing.sourceSet, source])) : [source],
+      });
       return;
     }
 
-    seen.add(dedupeKey);
-    accepted.push({
-      url: parsed.href,
-      source,
-    });
+    if (!existing.sourceSet.includes(source)) {
+      existing.sourceSet.push(source);
+      acceptedByKey.set(dedupeKey, existing);
+    }
   });
 
-  return accepted;
+  return Array.from(acceptedByKey.values()).sort((left, right) => {
+    if (right.score !== left.score) {
+      return right.score - left.score;
+    }
+    return left.url.localeCompare(right.url);
+  });
+}
+
+function buildSourceCounts(candidates) {
+  return candidates.reduce(
+    (counts, candidate) => {
+      const source = candidate?.source ?? 'unknown';
+      counts[source] = (counts[source] ?? 0) + 1;
+      return counts;
+    },
+    {},
+  );
+}
+
+function buildAcceptedSourceCounts(candidates) {
+  return candidates.reduce(
+    (counts, candidate) => {
+      const source = candidate?.source ?? 'unknown';
+      counts[source] = (counts[source] ?? 0) + 1;
+      return counts;
+    },
+    {},
+  );
+}
+
+function calculateScoreDiagnostics(candidates) {
+  if (!candidates.length) {
+    return {
+      average: 0,
+      highest: 0,
+      lowest: 0,
+    };
+  }
+
+  const scores = candidates.map((candidate) => candidate.score);
+  const sum = scores.reduce((total, score) => total + score, 0);
+
+  return {
+    average: Number((sum / candidates.length).toFixed(2)),
+    highest: Math.max(...scores),
+    lowest: Math.min(...scores),
+  };
+}
+
+function evaluateFallbackNeed({ primaryCandidates, requestedCount }) {
+  const reasons = [];
+  const shortfall = Math.max(0, requestedCount - primaryCandidates.length);
+  const priorityCoverage = aggregatePriorityCoverage(primaryCandidates);
+  const missingCriticalPriority = !priorityCoverage.homepage
+    || !priorityCoverage.search
+    || !priorityCoverage.accessibility;
+
+  if (shortfall > 0) {
+    reasons.push(`shortfall:${shortfall}`);
+  }
+
+  if (missingCriticalPriority) {
+    reasons.push('missing-priority-coverage');
+  }
+
+  return {
+    fallbackNeeded: reasons.length > 0,
+    reasons,
+    shortfall,
+    priorityCoverage,
+  };
 }
 
 async function discoverFromSitemap(normalizedBaseUrl, warnings) {
@@ -172,9 +316,8 @@ async function discoverFromSitemap(normalizedBaseUrl, warnings) {
       extractLocValues(xml).forEach((url) => {
         candidates.push({ url, source: 'sitemap' });
       });
-    } catch (error) {
-      const message = error instanceof Error ? error.message : 'Unknown sitemap error';
-      warnings.push(`Sitemap unavailable for ${nextSitemapUrl}: ${message}`);
+    } catch {
+      warnings.push('Sitemap source unavailable or unreadable for one or more sitemap files.');
     }
   }
 
@@ -208,7 +351,7 @@ async function discoverFromSearchAdapter(normalizedBaseUrl, canonicalHost, warni
 
     return urls.map((url) => ({ url, source: 'search' }));
   } catch {
-    warnings.push('No-key search source unavailable in current browser context.');
+    warnings.push('No-key search source unavailable in the current browser context.');
     return [];
   }
 }
@@ -218,16 +361,15 @@ async function discoverFromHomepageFallback(normalizedBaseUrl, warnings) {
     const html = await fetchText(normalizedBaseUrl.href, { cache: 'no-store' });
     const links = extractHomepageLinks(html, normalizedBaseUrl.href);
     return links.map((url) => ({ url, source: 'homepage-fallback' }));
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Unknown homepage fetch error';
-    warnings.push(`Homepage fallback unavailable: ${message}`);
+  } catch {
+    warnings.push('Homepage fallback source unavailable.');
     return [];
   }
 }
 
 export async function discoverCandidates(scanRequest) {
   const warnings = [];
-  const sourcesAttempted = ['sitemap', 'search', 'homepage-fallback'];
+  const sourcesAttempted = ['sitemap', 'search'];
   const canonicalHost = canonicalizeHost(scanRequest.canonicalHost);
   const normalizedBaseUrl = scanRequest.normalizedUrl;
 
@@ -238,23 +380,43 @@ export async function discoverCandidates(scanRequest) {
     warnings,
   );
 
-  const primaryCandidates = normalizeAndDeduplicateCandidates(
+  const primaryRawCandidates = [...sitemapCandidates, ...searchCandidates];
+  const primaryCandidates = normalizeAndScoreCandidates(
     [...sitemapCandidates, ...searchCandidates],
     canonicalHost,
   );
 
+  const fallbackEvaluation = evaluateFallbackNeed({
+    primaryCandidates,
+    requestedCount: scanRequest.requestedCount,
+  });
+
   let fallbackUsed = false;
   let fallbackCandidates = [];
-  if (primaryCandidates.length < scanRequest.requestedCount) {
+  if (fallbackEvaluation.fallbackNeeded) {
     fallbackUsed = true;
+    sourcesAttempted.push('homepage-fallback');
     const rawFallback = await discoverFromHomepageFallback(normalizedBaseUrl, warnings);
-    fallbackCandidates = normalizeAndDeduplicateCandidates(rawFallback, canonicalHost);
+    fallbackCandidates = normalizeAndScoreCandidates(rawFallback, canonicalHost);
+
+    if (!fallbackCandidates.length) {
+      warnings.push('Fallback triggered but did not yield additional eligible URLs.');
+    }
   }
 
-  const mergedCandidates = normalizeAndDeduplicateCandidates(
+  const mergedCandidates = normalizeAndScoreCandidates(
     [...primaryCandidates, ...fallbackCandidates],
     canonicalHost,
   );
+
+  const finalPriorityCoverage = aggregatePriorityCoverage(mergedCandidates);
+  const sourceCountsRaw = {
+    ...buildSourceCounts(primaryRawCandidates),
+    ...(fallbackUsed ? buildSourceCounts(fallbackCandidates) : {}),
+  };
+
+  const sourceCountsAccepted = buildAcceptedSourceCounts(mergedCandidates);
+  const scoreDiagnostics = calculateScoreDiagnostics(mergedCandidates);
 
   return {
     candidates: mergedCandidates,
@@ -262,15 +424,16 @@ export async function discoverCandidates(scanRequest) {
       requestId: scanRequest.requestId,
       sourcesAttempted,
       fallbackUsed,
+      fallbackTriggerReasons: fallbackEvaluation.reasons,
       cacheHit: false,
       cacheCleared: false,
       warnings,
       sourceCounts: {
-        sitemap: sitemapCandidates.length,
-        search: searchCandidates.length,
-        fallback: fallbackCandidates.length,
-        accepted: mergedCandidates.length,
+        raw: sourceCountsRaw,
+        accepted: sourceCountsAccepted,
       },
+      priorityCoverage: finalPriorityCoverage,
+      scoreDiagnostics,
     },
   };
 }
