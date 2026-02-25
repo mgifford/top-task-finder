@@ -1,108 +1,86 @@
-# Implementation Plan: [FEATURE]
+# Implementation Plan: Accessible Top Task URL Finder
 *Path: [templates/plan-template.md](templates/plan-template.md)*
 
-
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
-**Input**: Feature specification from `/kitty-specs/[###-feature-name]/spec.md`
-
-**Note**: This template is filled in by the `/spec-kitty.plan` command. See `src/specify_cli/missions/software-dev/command-templates/plan.md` for the execution workflow.
-
-The planner will not begin until all planning questions have been answered—capture those answers in this document before progressing to later phases.
+**Branch**: `001-accessible-top-task-url-finder` | **Date**: 2026-02-25 | **Spec**: `/workspaces/top-task-finder/kitty-specs/001-accessible-top-task-url-finder/spec.md`
+**Input**: Feature specification from `/kitty-specs/001-accessible-top-task-url-finder/spec.md`
 
 ## Summary
 
-[Extract from feature spec: primary requirement + technical approach from research]
+Deliver a simple one-page GitHub Pages tool (vanilla JavaScript) that accepts a domain and requested URL count (default 100, max 200 configurable), then produces an editable one-URL-per-line list optimized for accessibility review coverage. Discovery uses no-key sources with sitemap/search-first plus homepage link fallback, canonical host normalization (`www`/non-`www`), multilingual sampling bias toward primary language, and explicit browser caching controls including a clear-cache path.
 
 ## Technical Context
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
-
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
-**Project Type**: [single/web/mobile - determines source structure]  
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]  
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+**Language/Version**: HTML5, CSS3, vanilla JavaScript (ES2020+)  
+**Primary Dependencies**: Browser Web APIs only (Fetch, URL, Storage, Clipboard)  
+**Storage**: Browser cache/local storage for scan artifacts; repository files for static resources  
+**Testing**: Manual quickstart scenarios plus contract validation for request/response shape  
+**Target Platform**: GitHub Pages (Jekyll-friendly static site) and modern desktop browsers  
+**Project Type**: Single-page static web tool  
+**Performance Goals**: For typical low-volume sites, return first usable output quickly and complete target list generation without blocking the UI  
+**Constraints**: 
+- One-page UX with two primary inputs (domain/URL and number of URLs)
+- Cap requested URLs at 200 in v1 using a configurable setting
+- Keep discovery scoped to canonical host in v1 (`example.org` + `www.example.org` treated as equivalent)
+- Optional subdomain exploration is deferred to a future release
+- Browser caching and clear-cache control are required behaviors
+**Scale/Scope**: Low-volume, public websites commonly reviewed for accessibility and top-task coverage
 
 ## Constitution Check
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+No constitution file found at `/workspaces/top-task-finder/.kittify/memory/constitution.md`; constitution gate is skipped for this feature.
+
+## Phase 0 Research Summary
+
+Research outcomes are documented in `/workspaces/top-task-finder/kitty-specs/001-accessible-top-task-url-finder/research.md` and resolve planning choices for:
+- static browser-first architecture on GitHub Pages
+- canonical host normalization strategy
+- caching and cache-invalidation model
+- no-key discovery reliability and fallback behavior
+
+## Phase 1 Design Outputs
+
+- Data model: `/workspaces/top-task-finder/kitty-specs/001-accessible-top-task-url-finder/data-model.md`
+- API contract: `/workspaces/top-task-finder/kitty-specs/001-accessible-top-task-url-finder/contracts/url-selection.openapi.yaml`
+- Validation scenarios: `/workspaces/top-task-finder/kitty-specs/001-accessible-top-task-url-finder/quickstart.md`
 
 ## Project Structure
 
 ### Documentation (this feature)
 
 ```
-kitty-specs/[###-feature]/
-├── plan.md              # This file (/spec-kitty.plan command output)
-├── research.md          # Phase 0 output (/spec-kitty.plan command)
-├── data-model.md        # Phase 1 output (/spec-kitty.plan command)
-├── quickstart.md        # Phase 1 output (/spec-kitty.plan command)
-├── contracts/           # Phase 1 output (/spec-kitty.plan command)
-└── tasks.md             # Phase 2 output (/spec-kitty.tasks command - NOT created by /spec-kitty.plan)
+kitty-specs/001-accessible-top-task-url-finder/
+├── plan.md
+├── research.md
+├── data-model.md
+├── quickstart.md
+├── contracts/
+│   └── url-selection.openapi.yaml
+└── tasks.md
 ```
 
 ### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
 
 ```
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
-
-tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+index.md                    # Jekyll page shell for the one-page tool
+assets/
+├── css/
+│   └── app.css
+└── js/
+    ├── app.js              # UI orchestration
+    ├── discovery.js        # sitemap/search/fallback discovery logic
+    ├── selection.js        # prioritization, random 20%, language sampling
+    └── cache.js            # browser caching + clear-cache behavior
+config/
+└── limits.json             # configurable max URL cap (default 200)
+.github/
+└── workflows/
+    └── refresh-sources.yml # optional GitHub Actions refresh job
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+**Structure Decision**: Single static web project optimized for GitHub Pages and minimal operational overhead.
 
-## Complexity Tracking
+## Re-check Constitution Gate (Post-Design)
 
-*Fill ONLY if Constitution Check has violations that must be justified*
-
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+Still skipped (no constitution file present). No additional gate violations identified.

@@ -1,0 +1,112 @@
+openapi: 3.0.3
+info:
+  title: Accessible Top Task URL Finder Contract
+  version: 0.1.0
+  description: Contract for generating representative URL lists for accessibility review.
+paths:
+  /v1/url-selection:
+    post:
+      summary: Generate representative URL list
+      operationId: generateUrlSelection
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UrlSelectionRequest'
+      responses:
+        '200':
+          description: URL selection generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UrlSelectionResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    UrlSelectionRequest:
+      type: object
+      required:
+        - domainUrl
+      properties:
+        domainUrl:
+          type: string
+          format: uri
+          description: User-submitted domain or URL.
+        requestedCount:
+          type: integer
+          minimum: 1
+          maximum: 200
+          default: 100
+          description: Requested number of URLs, constrained by configurable max.
+        bypassCache:
+          type: boolean
+          default: false
+          description: When true, forces fresh discovery and ignores cached artifacts.
+    UrlSelectionResponse:
+      type: object
+      required:
+        - requestId
+        - canonicalHost
+        - requestedCount
+        - returnedCount
+        - urls
+        - discoverySummary
+      properties:
+        requestId:
+          type: string
+        canonicalHost:
+          type: string
+          description: Canonicalized host used for discovery scope.
+        requestedCount:
+          type: integer
+        returnedCount:
+          type: integer
+        shortfallCount:
+          type: integer
+          minimum: 0
+        urls:
+          type: array
+          items:
+            type: string
+            format: uri
+        randomShareCount:
+          type: integer
+          minimum: 0
+        discoverySummary:
+          $ref: '#/components/schemas/DiscoverySummary'
+    DiscoverySummary:
+      type: object
+      required:
+        - sourcesAttempted
+        - fallbackUsed
+        - cacheHit
+      properties:
+        sourcesAttempted:
+          type: array
+          items:
+            type: string
+            enum: [sitemap, search, internal-link]
+        fallbackUsed:
+          type: boolean
+        cacheHit:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
