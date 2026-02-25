@@ -1,27 +1,30 @@
 ---
-work_package_id: "WP02"
-subtasks:
-  - "T006"
-  - "T007"
-  - "T008"
-  - "T009"
-  - "T010"
-title: "Discovery Pipeline"
-phase: "Phase 2 - Source Discovery"
-lane: "planned"
+work_package_id: WP02
+title: Discovery Pipeline
+lane: "doing"
 dependencies:
-  - "WP01"
-assignee: ""
-agent: ""
-shell_pid: ""
-review_status: ""
-reviewed_by: ""
+- WP01
+base_branch: 001-accessible-top-task-url-finder-WP01
+base_commit: b4471152eda1f18702bfa48e828158fc89d45d08
+created_at: '2026-02-25T21:08:50.979137+00:00'
+subtasks:
+- T006
+- T007
+- T008
+- T009
+- T010
+phase: Phase 2 - Source Discovery
+assignee: ''
+agent: ''
+shell_pid: "29577"
+review_status: ''
+reviewed_by: ''
 history:
-  - timestamp: "2026-02-25T20:40:48Z"
-    lane: "planned"
-    agent: "system"
-    shell_pid: ""
-    action: "Prompt generated via /spec-kitty.tasks"
+- timestamp: '2026-02-25T20:40:48Z'
+  lane: planned
+  agent: system
+  shell_pid: ''
+  action: Prompt generated via /spec-kitty.tasks
 ---
 
 # Work Package Prompt: WP02 - Discovery Pipeline
