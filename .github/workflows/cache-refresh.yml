@@ -4,10 +4,15 @@ run-name: Refresh URL Cache (${{ inputs.domain_url || 'scheduled' }})
 on:
   workflow_dispatch:
     inputs:
-      domainUrl:
+      domain_url:
         description: 'The domain to crawl'
         required: true
         type: string
+      requested_count:
+        description: 'Number of URLs to return'
+        required: false
+        type: string
+        default: '100'
 
 jobs:
   refresh-cache:
