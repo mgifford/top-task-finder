@@ -1,0 +1,10 @@
+name = "top-task-finder-trigger"
+main = "src/worker.js"
+compatibility_date = "2026-02-26"
+
+[vars]
+GITHUB_OWNER = "mgifford"
+GITHUB_REPO = "top-task-finder"
+GITHUB_WORKFLOW_FILE = "cache-refresh.yml"
+GITHUB_WORKFLOW_REF = "main"
+ALLOWED_ORIGIN = "https://mgifford.github.io"

@@ -1,0 +1,5 @@
+{
+  "cloudflareTriggerEndpoint": "",
+  "pollIntervalMs": 8000,
+  "pollTimeoutMs": 900000
+}

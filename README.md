@@ -54,7 +54,7 @@ Interactive server crawl from the page:
 
 - Enter only a domain/URL and click `Find Popular URLs`.
 - The app first checks generated cache, then browser cache.
-- If no cache exists, it automatically starts a GitHub Action server crawl (prompts once for token if needed), waits for completion, and loads results into the page.
+- If no cache exists, it automatically starts a server crawl through the configured Cloudflare endpoint, waits for completion, and loads results into the page.
 - Once results are shown, a `Clear cache and rescan` option appears.
 
 URL sync behavior:
@@ -68,3 +68,48 @@ Manual run options:
 - Or run locally:
 	- `node scripts/build-cache.mjs --targets config/cache-targets.json --out cache`
 	- `node scripts/build-cache.mjs --domain-url https://gsa.gov --requested-count 75 --out cache`
+
+## Cloudflare serverless trigger setup
+
+Files included:
+
+- Worker source: [cloudflare/src/worker.js](cloudflare/src/worker.js)
+- Wrangler config: [cloudflare/wrangler.toml](cloudflare/wrangler.toml)
+- Site runtime config: [config/runtime.json](config/runtime.json)
+
+### 1) Create GitHub token for worker secret
+
+Create a fine-grained personal access token with access to this repository and permissions:
+
+- Actions: Read and write
+- Contents: Read and write
+
+### 2) Deploy worker
+
+From the `cloudflare/` directory:
+
+- `npm install -g wrangler` (if not already installed)
+- `wrangler login`
+- `wrangler secret put GITHUB_TOKEN`
+- `wrangler deploy`
+
+### 3) Configure allowed origin and repo vars (if needed)
+
+Defaults are set in [cloudflare/wrangler.toml](cloudflare/wrangler.toml):
+
+- `GITHUB_OWNER`
+- `GITHUB_REPO`
+- `GITHUB_WORKFLOW_FILE`
+- `GITHUB_WORKFLOW_REF`
+- `ALLOWED_ORIGIN`
+
+Adjust these before deploy if your repo/page location differs.
+
+### 4) Point the site to your worker endpoint
+
+Edit [config/runtime.json](config/runtime.json):
+
+- Set `cloudflareTriggerEndpoint` to your deployed worker URL + `/trigger-crawl`
+- Example: `https://top-task-finder-trigger.<your-subdomain>.workers.dev/trigger-crawl`
+
+After this, clicking `Find Popular URLs` will automatically trigger the worker on cache miss.

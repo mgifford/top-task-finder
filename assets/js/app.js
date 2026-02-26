@@ -1,4 +1,3 @@
-import { normalizeInputUrl } from './discovery.js';
 import {
   createScanRequest,
   validateScanRequest,
@@ -9,22 +8,21 @@ import {
   loadCacheRecord,
   saveCacheRecord,
 } from './cache.js';
+import { normalizeInputUrl } from './discovery.js';
 
 const DEFAULT_REQUESTED_COUNT = 100;
 const FALLBACK_MAX_URLS = 200;
-const CACHE_DISPATCH_TIMEOUT_MS = 120000;
-const CACHE_RUN_TIMEOUT_MS = 900000;
-const GITHUB_TOKEN_STORAGE_KEY = 'ttf:github-token';
-const GITHUB_API_BASE = 'https://api.github.com';
-const FALLBACK_GITHUB_OWNER = 'mgifford';
-const FALLBACK_GITHUB_REPO = 'top-task-finder';
-const CACHE_WORKFLOW_FILE = 'cache-refresh.yml';
-const CACHE_WORKFLOW_REF = 'main';
+const FALLBACK_POLL_INTERVAL_MS = 8000;
+const FALLBACK_POLL_TIMEOUT_MS = 900000;
 
 const state = {
   defaultRequestedCount: DEFAULT_REQUESTED_COUNT,
   maxRequestedUrls: FALLBACK_MAX_URLS,
-  githubContext: null,
+  runtime: {
+    cloudflareTriggerEndpoint: '',
+    pollIntervalMs: FALLBACK_POLL_INTERVAL_MS,
+    pollTimeoutMs: FALLBACK_POLL_TIMEOUT_MS,
+  },
 };
 
 const scanForm = document.getElementById('scan-form');
@@ -52,8 +50,8 @@ function renderStatus(kind, message) {
   statusRegion.textContent = message;
 }
 
-function renderError(errorMessage) {
-  renderStatus('error', errorMessage);
+function renderError(message) {
+  renderStatus('error', message);
 }
 
 function renderServerCrawlStatus(message) {
@@ -110,6 +108,34 @@ async function loadLimitsConfig() {
     state.maxRequestedUrls = FALLBACK_MAX_URLS;
   } catch {
     state.maxRequestedUrls = FALLBACK_MAX_URLS;
+  }
+}
+
+async function loadRuntimeConfig() {
+  try {
+    const response = await fetch('config/runtime.json', { cache: 'no-store' });
+    if (!response.ok) {
+      return;
+    }
+
+    const data = await response.json();
+    const endpoint = String(data.cloudflareTriggerEndpoint || '').trim();
+    const pollIntervalMs = Number(data.pollIntervalMs);
+    const pollTimeoutMs = Number(data.pollTimeoutMs);
+
+    if (endpoint) {
+      state.runtime.cloudflareTriggerEndpoint = endpoint;
+    }
+
+    if (Number.isInteger(pollIntervalMs) && pollIntervalMs >= 1000) {
+      state.runtime.pollIntervalMs = pollIntervalMs;
+    }
+
+    if (Number.isInteger(pollTimeoutMs) && pollTimeoutMs >= 30000) {
+      state.runtime.pollTimeoutMs = pollTimeoutMs;
+    }
+  } catch {
+    // keep defaults
   }
 }
 
@@ -201,67 +227,6 @@ function applyQueryParamsToForm() {
   };
 }
 
-function getGithubContext() {
-  if (state.githubContext) {
-    return state.githubContext;
-  }
-
-  const host = window.location.hostname || '';
-  const pathParts = window.location.pathname.split('/').filter(Boolean);
-  let owner = FALLBACK_GITHUB_OWNER;
-  let repo = FALLBACK_GITHUB_REPO;
-
-  if (host.endsWith('.github.io')) {
-    owner = host.split('.')[0] || owner;
-    if (pathParts.length > 0) {
-      repo = pathParts[0] || repo;
-    }
-  }
-
-  state.githubContext = { owner, repo };
-  return state.githubContext;
-}
-
-function loadStoredGithubToken() {
-  try {
-    return localStorage.getItem(GITHUB_TOKEN_STORAGE_KEY) ?? '';
-  } catch {
-    return '';
-  }
-}
-
-function storeGithubToken(tokenValue) {
-  try {
-    const trimmed = String(tokenValue || '').trim();
-    if (!trimmed) {
-      localStorage.removeItem(GITHUB_TOKEN_STORAGE_KEY);
-      return;
-    }
-    localStorage.setItem(GITHUB_TOKEN_STORAGE_KEY, trimmed);
-  } catch {
-    // no-op
-  }
-}
-
-function getOrPromptGithubToken() {
-  const existing = loadStoredGithubToken();
-  if (existing) {
-    return existing;
-  }
-
-  const entered = window.prompt(
-    'Enter a GitHub token with Actions + Contents permissions for this repository. It will be stored only in this browser.',
-  );
-
-  const trimmed = String(entered || '').trim();
-  if (!trimmed) {
-    throw new Error('A GitHub token is required to create new server cache.');
-  }
-
-  storeGithubToken(trimmed);
-  return trimmed;
-}
-
 async function loadGeneratedServerCache(scanRequest) {
   const host = canonicalizeHost(scanRequest.canonicalHost);
   const cachePath = `cache/${host}-${scanRequest.requestedCount}.json`;
@@ -275,149 +240,6 @@ async function loadGeneratedServerCache(scanRequest) {
     const payload = await response.json();
     validateUrlSelectionResult(payload);
     return payload;
-  } catch {
-    return null;
-  }
-}
-
-function encodeRepoPath(pathValue) {
-  return pathValue
-    .split('/')
-    .map((segment) => encodeURIComponent(segment))
-    .join('/');
-}
-
-async function githubApiRequest(endpoint, token, options = {}) {
-  const response = await fetch(`${GITHUB_API_BASE}${endpoint}`, {
-    method: options.method ?? 'GET',
-    headers: {
-      Accept: 'application/vnd.github+json',
-      Authorization: `Bearer ${token}`,
-      'X-GitHub-Api-Version': '2022-11-28',
-      ...(options.body ? { 'Content-Type': 'application/json' } : {}),
-    },
-    body: options.body,
-  });
-
-  if (!response.ok) {
-    const message = response.status === 401 || response.status === 403
-      ? 'GitHub token rejected or missing required permissions.'
-      : `GitHub API error (${response.status}).`;
-    throw new Error(message);
-  }
-
-  if (response.status === 204) {
-    return null;
-  }
-
-  return response.json();
-}
-
-async function dispatchCacheWorkflow(scanRequest, token) {
-  const { owner, repo } = getGithubContext();
-  await githubApiRequest(
-    `/repos/${owner}/${repo}/actions/workflows/${CACHE_WORKFLOW_FILE}/dispatches`,
-    token,
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        ref: CACHE_WORKFLOW_REF,
-        inputs: {
-          domain_url: scanRequest.normalizedUrl.origin,
-          requested_count: String(scanRequest.requestedCount),
-        },
-      }),
-    },
-  );
-}
-
-async function sleep(ms) {
-  await new Promise((resolve) => {
-    window.setTimeout(resolve, ms);
-  });
-}
-
-function findWorkflowRun(runsPayload, startedAtMs) {
-  const runs = Array.isArray(runsPayload?.workflow_runs)
-    ? runsPayload.workflow_runs
-    : [];
-
-  const candidates = runs
-    .filter((run) => run?.event === 'workflow_dispatch')
-    .filter((run) => Date.parse(run.created_at || 0) >= startedAtMs - 60000)
-    .sort((left, right) => Date.parse(right.created_at) - Date.parse(left.created_at));
-
-  return candidates[0] ?? null;
-}
-
-async function waitForWorkflowRun(token, startedAtMs) {
-  const { owner, repo } = getGithubContext();
-  const timeoutAt = Date.now() + CACHE_DISPATCH_TIMEOUT_MS;
-
-  while (Date.now() < timeoutAt) {
-    const runsPayload = await githubApiRequest(
-      `/repos/${owner}/${repo}/actions/workflows/${CACHE_WORKFLOW_FILE}/runs?event=workflow_dispatch&branch=${CACHE_WORKFLOW_REF}&per_page=20`,
-      token,
-    );
-
-    const run = findWorkflowRun(runsPayload, startedAtMs);
-    if (run) {
-      return run;
-    }
-
-    await sleep(4000);
-  }
-
-  throw new Error('Timed out waiting for dispatched workflow run.');
-}
-
-async function waitForRunCompletion(token, runId) {
-  const { owner, repo } = getGithubContext();
-  const timeoutAt = Date.now() + CACHE_RUN_TIMEOUT_MS;
-
-  while (Date.now() < timeoutAt) {
-    const run = await githubApiRequest(
-      `/repos/${owner}/${repo}/actions/runs/${runId}`,
-      token,
-    );
-
-    if (run?.status === 'completed') {
-      if (run.conclusion === 'success') {
-        return run;
-      }
-      throw new Error(`Workflow completed with conclusion: ${run.conclusion || 'unknown'}.`);
-    }
-
-    await sleep(6000);
-  }
-
-  throw new Error('Timed out waiting for workflow completion.');
-}
-
-function decodeBase64Json(base64Content) {
-  const clean = String(base64Content || '').replace(/\n/g, '');
-  const jsonText = atob(clean);
-  return JSON.parse(jsonText);
-}
-
-async function loadGeneratedCacheFromGithubApi(scanRequest, token) {
-  const { owner, repo } = getGithubContext();
-  const host = canonicalizeHost(scanRequest.canonicalHost);
-  const filePath = `cache/${host}-${scanRequest.requestedCount}.json`;
-
-  try {
-    const payload = await githubApiRequest(
-      `/repos/${owner}/${repo}/contents/${encodeRepoPath(filePath)}?ref=${CACHE_WORKFLOW_REF}`,
-      token,
-    );
-
-    if (!payload?.content) {
-      return null;
-    }
-
-    const parsed = decodeBase64Json(payload.content);
-    validateUrlSelectionResult(parsed);
-    return parsed;
   } catch {
     return null;
   }
@@ -440,27 +262,100 @@ function buildScanRequest() {
   return scanRequest;
 }
 
-async function runServerCrawlAndLoad(scanRequest) {
-  const token = getOrPromptGithubToken();
-  const dispatchStartedAt = Date.now();
+async function sleep(ms) {
+  await new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
 
-  renderStatus('info', 'No cached result found. Starting server crawl; this may take a few minutes...');
-  renderServerCrawlStatus('Dispatching GitHub Action workflow...');
-
-  await dispatchCacheWorkflow(scanRequest, token);
-  const run = await waitForWorkflowRun(token, dispatchStartedAt);
-  renderServerCrawlStatus(`Workflow run #${run.run_number} started. Waiting for completion...`);
-
-  await waitForRunCompletion(token, run.id);
-  renderServerCrawlStatus('Workflow complete. Loading generated result...');
-
-  let result = await loadGeneratedCacheFromGithubApi(scanRequest, token);
-  if (!result) {
-    result = await loadGeneratedServerCache(scanRequest);
+async function triggerServerCrawl(scanRequest, forceRescan) {
+  const endpoint = state.runtime.cloudflareTriggerEndpoint;
+  if (!endpoint) {
+    throw new Error('Server crawl endpoint is not configured. Set cloudflareTriggerEndpoint in config/runtime.json.');
   }
 
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      domainUrl: scanRequest.normalizedUrl.origin,
+      requestedCount: scanRequest.requestedCount,
+      forceRescan: Boolean(forceRescan),
+    }),
+  });
+
+  let payload = {};
+  try {
+    payload = await response.json();
+  } catch {
+    payload = {};
+  }
+
+  if (!response.ok) {
+    const message = typeof payload?.error === 'string'
+      ? payload.error
+      : `Server crawl trigger failed (${response.status}).`;
+    throw new Error(message);
+  }
+
+  if (payload?.result) {
+    validateUrlSelectionResult(payload.result);
+    return {
+      accepted: true,
+      immediateResult: payload.result,
+      runId: payload.runId ?? null,
+    };
+  }
+
+  return {
+    accepted: true,
+    immediateResult: null,
+    runId: payload?.runId ?? null,
+  };
+}
+
+async function waitForGeneratedCache(scanRequest) {
+  const startedAt = Date.now();
+  const timeoutAt = startedAt + state.runtime.pollTimeoutMs;
+
+  while (Date.now() < timeoutAt) {
+    const cachedResult = await loadGeneratedServerCache(scanRequest);
+    if (cachedResult) {
+      return cachedResult;
+    }
+
+    const elapsedSeconds = Math.round((Date.now() - startedAt) / 1000);
+    renderServerCrawlStatus(`Server crawl in progress... ${elapsedSeconds}s elapsed.`);
+    await sleep(state.runtime.pollIntervalMs);
+  }
+
+  return null;
+}
+
+async function runServerCrawlAndLoad(scanRequest, forceRescan) {
+  renderStatus('info', 'No cached result found. Starting server crawl; this may take a few minutes...');
+  renderServerCrawlStatus('Submitting crawl request...');
+
+  const trigger = await triggerServerCrawl(scanRequest, forceRescan);
+  if (trigger.immediateResult) {
+    renderCachedResult(trigger.immediateResult, 'Generated server cache');
+    saveCacheRecord(scanRequest, trigger.immediateResult);
+    renderStatus('success', 'Popular URLs are ready.');
+    renderServerCrawlStatus('Done.');
+    return;
+  }
+
+  if (trigger.runId) {
+    renderServerCrawlStatus(`Workflow run queued (#${trigger.runId}). Waiting for cache file...`);
+  } else {
+    renderServerCrawlStatus('Workflow queued. Waiting for cache file...');
+  }
+
+  const result = await waitForGeneratedCache(scanRequest);
   if (!result) {
-    throw new Error('Server crawl completed, but cached file is not readable yet. Please retry in a minute.');
+    throw new Error('Server crawl timed out before cache became available. Please try again shortly.');
   }
 
   renderCachedResult(result, 'Generated server cache');
@@ -487,7 +382,7 @@ async function resolveResult(scanRequest, { forceRescan } = { forceRescan: false
     }
   }
 
-  await runServerCrawlAndLoad(scanRequest);
+  await runServerCrawlAndLoad(scanRequest, forceRescan);
 }
 
 async function handleSubmit(event) {
@@ -551,7 +446,7 @@ async function handleCopy() {
 }
 
 async function initialize() {
-  await loadLimitsConfig();
+  await Promise.all([loadLimitsConfig(), loadRuntimeConfig()]);
   updateLimitHelp();
 
   const queryPrefill = applyQueryParamsToForm();
