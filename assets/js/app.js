@@ -115,6 +115,7 @@ async function loadRuntimeConfig() {
   try {
     const response = await fetch('config/runtime.json', { cache: 'no-store' });
     if (!response.ok) {
+      console.warn('Could not load runtime configuration. Using default values.');
       return;
     }
 
@@ -134,7 +135,14 @@ async function loadRuntimeConfig() {
     if (Number.isInteger(pollTimeoutMs) && pollTimeoutMs >= 30000) {
       state.runtime.pollTimeoutMs = pollTimeoutMs;
     }
-  } catch {
+
+    console.log('Runtime configuration loaded:', {
+      endpoint: state.runtime.cloudflareTriggerEndpoint,
+      pollIntervalMs: state.runtime.pollIntervalMs,
+      pollTimeoutMs: state.runtime.pollTimeoutMs,
+    });
+  } catch (error) {
+    console.error('Error loading runtime configuration:', error);
     // keep defaults
   }
 }
@@ -274,24 +282,44 @@ async function triggerServerCrawl(scanRequest, forceRescan) {
     throw new Error('Server crawl endpoint is not configured. Set cloudflareTriggerEndpoint in config/runtime.json.');
   }
 
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      domainUrl: scanRequest.normalizedUrl.origin,
-      requestedCount: scanRequest.requestedCount,
-      forceRescan: Boolean(forceRescan),
-    }),
+  const requestPayload = {
+    domainUrl: scanRequest.normalizedUrl.origin,
+    requestedCount: scanRequest.requestedCount,
+    forceRescan: Boolean(forceRescan),
+  };
+
+  console.log('Triggering server crawl:', {
+    endpoint,
+    payload: requestPayload,
   });
+
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestPayload),
+    });
+  } catch (error) {
+    console.error('Network error during server crawl trigger:', error);
+    throw new Error(`Network error: Unable to reach server crawl endpoint. ${error.message}`);
+  }
 
   let payload = {};
   try {
     payload = await response.json();
-  } catch {
+  } catch (parseError) {
+    console.error('Failed to parse response JSON:', parseError);
     payload = {};
   }
+
+  console.log('Server crawl response:', {
+    status: response.status,
+    ok: response.ok,
+    payload,
+  });
 
   if (!response.ok) {
     const message = typeof payload?.error === 'string'

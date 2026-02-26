@@ -113,3 +113,47 @@ Edit [config/runtime.json](config/runtime.json):
 - Example: `https://top-task-finder-trigger.<your-subdomain>.workers.dev/trigger-crawl`
 
 After this, clicking `Find Popular URLs` will automatically trigger the worker on cache miss.
+
+## Troubleshooting
+
+### Console errors about missing JavaScript modules
+
+If you see console errors like:
+```
+Uncaught SyntaxError: Cannot use import statement outside a module (at content.js:1:1)
+Uncaught SyntaxError: Unexpected token 'export' (at all-focusable-elements.js:1:1)
+Uncaught SyntaxError: Unexpected token 'export' (at button-toggle.js:3:1)
+```
+
+These errors are **not from this repository**. They typically come from:
+- Browser extensions (e.g., accessibility checkers, development tools)
+- Other browser tabs or applications injecting scripts
+- Browser developer tools or plugins
+
+This application uses ES6 modules correctly with `type="module"` in the script tag. The custom `_layouts/default.html` overrides the Jekyll minima theme to prevent unwanted script injection.
+
+**To diagnose**: Open the browser developer console and check which files are being loaded. The only scripts this site loads are:
+- `/assets/js/app.js` (as a module)
+- Imports from `/assets/js/selection.js`, `/assets/js/cache.js`, and `/assets/js/discovery.js`
+
+### CORS errors when triggering server crawl
+
+If you see CORS errors like:
+```
+Access to fetch at 'https://...' has been blocked by CORS policy
+```
+
+**Cause**: The `cloudflareTriggerEndpoint` URL in `config/runtime.json` must include the `/trigger-crawl` path.
+
+**Fix**: Ensure the endpoint URL ends with `/trigger-crawl`:
+```json
+{
+  "cloudflareTriggerEndpoint": "https://your-worker.workers.dev/trigger-crawl"
+}
+```
+
+The application now includes detailed console logging to help debug these issues. Open the browser console to see:
+- Runtime configuration when loaded
+- Request payload when triggering server crawl
+- Response status and payload from the server
+- Detailed error messages for network failures
