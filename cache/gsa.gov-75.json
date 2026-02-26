@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772078789630-86086",
+  "requestId": "cache-1772123044217-65047",
   "selectedUrls": [
     "https://gsa.gov/about-us/find-apply-for-and-land-a-job-at-gsa",
     "https://gsa.gov/about-us/find-apply-for-and-land-a-job-at-gsa/discover-special-hiring-paths",
@@ -92,7 +92,7 @@
     "additional": 0
   },
   "discoverySummary": {
-    "requestId": "cache-1772078789630-86086",
+    "requestId": "cache-1772123044217-65047",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -106,11 +106,11 @@
     "warnings": [],
     "sourceCounts": {
       "raw": {
-        "sitemap": 8590,
+        "sitemap": 8592,
         "homepage-fallback": 382
       },
       "accepted": {
-        "sitemap": 5349,
+        "sitemap": 5351,
         "homepage-fallback": 186
       }
     },
@@ -122,6 +122,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-26T04:06:32.663Z",
+  "generatedAt": "2026-02-26T16:24:05.209Z",
   "generatedBy": "github-action-cache"
 }
