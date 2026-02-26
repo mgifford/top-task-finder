@@ -38,7 +38,7 @@ Created a custom Jekyll deployment workflow (`.github/workflows/jekyll-pages.yml
 
 ### Option 2: Retry the Failed Workflow
 If this was a one-time transient issue:
-1. Go to https://github.com/mgifford/top-task-finder/actions/runs/22446039858
+1. Go to the Actions tab and find the failed workflow run
 2. Click "Re-run failed jobs"
 3. The timeout might not occur on retry
 
