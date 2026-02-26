@@ -48,14 +48,14 @@ How it works:
 
 Interactive server crawl from the page:
 
-- Enter a domain and requested URL count.
-- Add a GitHub token in the `GitHub token` field (stored only in browser `localStorage`).
-- Click `Run server crawl`.
-- The page dispatches the workflow, waits for completion, and loads generated results directly into the results area.
+- Enter only a domain/URL and click `Find Popular URLs`.
+- The app first checks generated cache, then browser cache.
+- If no cache exists, it automatically starts a GitHub Action server crawl (prompts once for token if needed), waits for completion, and loads results into the page.
+- Once results are shown, a `Clear cache and rescan` option appears.
 
 URL sync behavior:
 
-- Query params (`domainUrl`, `requestedCount`, `bypassCache`) prefill the form on load.
+- Query params (`domainUrl`, `requestedCount`) prefill the form on load.
 - When form values change, the page updates the URL query string in place so links can be shared.
 
 Manual run options:

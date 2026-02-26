@@ -1,8 +1,6 @@
-import { discoverCandidates, normalizeInputUrl } from './discovery.js';
+import { normalizeInputUrl } from './discovery.js';
 import {
-  createDiscoverySummary,
   createScanRequest,
-  createUrlSelectionResult,
   validateScanRequest,
   validateUrlSelectionResult,
 } from './selection.js';
@@ -24,24 +22,22 @@ const CACHE_WORKFLOW_FILE = 'cache-refresh.yml';
 const CACHE_WORKFLOW_REF = 'main';
 
 const state = {
+  defaultRequestedCount: DEFAULT_REQUESTED_COUNT,
   maxRequestedUrls: FALLBACK_MAX_URLS,
-  currentResult: null,
   githubContext: null,
 };
 
 const scanForm = document.getElementById('scan-form');
 const domainInput = document.getElementById('domain-url');
 const requestedCountInput = document.getElementById('requested-count');
-const bypassCacheInput = document.getElementById('bypass-cache');
 const limitHelp = document.getElementById('limit-help');
 const statusRegion = document.getElementById('status-region');
 const cacheState = document.getElementById('cache-state');
+const serverCrawlStatus = document.getElementById('server-crawl-status');
 const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
-const clearCacheButton = document.getElementById('clear-cache');
-const githubTokenInput = document.getElementById('github-token');
-const runServerCrawlButton = document.getElementById('run-server-crawl');
-const serverCrawlStatus = document.getElementById('server-crawl-status');
+const findUrlsButton = document.getElementById('find-urls');
+const rescanUrlsButton = document.getElementById('rescan-urls');
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -61,9 +57,148 @@ function renderError(errorMessage) {
 }
 
 function renderServerCrawlStatus(message) {
-  if (serverCrawlStatus) {
-    serverCrawlStatus.textContent = message;
+  serverCrawlStatus.textContent = message;
+}
+
+function renderResult(result) {
+  outputArea.value = Array.isArray(result.selectedUrls)
+    ? result.selectedUrls.join('\n')
+    : '';
+}
+
+function clearResultPresentation() {
+  outputArea.value = '';
+  cacheState.textContent = '';
+  renderServerCrawlStatus('');
+  rescanUrlsButton.hidden = true;
+}
+
+function parseRequestedCount(rawValue) {
+  if (!rawValue || rawValue.trim() === '') {
+    return state.defaultRequestedCount;
   }
+
+  const parsed = Number(rawValue);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    return state.defaultRequestedCount;
+  }
+
+  return Math.min(parsed, state.maxRequestedUrls);
+}
+
+async function loadLimitsConfig() {
+  try {
+    const response = await fetch('/config/limits.json', { cache: 'no-store' });
+    if (!response.ok) {
+      state.maxRequestedUrls = FALLBACK_MAX_URLS;
+      return;
+    }
+
+    const data = await response.json();
+
+    const configuredDefault = Number(data.defaultUrlCount);
+    if (Number.isInteger(configuredDefault) && configuredDefault > 0) {
+      state.defaultRequestedCount = configuredDefault;
+    }
+
+    const configuredMax = Number(data.maxRequestedUrls);
+    if (Number.isInteger(configuredMax) && configuredMax >= state.defaultRequestedCount) {
+      state.maxRequestedUrls = configuredMax;
+      return;
+    }
+
+    state.maxRequestedUrls = FALLBACK_MAX_URLS;
+  } catch {
+    state.maxRequestedUrls = FALLBACK_MAX_URLS;
+  }
+}
+
+function updateLimitHelp() {
+  limitHelp.textContent = `Default ${state.defaultRequestedCount} URLs (max ${state.maxRequestedUrls}).`;
+}
+
+function formatAge(isoDate) {
+  const timestamp = Date.parse(isoDate || '');
+  if (!Number.isFinite(timestamp)) {
+    return 'unknown age';
+  }
+
+  const deltaMs = Math.max(0, Date.now() - timestamp);
+  const minutes = Math.floor(deltaMs / 60000);
+
+  if (minutes < 1) {
+    return 'just now';
+  }
+  if (minutes < 60) {
+    return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+  }
+
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) {
+    return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  }
+
+  const days = Math.floor(hours / 24);
+  return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+function renderCacheMeta(result, sourceLabel) {
+  const accepted = result?.discoverySummary?.sourceCounts?.accepted ?? {};
+  const sitemapAccepted = accepted.sitemap ?? 0;
+  const searchAccepted = accepted.search ?? 0;
+  const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
+  const ageText = formatAge(result?.generatedAt);
+
+  cacheState.textContent = `${sourceLabel} • Cached ${ageText} • accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
+}
+
+function renderCachedResult(result, sourceLabel) {
+  validateUrlSelectionResult(result);
+  renderResult(result);
+  renderCacheMeta(result, sourceLabel);
+  rescanUrlsButton.hidden = false;
+}
+
+function updateUrlFromForm() {
+  const params = new URLSearchParams(window.location.search);
+  const domainValue = domainInput.value.trim();
+  const requestedValue = parseRequestedCount(requestedCountInput.value);
+
+  if (domainValue) {
+    params.set('domainUrl', domainValue);
+  } else {
+    params.delete('domainUrl');
+  }
+
+  if (requestedValue !== state.defaultRequestedCount) {
+    params.set('requestedCount', String(requestedValue));
+  } else {
+    params.delete('requestedCount');
+  }
+
+  const query = params.toString();
+  const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
+  window.history.replaceState({}, '', nextUrl);
+}
+
+function applyQueryParamsToForm() {
+  const params = new URLSearchParams(window.location.search);
+  const domainUrl = params.get('domainUrl');
+  const requestedCount = params.get('requestedCount');
+
+  let hasDomainInput = false;
+  if (domainUrl) {
+    domainInput.value = domainUrl;
+    hasDomainInput = true;
+  }
+
+  if (requestedCount && /^\d+$/.test(requestedCount)) {
+    requestedCountInput.value = requestedCount;
+  }
+
+  return {
+    shouldAutoRun: hasDomainInput,
+  };
 }
 
 function getGithubContext() {
@@ -104,110 +239,45 @@ function storeGithubToken(tokenValue) {
     }
     localStorage.setItem(GITHUB_TOKEN_STORAGE_KEY, trimmed);
   } catch {
-    renderServerCrawlStatus('Unable to persist token in this browser context.');
+    // no-op
   }
 }
 
-function parseRequestedCount(rawValue) {
-  if (!rawValue || rawValue.trim() === '') {
-    return DEFAULT_REQUESTED_COUNT;
+function getOrPromptGithubToken() {
+  const existing = loadStoredGithubToken();
+  if (existing) {
+    return existing;
   }
 
-  const parsed = Number(rawValue);
-  if (!Number.isInteger(parsed) || parsed < 1) {
-    throw new Error('Enter a whole number greater than 0 for Number of URLs.');
+  const entered = window.prompt(
+    'Enter a GitHub token with Actions + Contents permissions for this repository. It will be stored only in this browser.',
+  );
+
+  const trimmed = String(entered || '').trim();
+  if (!trimmed) {
+    throw new Error('A GitHub token is required to create new server cache.');
   }
 
-  if (parsed > state.maxRequestedUrls) {
-    return state.maxRequestedUrls;
-  }
-
-  return parsed;
+  storeGithubToken(trimmed);
+  return trimmed;
 }
 
-async function loadLimitsConfig() {
+async function loadGeneratedServerCache(scanRequest) {
+  const host = canonicalizeHost(scanRequest.canonicalHost);
+  const cachePath = `/cache/${host}-${scanRequest.requestedCount}.json`;
+
   try {
-    const response = await fetch('/config/limits.json', { cache: 'no-store' });
+    const response = await fetch(cachePath, { cache: 'no-store' });
     if (!response.ok) {
-      state.maxRequestedUrls = FALLBACK_MAX_URLS;
-      return;
+      return null;
     }
 
-    const data = await response.json();
-    const configured = Number(data.maxRequestedUrls);
-    if (Number.isInteger(configured) && configured >= DEFAULT_REQUESTED_COUNT) {
-      state.maxRequestedUrls = configured;
-      return;
-    }
-
-    state.maxRequestedUrls = FALLBACK_MAX_URLS;
+    const payload = await response.json();
+    validateUrlSelectionResult(payload);
+    return payload;
   } catch {
-    state.maxRequestedUrls = FALLBACK_MAX_URLS;
+    return null;
   }
-}
-
-function updateLimitHelp() {
-  requestedCountInput.placeholder = String(DEFAULT_REQUESTED_COUNT);
-  limitHelp.textContent = `Default ${DEFAULT_REQUESTED_COUNT}; max ${state.maxRequestedUrls}.`;
-}
-
-function renderResult(result) {
-  outputArea.value = result.selectedUrls.join('\n');
-  state.currentResult = result;
-}
-
-function updateUrlFromForm() {
-  const params = new URLSearchParams(window.location.search);
-  const domainValue = domainInput.value.trim();
-  const requestedValue = requestedCountInput.value.trim();
-
-  if (domainValue) {
-    params.set('domainUrl', domainValue);
-  } else {
-    params.delete('domainUrl');
-  }
-
-  if (/^\d+$/.test(requestedValue)) {
-    params.set('requestedCount', requestedValue);
-  } else {
-    params.delete('requestedCount');
-  }
-
-  if (bypassCacheInput.checked) {
-    params.set('bypassCache', '1');
-  } else {
-    params.delete('bypassCache');
-  }
-
-  const query = params.toString();
-  const nextUrl = `${window.location.pathname}${query ? `?${query}` : ''}`;
-  window.history.replaceState({}, '', nextUrl);
-}
-
-function applyQueryParamsToForm() {
-  const params = new URLSearchParams(window.location.search);
-  const domainUrl = params.get('domainUrl');
-  const requestedCount = params.get('requestedCount');
-  const bypassCache = params.get('bypassCache');
-
-  let hasDomainInput = false;
-  if (domainUrl) {
-    domainInput.value = domainUrl;
-    hasDomainInput = true;
-  }
-
-  if (requestedCount && /^\d+$/.test(requestedCount)) {
-    requestedCountInput.value = requestedCount;
-  }
-
-  if (bypassCache && /^(1|true|yes)$/i.test(bypassCache)) {
-    bypassCacheInput.checked = true;
-  }
-
-  return {
-    hasDomainInput,
-    shouldAutoRun: hasDomainInput,
-  };
 }
 
 function encodeRepoPath(pathValue) {
@@ -315,7 +385,6 @@ async function waitForRunCompletion(token, runId) {
       if (run.conclusion === 'success') {
         return run;
       }
-
       throw new Error(`Workflow completed with conclusion: ${run.conclusion || 'unknown'}.`);
     }
 
@@ -354,250 +423,115 @@ async function loadGeneratedCacheFromGithubApi(scanRequest, token) {
   }
 }
 
-function buildPlaceholderResult(scanRequest, usedCache) {
-  const summary = createDiscoverySummary({
-    requestId: scanRequest.requestId,
-    sourcesAttempted: ['placeholder'],
-    fallbackUsed: false,
-    cacheHit: usedCache,
-    cacheCleared: false,
-    warnings: ['Discovery pipeline placeholder active in WP01 scaffold.'],
+function buildScanRequest() {
+  const normalizedUrl = normalizeInputUrl(domainInput.value);
+  const requestedCount = parseRequestedCount(requestedCountInput.value);
+  requestedCountInput.value = String(requestedCount);
+
+  const scanRequest = createScanRequest({
+    rawInputUrl: domainInput.value,
+    normalizedUrl,
+    requestedCount,
+    effectiveCountLimit: state.maxRequestedUrls,
+    bypassCache: false,
   });
 
-  return createUrlSelectionResult({
-    requestId: scanRequest.requestId,
-    selectedUrls: [scanRequest.normalizedUrl.href],
-    requestedCount: scanRequest.requestedCount,
-    returnedCount: 1,
-    randomShareCount: 0,
-    shortfallCount: Math.max(0, scanRequest.requestedCount - 1),
-    priorityCoverage: {
-      homepage: 1,
-      search: 0,
-      accessibility: 0,
-      topTask: 0,
-      other: 0,
-    },
-    languageDistribution: {
-      primary: 1,
-      additional: 0,
-    },
-    discoverySummary: summary,
-  });
+  validateScanRequest(scanRequest);
+  return scanRequest;
 }
 
-async function loadGeneratedServerCache(scanRequest) {
-  const host = canonicalizeHost(scanRequest.canonicalHost);
-  const cachePath = `/cache/${host}-${scanRequest.requestedCount}.json`;
+async function runServerCrawlAndLoad(scanRequest) {
+  const token = getOrPromptGithubToken();
+  const dispatchStartedAt = Date.now();
 
-  try {
-    const response = await fetch(cachePath, { cache: 'no-store' });
-    if (!response.ok) {
-      return null;
+  renderStatus('info', 'No cached result found. Starting server crawl; this may take a few minutes...');
+  renderServerCrawlStatus('Dispatching GitHub Action workflow...');
+
+  await dispatchCacheWorkflow(scanRequest, token);
+  const run = await waitForWorkflowRun(token, dispatchStartedAt);
+  renderServerCrawlStatus(`Workflow run #${run.run_number} started. Waiting for completion...`);
+
+  await waitForRunCompletion(token, run.id);
+  renderServerCrawlStatus('Workflow complete. Loading generated result...');
+
+  let result = await loadGeneratedCacheFromGithubApi(scanRequest, token);
+  if (!result) {
+    result = await loadGeneratedServerCache(scanRequest);
+  }
+
+  if (!result) {
+    throw new Error('Server crawl completed, but cached file is not readable yet. Please retry in a minute.');
+  }
+
+  renderCachedResult(result, 'Generated server cache');
+  saveCacheRecord(scanRequest, result);
+  renderStatus('success', 'Popular URLs are ready.');
+  renderServerCrawlStatus('Done.');
+}
+
+async function resolveResult(scanRequest, { forceRescan } = { forceRescan: false }) {
+  if (!forceRescan) {
+    const generated = await loadGeneratedServerCache(scanRequest);
+    if (generated) {
+      renderCachedResult(generated, 'Generated cache');
+      saveCacheRecord(scanRequest, generated);
+      renderStatus('success', 'Loaded cached popular URLs.');
+      return;
     }
 
-    const payload = await response.json();
-    validateUrlSelectionResult(payload);
-    return payload;
-  } catch {
-    return null;
+    const local = loadCacheRecord(scanRequest);
+    if (local) {
+      renderCachedResult(local, 'Local cache');
+      renderStatus('success', 'Loaded cached popular URLs.');
+      return;
+    }
   }
-}
 
-function buildResultFromDiscovery(scanRequest, discoveryOutput, usedCache) {
-  const selectedUrls = discoveryOutput.candidates
-    .map((candidate) => candidate.url)
-    .slice(0, scanRequest.requestedCount);
-
-  const summary = createDiscoverySummary({
-    requestId: scanRequest.requestId,
-    sourcesAttempted: discoveryOutput.summary.sourcesAttempted,
-    fallbackUsed: discoveryOutput.summary.fallbackUsed,
-    fallbackTriggerReasons: discoveryOutput.summary.fallbackTriggerReasons,
-    cacheHit: usedCache,
-    cacheCleared: false,
-    warnings: discoveryOutput.summary.warnings,
-    sourceCounts: discoveryOutput.summary.sourceCounts,
-    priorityCoverage: discoveryOutput.summary.priorityCoverage,
-    scoreDiagnostics: discoveryOutput.summary.scoreDiagnostics,
-  });
-
-  return createUrlSelectionResult({
-    requestId: scanRequest.requestId,
-    selectedUrls,
-    requestedCount: scanRequest.requestedCount,
-    returnedCount: selectedUrls.length,
-    randomShareCount: 0,
-    shortfallCount: Math.max(0, scanRequest.requestedCount - selectedUrls.length),
-    priorityCoverage: {
-      homepage: selectedUrls.some((url) => /\/$/.test(url)) ? 1 : 0,
-      search: selectedUrls.some((url) => /\/search(?:\/|$)/.test(url)) ? 1 : 0,
-      accessibility: selectedUrls.some((url) => /accessibility/.test(url)) ? 1 : 0,
-      topTask: selectedUrls.some((url) => /top-?tasks?|services?|apply/.test(url)) ? 1 : 0,
-      other: selectedUrls.length,
-    },
-    languageDistribution: {
-      primary: selectedUrls.length,
-      additional: 0,
-    },
-    discoverySummary: summary,
-  });
+  await runServerCrawlAndLoad(scanRequest);
 }
 
 async function handleSubmit(event) {
   event.preventDefault();
+  findUrlsButton.disabled = true;
+
   try {
-    renderStatus('info', 'Preparing scan request...');
+    clearResultPresentation();
+    renderStatus('info', 'Preparing request...');
+
+    const scanRequest = buildScanRequest();
     updateUrlFromForm();
 
-    const normalizedUrl = normalizeInputUrl(domainInput.value);
-    const requestedCount = parseRequestedCount(requestedCountInput.value);
-
-    const scanRequest = createScanRequest({
-      rawInputUrl: domainInput.value,
-      normalizedUrl,
-      requestedCount,
-      effectiveCountLimit: state.maxRequestedUrls,
-      bypassCache: bypassCacheInput.checked,
-    });
-    validateScanRequest(scanRequest);
-
-    if (!scanRequest.bypassCache) {
-      const generatedCache = await loadGeneratedServerCache(scanRequest);
-      if (generatedCache) {
-        renderResult(generatedCache);
-        saveCacheRecord(scanRequest, generatedCache);
-        renderStatus('success', 'Loaded generated server cache.');
-        const accepted = generatedCache.discoverySummary?.sourceCounts?.accepted ?? {};
-        const sitemapAccepted = accepted.sitemap ?? 0;
-        const searchAccepted = accepted.search ?? 0;
-        const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
-        cacheState.textContent = `Cache state: generated file hit, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
-        return;
-      }
-    }
-
-    const cached = loadCacheRecord(scanRequest);
-    if (cached && !scanRequest.bypassCache) {
-      validateUrlSelectionResult(cached);
-      renderResult(cached);
-      renderStatus('success', 'Loaded cached result.');
-      const accepted = cached.discoverySummary?.sourceCounts?.accepted ?? {};
-      const sitemapAccepted = accepted.sitemap ?? 0;
-      const searchAccepted = accepted.search ?? 0;
-      const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
-      cacheState.textContent = `Cache state: hit, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
-      return;
-    }
-
-    const discoveryOutput = await discoverCandidates(scanRequest);
-    let result = buildResultFromDiscovery(scanRequest, discoveryOutput, false);
-
-    if (result.returnedCount === 0) {
-      result = buildPlaceholderResult(scanRequest, false);
-    }
-
-    validateUrlSelectionResult(result);
-    renderResult(result);
-    saveCacheRecord(scanRequest, result);
-
-    if (result.shortfallCount > 0) {
-      renderStatus(
-        'warning',
-        `Generated ${result.returnedCount} URL(s); short by ${result.shortfallCount}.`,
-      );
-    } else {
-      renderStatus('success', 'URL list generated from discovery sources.');
-    }
-
-    const warningsCount = result.discoverySummary?.warnings?.length ?? 0;
-    const fallbackReasons = result.discoverySummary?.fallbackTriggerReasons ?? [];
-    const accepted = result.discoverySummary?.sourceCounts?.accepted ?? {};
-    const sitemapAccepted = accepted.sitemap ?? 0;
-    const searchAccepted = accepted.search ?? 0;
-    const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
-    const acceptedTotal = sitemapAccepted + searchAccepted + fallbackAccepted;
-    const fallbackReasonText = fallbackReasons.length
-      ? `, fallback: ${fallbackReasons.join('|')}`
-      : '';
-
-    if (acceptedTotal === 0 && warningsCount > 0) {
-      renderStatus(
-        'warning',
-        'Discovery sources were blocked or unavailable in this browser context. Try enabling bypass cache and rerun, or use a server-side fetch proxy for cross-site discovery.',
-      );
-    }
-
-    cacheState.textContent = scanRequest.bypassCache
-      ? `Cache state: bypassed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`
-      : `Cache state: miss then saved, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})${warningsCount ? `, warnings: ${warningsCount}` : ''}${fallbackReasonText}`;
+    await resolveResult(scanRequest, { forceRescan: false });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unexpected error.';
     renderError(message);
+    renderServerCrawlStatus('');
+  } finally {
+    findUrlsButton.disabled = false;
   }
 }
 
-async function handleRunServerCrawl() {
-  runServerCrawlButton.disabled = true;
-  renderServerCrawlStatus('Starting server crawl workflow...');
+async function handleRescan() {
+  findUrlsButton.disabled = true;
+  rescanUrlsButton.disabled = true;
 
   try {
-    const token = githubTokenInput.value.trim();
-    if (!token) {
-      throw new Error('Enter a GitHub token to run server crawl.');
+    const confirmed = window.confirm('Clear cached results and run a fresh server crawl for this URL?');
+    if (!confirmed) {
+      return;
     }
 
-    storeGithubToken(token);
+    const scanRequest = buildScanRequest();
+    clearCacheForHost(scanRequest.normalizedUrl);
     updateUrlFromForm();
 
-    const normalizedUrl = normalizeInputUrl(domainInput.value);
-    const requestedCount = parseRequestedCount(requestedCountInput.value);
-    const scanRequest = createScanRequest({
-      rawInputUrl: domainInput.value,
-      normalizedUrl,
-      requestedCount,
-      effectiveCountLimit: state.maxRequestedUrls,
-      bypassCache: true,
-    });
-    validateScanRequest(scanRequest);
-
-    const dispatchStartedAt = Date.now();
-    await dispatchCacheWorkflow(scanRequest, token);
-    renderServerCrawlStatus('Workflow dispatched. Waiting for run to start...');
-
-    const run = await waitForWorkflowRun(token, dispatchStartedAt);
-    renderServerCrawlStatus(`Run started (#${run.run_number}). Waiting for completion...`);
-
-    await waitForRunCompletion(token, run.id);
-    renderServerCrawlStatus('Workflow complete. Loading generated cache result...');
-
-    let result = await loadGeneratedCacheFromGithubApi(scanRequest, token);
-    if (!result) {
-      result = await loadGeneratedServerCache(scanRequest);
-    }
-
-    if (!result) {
-      throw new Error('Workflow succeeded, but generated cache file was not readable yet. Retry in a moment.');
-    }
-
-    validateUrlSelectionResult(result);
-    renderResult(result);
-    saveCacheRecord(scanRequest, result);
-
-    const accepted = result.discoverySummary?.sourceCounts?.accepted ?? {};
-    const sitemapAccepted = accepted.sitemap ?? 0;
-    const searchAccepted = accepted.search ?? 0;
-    const fallbackAccepted = accepted['homepage-fallback'] ?? 0;
-    cacheState.textContent = `Cache state: server crawl completed, accepted(s:${sitemapAccepted} q:${searchAccepted} f:${fallbackAccepted})`;
-
-    renderStatus('success', 'Server crawl completed and results loaded.');
-    renderServerCrawlStatus('Done. Results loaded into the page.');
+    await resolveResult(scanRequest, { forceRescan: true });
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Server crawl failed.';
+    const message = error instanceof Error ? error.message : 'Unable to rescan.';
     renderError(message);
-    renderServerCrawlStatus(message);
   } finally {
-    runServerCrawlButton.disabled = false;
+    findUrlsButton.disabled = false;
+    rescanUrlsButton.disabled = false;
   }
 }
 
@@ -605,24 +539,14 @@ async function handleCopy() {
   try {
     const text = outputArea.value.trim();
     if (!text) {
-      renderStatus('warning', 'Nothing to copy yet. Generate URLs first.');
+      renderStatus('warning', 'Nothing to copy yet.');
       return;
     }
+
     await navigator.clipboard.writeText(text);
     renderStatus('success', 'Copied URLs to clipboard.');
   } catch {
     renderError('Unable to copy. Check browser clipboard permissions.');
-  }
-}
-
-function handleClearCache() {
-  try {
-    const normalizedUrl = normalizeInputUrl(domainInput.value || 'https://example.org');
-    clearCacheForHost(normalizedUrl);
-    cacheState.textContent = `Cache state: cleared for ${normalizedUrl.host}`;
-    renderStatus('info', 'Cache cleared for normalized host scope.');
-  } catch {
-    renderError('Enter a valid URL before clearing cache for that host.');
   }
 }
 
@@ -633,33 +557,21 @@ async function initialize() {
   const queryPrefill = applyQueryParamsToForm();
 
   if (!requestedCountInput.value) {
-    requestedCountInput.value = String(DEFAULT_REQUESTED_COUNT);
-  }
-
-  const storedToken = loadStoredGithubToken();
-  if (storedToken) {
-    githubTokenInput.value = storedToken;
+    requestedCountInput.value = String(state.defaultRequestedCount);
   }
 
   updateUrlFromForm();
   renderStatus('info', 'Ready.');
 
   if (queryPrefill.shouldAutoRun) {
-    renderStatus('info', 'Loaded scan inputs from URL. Running scan...');
+    renderStatus('info', 'Loaded URL from query string. Finding popular URLs...');
     scanForm.requestSubmit();
   }
 }
 
 scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
-clearCacheButton.addEventListener('click', handleClearCache);
-runServerCrawlButton.addEventListener('click', handleRunServerCrawl);
-
+rescanUrlsButton.addEventListener('click', handleRescan);
 domainInput.addEventListener('input', updateUrlFromForm);
-requestedCountInput.addEventListener('input', updateUrlFromForm);
-bypassCacheInput.addEventListener('change', updateUrlFromForm);
-githubTokenInput.addEventListener('change', () => {
-  storeGithubToken(githubTokenInput.value);
-});
 
 initialize();

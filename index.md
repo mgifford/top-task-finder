@@ -4,51 +4,36 @@ title: Accessible Top Task URL Finder
 ---
 
 <main class="container" aria-labelledby="page-title">
-  <h1 id="page-title">Accessible Top Task URL Finder</h1>
-  <p class="lead">Generate a representative, editable URL list for accessibility review.</p>
+  <header class="hero">
+    <h1 id="page-title">Find Popular URLs</h1>
+    <p class="lead">Enter a website URL and get a representative, editable list of pages for review.</p>
+  </header>
 
   <section class="panel" aria-labelledby="scan-form-title">
-    <h2 id="scan-form-title">Scan Inputs</h2>
+    <h2 id="scan-form-title">Website</h2>
     <form id="scan-form" novalidate>
       <div class="field">
-        <label for="domain-url">Domain name / URL</label>
+        <label for="domain-url">Domain name / URL (required)</label>
         <input id="domain-url" name="domainUrl" type="url" placeholder="https://example.org" required />
-      </div>
-
-      <div class="field">
-        <label for="requested-count">Number of URLs</label>
-        <input id="requested-count" name="requestedCount" type="number" min="1" step="1" />
         <p id="limit-help" class="hint" aria-live="polite"></p>
       </div>
 
-      <div class="field-inline">
-        <label>
-          <input id="bypass-cache" name="bypassCache" type="checkbox" />
-          Bypass cache for this run
-        </label>
-      </div>
-
-      <div class="field">
-        <label for="github-token">GitHub token (stored only in your browser)</label>
-        <input id="github-token" name="githubToken" type="password" placeholder="ghp_..." autocomplete="off" />
-      </div>
-
       <div class="actions">
-        <button id="run-scan" type="submit">Generate URLs</button>
-        <button id="run-server-crawl" type="button">Run server crawl</button>
-        <button id="clear-cache" type="button">Clear cache</button>
+        <button id="find-urls" type="submit">Find Popular URLs</button>
       </div>
 
-      <p id="server-crawl-status" class="hint" aria-live="polite"></p>
+      <input id="requested-count" name="requestedCount" type="hidden" />
+      <input id="bypass-cache" name="bypassCache" type="hidden" value="0" />
     </form>
   </section>
 
   <section class="panel" aria-labelledby="status-title">
-    <h2 id="status-title">Status</h2>
+    <h2 id="status-title">Progress</h2>
     <div id="status-region" class="status info" role="status" aria-live="polite">
       Ready.
     </div>
     <p id="cache-state" class="hint" aria-live="polite"></p>
+    <p id="server-crawl-status" class="hint" aria-live="polite"></p>
   </section>
 
   <section class="panel" aria-labelledby="results-title">
@@ -56,6 +41,7 @@ title: Accessible Top Task URL Finder
     <textarea id="url-output" rows="14" spellcheck="false" placeholder="One URL per line will appear here."></textarea>
     <div class="actions">
       <button id="copy-results" type="button">Copy URLs</button>
+      <button id="rescan-urls" type="button" class="secondary" hidden>Clear cache and rescan</button>
     </div>
   </section>
 </main>
