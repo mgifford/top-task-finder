@@ -1,0 +1,6 @@
+title: Top Task Finder
+description: Generate representative URL lists for accessibility and top-task review.
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed

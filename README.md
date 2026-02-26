@@ -32,6 +32,10 @@ Top Task Finder generates a representative list of URLs from a public website to
 
 - `index.md` uses Jekyll front matter (`layout: default`), so plain static servers may show raw Markdown instead of the final page shell.
 - For a GitHub Pages-like local preview, run via Jekyll (for example: `bundle exec jekyll serve`) and open the served site URL.
+- Jekyll setup files in this repo:
+	- [_config.yml](_config.yml)
+	- [_layouts/default.html](_layouts/default.html)
+	- [Gemfile](Gemfile)
 
 ## GitHub Action generated cache
 

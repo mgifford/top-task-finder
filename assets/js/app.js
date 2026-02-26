@@ -88,7 +88,7 @@ function parseRequestedCount(rawValue) {
 
 async function loadLimitsConfig() {
   try {
-    const response = await fetch('/config/limits.json', { cache: 'no-store' });
+    const response = await fetch('config/limits.json', { cache: 'no-store' });
     if (!response.ok) {
       state.maxRequestedUrls = FALLBACK_MAX_URLS;
       return;
@@ -264,7 +264,7 @@ function getOrPromptGithubToken() {
 
 async function loadGeneratedServerCache(scanRequest) {
   const host = canonicalizeHost(scanRequest.canonicalHost);
-  const cachePath = `/cache/${host}-${scanRequest.requestedCount}.json`;
+  const cachePath = `cache/${host}-${scanRequest.requestedCount}.json`;
 
   try {
     const response = await fetch(cachePath, { cache: 'no-store' });
