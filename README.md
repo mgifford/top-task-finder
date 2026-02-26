@@ -157,3 +157,37 @@ The application now includes detailed console logging to help debug these issues
 - Request payload when triggering server crawl
 - Response status and payload from the server
 - Detailed error messages for network failures
+
+## GitHub Pages Deployment
+
+This site is deployed to GitHub Pages using a custom Jekyll workflow.
+
+### Workflow file
+
+- [.github/workflows/jekyll-pages.yml](.github/workflows/jekyll-pages.yml)
+
+### How it works
+
+- The workflow runs automatically on every push to the `main` branch
+- Can also be triggered manually from the Actions tab
+- Builds the Jekyll site with proper base path configuration
+- Uploads the built site as a Pages artifact
+- Deploys to GitHub Pages using the `deploy-pages` action
+
+### Features
+
+- **Bundler caching**: Speeds up builds by caching Ruby dependencies
+- **Proper permissions**: Uses scoped permissions for security
+- **Concurrency control**: Prevents multiple simultaneous deployments
+- **Manual triggers**: Can be run on-demand via workflow_dispatch
+
+### Troubleshooting deployment issues
+
+If you encounter issues with the Pages deployment:
+
+1. **Check workflow runs**: Go to the Actions tab and check the latest workflow run
+2. **Retry failed workflows**: Click "Re-run failed jobs" if there was a transient error
+3. **Check Pages settings**: Ensure Settings → Pages → Build and deployment source is set to "GitHub Actions"
+4. **View detailed logs**: Click into failed jobs to see detailed error messages
+
+See [PAGES_FIX.md](PAGES_FIX.md) for details about the artifact upload timeout issue that was resolved by creating this custom workflow.
