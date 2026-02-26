@@ -8,16 +8,6 @@ on:
         description: 'The domain to crawl'
         required: true
         type: string
-      requested_count:
-        description: URL count for manual run (used with domain_url)
-        required: false
-        default: '100'
-        type: string
-  schedule:
-    - cron: '23 3 * * *'
-
-permissions:
-  contents: write
 
 jobs:
   refresh-cache:
