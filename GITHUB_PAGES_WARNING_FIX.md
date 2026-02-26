@@ -1,5 +1,9 @@
 # Fix for GitHub Pages Gem Warning
 
+> **TL;DR**: Change your repository's GitHub Pages settings from "Deploy from a branch" to "GitHub Actions" to eliminate this warning.
+
+# Fix for GitHub Pages Gem Warning
+
 ## The Warning
 ```
 The github-pages gem can't satisfy your Gemfile's dependencies. 
@@ -17,6 +21,17 @@ This warning appears because:
 ## The Solution (REQUIRED)
 
 **You must change your repository's GitHub Pages settings to use GitHub Actions:**
+
+### Quick Checklist
+
+- [ ] Open repository Settings
+- [ ] Click Pages in left sidebar
+- [ ] Find "Build and deployment" section
+- [ ] Change "Source" dropdown from "Deploy from a branch" to "GitHub Actions"
+- [ ] Save (changes apply automatically)
+- [ ] Push a new commit to trigger the workflow
+- [ ] Verify the "Deploy Jekyll site to Pages" workflow runs successfully
+- [ ] Confirm the automatic "pages build and deployment" workflow no longer appears
 
 ### Step-by-Step Instructions:
 
