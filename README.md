@@ -2,6 +2,17 @@
 
 Top Task Finder generates a representative list of URLs from a public website to support accessibility and top-task review.
 
+## ⚠️ GitHub Pages Configuration Required
+
+**If you see a warning about "github-pages gem can't satisfy your Gemfile's dependencies":**
+
+This repository uses a custom Jekyll 4.3+ workflow. To eliminate the warning, you must configure GitHub Pages to use GitHub Actions:
+
+1. Go to **Settings** → **Pages**
+2. Under **"Build and deployment"**, change **Source** to **"GitHub Actions"**
+
+See **[GITHUB_PAGES_WARNING_FIX.md](GITHUB_PAGES_WARNING_FIX.md)** for detailed instructions.
+
 ## What it does
 
 - Accepts a site URL and target number of pages.
