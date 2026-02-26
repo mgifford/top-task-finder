@@ -2,8 +2,6 @@
 
 > **TL;DR**: Change your repository's GitHub Pages settings from "Deploy from a branch" to "GitHub Actions" to eliminate this warning.
 
-# Fix for GitHub Pages Gem Warning
-
 ## The Warning
 ```
 The github-pages gem can't satisfy your Gemfile's dependencies. 
