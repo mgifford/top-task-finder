@@ -1,5 +1,5 @@
-name = "top-task-finder-trigger"
-main = "src/worker.js"
+name = "top-task-crawler"
+main = "index.js"
 compatibility_date = "2026-02-26"
 
 [vars]
