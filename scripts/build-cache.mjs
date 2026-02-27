@@ -6,6 +6,7 @@ import path from 'node:path';
 const DEFAULT_REQUESTED_COUNT = 100;
 const MAX_REQUESTED_COUNT = 200;
 const MAX_SITEMAP_DOCS = 24;
+const CRITICAL_PAGE_SCORE = 1000;
 
 function parseArgs(argv) {
   const parsed = {};
@@ -326,7 +327,7 @@ function ensureCriticalPages(candidates, baseUrl) {
     candidates.unshift({
       url: homepageUrl,
       source: 'critical-pages',
-      score: 1000,
+      score: CRITICAL_PAGE_SCORE,
       prioritySignals: {
         homepage: true,
         search: false,
