@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-02-27T15:50:37.886Z",
+  "generatedAt": "2026-02-27T16:01:08.798Z",
   "targets": [
     {
-      "fileName": "canada.ca-100.json",
-      "canonicalHost": "canada.ca",
+      "fileName": "gsa.gov-100.json",
+      "canonicalHost": "gsa.gov",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-02-27T15:50:37.884Z",
-      "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files."
-      ]
+      "generatedAt": "2026-02-27T16:01:08.796Z",
+      "warnings": []
     }
   ]
 }
