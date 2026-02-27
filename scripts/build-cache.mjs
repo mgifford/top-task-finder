@@ -259,6 +259,81 @@ function aggregatePriorityCoverage(candidates) {
   );
 }
 
+function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
+  // Match year patterns: -2020, -2020-2021, /2020, _2020, etc.
+  // Updated to allow year patterns followed by dashes, underscores, slashes, or end of path
+  const yearPattern = /[-_/]((?:19|20)\d{2})(?:[-_]((?:19|20)\d{2}))?(?=[-_/?#]|$)/g;
+  const groupedByPattern = new Map();
+  
+  candidates.forEach((candidate) => {
+    const url = candidate.url;
+    const parsed = new URL(url);
+    const pathname = parsed.pathname;
+    
+    // Create a normalized pattern by replacing all year occurrences with {YEAR}
+    const patternKey = pathname.replace(yearPattern, '-{YEAR}');
+    
+    // Check if this URL has any year patterns
+    const hasYearPattern = yearPattern.test(pathname);
+    yearPattern.lastIndex = 0; // Reset regex state
+    
+    if (!hasYearPattern) {
+      // No year pattern, treat as unique
+      if (!groupedByPattern.has(url)) {
+        groupedByPattern.set(url, [candidate]);
+      }
+      return;
+    }
+    
+    // Group by the pattern
+    const fullKey = `${parsed.hostname}${patternKey}`;
+    if (!groupedByPattern.has(fullKey)) {
+      groupedByPattern.set(fullKey, []);
+    }
+    
+    groupedByPattern.get(fullKey).push(candidate);
+  });
+  
+  const result = [];
+  
+  groupedByPattern.forEach((group, key) => {
+    // If the group has maxRecentItems or fewer, keep all
+    if (group.length <= maxRecentItems) {
+      result.push(...group);
+      return;
+    }
+    
+    // Sort by the most recent year found in the URL
+    const sortedByYear = group.sort((a, b) => {
+      // Extract all years from each URL
+      const yearsA = [];
+      const yearsB = [];
+      
+      let match;
+      const patternA = /[-_/]((?:19|20)\d{2})/g;
+      while ((match = patternA.exec(a.url)) !== null) {
+        yearsA.push(parseInt(match[1], 10));
+      }
+      
+      const patternB = /[-_/]((?:19|20)\d{2})/g;
+      while ((match = patternB.exec(b.url)) !== null) {
+        yearsB.push(parseInt(match[1], 10));
+      }
+      
+      // Use the maximum year from each URL for comparison
+      const maxYearA = yearsA.length > 0 ? Math.max(...yearsA) : 0;
+      const maxYearB = yearsB.length > 0 ? Math.max(...yearsB) : 0;
+      
+      return maxYearB - maxYearA;
+    });
+    
+    // Keep only the most recent N items
+    result.push(...sortedByYear.slice(0, maxRecentItems));
+  });
+  
+  return result;
+}
+
 function applyUrlDiversityLimits(sortedCandidates) {
   const result = [];
   const pathCounts = new Map();
@@ -428,7 +503,8 @@ function createScanRequest(domainUrl, requestedCount) {
 }
 
 function buildResult(scanRequest, rankedCandidates, discoverySummary) {
-  const diverseCandidates = applyUrlDiversityLimits(rankedCandidates);
+  const deduplicatedCandidates = deduplicateYearBasedUrls(rankedCandidates, 3);
+  const diverseCandidates = applyUrlDiversityLimits(deduplicatedCandidates);
   const selectedUrls = diverseCandidates
     .slice(0, scanRequest.requestedCount)
     .map((candidate) => candidate.url);
