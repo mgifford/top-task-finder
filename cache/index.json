@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-02-27T21:24:55.613Z",
+  "generatedAt": "2026-02-27T21:25:30.067Z",
   "targets": [
     {
       "fileName": "homergaines.com-100.json",
       "canonicalHost": "homergaines.com",
       "requestedCount": 100,
       "returnedCount": 1,
-      "generatedAt": "2026-02-27T21:24:55.612Z",
+      "generatedAt": "2026-02-27T21:25:30.066Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://homergaines.com/sitemap.xml",
-        "Homepage fallback unavailable."
+        "Sitemap fetch unavailable for https://homergaines.com/sitemap.xml"
       ]
     }
   ]
