@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772214777976-98115",
+  "requestId": "cache-1772222638716-13515",
   "selectedUrls": [
     "https://nsf.gov/",
     "https://nsf.gov/news/nsf-releases-usap-sahcs-findings-report",
@@ -26,9 +26,6 @@
     "https://nsf.gov/reports/statistics/federal-science-engineering-support-higher-education-0",
     "https://nsf.gov/reports/statistics/federal-science-engineering-support-universities-colleges",
     "https://nsf.gov/reports/statistics/federal-science-engineering-support-universities-colleges-0",
-    "https://nsf.gov/reports/statistics/federal-science-engineering-support-universities-colleges-1",
-    "https://nsf.gov/reports/statistics/fy-2022-federal-science-engineering-support-selected-types",
-    "https://nsf.gov/reports/topical/nsf-report-support-cloud-computing",
     "https://nsf.gov/science-matters/nsf-101-agency-accessibility-resources",
     "https://nsf.gov/funding/information/dcl-request-community-input-cyberinfrastructure-support/nsf06-007",
     "https://nsf.gov/funding/opportunities/dcl-growing-post-award-research-support-service-infrastructure/nsf23-152",
@@ -36,10 +33,6 @@
     "https://nsf.gov/geo/opp/updates/request-information-antarctic-science-engineering-support",
     "https://nsf.gov/geo/opp/updates/request-information-transport-aircraft-support-nsf",
     "https://nsf.gov/making-it-easier-to-find-nsf-funding-opportunities",
-    "https://nsf.gov/reports/nsb/board/enhancing-support-transformative-research-national-science",
-    "https://nsf.gov/reports/nsb/board/industry-trends-research-support-links-public-research-1998",
-    "https://nsf.gov/reports/nsb/board/national-science-foundation-support-unsolicited-mid-scale",
-    "https://nsf.gov/reports/statistics/federal-obligations-se-support-hbcus-fy-2018-increase-38/nsf20-314",
     "https://nsf.gov/about/meetings/help",
     "https://nsf.gov/events/archived-public-discussionhow-move-quality-research-findings",
     "https://nsf.gov/events/do-simpler-machine-learning-models-exist-how-can-we-find",
@@ -100,7 +93,14 @@
     "https://nsf.gov/news/researchers-find-new-technique-self-assembling-electronics",
     "https://nsf.gov/news/researchers-find-trigger-devastating-digestive",
     "https://nsf.gov/news/researchers-use-machine-learning-find-out-which",
-    "https://nsf.gov/news/scientists-find-closest-known-asteroid-fly-earth"
+    "https://nsf.gov/news/scientists-find-closest-known-asteroid-fly-earth",
+    "https://nsf.gov/news/scientists-find-double-quasar-early-universe",
+    "https://nsf.gov/news/scientists-find-earliest-new-world-writings-mexico",
+    "https://nsf.gov/news/scientists-find-most-nitrogen-gulf-mexico-comes",
+    "https://nsf.gov/news/scientists-find-much-earlier-birth-date-earths",
+    "https://nsf.gov/news/scientists-find-no-direct-link-between-north",
+    "https://nsf.gov/news/scientists-find-oldest-known-fossilized-digestive",
+    "https://nsf.gov/news/scientists-find-water-billions-light-years-away"
   ],
   "requestedCount": 100,
   "returnedCount": 100,
@@ -120,8 +120,9 @@
     "primary": 100,
     "additional": 0
   },
+  "totalDiscoveredPages": 19748,
   "discoverySummary": {
-    "requestId": "cache-1772214777976-98115",
+    "requestId": "cache-1772222638716-13515",
     "sourcesAttempted": [
       "sitemap"
     ],
@@ -136,7 +137,7 @@
         "homepage-fallback": 0
       },
       "accepted": {
-        "sitemap": 19743
+        "sitemap": 19748
       }
     },
     "priorityCoverage": {
@@ -151,6 +152,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T17:52:59.503Z",
+  "generatedAt": "2026-02-27T20:04:03.300Z",
   "generatedBy": "github-action-cache"
 }
