@@ -347,7 +347,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
   // Limits for diversity
   const MAX_FIRST_SEGMENT = 15;
   const MAX_DEPTH3_PREFIX = 3;
-  const MAX_INDIVIDUAL_SEGMENT = 8; // Max URLs containing any single segment
+  const MAX_INDIVIDUAL_SEGMENT = 10; // Max URLs containing any single segment
   
   // Process candidates in order of their score
   sortedCandidates.forEach((candidate) => {
