@@ -1,0 +1,121 @@
+{
+  "requestId": "cache-1772221386940-94623",
+  "selectedUrls": [
+    "https://alberta.ca/",
+    "https://alberta.ca/accessibility",
+    "https://alberta.ca/find-a-job",
+    "https://alberta.ca/all-services",
+    "https://alberta.ca/canada-post-service-interruption",
+    "https://alberta.ca/vehicle-registration-renewal",
+    "https://alberta.ca/family-and-social-supports-topic",
+    "https://alberta.ca/about-government",
+    "https://alberta.ca/acute-care-action-plan",
+    "https://alberta.ca/agriculture",
+    "https://alberta.ca/ahcip",
+    "https://alberta.ca/aish",
+    "https://alberta.ca/alberta-advantage-immigration-program",
+    "https://alberta.ca/alberta-ca-account",
+    "https://alberta.ca/announcements.cfm?xID=957330F7B921A-EEA9-EE49-575132BCF2B4A8E4",
+    "https://alberta.ca/announcements.cfm?xID=9573410ED1AD8-DE7F-DF66-A798654D0700135F",
+    "https://alberta.ca/announcements.cfm?xID=95735120C00EF-B4D2-523E-653AFC3B7691D90A",
+    "https://alberta.ca/birth-adoption-death-marriage-and-divorce-topic",
+    "https://alberta.ca/budget",
+    "https://alberta.ca/business-and-economic-development",
+    "https://alberta.ca/contact-government",
+    "https://alberta.ca/contact.cfm",
+    "https://alberta.ca/culture-topic",
+    "https://alberta.ca/cut-red-tape",
+    "https://alberta.ca/disclaimer",
+    "https://alberta.ca/driving-safety-topic",
+    "https://alberta.ca/education-and-training-topic",
+    "https://alberta.ca/emergency",
+    "https://alberta.ca/emergency-preparedness-disaster-response-and-public-safety-topic",
+    "https://alberta.ca/employment-topic",
+    "https://alberta.ca/energy-topic",
+    "https://alberta.ca/environment-natural-resources",
+    "https://alberta.ca/fish-and-wildlife-topic",
+    "https://alberta.ca/government-of-alberta",
+    "https://alberta.ca/health-wellness",
+    "https://alberta.ca/housing-topic",
+    "https://alberta.ca/indigenous-relations-topic",
+    "https://alberta.ca/infrastructure-topic",
+    "https://alberta.ca/justice-topic",
+    "https://alberta.ca/key-initiatives",
+    "https://alberta.ca/ministries",
+    "https://alberta.ca/moving-to-alberta-topic",
+    "https://alberta.ca/municipalities-topic",
+    "https://alberta.ca/news",
+    "https://alberta.ca/non-profit-and-charitable-organizations-topic",
+    "https://alberta.ca/open-government-program",
+    "https://alberta.ca/premier.aspx",
+    "https://alberta.ca/privacystatement",
+    "https://alberta.ca/public-engagement",
+    "https://alberta.ca/release.cfm?xID=956393BF7AAE1-FC58-0121-F6ACBF2A8BCD7A5B",
+    "https://alberta.ca/release.cfm?xID=956403CB2A273-BB32-5FB1-CF2920F98FFC9B8A",
+    "https://alberta.ca/release.cfm?xID=9564141722588-FFA6-400D-B388DB636D18FB65",
+    "https://alberta.ca/schools-now",
+    "https://alberta.ca/social-media-directory",
+    "https://alberta.ca/staff-directory.cfm",
+    "https://alberta.ca/tax-information-topic",
+    "https://alberta.ca/tourism-sport-and-outdoor-recreation",
+    "https://alberta.ca/usingthissite",
+    "https://alberta.ca/west-coast-oil-pipeline"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 59,
+  "randomShareCount": 0,
+  "shortfallCount": 41,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": true,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 59,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 59,
+  "discoverySummary": {
+    "requestId": "cache-1772221386940-94623",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://alberta.ca/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 73
+      },
+      "accepted": {
+        "homepage-fallback": 59
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": true,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-27T19:43:07.750Z",
+  "generatedBy": "github-action-cache"
+}
