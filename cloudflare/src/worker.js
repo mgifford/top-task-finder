@@ -64,6 +64,7 @@ async function dispatchGithubWorkflow(env, payload) {
         Authorization: `Bearer ${env.GITHUB_TOKEN}`,
         'X-GitHub-Api-Version': '2022-11-28',
         'Content-Type': 'application/json',
+        'User-Agent': 'top-task-finder-cloudflare-worker',
       },
       body: JSON.stringify({
         ref: workflowRef,
