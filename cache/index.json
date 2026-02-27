@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-27T19:15:13.127Z",
+  "generatedAt": "2026-02-27T19:38:39.960Z",
   "targets": [
     {
-      "fileName": "va.gov-100.json",
-      "canonicalHost": "va.gov",
+      "fileName": "ca.gov-100.json",
+      "canonicalHost": "ca.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-27T19:15:13.126Z",
-      "warnings": []
+      "returnedCount": 28,
+      "generatedAt": "2026-02-27T19:38:39.958Z",
+      "warnings": [
+        "Sitemap fetch unavailable for https://ca.gov/sitemap.xml"
+      ]
     }
   ]
 }

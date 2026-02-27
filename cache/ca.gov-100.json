@@ -1,0 +1,90 @@
+{
+  "requestId": "cache-1772221119213-44319",
+  "selectedUrls": [
+    "https://ca.gov/",
+    "https://ca.gov/website-accessibility-certification.html",
+    "https://ca.gov/legal/accessibility/",
+    "https://ca.gov/services/",
+    "https://ca.gov/contact/",
+    "https://ca.gov/support/",
+    "https://ca.gov/about/about-this-website/",
+    "https://ca.gov/about/sitemap/",
+    "https://ca.gov/departments/176/services/52/",
+    "https://ca.gov/departments/193/services/15/",
+    "https://ca.gov/departments/220/services/1194/",
+    "https://ca.gov/departments/236/services/33/",
+    "https://ca.gov/departments/287/services/25/",
+    "https://ca.gov/departments/287/services/26/",
+    "https://ca.gov/support/technical-help/",
+    "https://ca.gov/about-california/",
+    "https://ca.gov/departments/",
+    "https://ca.gov/topics/",
+    "https://ca.gov/translate/",
+    "https://ca.gov/legal/conditions-of-use/",
+    "https://ca.gov/legal/privacy-policy/",
+    "https://ca.gov/topics/assistance/",
+    "https://ca.gov/topics/businesses/",
+    "https://ca.gov/topics/disaster-recovery/",
+    "https://ca.gov/topics/dmv-auto/",
+    "https://ca.gov/topics/jobs/",
+    "https://ca.gov/topics/personal-records/",
+    "https://ca.gov/topics/taxes/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 28,
+  "randomShareCount": 0,
+  "shortfallCount": 72,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": true,
+    "about": true,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 28,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 28,
+  "discoverySummary": {
+    "requestId": "cache-1772221119213-44319",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://ca.gov/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 50
+      },
+      "accepted": {
+        "homepage-fallback": 28
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": true,
+      "about": true,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-27T19:38:39.958Z",
+  "generatedBy": "github-action-cache"
+}
