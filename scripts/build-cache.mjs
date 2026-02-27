@@ -258,15 +258,6 @@ function aggregatePriorityCoverage(candidates) {
   );
 }
 
-function getPathPrefix(url, depth) {
-  const parsed = typeof url === 'string' ? new URL(url) : new URL(url.href);
-  const segments = parsed.pathname.split('/').filter(Boolean);
-  if (segments.length < depth) {
-    return parsed.pathname.replace(/\/$/, '') || '/';
-  }
-  return '/' + segments.slice(0, depth).join('/');
-}
-
 function applyUrlDiversityLimits(sortedCandidates) {
   const result = [];
   const pathCounts = new Map();
@@ -285,25 +276,39 @@ function applyUrlDiversityLimits(sortedCandidates) {
       return;
     }
     
-    if (segments.length >= 3) {
-      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
-      const depth3Count = pathCounts.get(depth3Prefix) || 0;
-      
-      if (depth3Count >= MAX_DEPTH_3) {
-        return;
-      }
-      
-      pathCounts.set(depth3Prefix, depth3Count + 1);
-    }
+    let canAdd = true;
     
     if (segments.length >= 2) {
       const depth2Prefix = '/' + segments.slice(0, 2).join('/');
       const depth2Count = pathCounts.get(depth2Prefix) || 0;
       
       if (depth2Count >= MAX_DEPTH_2) {
-        return;
+        canAdd = false;
       }
+    }
+    
+    if (canAdd && segments.length >= 3) {
+      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+      const depth3Count = pathCounts.get(depth3Prefix) || 0;
       
+      if (depth3Count >= MAX_DEPTH_3) {
+        canAdd = false;
+      }
+    }
+    
+    if (!canAdd) {
+      return;
+    }
+    
+    if (segments.length >= 3) {
+      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+      const depth3Count = pathCounts.get(depth3Prefix) || 0;
+      pathCounts.set(depth3Prefix, depth3Count + 1);
+    }
+    
+    if (segments.length >= 2) {
+      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
+      const depth2Count = pathCounts.get(depth2Prefix) || 0;
       pathCounts.set(depth2Prefix, depth2Count + 1);
     }
     
