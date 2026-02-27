@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772217212557-93403",
+  "requestId": "cache-1772222231839-86819",
   "selectedUrls": [
     "https://cms.gov/digital-service/findsupportgov",
     "https://cms.gov/",
@@ -8,7 +8,6 @@
     "https://cms.gov/data-research/monitoring-programs/improper-payment-measurement-programs/medicare-part-c-ipm/error-rate-findings-results",
     "https://cms.gov/data-research/monitoring-programs/improper-payment-measurement-programs/medicare-part-d-ipm/error-rate-findings-results",
     "https://cms.gov/data-research/monitoring-programs/improper-payment-measurement-programs/payment-error-rate-measurement-perm/perm-error-rate-findings-and-reports",
-    "https://cms.gov/medicare/quality-initiatives-patient-assessment-instruments/hospice-quality-reporting/downloads/heart-pilot-a-findings-summary-slides_508.pptx",
     "https://cms.gov/priorities/innovation/data-and-reports/2020/cpc-evaluation-findings-annual-report-2",
     "https://cms.gov/priorities/innovation/data-and-reports/2020/ocm-annual-report-2-findings-glance",
     "https://cms.gov/priorities/innovation/data-and-reports/2021/bpci-yr2-annual-report-findings-aag",
@@ -26,8 +25,6 @@
     "https://cms.gov/data-research/monitoring-programs/improper-payment-measurement-programs/payment-error-rate-measurement-perm/archive/perm-error-rate-findings-reports",
     "https://cms.gov/marketplace/about/affordable-care-act/content-requirements-plan-finder",
     "https://cms.gov/marketplace/resources/data/healthcaregov-plan-finder-data",
-    "https://cms.gov/medicare/new-medicare-card/nmc-long-term-services-and-supports-odf.pptx",
-    "https://cms.gov/priorities/key-initiatives/open-payments/contact",
     "https://cms.gov/training-education/open-door-forums/long-term-services-supports",
     "https://cms.gov/about-cms/web-policies-important-links/accessibility-compliance",
     "https://cms.gov/about-cms/web-policies-important-links/accessibility-nondiscrimination-disabilities-notice",
@@ -35,16 +32,12 @@
     "https://cms.gov/medicare/medicaid-coordination/about/state-payment-premiums",
     "https://cms.gov/medicare/payment/medicare-advantage-rates-statistics/ratebooks-supporting-data",
     "https://cms.gov/medicare/quality/snf-quality-reporting-program/help",
-    "https://cms.gov/priorities/innovation/about/alternative-payment-models",
     "https://cms.gov/data-research/cms-information-technology/section-508-and-cms/accessibility-cmsgov",
     "https://cms.gov/data-research/monitoring-programs/medicare-fee-service-compliance-programs/medical-review-education/ncd-240-9-faq",
     "https://cms.gov/medicare/payment/fee-for-service-providers/shared-savings-program-ssp-acos/about",
-    "https://cms.gov/priorities/key-initiatives/open-payments/resources",
-    "https://cms.gov/cciio/resources/data-resources/downloads/2016-enrollment-disenrollment-report.xlsx",
-    "https://cms.gov/cciio/resources/data-resources/downloads/metadata-report-for-puf.xlsx",
-    "https://cms.gov/cciio/resources/forms-reports-and-other-resources/downloads/2011_mlr_qtr_form_expatxls.xls",
-    "https://cms.gov/cciio/resources/forms-reports-and-other-resources/downloads/2011_mlr_qtr_form_mmplanxls.xls",
     "https://cms.gov/cciio/resources/forms-reports-and-other-resources/downloads/2012_mlr_calculator_and_formula_toolxlsm.xlsm",
+    "https://cms.gov/cciio/resources/forms-reports-and-other-resources/downloads/2013_mlr_formula_tool_20140513.xlsm",
+    "https://cms.gov/cciio/resources/forms-reports-and-other-resources/downloads/2013-mlr-formula-tool_20140324.xlsm",
     "https://cms.gov/data-research/monitoring-programs/medicare-fee-service-compliance-programs/medicare-fee-service-recovery-audit-program/resources",
     "https://cms.gov/digital-service",
     "https://cms.gov/files/document/2011-program-audit-findings-and-best-practicespdf",
@@ -61,7 +54,6 @@
     "https://cms.gov/files/document/planfinderissuerusermanual032013pdf",
     "https://cms.gov/files/document/planfinderpressreleasepdf",
     "https://cms.gov/files/document/questions-and-answers-plan-finder-data-entrypdf",
-    "https://cms.gov/priorities/key-initiatives/open-payments/resources/covered-recipients",
     "https://cms.gov/training-education/find-provider-type/employers-unions",
     "https://cms.gov/training-education/find-provider-type/facilities",
     "https://cms.gov/training-education/find-provider-type/health-drug-plans",
@@ -84,23 +76,31 @@
     "https://cms.gov/about-cms/what-we-do/nursing-homes/patients-caregivers/finding-nursing-home",
     "https://cms.gov/data-research/cms-data/payment-data",
     "https://cms.gov/data-research/computer-data-systems/minimum-data-sets-3.0-public-reports",
-    "https://cms.gov/data-research/monitoring-programs/improper-payment-measurement-programs",
-    "https://cms.gov/data-research/monitoring-programs/medicare-fee-service-compliance-programs",
-    "https://cms.gov/data-research/statistics-trends-and-reports/basic-stand-alone-medicare-claims-public-use-files",
-    "https://cms.gov/data-research/statistics-trends-and-reports/cfo-report",
-    "https://cms.gov/data-research/statistics-trends-and-reports/chart-series",
-    "https://cms.gov/data-research/statistics-trends-and-reports/cms-covid-19-data-products",
-    "https://cms.gov/data-research/statistics-trends-and-reports/cms-drug-spending",
-    "https://cms.gov/data-research/statistics-trends-and-reports/cms-statistics-reference-booklet",
-    "https://cms.gov/data-research/statistics-trends-and-reports/cost-reports",
-    "https://cms.gov/data-research/statistics-trends-and-reports/edi-performance-statistics",
-    "https://cms.gov/data-research/statistics-trends-and-reports/health-care-information-system-data-file",
-    "https://cms.gov/data-research/statistics-trends-and-reports/health-plans-reports-files-data",
-    "https://cms.gov/data-research/statistics-trends-and-reports/insight-briefs",
-    "https://cms.gov/data-research/statistics-trends-and-reports/marketplace-products",
-    "https://cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data",
-    "https://cms.gov/data-research/statistics-trends-and-reports/medicare-claims-synthetic-public-use-files",
-    "https://cms.gov/data-research/statistics-trends-and-reports/medicare-enrollment-reports"
+    "https://cms.gov/health-tech-ecosystem/early-adopters/payers",
+    "https://cms.gov/help-support",
+    "https://cms.gov/medicare/appeals-grievances/fee-for-service",
+    "https://cms.gov/medicare/audits-compliance/part-a-cost-report",
+    "https://cms.gov/medicare/coding-billing/place-of-service-codes",
+    "https://cms.gov/medicare/coding-billing/provider-customer-service-program",
+    "https://cms.gov/medicare/coding-billing/therapy-services",
+    "https://cms.gov/nosurprises/policies-and-resources/reports",
+    "https://cms.gov/about-cms/contact/cms",
+    "https://cms.gov/about-cms/contact/database",
+    "https://cms.gov/about-cms/contact/newsroom",
+    "https://cms.gov/about-cms/information-systems/privacy/privacy-act-1974-and-privacy-act-requests",
+    "https://cms.gov/about-cms/who-we-are/leadership/digital-service-cms",
+    "https://cms.gov/medicaid-chip/medicare-coordination/financial-alignment/managed-fee-for-service-model-mffs",
+    "https://cms.gov/medicaid-chip/medicare-coordination/integrity-institute/reports",
+    "https://cms.gov/medicare-medicaid-coordination/fraud-prevention/fraudabuseforprofs/focused-program-integrity-review-reports-state-or-territory",
+    "https://cms.gov/marketplace/about/affordable-care-act",
+    "https://cms.gov/marketplace/about/exchange-coverage-maps",
+    "https://cms.gov/marketplace/about/health-insurance-marketplace-quality-initiatives",
+    "https://cms.gov/marketplace/about/oversight",
+    "https://cms.gov/marketplace/about/overview-exchanges",
+    "https://cms.gov/marketplace/agents-brokers/help-on-demand",
+    "https://cms.gov/medicaid-chip/community-engagement-support/eligibility-made-easy",
+    "https://cms.gov/medicaid-chip/medicare-coordination/integrity-institute/contact",
+    "https://cms.gov/research-statistics-data-and-systems/monitoring-programs/cert/downloads/fy_2004shortreportpdf"
   ],
   "requestedCount": 100,
   "returnedCount": 100,
@@ -120,8 +120,9 @@
     "primary": 100,
     "additional": 0
   },
+  "totalDiscoveredPages": 9986,
   "discoverySummary": {
-    "requestId": "cache-1772217212557-93403",
+    "requestId": "cache-1772222231839-86819",
     "sourcesAttempted": [
       "sitemap"
     ],
@@ -138,7 +139,7 @@
         "homepage-fallback": 0
       },
       "accepted": {
-        "sitemap": 10611
+        "sitemap": 9986
       }
     },
     "priorityCoverage": {
@@ -153,6 +154,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T18:33:39.119Z",
+  "generatedAt": "2026-02-27T19:57:14.059Z",
   "generatedBy": "github-action-cache"
 }

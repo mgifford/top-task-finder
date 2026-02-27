@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-02-27T19:43:07.751Z",
+  "generatedAt": "2026-02-27T19:57:14.062Z",
   "targets": [
     {
-      "fileName": "alberta.ca-100.json",
-      "canonicalHost": "alberta.ca",
+      "fileName": "cms.gov-100.json",
+      "canonicalHost": "cms.gov",
       "requestedCount": 100,
-      "returnedCount": 59,
-      "generatedAt": "2026-02-27T19:43:07.750Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-02-27T19:57:14.059Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://alberta.ca/sitemap.xml"
+        "Sitemap traversal limit reached; skipped additional sitemap files."
       ]
     }
   ]
