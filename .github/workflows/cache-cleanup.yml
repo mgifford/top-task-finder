@@ -1,0 +1,50 @@
+name: Clean Cache Directory
+run-name: Clean Cache Directory (weekly cleanup)
+
+on:
+  schedule:
+    # Run every Friday at 11:59 PM UTC (end of day)
+    - cron: '59 23 * * 5'
+  workflow_dispatch:
+    # Allow manual trigger for testing
+
+jobs:
+  cleanup-cache:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Delete cache files older than 7 days
+        run: |
+          if [ ! -d "cache" ]; then
+            echo "Cache directory does not exist, nothing to clean"
+            exit 0
+          fi
+          
+          echo "Current cache files:"
+          ls -lah cache/
+          
+          echo ""
+          echo "Deleting cache files older than 7 days..."
+          
+          # Find and delete files older than 7 days in the cache directory
+          find cache/ -type f -name "*.json" -mtime +7 -delete
+          
+          echo ""
+          echo "Remaining cache files:"
+          ls -lah cache/
+
+      - name: Commit cache cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -u cache
+          if git diff --cached --quiet; then
+            echo "No cache files were deleted"
+            exit 0
+          fi
+          git commit -m "chore: clean cache files older than 7 days"
+          git push
