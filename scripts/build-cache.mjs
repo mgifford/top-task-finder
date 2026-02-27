@@ -342,6 +342,12 @@ function applyUrlDiversityLimits(sortedCandidates) {
   // Track counts for efficient O(n) performance
   const firstSegmentCounts = new Map();
   const depth3PrefixCounts = new Map();
+  const segmentCounts = new Map(); // Track individual segment repetition across all positions
+  
+  // Limits for diversity
+  const MAX_FIRST_SEGMENT = 15;
+  const MAX_DEPTH3_PREFIX = 3;
+  const MAX_INDIVIDUAL_SEGMENT = 8; // Max URLs containing any single segment
   
   // Process candidates in order of their score
   sortedCandidates.forEach((candidate) => {
@@ -354,11 +360,15 @@ function applyUrlDiversityLimits(sortedCandidates) {
     
     if (isHomepage || isSearch) {
       selected.push(candidate);
-      // Track first-level segments from selected URLs
+      // Track segments from selected URLs
       if (segments.length >= 1) {
         selectedFirstSegments.add(segments[0]);
         firstSegmentCounts.set(segments[0], (firstSegmentCounts.get(segments[0]) || 0) + 1);
       }
+      // Track all segments for individual segment counting
+      segments.forEach((segment) => {
+        segmentCounts.set(segment, (segmentCounts.get(segment) || 0) + 1);
+      });
       return;
     }
     
@@ -370,24 +380,36 @@ function applyUrlDiversityLimits(sortedCandidates) {
       const firstSegment = segments[0];
       
       // If we've already selected a URL with this first segment,
-      // limit to 15 URLs per first-level segment to ensure diversity
+      // limit to MAX_FIRST_SEGMENT URLs per first-level segment to ensure diversity
       if (selectedFirstSegments.has(firstSegment)) {
         const countWithSameFirstSegment = firstSegmentCounts.get(firstSegment) || 0;
         
-        if (countWithSameFirstSegment >= 15) {
+        if (countWithSameFirstSegment >= MAX_FIRST_SEGMENT) {
           shouldSkip = true;
         }
       }
     }
     
-    // For deeper URLs (3+ segments), apply stricter limits
+    // For deeper URLs (3+ segments), apply stricter limits on prefixes
     if (!shouldSkip && segments.length >= 3) {
       const depth3Prefix = '/' + segments.slice(0, 3).join('/');
       const countWithSamePrefix = depth3PrefixCounts.get(depth3Prefix) || 0;
       
-      // Limit to 3 URLs per 3-segment prefix
-      if (countWithSamePrefix >= 3) {
+      // Limit to MAX_DEPTH3_PREFIX URLs per 3-segment prefix
+      if (countWithSamePrefix >= MAX_DEPTH3_PREFIX) {
         shouldSkip = true;
+      }
+    }
+    
+    // Check for individual segment repetition across all path positions
+    // This catches patterns like "health-services" or "caregiver-support" appearing in many URLs
+    if (!shouldSkip) {
+      for (const segment of segments) {
+        const count = segmentCounts.get(segment) || 0;
+        if (count >= MAX_INDIVIDUAL_SEGMENT) {
+          shouldSkip = true;
+          break;
+        }
       }
     }
     
@@ -405,6 +427,10 @@ function applyUrlDiversityLimits(sortedCandidates) {
         const depth3Prefix = '/' + segments.slice(0, 3).join('/');
         depth3PrefixCounts.set(depth3Prefix, (depth3PrefixCounts.get(depth3Prefix) || 0) + 1);
       }
+      // Track all individual segments
+      segments.forEach((segment) => {
+        segmentCounts.set(segment, (segmentCounts.get(segment) || 0) + 1);
+      });
     }
   });
 
