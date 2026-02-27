@@ -261,6 +261,9 @@ function aggregatePriorityCoverage(candidates) {
 function getPathPrefix(url, depth) {
   const parsed = typeof url === 'string' ? new URL(url) : new URL(url.href);
   const segments = parsed.pathname.split('/').filter(Boolean);
+  if (segments.length < depth) {
+    return parsed.pathname.replace(/\/$/, '') || '/';
+  }
   return '/' + segments.slice(0, depth).join('/');
 }
 
@@ -271,33 +274,40 @@ function applyUrlDiversityLimits(sortedCandidates) {
   const MAX_DEPTH_2 = 15;
 
   sortedCandidates.forEach((candidate) => {
-    const depth2Prefix = getPathPrefix(candidate.url, 2);
-    const depth3Prefix = getPathPrefix(candidate.url, 3);
-    
-    const depth2Count = pathCounts.get(depth2Prefix) || 0;
-    const depth3Count = pathCounts.get(depth3Prefix) || 0;
+    const parsed = new URL(candidate.url);
+    const segments = parsed.pathname.split('/').filter(Boolean);
     
     const isHomepage = candidate.prioritySignals?.homepage;
     const isSearch = candidate.prioritySignals?.search;
     
     if (isHomepage || isSearch) {
       result.push(candidate);
-      pathCounts.set(depth2Prefix, depth2Count + 1);
+      return;
+    }
+    
+    if (segments.length >= 3) {
+      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+      const depth3Count = pathCounts.get(depth3Prefix) || 0;
+      
+      if (depth3Count >= MAX_DEPTH_3) {
+        return;
+      }
+      
       pathCounts.set(depth3Prefix, depth3Count + 1);
-      return;
     }
     
-    if (depth3Count >= MAX_DEPTH_3) {
-      return;
-    }
-    
-    if (depth2Count >= MAX_DEPTH_2) {
-      return;
+    if (segments.length >= 2) {
+      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
+      const depth2Count = pathCounts.get(depth2Prefix) || 0;
+      
+      if (depth2Count >= MAX_DEPTH_2) {
+        return;
+      }
+      
+      pathCounts.set(depth2Prefix, depth2Count + 1);
     }
     
     result.push(candidate);
-    pathCounts.set(depth2Prefix, depth2Count + 1);
-    pathCounts.set(depth3Prefix, depth3Count + 1);
   });
 
   return result;
