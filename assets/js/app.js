@@ -36,6 +36,10 @@ const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
 const findUrlsButton = document.getElementById('find-urls');
 const rescanUrlsButton = document.getElementById('rescan-urls');
+const pageEstimate = document.getElementById('page-estimate');
+const modal = document.getElementById('top-task-modal');
+const openModalButton = document.getElementById('open-modal');
+const closeModalButton = document.getElementById('close-modal');
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -62,11 +66,18 @@ function renderResult(result) {
   outputArea.value = Array.isArray(result.selectedUrls)
     ? result.selectedUrls.join('\n')
     : '';
+  
+  // Display page estimate if available
+  if (result.totalDiscoveredPages) {
+    const estimate = formatPageEstimate(result.totalDiscoveredPages);
+    pageEstimate.textContent = `Estimated site size: ${estimate}`;
+  }
 }
 
 function clearResultPresentation() {
   outputArea.value = '';
   cacheState.textContent = '';
+  pageEstimate.textContent = '';
   renderServerCrawlStatus('');
   rescanUrlsButton.hidden = true;
 }
@@ -174,6 +185,33 @@ function formatAge(isoDate) {
 
   const days = Math.floor(hours / 24);
   return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+// Page estimate rounding thresholds: round to nearest 10 for small sites,
+// 50 for medium sites, 500 for large sites, and 5000 for very large sites
+const PAGE_ESTIMATE_THRESHOLDS = {
+  SMALL_MAX: 100,        // Sites < 100 pages: round to nearest 10
+  SMALL_ROUND: 10,
+  MEDIUM_MAX: 1000,      // Sites < 1000 pages: round to nearest 50
+  MEDIUM_ROUND: 50,
+  LARGE_MAX: 10000,      // Sites < 10000 pages: round to nearest 500
+  LARGE_ROUND: 500,
+  XLARGE_ROUND: 5000,    // Sites >= 10000 pages: round to nearest 5000
+};
+
+function formatPageEstimate(count) {
+  const { SMALL_MAX, SMALL_ROUND, MEDIUM_MAX, MEDIUM_ROUND, LARGE_MAX, LARGE_ROUND, XLARGE_ROUND } = PAGE_ESTIMATE_THRESHOLDS;
+  
+  if (count < SMALL_MAX) {
+    return `~${Math.round(count / SMALL_ROUND) * SMALL_ROUND} pages`;
+  }
+  if (count < MEDIUM_MAX) {
+    return `~${Math.round(count / MEDIUM_ROUND) * MEDIUM_ROUND} pages`;
+  }
+  if (count < LARGE_MAX) {
+    return `~${Math.round(count / LARGE_ROUND) * LARGE_ROUND} pages`;
+  }
+  return `~${Math.round(count / XLARGE_ROUND) * XLARGE_ROUND}+ pages`;
 }
 
 function renderCacheMeta(result, sourceLabel) {
@@ -496,5 +534,37 @@ scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
 rescanUrlsButton.addEventListener('click', handleRescan);
 domainInput.addEventListener('input', updateUrlFromForm);
+
+// Modal event handlers
+function openModal() {
+  modal.classList.add('open');
+  modal.removeAttribute('hidden');
+  closeModalButton.focus();
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('hidden', '');
+}
+
+openModalButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  openModal();
+});
+
+closeModalButton.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && modal.classList.contains('open')) {
+    closeModal();
+  }
+});
 
 initialize();

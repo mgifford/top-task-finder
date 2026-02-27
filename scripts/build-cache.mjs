@@ -74,7 +74,7 @@ function isWithinCanonicalScope(candidateUrl, canonicalHost) {
   return canonicalizeHost(parsed.hostname) === canonicalizeHost(canonicalHost);
 }
 
-const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|zip|gz|mp4|mp3|woff2?|ttf|eot|xml|json|csv)$/i;
+const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
 
 function isLikelyHtmlUrl(urlValue) {
   const parsed = typeof urlValue === 'string' ? new URL(urlValue) : new URL(urlValue.href);
@@ -335,63 +335,84 @@ function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
 }
 
 function applyUrlDiversityLimits(sortedCandidates) {
-  const result = [];
-  const pathCounts = new Map();
-  const MAX_DEPTH_3 = 3;
-  const MAX_DEPTH_2 = 15;
-
+  const selected = [];
+  const skipped = [];
+  const selectedFirstSegments = new Set();
+  
+  // Track counts for efficient O(n) performance
+  const firstSegmentCounts = new Map();
+  const depth3PrefixCounts = new Map();
+  
+  // Process candidates in order of their score
   sortedCandidates.forEach((candidate) => {
     const parsed = new URL(candidate.url);
     const segments = parsed.pathname.split('/').filter(Boolean);
     
+    // Always include homepage and search pages
     const isHomepage = candidate.prioritySignals?.homepage;
     const isSearch = candidate.prioritySignals?.search;
     
     if (isHomepage || isSearch) {
-      result.push(candidate);
+      selected.push(candidate);
+      // Track first-level segments from selected URLs
+      if (segments.length >= 1) {
+        selectedFirstSegments.add(segments[0]);
+        firstSegmentCounts.set(segments[0], (firstSegmentCounts.get(segments[0]) || 0) + 1);
+      }
       return;
     }
     
-    let canAdd = true;
+    // Check if this URL shares path segments with already selected URLs
+    let shouldSkip = false;
     
-    if (segments.length >= 2) {
-      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
-      const depth2Count = pathCounts.get(depth2Prefix) || 0;
+    // For URLs with at least one segment, check if the first segment is already seen
+    if (segments.length >= 1) {
+      const firstSegment = segments[0];
       
-      if (depth2Count >= MAX_DEPTH_2) {
-        canAdd = false;
+      // If we've already selected a URL with this first segment,
+      // limit to 15 URLs per first-level segment to ensure diversity
+      if (selectedFirstSegments.has(firstSegment)) {
+        const countWithSameFirstSegment = firstSegmentCounts.get(firstSegment) || 0;
+        
+        if (countWithSameFirstSegment >= 15) {
+          shouldSkip = true;
+        }
       }
     }
     
-    if (canAdd && segments.length >= 3) {
+    // For deeper URLs (3+ segments), apply stricter limits
+    if (!shouldSkip && segments.length >= 3) {
       const depth3Prefix = '/' + segments.slice(0, 3).join('/');
-      const depth3Count = pathCounts.get(depth3Prefix) || 0;
+      const countWithSamePrefix = depth3PrefixCounts.get(depth3Prefix) || 0;
       
-      if (depth3Count >= MAX_DEPTH_3) {
-        canAdd = false;
+      // Limit to 3 URLs per 3-segment prefix
+      if (countWithSamePrefix >= 3) {
+        shouldSkip = true;
       }
     }
     
-    if (!canAdd) {
-      return;
+    if (shouldSkip) {
+      skipped.push(candidate);
+    } else {
+      selected.push(candidate);
+      // Track the first segment and depth-3 prefix
+      if (segments.length >= 1) {
+        const firstSegment = segments[0];
+        selectedFirstSegments.add(firstSegment);
+        firstSegmentCounts.set(firstSegment, (firstSegmentCounts.get(firstSegment) || 0) + 1);
+      }
+      if (segments.length >= 3) {
+        const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+        depth3PrefixCounts.set(depth3Prefix, (depth3PrefixCounts.get(depth3Prefix) || 0) + 1);
+      }
     }
-    
-    if (segments.length >= 3) {
-      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
-      const depth3Count = pathCounts.get(depth3Prefix) || 0;
-      pathCounts.set(depth3Prefix, depth3Count + 1);
-    }
-    
-    if (segments.length >= 2) {
-      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
-      const depth2Count = pathCounts.get(depth2Prefix) || 0;
-      pathCounts.set(depth2Prefix, depth2Count + 1);
-    }
-    
-    result.push(candidate);
   });
 
-  return result;
+  // Return both selected and skipped for potential backfill
+  return {
+    selected,
+    skipped,
+  };
 }
 
 function ensureCriticalPages(candidates, baseUrl) {
@@ -504,10 +525,28 @@ function createScanRequest(domainUrl, requestedCount) {
 
 function buildResult(scanRequest, rankedCandidates, discoverySummary) {
   const deduplicatedCandidates = deduplicateYearBasedUrls(rankedCandidates, 3);
-  const diverseCandidates = applyUrlDiversityLimits(deduplicatedCandidates);
-  const selectedUrls = diverseCandidates
+  const diversityResult = applyUrlDiversityLimits(deduplicatedCandidates);
+  
+  let finalCandidates = diversityResult.selected;
+  
+  // If we don't have enough URLs, backfill from skipped ones
+  if (finalCandidates.length < scanRequest.requestedCount && diversityResult.skipped.length > 0) {
+    const needed = scanRequest.requestedCount - finalCandidates.length;
+    // Shuffle skipped URLs for random selection
+    const shuffled = diversityResult.skipped
+      .map(item => ({ item, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ item }) => item);
+    
+    finalCandidates = [...finalCandidates, ...shuffled.slice(0, needed)];
+  }
+  
+  const selectedUrls = finalCandidates
     .slice(0, scanRequest.requestedCount)
     .map((candidate) => candidate.url);
+
+  // Calculate total discovered pages for estimate
+  const totalDiscovered = rankedCandidates.length;
 
   return {
     requestId: scanRequest.requestId,
@@ -516,11 +555,12 @@ function buildResult(scanRequest, rankedCandidates, discoverySummary) {
     returnedCount: selectedUrls.length,
     randomShareCount: 0,
     shortfallCount: Math.max(0, scanRequest.requestedCount - selectedUrls.length),
-    priorityCoverage: aggregatePriorityCoverage(diverseCandidates),
+    priorityCoverage: aggregatePriorityCoverage(finalCandidates),
     languageDistribution: {
       primary: selectedUrls.length,
       additional: 0,
     },
+    totalDiscoveredPages: totalDiscovered,
     discoverySummary,
     generatedAt: new Date().toISOString(),
     generatedBy: 'github-action-cache',
