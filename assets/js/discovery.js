@@ -47,7 +47,7 @@ export function isWithinCanonicalScope(candidateUrl, canonicalHost) {
   return candidateHost === canonicalizeHost(canonicalHost);
 }
 
-const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|zip|gz|mp4|mp3|woff2?|ttf|eot|xml|json|csv)$/i;
+const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
 const SOURCE_BASE_WEIGHTS = {
   sitemap: 40,
   search: 28,

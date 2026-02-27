@@ -36,6 +36,10 @@ const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
 const findUrlsButton = document.getElementById('find-urls');
 const rescanUrlsButton = document.getElementById('rescan-urls');
+const pageEstimate = document.getElementById('page-estimate');
+const modal = document.getElementById('top-task-modal');
+const openModalButton = document.getElementById('open-modal');
+const closeModalButton = document.getElementById('close-modal');
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -62,11 +66,18 @@ function renderResult(result) {
   outputArea.value = Array.isArray(result.selectedUrls)
     ? result.selectedUrls.join('\n')
     : '';
+  
+  // Display page estimate if available
+  if (result.totalDiscoveredPages) {
+    const estimate = formatPageEstimate(result.totalDiscoveredPages);
+    pageEstimate.textContent = `Estimated site size: ${estimate}`;
+  }
 }
 
 function clearResultPresentation() {
   outputArea.value = '';
   cacheState.textContent = '';
+  pageEstimate.textContent = '';
   renderServerCrawlStatus('');
   rescanUrlsButton.hidden = true;
 }
@@ -174,6 +185,19 @@ function formatAge(isoDate) {
 
   const days = Math.floor(hours / 24);
   return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+function formatPageEstimate(count) {
+  if (count < 100) {
+    return `~${Math.ceil(count / 10) * 10} pages`;
+  }
+  if (count < 1000) {
+    return `~${Math.ceil(count / 50) * 50} pages`;
+  }
+  if (count < 10000) {
+    return `~${Math.ceil(count / 500) * 500} pages`;
+  }
+  return `~${Math.ceil(count / 5000) * 5000}+ pages`;
 }
 
 function renderCacheMeta(result, sourceLabel) {
@@ -496,5 +520,37 @@ scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
 rescanUrlsButton.addEventListener('click', handleRescan);
 domainInput.addEventListener('input', updateUrlFromForm);
+
+// Modal event handlers
+function openModal() {
+  modal.classList.add('open');
+  modal.removeAttribute('hidden');
+  closeModalButton.focus();
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  modal.setAttribute('hidden', '');
+}
+
+openModalButton.addEventListener('click', (event) => {
+  event.preventDefault();
+  openModal();
+});
+
+closeModalButton.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && modal.classList.contains('open')) {
+    closeModal();
+  }
+});
 
 initialize();
