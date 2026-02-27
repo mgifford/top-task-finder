@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-02-27T19:38:39.960Z",
+  "generatedAt": "2026-02-27T19:41:58.383Z",
   "targets": [
     {
-      "fileName": "ca.gov-100.json",
-      "canonicalHost": "ca.gov",
+      "fileName": "alberta.gov-100.json",
+      "canonicalHost": "alberta.gov",
       "requestedCount": 100,
-      "returnedCount": 28,
-      "generatedAt": "2026-02-27T19:38:39.958Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-27T19:41:58.382Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://ca.gov/sitemap.xml"
+        "Sitemap fetch unavailable for https://alberta.gov/sitemap.xml",
+        "Homepage fallback unavailable."
       ]
     }
   ]
