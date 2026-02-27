@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-27T19:58:28.990Z",
+  "generatedAt": "2026-02-27T20:03:21.039Z",
   "targets": [
     {
-      "fileName": "medicare.gov-100.json",
-      "canonicalHost": "medicare.gov",
+      "fileName": "medicaid.gov-100.json",
+      "canonicalHost": "medicaid.gov",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-02-27T19:58:28.988Z",
-      "warnings": []
+      "generatedAt": "2026-02-27T20:03:21.037Z",
+      "warnings": [
+        "Sitemap traversal limit reached; skipped additional sitemap files."
+      ]
     }
   ]
 }
