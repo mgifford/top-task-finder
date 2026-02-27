@@ -6,6 +6,7 @@ import path from 'node:path';
 const DEFAULT_REQUESTED_COUNT = 100;
 const MAX_REQUESTED_COUNT = 200;
 const MAX_SITEMAP_DOCS = 24;
+const CRITICAL_PAGE_SCORE = 1000;
 
 function parseArgs(argv) {
   const parsed = {};
@@ -87,6 +88,10 @@ function detectPrioritySignals(pathname) {
     search: /(^|\/)search(\/|$)|find/.test(normalized),
     accessibility: /accessibility|a11y/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
+    contact: /(^|\/)contact(\/|$)/.test(normalized),
+    about: /(^|\/)about(\/|$)/.test(normalized),
+    help: /(^|\/)help|support|faq(\/|$)/.test(normalized),
+    resources: /(^|\/)resources?(\/|$)/.test(normalized),
   };
 }
 
@@ -114,6 +119,18 @@ function scoreCandidateUrl(normalizedUrl, source) {
   }
   if (prioritySignals.topTask) {
     priorityWeight += 14;
+  }
+  if (prioritySignals.contact) {
+    priorityWeight += 12;
+  }
+  if (prioritySignals.about) {
+    priorityWeight += 10;
+  }
+  if (prioritySignals.help) {
+    priorityWeight += 10;
+  }
+  if (prioritySignals.resources) {
+    priorityWeight += 8;
   }
 
   return {
@@ -224,14 +241,107 @@ function aggregatePriorityCoverage(candidates) {
       search: coverage.search || Boolean(candidate.prioritySignals?.search),
       accessibility: coverage.accessibility || Boolean(candidate.prioritySignals?.accessibility),
       topTask: coverage.topTask || Boolean(candidate.prioritySignals?.topTask),
+      contact: coverage.contact || Boolean(candidate.prioritySignals?.contact),
+      about: coverage.about || Boolean(candidate.prioritySignals?.about),
+      help: coverage.help || Boolean(candidate.prioritySignals?.help),
+      resources: coverage.resources || Boolean(candidate.prioritySignals?.resources),
     }),
     {
       homepage: false,
       search: false,
       accessibility: false,
       topTask: false,
+      contact: false,
+      about: false,
+      help: false,
+      resources: false,
     },
   );
+}
+
+function applyUrlDiversityLimits(sortedCandidates) {
+  const result = [];
+  const pathCounts = new Map();
+  const MAX_DEPTH_3 = 3;
+  const MAX_DEPTH_2 = 15;
+
+  sortedCandidates.forEach((candidate) => {
+    const parsed = new URL(candidate.url);
+    const segments = parsed.pathname.split('/').filter(Boolean);
+    
+    const isHomepage = candidate.prioritySignals?.homepage;
+    const isSearch = candidate.prioritySignals?.search;
+    
+    if (isHomepage || isSearch) {
+      result.push(candidate);
+      return;
+    }
+    
+    let canAdd = true;
+    
+    if (segments.length >= 2) {
+      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
+      const depth2Count = pathCounts.get(depth2Prefix) || 0;
+      
+      if (depth2Count >= MAX_DEPTH_2) {
+        canAdd = false;
+      }
+    }
+    
+    if (canAdd && segments.length >= 3) {
+      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+      const depth3Count = pathCounts.get(depth3Prefix) || 0;
+      
+      if (depth3Count >= MAX_DEPTH_3) {
+        canAdd = false;
+      }
+    }
+    
+    if (!canAdd) {
+      return;
+    }
+    
+    if (segments.length >= 3) {
+      const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+      const depth3Count = pathCounts.get(depth3Prefix) || 0;
+      pathCounts.set(depth3Prefix, depth3Count + 1);
+    }
+    
+    if (segments.length >= 2) {
+      const depth2Prefix = '/' + segments.slice(0, 2).join('/');
+      const depth2Count = pathCounts.get(depth2Prefix) || 0;
+      pathCounts.set(depth2Prefix, depth2Count + 1);
+    }
+    
+    result.push(candidate);
+  });
+
+  return result;
+}
+
+function ensureCriticalPages(candidates, baseUrl) {
+  const hasHomepage = candidates.some(c => c.prioritySignals?.homepage);
+  
+  if (!hasHomepage) {
+    const homepageUrl = new URL('/', baseUrl.origin).href;
+    candidates.unshift({
+      url: homepageUrl,
+      source: 'critical-pages',
+      score: CRITICAL_PAGE_SCORE,
+      prioritySignals: {
+        homepage: true,
+        search: false,
+        accessibility: false,
+        topTask: false,
+        contact: false,
+        about: false,
+        help: false,
+        resources: false,
+      },
+    });
+  }
+  
+  return candidates;
 }
 
 async function discoverFromSitemap(baseUrl, warnings) {
@@ -318,7 +428,8 @@ function createScanRequest(domainUrl, requestedCount) {
 }
 
 function buildResult(scanRequest, rankedCandidates, discoverySummary) {
-  const selectedUrls = rankedCandidates
+  const diverseCandidates = applyUrlDiversityLimits(rankedCandidates);
+  const selectedUrls = diverseCandidates
     .slice(0, scanRequest.requestedCount)
     .map((candidate) => candidate.url);
 
@@ -329,7 +440,7 @@ function buildResult(scanRequest, rankedCandidates, discoverySummary) {
     returnedCount: selectedUrls.length,
     randomShareCount: 0,
     shortfallCount: Math.max(0, scanRequest.requestedCount - selectedUrls.length),
-    priorityCoverage: aggregatePriorityCoverage(rankedCandidates),
+    priorityCoverage: aggregatePriorityCoverage(diverseCandidates),
     languageDistribution: {
       primary: selectedUrls.length,
       additional: 0,
@@ -376,6 +487,8 @@ async function processTarget(target, outDir) {
       scanRequest.canonicalHost,
     );
   }
+  
+  ranked = ensureCriticalPages(ranked, scanRequest.normalizedUrl);
 
   const discoverySummary = buildDiscoverySummary({
     requestId: scanRequest.requestId,

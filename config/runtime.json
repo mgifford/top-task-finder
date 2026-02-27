@@ -1,5 +1,5 @@
 {
   "cloudflareTriggerEndpoint": "https://top-task-crawler.mike-gifford.workers.dev/trigger-crawl",
-  "pollIntervalMs": 8000,
+  "pollIntervalMs": 20000,
   "pollTimeoutMs": 900000
 }

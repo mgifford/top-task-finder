@@ -38,6 +38,7 @@ title: Accessible Top Task URL Finder
 
   <section class="panel" aria-labelledby="results-title">
     <h2 id="results-title">URL Results</h2>
+    <p class="hint">This list represents a diverse selection of popular and important pages from the website, prioritizing the homepage, search, accessibility pages, and top task pages while limiting deep subdirectories to increase variety across the site.</p>
     <textarea id="url-output" rows="14" spellcheck="false" placeholder="One URL per line will appear here."></textarea>
     <div class="actions">
       <button id="copy-results" type="button">Copy URLs</button>
