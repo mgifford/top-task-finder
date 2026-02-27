@@ -1,7 +1,79 @@
+/* CSS Custom Properties for theming */
+:root {
+  --color-text: #1f2328;
+  --color-text-secondary: #57606a;
+  --color-bg: #ffffff;
+  --color-bg-panel: #ffffff;
+  --color-border: #d0d7de;
+  --color-border-input: #8c959f;
+  --color-primary: #0969da;
+  --color-primary-text: #ffffff;
+  --color-secondary-bg: #f6f8fa;
+  --color-secondary-text: #1f2328;
+  --color-info-bg: #ddf4ff;
+  --color-info-text: #0a3069;
+  --color-success-bg: #dafbe1;
+  --color-success-text: #116329;
+  --color-warning-bg: #fff8c5;
+  --color-warning-text: #4d2d00;
+  --color-error-bg: #ffebe9;
+  --color-error-text: #82071e;
+  --color-footer-bg: #f6f8fa;
+  --color-link: #0969da;
+  --color-link-hover: #0550ae;
+}
+
+[data-theme="dark"] {
+  --color-text: #e6edf3;
+  --color-text-secondary: #8d96a0;
+  --color-bg: #0d1117;
+  --color-bg-panel: #161b22;
+  --color-border: #30363d;
+  --color-border-input: #6e7681;
+  --color-primary: #2f81f7;
+  --color-primary-text: #ffffff;
+  --color-secondary-bg: #21262d;
+  --color-secondary-text: #e6edf3;
+  --color-info-bg: #051d4d;
+  --color-info-text: #9ec8ff;
+  --color-success-bg: #033a16;
+  --color-success-text: #7ee787;
+  --color-warning-bg: #3d2d00;
+  --color-warning-text: #f0c938;
+  --color-error-bg: #490202;
+  --color-error-text: #ff7b72;
+  --color-footer-bg: #161b22;
+  --color-link: #58a6ff;
+  --color-link-hover: #79c0ff;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   max-width: 48rem;
   margin: 0 auto;
   padding: 1.25rem 1rem 2rem;
+  flex: 1;
 }
 
 .hero {
@@ -13,11 +85,11 @@
 }
 
 .panel {
-  border: 1px solid #d0d7de;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 1rem 1rem 0.9rem;
   margin-bottom: 1rem;
-  background: #ffffff;
+  background: var(--color-bg-panel);
 }
 
 .field {
@@ -40,10 +112,12 @@ input[type="password"],
 textarea {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #8c959f;
+  border: 1px solid var(--color-border-input);
   border-radius: 6px;
   padding: 0.55rem 0.65rem;
   font: inherit;
+  background: var(--color-bg);
+  color: var(--color-text);
 }
 
 textarea {
@@ -58,10 +132,10 @@ textarea {
 }
 
 button {
-  border: 1px solid #0969da;
+  border: 1px solid var(--color-primary);
   border-radius: 6px;
-  background: #0969da;
-  color: #ffffff;
+  background: var(--color-primary);
+  color: var(--color-primary-text);
   min-height: 2.6rem;
   padding: 0.45rem 0.85rem;
   font: inherit;
@@ -74,15 +148,15 @@ button:disabled {
 }
 
 button.secondary {
-  background: #f6f8fa;
-  color: #1f2328;
-  border-color: #8c959f;
+  background: var(--color-secondary-bg);
+  color: var(--color-secondary-text);
+  border-color: var(--color-border-input);
 }
 
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid #0969da;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -93,28 +167,28 @@ textarea:focus-visible {
 }
 
 .status.info {
-  background: #ddf4ff;
-  color: #0a3069;
+  background: var(--color-info-bg);
+  color: var(--color-info-text);
 }
 
 .status.success {
-  background: #dafbe1;
-  color: #116329;
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
 }
 
 .status.warning {
-  background: #fff8c5;
-  color: #4d2d00;
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
 }
 
 .status.error {
-  background: #ffebe9;
-  color: #82071e;
+  background: var(--color-error-bg);
+  color: var(--color-error-text);
 }
 
 .hint {
   margin: 0.25rem 0 0;
-  color: #57606a;
+  color: var(--color-text-secondary);
   font-size: 0.95rem;
 }
 
@@ -127,4 +201,109 @@ textarea:focus-visible {
     grid-template-columns: repeat(2, minmax(0, max-content));
     justify-content: flex-start;
   }
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  min-height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-secondary-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-border);
+  transform: scale(1.05);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.theme-toggle .theme-icon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.theme-toggle .theme-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Show sun icon in dark mode, moon icon in light mode */
+[data-theme="light"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+[data-theme="light"] .theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: none;
+}
+
+/* Footer styles */
+.site-footer {
+  background-color: var(--color-footer-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 1.5rem 1rem;
+  margin-top: auto;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-link);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.site-footer a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+.site-footer a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.site-footer svg {
+  flex-shrink: 0;
 }
