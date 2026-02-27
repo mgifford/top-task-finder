@@ -18,6 +18,7 @@ See **[GITHUB_PAGES_WARNING_FIX.md](GITHUB_PAGES_WARNING_FIX.md)** for detailed 
 - Accepts a site URL and target number of pages.
 - Produces an editable, one-URL-per-line list you can copy into other workflows.
 - Prioritizes high-value pages (for example: homepage, search, accessibility, and task-oriented pages) while keeping a random share for broader coverage.
+- Automatically deduplicates year-based URL patterns (e.g., annual reports, yearly plans) to keep only the most recent 3 items of each series.
 - Normalizes `www` and non-`www` versions of the same host so each run stays in a single canonical site scope.
 - Reuses cached results for faster repeat runs and lets you clear cached entries.
 
@@ -32,6 +33,17 @@ See **[GITHUB_PAGES_WARNING_FIX.md](GITHUB_PAGES_WARNING_FIX.md)** for detailed 
 - Primary output is plain text: one URL per line.
 - The list is editable before copying.
 - If fewer in-scope URLs are found than requested, the tool reports the shortfall.
+
+## URL Deduplication
+
+The tool automatically reduces duplication in year-based URL patterns to provide a more useful sample for testing:
+
+- **Year pattern detection**: Identifies URLs with year markers like `-2024`, `/2022`, `_2020`, or year ranges like `-2023-2024`
+- **Smart grouping**: Groups similar URLs by their pattern (e.g., all "annual-report-YEAR" URLs are grouped together)
+- **Recent focus**: Keeps only the 3 most recent items from each group to maintain historical context without overwhelming the list
+- **Example**: If a site has annual reports from 2017-2024, only the 2024, 2023, and 2022 versions are included
+
+This feature is particularly useful for government sites and organizations with extensive archives of annual reports, accessibility statements, and other time-series content.
 
 ## Current scope
 
