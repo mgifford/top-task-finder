@@ -337,7 +337,7 @@ function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
 function applyUrlDiversityLimits(sortedCandidates) {
   const selected = [];
   const skipped = [];
-  const segmentsSeen = new Set();
+  const selectedFirstSegments = new Set();
   
   // Track counts for efficient O(n) performance
   const firstSegmentCounts = new Map();
@@ -356,7 +356,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
       selected.push(candidate);
       // Track first-level segments from selected URLs
       if (segments.length >= 1) {
-        segmentsSeen.add(segments[0]);
+        selectedFirstSegments.add(segments[0]);
         firstSegmentCounts.set(segments[0], (firstSegmentCounts.get(segments[0]) || 0) + 1);
       }
       return;
@@ -370,11 +370,10 @@ function applyUrlDiversityLimits(sortedCandidates) {
       const firstSegment = segments[0];
       
       // If we've already selected a URL with this first segment,
-      // we should be more selective about adding more from this path
-      if (segmentsSeen.has(firstSegment)) {
+      // limit to 15 URLs per first-level segment to ensure diversity
+      if (selectedFirstSegments.has(firstSegment)) {
         const countWithSameFirstSegment = firstSegmentCounts.get(firstSegment) || 0;
         
-        // Limit to 15 URLs per first-level segment
         if (countWithSameFirstSegment >= 15) {
           shouldSkip = true;
         }
@@ -399,7 +398,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
       // Track the first segment and depth-3 prefix
       if (segments.length >= 1) {
         const firstSegment = segments[0];
-        segmentsSeen.add(firstSegment);
+        selectedFirstSegments.add(firstSegment);
         firstSegmentCounts.set(firstSegment, (firstSegmentCounts.get(firstSegment) || 0) + 1);
       }
       if (segments.length >= 3) {

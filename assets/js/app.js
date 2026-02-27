@@ -203,15 +203,15 @@ function formatPageEstimate(count) {
   const { SMALL_MAX, SMALL_ROUND, MEDIUM_MAX, MEDIUM_ROUND, LARGE_MAX, LARGE_ROUND, XLARGE_ROUND } = PAGE_ESTIMATE_THRESHOLDS;
   
   if (count < SMALL_MAX) {
-    return `~${Math.ceil(count / SMALL_ROUND) * SMALL_ROUND} pages`;
+    return `~${Math.round(count / SMALL_ROUND) * SMALL_ROUND} pages`;
   }
   if (count < MEDIUM_MAX) {
-    return `~${Math.ceil(count / MEDIUM_ROUND) * MEDIUM_ROUND} pages`;
+    return `~${Math.round(count / MEDIUM_ROUND) * MEDIUM_ROUND} pages`;
   }
   if (count < LARGE_MAX) {
-    return `~${Math.ceil(count / LARGE_ROUND) * LARGE_ROUND} pages`;
+    return `~${Math.round(count / LARGE_ROUND) * LARGE_ROUND} pages`;
   }
-  return `~${Math.ceil(count / XLARGE_ROUND) * XLARGE_ROUND}+ pages`;
+  return `~${Math.round(count / XLARGE_ROUND) * XLARGE_ROUND}+ pages`;
 }
 
 function renderCacheMeta(result, sourceLabel) {

@@ -48,7 +48,7 @@ title: Accessible Top Task URL Finder
   </section>
 
   <div class="disclaimer">
-    <p><strong>Note:</strong> This tool provides a quick way to sample popular URLs from a website, but it is <em>not</em> a replacement for proper Top Task research methodology. <a href="#" id="open-modal" class="disclaimer-link">Learn more about Top Tasks</a>.</p>
+    <p><strong>Note:</strong> This tool provides a quick way to sample popular URLs from a website, but it is <em>not</em> a replacement for proper Top Task research methodology. <button type="button" id="open-modal" class="disclaimer-link">Learn more about Top Tasks</button>.</p>
   </div>
 </main>
 
