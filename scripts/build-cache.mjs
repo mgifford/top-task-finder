@@ -339,6 +339,10 @@ function applyUrlDiversityLimits(sortedCandidates) {
   const skipped = [];
   const segmentsSeen = new Set();
   
+  // Track counts for efficient O(n) performance
+  const firstSegmentCounts = new Map();
+  const depth3PrefixCounts = new Map();
+  
   // Process candidates in order of their score
   sortedCandidates.forEach((candidate) => {
     const parsed = new URL(candidate.url);
@@ -353,6 +357,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
       // Track first-level segments from selected URLs
       if (segments.length >= 1) {
         segmentsSeen.add(segments[0]);
+        firstSegmentCounts.set(segments[0], (firstSegmentCounts.get(segments[0]) || 0) + 1);
       }
       return;
     }
@@ -367,12 +372,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
       // If we've already selected a URL with this first segment,
       // we should be more selective about adding more from this path
       if (segmentsSeen.has(firstSegment)) {
-        // Allow some URLs from the same first segment, but limit them
-        const countWithSameFirstSegment = selected.filter(s => {
-          const sUrl = new URL(s.url);
-          const sSegments = sUrl.pathname.split('/').filter(Boolean);
-          return sSegments.length >= 1 && sSegments[0] === firstSegment;
-        }).length;
+        const countWithSameFirstSegment = firstSegmentCounts.get(firstSegment) || 0;
         
         // Limit to 15 URLs per first-level segment
         if (countWithSameFirstSegment >= 15) {
@@ -384,11 +384,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
     // For deeper URLs (3+ segments), apply stricter limits
     if (!shouldSkip && segments.length >= 3) {
       const depth3Prefix = '/' + segments.slice(0, 3).join('/');
-      const countWithSamePrefix = selected.filter(s => {
-        const sUrl = new URL(s.url);
-        const sPath = sUrl.pathname;
-        return sPath.startsWith(depth3Prefix);
-      }).length;
+      const countWithSamePrefix = depth3PrefixCounts.get(depth3Prefix) || 0;
       
       // Limit to 3 URLs per 3-segment prefix
       if (countWithSamePrefix >= 3) {
@@ -400,9 +396,15 @@ function applyUrlDiversityLimits(sortedCandidates) {
       skipped.push(candidate);
     } else {
       selected.push(candidate);
-      // Track the first segment
+      // Track the first segment and depth-3 prefix
       if (segments.length >= 1) {
-        segmentsSeen.add(segments[0]);
+        const firstSegment = segments[0];
+        segmentsSeen.add(firstSegment);
+        firstSegmentCounts.set(firstSegment, (firstSegmentCounts.get(firstSegment) || 0) + 1);
+      }
+      if (segments.length >= 3) {
+        const depth3Prefix = '/' + segments.slice(0, 3).join('/');
+        depth3PrefixCounts.set(depth3Prefix, (depth3PrefixCounts.get(depth3Prefix) || 0) + 1);
       }
     }
   });

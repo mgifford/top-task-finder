@@ -187,17 +187,31 @@ function formatAge(isoDate) {
   return `${days} day${days === 1 ? '' : 's'} ago`;
 }
 
+// Page estimate rounding thresholds: round to nearest 10 for small sites,
+// 50 for medium sites, 500 for large sites, and 5000 for very large sites
+const PAGE_ESTIMATE_THRESHOLDS = {
+  SMALL_MAX: 100,        // Sites < 100 pages: round to nearest 10
+  SMALL_ROUND: 10,
+  MEDIUM_MAX: 1000,      // Sites < 1000 pages: round to nearest 50
+  MEDIUM_ROUND: 50,
+  LARGE_MAX: 10000,      // Sites < 10000 pages: round to nearest 500
+  LARGE_ROUND: 500,
+  XLARGE_ROUND: 5000,    // Sites >= 10000 pages: round to nearest 5000
+};
+
 function formatPageEstimate(count) {
-  if (count < 100) {
-    return `~${Math.ceil(count / 10) * 10} pages`;
+  const { SMALL_MAX, SMALL_ROUND, MEDIUM_MAX, MEDIUM_ROUND, LARGE_MAX, LARGE_ROUND, XLARGE_ROUND } = PAGE_ESTIMATE_THRESHOLDS;
+  
+  if (count < SMALL_MAX) {
+    return `~${Math.ceil(count / SMALL_ROUND) * SMALL_ROUND} pages`;
   }
-  if (count < 1000) {
-    return `~${Math.ceil(count / 50) * 50} pages`;
+  if (count < MEDIUM_MAX) {
+    return `~${Math.ceil(count / MEDIUM_ROUND) * MEDIUM_ROUND} pages`;
   }
-  if (count < 10000) {
-    return `~${Math.ceil(count / 500) * 500} pages`;
+  if (count < LARGE_MAX) {
+    return `~${Math.ceil(count / LARGE_ROUND) * LARGE_ROUND} pages`;
   }
-  return `~${Math.ceil(count / 5000) * 5000}+ pages`;
+  return `~${Math.ceil(count / XLARGE_ROUND) * XLARGE_ROUND}+ pages`;
 }
 
 function renderCacheMeta(result, sourceLabel) {
