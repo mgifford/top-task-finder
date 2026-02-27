@@ -1,0 +1,64 @@
+{
+  "requestId": "cache-1772227488470-3761",
+  "selectedUrls": [
+    "https://homergaines.com/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 1,
+  "randomShareCount": 0,
+  "shortfallCount": 99,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 1,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 1,
+  "discoverySummary": {
+    "requestId": "cache-1772227488470-3761",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://homergaines.com/sitemap.xml",
+      "Homepage fallback unavailable."
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 0
+      },
+      "accepted": {
+        "critical-pages": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-27T21:24:55.612Z",
+  "generatedBy": "github-action-cache"
+}

@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-02-27T20:59:17.230Z",
+  "generatedAt": "2026-02-27T21:24:55.613Z",
   "targets": [
     {
-      "fileName": "novascotia.ca-100.json",
-      "canonicalHost": "novascotia.ca",
+      "fileName": "homergaines.com-100.json",
+      "canonicalHost": "homergaines.com",
       "requestedCount": 100,
-      "returnedCount": 23,
-      "generatedAt": "2026-02-27T20:59:17.228Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-27T21:24:55.612Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://novascotia.ca/sitemap.xml"
+        "Sitemap fetch unavailable for https://homergaines.com/sitemap.xml",
+        "Homepage fallback unavailable."
       ]
     }
   ]
