@@ -19,6 +19,11 @@ jobs:
 
       - name: Delete cache files older than 7 days
         run: |
+          if [ ! -d "cache" ]; then
+            echo "Cache directory does not exist, nothing to clean"
+            exit 0
+          fi
+          
           echo "Current cache files:"
           ls -lah cache/
           
@@ -26,7 +31,6 @@ jobs:
           echo "Deleting cache files older than 7 days..."
           
           # Find and delete files older than 7 days in the cache directory
-          # excluding the .gitkeep file if it exists
           find cache/ -type f -name "*.json" -mtime +7 -delete
           
           echo ""
