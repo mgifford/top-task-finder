@@ -87,6 +87,10 @@ function detectPrioritySignals(pathname) {
     search: /(^|\/)search(\/|$)|find/.test(normalized),
     accessibility: /accessibility|a11y/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
+    contact: /(^|\/)contact(\/|$)/.test(normalized),
+    about: /(^|\/)about(\/|$)/.test(normalized),
+    help: /(^|\/)help|support|faq(\/|$)/.test(normalized),
+    resources: /(^|\/)resources?(\/|$)/.test(normalized),
   };
 }
 
@@ -114,6 +118,18 @@ function scoreCandidateUrl(normalizedUrl, source) {
   }
   if (prioritySignals.topTask) {
     priorityWeight += 14;
+  }
+  if (prioritySignals.contact) {
+    priorityWeight += 12;
+  }
+  if (prioritySignals.about) {
+    priorityWeight += 10;
+  }
+  if (prioritySignals.help) {
+    priorityWeight += 10;
+  }
+  if (prioritySignals.resources) {
+    priorityWeight += 8;
   }
 
   return {
@@ -224,14 +240,92 @@ function aggregatePriorityCoverage(candidates) {
       search: coverage.search || Boolean(candidate.prioritySignals?.search),
       accessibility: coverage.accessibility || Boolean(candidate.prioritySignals?.accessibility),
       topTask: coverage.topTask || Boolean(candidate.prioritySignals?.topTask),
+      contact: coverage.contact || Boolean(candidate.prioritySignals?.contact),
+      about: coverage.about || Boolean(candidate.prioritySignals?.about),
+      help: coverage.help || Boolean(candidate.prioritySignals?.help),
+      resources: coverage.resources || Boolean(candidate.prioritySignals?.resources),
     }),
     {
       homepage: false,
       search: false,
       accessibility: false,
       topTask: false,
+      contact: false,
+      about: false,
+      help: false,
+      resources: false,
     },
   );
+}
+
+function getPathPrefix(url, depth) {
+  const parsed = typeof url === 'string' ? new URL(url) : new URL(url.href);
+  const segments = parsed.pathname.split('/').filter(Boolean);
+  return '/' + segments.slice(0, depth).join('/');
+}
+
+function applyUrlDiversityLimits(sortedCandidates) {
+  const result = [];
+  const pathCounts = new Map();
+  const MAX_DEPTH_3 = 3;
+  const MAX_DEPTH_2 = 15;
+
+  sortedCandidates.forEach((candidate) => {
+    const depth2Prefix = getPathPrefix(candidate.url, 2);
+    const depth3Prefix = getPathPrefix(candidate.url, 3);
+    
+    const depth2Count = pathCounts.get(depth2Prefix) || 0;
+    const depth3Count = pathCounts.get(depth3Prefix) || 0;
+    
+    const isHomepage = candidate.prioritySignals?.homepage;
+    const isSearch = candidate.prioritySignals?.search;
+    
+    if (isHomepage || isSearch) {
+      result.push(candidate);
+      pathCounts.set(depth2Prefix, depth2Count + 1);
+      pathCounts.set(depth3Prefix, depth3Count + 1);
+      return;
+    }
+    
+    if (depth3Count >= MAX_DEPTH_3) {
+      return;
+    }
+    
+    if (depth2Count >= MAX_DEPTH_2) {
+      return;
+    }
+    
+    result.push(candidate);
+    pathCounts.set(depth2Prefix, depth2Count + 1);
+    pathCounts.set(depth3Prefix, depth3Count + 1);
+  });
+
+  return result;
+}
+
+function ensureCriticalPages(candidates, baseUrl) {
+  const hasHomepage = candidates.some(c => c.prioritySignals?.homepage);
+  
+  if (!hasHomepage) {
+    const homepageUrl = new URL('/', baseUrl.origin).href;
+    candidates.unshift({
+      url: homepageUrl,
+      source: 'critical-pages',
+      score: 1000,
+      prioritySignals: {
+        homepage: true,
+        search: false,
+        accessibility: false,
+        topTask: false,
+        contact: false,
+        about: false,
+        help: false,
+        resources: false,
+      },
+    });
+  }
+  
+  return candidates;
 }
 
 async function discoverFromSitemap(baseUrl, warnings) {
@@ -318,7 +412,8 @@ function createScanRequest(domainUrl, requestedCount) {
 }
 
 function buildResult(scanRequest, rankedCandidates, discoverySummary) {
-  const selectedUrls = rankedCandidates
+  const diverseCandidates = applyUrlDiversityLimits(rankedCandidates);
+  const selectedUrls = diverseCandidates
     .slice(0, scanRequest.requestedCount)
     .map((candidate) => candidate.url);
 
@@ -329,7 +424,7 @@ function buildResult(scanRequest, rankedCandidates, discoverySummary) {
     returnedCount: selectedUrls.length,
     randomShareCount: 0,
     shortfallCount: Math.max(0, scanRequest.requestedCount - selectedUrls.length),
-    priorityCoverage: aggregatePriorityCoverage(rankedCandidates),
+    priorityCoverage: aggregatePriorityCoverage(diverseCandidates),
     languageDistribution: {
       primary: selectedUrls.length,
       additional: 0,
@@ -376,6 +471,8 @@ async function processTarget(target, outDir) {
       scanRequest.canonicalHost,
     );
   }
+  
+  ranked = ensureCriticalPages(ranked, scanRequest.normalizedUrl);
 
   const discoverySummary = buildDiscoverySummary({
     requestId: scanRequest.requestId,
