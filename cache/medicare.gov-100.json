@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772222262100-84129",
+  "requestId": "cache-1772222308446-95842",
   "selectedUrls": [
     "https://medicare.gov/",
     "https://medicare.gov/about-us/accessibility-nondiscrimination-notice",
@@ -95,12 +95,12 @@
     "https://medicare.gov/health-drug-plans/medigap/ready-to-buy",
     "https://medicare.gov/medigap-supplemental-insurance-plans/",
     "https://medicare.gov/sitemap",
-    "https://medicare.gov/coverage/pulmonary-rehabilitation-programs",
-    "https://medicare.gov/coverage/hearing-balance-exams",
-    "https://medicare.gov/coverage/covid-19-antibody-tests",
-    "https://medicare.gov/coverage/other-transplants",
-    "https://medicare.gov/coverage/physical-activity-nutrition-risk-assessment",
-    "https://medicare.gov/publications/11036_enrolling_in_medicare_part_a_and_part_b.mobi"
+    "https://medicare.gov/health-drug-plans/part-d/basics/choose-coverage",
+    "https://medicare.gov/providers-services/claims-appeals-complaints/claims/share-your-medicare-claims",
+    "https://medicare.gov/coverage/pre-exposure-prophylaxis-prep-for-hiv-prevention",
+    "https://medicare.gov/health-drug-plans/part-d/basics",
+    "https://medicare.gov/coverage/kidney-transplants",
+    "https://medicare.gov/publications/12085-opioid-treatment-programs.pdf-0"
   ],
   "requestedCount": 100,
   "returnedCount": 100,
@@ -122,7 +122,7 @@
   },
   "totalDiscoveredPages": 445,
   "discoverySummary": {
-    "requestId": "cache-1772222262100-84129",
+    "requestId": "cache-1772222308446-95842",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -157,6 +157,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T19:57:42.623Z",
+  "generatedAt": "2026-02-27T19:58:28.988Z",
   "generatedBy": "github-action-cache"
 }
