@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-27T20:04:03.311Z",
+  "generatedAt": "2026-02-27T20:59:17.230Z",
   "targets": [
     {
-      "fileName": "nsf.gov-100.json",
-      "canonicalHost": "nsf.gov",
+      "fileName": "novascotia.ca-100.json",
+      "canonicalHost": "novascotia.ca",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-27T20:04:03.300Z",
-      "warnings": []
+      "returnedCount": 23,
+      "generatedAt": "2026-02-27T20:59:17.228Z",
+      "warnings": [
+        "Sitemap fetch unavailable for https://novascotia.ca/sitemap.xml"
+      ]
     }
   ]
 }

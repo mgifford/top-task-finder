@@ -1,0 +1,85 @@
+{
+  "requestId": "cache-1772225956422-6011",
+  "selectedUrls": [
+    "https://novascotia.ca/",
+    "https://novascotia.ca/programs-and-services",
+    "https://novascotia.ca/programs-and-services/registry-joint-stock-companies",
+    "https://novascotia.ca/budget/",
+    "https://novascotia.ca/contact-us",
+    "https://novascotia.ca/copyright",
+    "https://novascotia.ca/government",
+    "https://novascotia.ca/news/",
+    "https://novascotia.ca/privacy",
+    "https://novascotia.ca/residential-tenancies-tenants-and-landlords/",
+    "https://novascotia.ca/tariffs/",
+    "https://novascotia.ca/terms",
+    "https://novascotia.ca/topics",
+    "https://novascotia.ca/documents/budget-documents-2026-2027",
+    "https://novascotia.ca/topic/births-deaths-marriage-and-identity",
+    "https://novascotia.ca/topic/business-non-profit-and-self-employed",
+    "https://novascotia.ca/topic/education-training-and-skills",
+    "https://novascotia.ca/topic/housing-property-and-community",
+    "https://novascotia.ca/topic/how-government-works",
+    "https://novascotia.ca/topic/industry-and-economy",
+    "https://novascotia.ca/topic/law-justice-and-safety",
+    "https://novascotia.ca/topic/money-tax-and-benefits",
+    "https://novascotia.ca/just/regulations/consregs.htm"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 23,
+  "randomShareCount": 0,
+  "shortfallCount": 77,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 23,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 23,
+  "discoverySummary": {
+    "requestId": "cache-1772225956422-6011",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://novascotia.ca/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 36
+      },
+      "accepted": {
+        "homepage-fallback": 23
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-27T20:59:17.228Z",
+  "generatedBy": "github-action-cache"
+}
