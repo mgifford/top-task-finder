@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-02-28T19:32:17.514Z",
+  "generatedAt": "2026-02-28T19:51:46.518Z",
   "targets": [
     {
-      "fileName": "government.nl-100.json",
-      "canonicalHost": "government.nl",
+      "fileName": "hi.gov-100.json",
+      "canonicalHost": "hi.gov",
       "requestedCount": 100,
-      "returnedCount": 58,
-      "generatedAt": "2026-02-28T19:32:17.513Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T19:51:46.516Z",
       "warnings": [
-        "Crawling discovered 57 additional URLs (crawled 3 pages)"
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://hi.gov/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
