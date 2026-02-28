@@ -43,6 +43,7 @@ title: Accessible Top Task URL Finder
     <textarea id="url-output" rows="14" spellcheck="false" placeholder="One URL per line will appear here."></textarea>
     <div class="actions">
       <button id="copy-results" type="button">Copy URLs</button>
+      <button id="copy-prompt" type="button">Copy Prompt for LLM</button>
       <button id="rescan-urls" type="button" class="secondary" hidden>Clear cache and rescan</button>
     </div>
   </section>

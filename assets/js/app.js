@@ -36,6 +36,7 @@ const cacheState = document.getElementById('cache-state');
 const serverCrawlStatus = document.getElementById('server-crawl-status');
 const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
+const copyPromptButton = document.getElementById('copy-prompt');
 const findUrlsButton = document.getElementById('find-urls');
 const rescanUrlsButton = document.getElementById('rescan-urls');
 const pageEstimate = document.getElementById('page-estimate');
@@ -518,6 +519,43 @@ async function handleCopy() {
   }
 }
 
+async function handleCopyPrompt() {
+  try {
+    const urls = outputArea.value.trim();
+    if (!urls) {
+      renderStatus('warning', 'Nothing to copy yet.');
+      return;
+    }
+
+    const prompt = `You are an accessibility expert focused on improving website accessibility and user experience.
+
+TASK: I want to refine a list of top tasks that highlight what users will likely want to do on this site. Please:
+
+1. Review the URLs provided below
+2. Explore the site structure and content
+3. Provide a curated, validated list of pages that should be evaluated for accessibility
+
+EVALUATION CRITERIA:
+- The list will be used for WCAG-EM (Web Content Accessibility Guidelines - Evaluation Methodology) reviews: https://www.w3.org/WAI/test-evaluate/conformance/wcag-em/
+- Include a wide variety of page types from different areas of the website
+- Prioritize commonly used pages and key user journeys
+- IMPORTANT: Ensure all accessibility-related pages are included (accessibility statements, help documentation, alternative formats, etc.)
+- Select pages that represent the full spectrum of templates, components, and interactions on the site
+- Include both static informational pages and interactive/dynamic pages
+
+URLS TO REVIEW:
+
+${urls}
+
+Please provide your recommended evaluation list with brief rationale for each selection.`;
+
+    await navigator.clipboard.writeText(prompt);
+    showNotification('LLM prompt with URLs has been copied');
+  } catch {
+    renderError('Unable to copy. Check browser clipboard permissions.');
+  }
+}
+
 async function initialize() {
   await Promise.all([loadLimitsConfig(), loadRuntimeConfig()]);
   updateLimitHelp();
@@ -539,6 +577,7 @@ async function initialize() {
 
 scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
+copyPromptButton.addEventListener('click', handleCopyPrompt);
 rescanUrlsButton.addEventListener('click', handleRescan);
 domainInput.addEventListener('input', updateUrlFromForm);
 
