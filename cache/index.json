@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-02-28T15:31:22.674Z",
+  "generatedAt": "2026-02-28T15:42:10.672Z",
   "targets": [
     {
-      "fileName": "governo.it-100.json",
-      "canonicalHost": "governo.it",
+      "fileName": "gov.gr-100.json",
+      "canonicalHost": "gov.gr",
       "requestedCount": 100,
-      "returnedCount": 68,
-      "generatedAt": "2026-02-28T15:31:22.672Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T15:42:10.670Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://governo.it/sitemap.xml"
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: fetch failed"
       ]
     }
   ]
