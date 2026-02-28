@@ -161,30 +161,38 @@ function scoreCandidateUrl(normalizedUrl, source) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url, {
-    redirect: 'follow',
-    headers: {
-      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
-      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
-      'accept-language': 'en-US,en;q=0.9',
-      'accept-encoding': 'gzip, deflate, br',
-      'cache-control': 'no-cache',
-      'pragma': 'no-cache',
-      'sec-fetch-dest': 'document',
-      'sec-fetch-mode': 'navigate',
-      'sec-fetch-site': 'none',
-      'upgrade-insecure-requests': '1',
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      redirect: 'follow',
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'accept-language': 'en-US,en;q=0.9',
+        'accept-encoding': 'gzip, deflate, br',
+        'cache-control': 'no-cache',
+        'pragma': 'no-cache',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'none',
+        'upgrade-insecure-requests': '1',
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`Request failed (${response.status}) for ${url}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} ${response.statusText}`);
+    }
+
+    return {
+      text: await response.text(),
+      finalUrl: response.url,
+    };
+  } catch (err) {
+    // Provide more context for network and HTTP errors
+    if (err.message.includes('HTTP ')) {
+      throw err; // Already has good error message
+    }
+    throw new Error(`fetch failed: ${err.message}`);
   }
-
-  return {
-    text: await response.text(),
-    finalUrl: response.url,
-  };
 }
 
 function extractXmlLocValues(xmlText) {
