@@ -17,6 +17,7 @@ You may only include additional URLs if:
 • The page renders as HTML.
 • The URL is fully qualified and exact.
 • The page is publicly accessible without authentication.
+• It is unique and not redirected or duplicate content.
 
 You may NOT:
 
@@ -39,6 +40,8 @@ For every additional URL discovered, you must record the navigation path using t
 This trace must be shown before the Section 2 URL list.
 
 No speculation. Only observed navigation steps.
+
+Treat www and non-www URLs as the same. Often redirects are not set up properly. 
 
 SCOPE REQUIREMENTS
 
@@ -94,7 +97,8 @@ Then:
 Verified Additional URLs only.
 One URL per line.
 No commentary.
-No duplication.
+No duplication. Having https://example.com/a and https://www.example.com/a is a duplication
+Try to be consistent with the original list with the use of "www." or non-www.
 Aim for 20-40% more URLs than provided.
 
 SECTION 3 — Redundant Pages (Low Priority)
@@ -104,6 +108,7 @@ URLs only.
 One per line.
 No commentary.
 If there is no duplication, say so.
+Do not add or remove "www." from the beginning of the URL from the list provided.
 
 SECTION 4 — Minimal WCAG-EM Manual Sample (Medium Priority)
 
