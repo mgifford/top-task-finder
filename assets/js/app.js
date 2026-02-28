@@ -14,6 +14,8 @@ const DEFAULT_REQUESTED_COUNT = 100;
 const FALLBACK_MAX_URLS = 200;
 const FALLBACK_POLL_INTERVAL_MS = 8000;
 const FALLBACK_POLL_TIMEOUT_MS = 900000;
+const NOTIFICATION_DURATION_MS = 10000;
+const NOTIFICATION_ANIMATION_MS = 300;
 
 const state = {
   defaultRequestedCount: DEFAULT_REQUESTED_COUNT,
@@ -40,6 +42,10 @@ const pageEstimate = document.getElementById('page-estimate');
 const modal = document.getElementById('top-task-modal');
 const openModalButton = document.getElementById('open-modal');
 const closeModalButton = document.getElementById('close-modal');
+const notificationModal = document.getElementById('notification-modal');
+const notificationMessage = document.getElementById('notification-message');
+
+let notificationTimeout = null;
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -487,6 +493,7 @@ async function handleRescan() {
     updateUrlFromForm();
 
     await resolveResult(scanRequest, { forceRescan: true });
+    showNotification('Cache cleared and rescan complete');
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to rescan.';
     renderError(message);
@@ -505,7 +512,7 @@ async function handleCopy() {
     }
 
     await navigator.clipboard.writeText(text);
-    renderStatus('success', 'Copied URLs to clipboard.');
+    showNotification('URLs have been copied');
   } catch {
     renderError('Unable to copy. Check browser clipboard permissions.');
   }
@@ -564,6 +571,43 @@ modal.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && modal.classList.contains('open')) {
     closeModal();
+  }
+});
+
+// Notification modal functions
+function showNotification(message) {
+  if (notificationTimeout) {
+    clearTimeout(notificationTimeout);
+    notificationTimeout = null;
+  }
+
+  notificationMessage.textContent = message;
+  notificationModal.removeAttribute('hidden');
+  notificationModal.focus();
+
+  notificationTimeout = setTimeout(() => {
+    hideNotification();
+  }, NOTIFICATION_DURATION_MS);
+}
+
+function hideNotification() {
+  if (notificationTimeout) {
+    clearTimeout(notificationTimeout);
+    notificationTimeout = null;
+  }
+  
+  notificationModal.classList.add('hiding');
+  
+  setTimeout(() => {
+    notificationModal.setAttribute('hidden', '');
+    notificationModal.classList.remove('hiding');
+  }, NOTIFICATION_ANIMATION_MS);
+}
+
+// Allow keyboard dismissal of notification
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !notificationModal.hasAttribute('hidden')) {
+    hideNotification();
   }
 });
 
