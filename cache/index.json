@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-02-28T15:02:08.606Z",
+  "generatedAt": "2026-02-28T15:03:21.544Z",
   "targets": [
     {
-      "fileName": "wa.gov-100.json",
-      "canonicalHost": "wa.gov",
+      "fileName": "toronto.ca-100.json",
+      "canonicalHost": "toronto.ca",
       "requestedCount": 100,
-      "returnedCount": 86,
-      "generatedAt": "2026-02-28T15:02:08.604Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T15:03:21.542Z",
+      "warnings": [
+        "Sitemap fetch unavailable for https://toronto.ca/sitemap.xml",
+        "Homepage fallback unavailable."
+      ]
     }
   ]
 }
