@@ -103,4 +103,4 @@ title: Accessible Top Task URL Finder
   </div>
 </div>
 
-<script type="module" src="{{ '/assets/js/app.js' | relative_url }}"></script>
+<script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>

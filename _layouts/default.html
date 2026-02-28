@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title | default: site.title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/app.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   </head>
   <body>
     <div class="page-wrapper">
@@ -30,6 +30,6 @@
       </footer>
     </div>
     <!-- This layout overrides the minima theme to prevent unwanted script injection -->
-    <script src="{{ '/assets/js/theme.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/theme.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
   </body>
 </html>
