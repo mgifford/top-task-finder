@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-02-28T15:05:42.586Z",
+  "generatedAt": "2026-02-28T15:08:09.348Z",
   "targets": [
     {
-      "fileName": "government.se-100.json",
-      "canonicalHost": "government.se",
+      "fileName": "colorado.gov-100.json",
+      "canonicalHost": "colorado.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T15:05:42.584Z",
+      "returnedCount": 18,
+      "generatedAt": "2026-02-28T15:08:09.347Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://government.se/sitemap.xml"
+        "Sitemap fetch unavailable for https://colorado.gov/sitemap.xml"
       ]
     }
   ]

@@ -1,0 +1,80 @@
+{
+  "requestId": "cache-1772291288348-11438",
+  "selectedUrls": [
+    "https://colorado.gov/",
+    "https://colorado.gov/accessibility-standards",
+    "https://colorado.gov/registered-services",
+    "https://colorado.gov/services",
+    "https://colorado.gov/supported-browsers",
+    "https://colorado.gov/articles",
+    "https://colorado.gov/business",
+    "https://colorado.gov/contact-us",
+    "https://colorado.gov/education",
+    "https://colorado.gov/employment",
+    "https://colorado.gov/general-notices",
+    "https://colorado.gov/government",
+    "https://colorado.gov/governor/",
+    "https://colorado.gov/legal-notices",
+    "https://colorado.gov/linking-policy",
+    "https://colorado.gov/residents",
+    "https://colorado.gov/visitors",
+    "https://colorado.gov/governor/economy"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 18,
+  "randomShareCount": 0,
+  "shortfallCount": 82,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 18,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 18,
+  "discoverySummary": {
+    "requestId": "cache-1772291288348-11438",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://colorado.gov/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 49
+      },
+      "accepted": {
+        "homepage-fallback": 18
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T15:08:09.347Z",
+  "generatedBy": "github-action-cache"
+}
