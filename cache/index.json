@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-28T15:28:42.181Z",
+  "generatedAt": "2026-02-28T15:31:22.674Z",
   "targets": [
     {
-      "fileName": "administracion.gob.es-100.json",
-      "canonicalHost": "administracion.gob.es",
+      "fileName": "governo.it-100.json",
+      "canonicalHost": "governo.it",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T15:28:42.179Z",
-      "warnings": []
+      "returnedCount": 68,
+      "generatedAt": "2026-02-28T15:31:22.672Z",
+      "warnings": [
+        "Sitemap fetch unavailable for https://governo.it/sitemap.xml"
+      ]
     }
   ]
 }
