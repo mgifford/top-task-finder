@@ -40,6 +40,10 @@ const pageEstimate = document.getElementById('page-estimate');
 const modal = document.getElementById('top-task-modal');
 const openModalButton = document.getElementById('open-modal');
 const closeModalButton = document.getElementById('close-modal');
+const notificationModal = document.getElementById('notification-modal');
+const notificationMessage = document.getElementById('notification-message');
+
+let notificationTimeout = null;
 
 function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
@@ -487,6 +491,7 @@ async function handleRescan() {
     updateUrlFromForm();
 
     await resolveResult(scanRequest, { forceRescan: true });
+    showNotification('Cache cleared and rescan complete');
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to rescan.';
     renderError(message);
@@ -505,7 +510,7 @@ async function handleCopy() {
     }
 
     await navigator.clipboard.writeText(text);
-    renderStatus('success', 'Copied URLs to clipboard.');
+    showNotification('URLs have been copied');
   } catch {
     renderError('Unable to copy. Check browser clipboard permissions.');
   }
@@ -564,6 +569,42 @@ modal.addEventListener('click', (event) => {
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && modal.classList.contains('open')) {
     closeModal();
+  }
+});
+
+// Notification modal functions
+function showNotification(message) {
+  if (notificationTimeout) {
+    clearTimeout(notificationTimeout);
+    notificationTimeout = null;
+  }
+
+  notificationMessage.textContent = message;
+  notificationModal.removeAttribute('hidden');
+
+  notificationTimeout = setTimeout(() => {
+    hideNotification();
+  }, 10000);
+}
+
+function hideNotification() {
+  if (notificationTimeout) {
+    clearTimeout(notificationTimeout);
+    notificationTimeout = null;
+  }
+  
+  notificationModal.style.animation = 'notificationFadeOut 0.3s ease';
+  
+  setTimeout(() => {
+    notificationModal.setAttribute('hidden', '');
+    notificationModal.style.animation = '';
+  }, 300);
+}
+
+// Allow keyboard dismissal of notification
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !notificationModal.hasAttribute('hidden')) {
+    hideNotification();
   }
 });
 
