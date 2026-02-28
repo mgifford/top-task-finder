@@ -7,6 +7,8 @@ const DEFAULT_REQUESTED_COUNT = 100;
 const MAX_REQUESTED_COUNT = 200;
 const MAX_SITEMAP_DOCS = 24;
 const CRITICAL_PAGE_SCORE = 1000;
+const MAX_CRAWL_DEPTH = 2; // Maximum depth to crawl
+const MAX_PAGES_TO_CRAWL = 10; // Maximum number of pages to fetch
 
 function parseArgs(argv) {
   const parsed = {};
@@ -116,6 +118,7 @@ function detectPrioritySignals(pathname) {
 const SOURCE_BASE_WEIGHTS = {
   sitemap: 40,
   'homepage-fallback': 20,
+  crawl: 15,
   unknown: 10,
 };
 
@@ -206,6 +209,75 @@ function extractHrefValues(htmlText, baseUrl) {
     match = pattern.exec(htmlText);
   }
   return values;
+}
+
+function extractPrioritizedLinks(htmlText, baseUrl) {
+  // Extract links prioritized by location: footer first, then nav, then all others
+  // Note: Uses regex-based extraction which works for most well-formed HTML.
+  // This is a pragmatic approach that avoids dependencies on HTML parser libraries.
+  const footerLinksSet = new Set();
+  const navLinksSet = new Set();
+  const otherLinksSet = new Set();
+  
+  // Simple regex-based approach to identify sections
+  // Footer patterns: <footer>, </footer>, id="footer", class="footer"
+  const footerPattern = /<footer[^>]*>[\s\S]*?<\/footer>/gi;
+  const footerMatches = htmlText.match(footerPattern) || [];
+  
+  // Nav patterns: <nav>, </nav>, id="nav", class="nav"  
+  const navPattern = /<nav[^>]*>[\s\S]*?<\/nav>/gi;
+  const navMatches = htmlText.match(navPattern) || [];
+  
+  // Extract links from footer sections
+  footerMatches.forEach(section => {
+    const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
+    let match = pattern.exec(section);
+    while (match) {
+      try {
+        const url = new URL(match[1], baseUrl).href;
+        footerLinksSet.add(url);
+      } catch {
+        // ignore invalid links
+      }
+      match = pattern.exec(section);
+    }
+  });
+  
+  // Extract links from nav sections
+  navMatches.forEach(section => {
+    const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
+    let match = pattern.exec(section);
+    while (match) {
+      try {
+        const url = new URL(match[1], baseUrl).href;
+        if (!footerLinksSet.has(url)) {
+          navLinksSet.add(url);
+        }
+      } catch {
+        // ignore invalid links
+      }
+      match = pattern.exec(section);
+    }
+  });
+  
+  // Extract all other links not in footer/nav
+  const allLinks = extractHrefValues(htmlText, baseUrl);
+  allLinks.forEach(url => {
+    if (!footerLinksSet.has(url) && !navLinksSet.has(url)) {
+      otherLinksSet.add(url);
+    }
+  });
+  
+  const footerLinks = Array.from(footerLinksSet);
+  const navLinks = Array.from(navLinksSet);
+  const otherLinks = Array.from(otherLinksSet);
+  
+  return {
+    footerLinks,
+    navLinks,
+    otherLinks,
+    allLinks: [...footerLinks, ...navLinks, ...otherLinks],
+  };
 }
 
 function normalizeAndScoreCandidates(candidates, canonicalHost) {
@@ -599,6 +671,87 @@ async function discoverFromHomepage(baseUrl, warnings) {
   }
 }
 
+async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existingCandidates, warnings) {
+  const visited = new Set();
+  const candidates = [];
+  const queue = [];
+  
+  // Track which URLs we already have
+  const existingUrls = new Set(existingCandidates.map(c => c.url));
+  
+  // Start by crawling the homepage
+  queue.push({ url: baseUrl.href, depth: 0 });
+  
+  let pagesCrawled = 0;
+  
+  while (queue.length > 0 && pagesCrawled < MAX_PAGES_TO_CRAWL) {
+    const { url: currentUrl, depth } = queue.shift();
+    
+    // Skip if already visited or too deep
+    if (visited.has(currentUrl) || depth > MAX_CRAWL_DEPTH) {
+      continue;
+    }
+    
+    visited.add(currentUrl);
+    
+    try {
+      const { text: html, finalUrl } = await fetchText(currentUrl);
+      pagesCrawled++;
+      
+      const effectiveBaseUrl = finalUrl || currentUrl;
+      const { footerLinks, navLinks, otherLinks } = extractPrioritizedLinks(html, effectiveBaseUrl);
+      
+      // Process links in priority order: footer first, then nav, then others
+      const prioritizedLinks = [
+        ...footerLinks.map(url => ({ url, priority: 'footer' })),
+        ...navLinks.map(url => ({ url, priority: 'nav' })),
+        ...otherLinks.map(url => ({ url, priority: 'other' })),
+      ];
+      
+      for (const { url: linkUrl, priority } of prioritizedLinks) {
+        // Check if it's in scope and HTML
+        if (!isWithinCanonicalScope(linkUrl, canonicalHost) || !isLikelyHtmlUrl(linkUrl)) {
+          continue;
+        }
+        
+        // Skip if we already have this URL
+        if (existingUrls.has(linkUrl) || candidates.some(c => c.url === linkUrl)) {
+          continue;
+        }
+        
+        // Add to candidates
+        candidates.push({
+          url: linkUrl,
+          source: 'crawl',
+        });
+        
+        existingUrls.add(linkUrl);
+        
+        // Queue for further crawling if from footer or nav and not too deep
+        if (depth < MAX_CRAWL_DEPTH && (priority === 'footer' || priority === 'nav')) {
+          queue.push({ url: linkUrl, depth: depth + 1 });
+        }
+        
+        // Stop if we've found enough URLs
+        if (existingCandidates.length + candidates.length >= requestedCount) {
+          warnings.push(`Crawling discovered ${candidates.length} additional URLs (crawled ${pagesCrawled} pages)`);
+          return candidates;
+        }
+      }
+    } catch (err) {
+      warnings.push(`Failed to crawl ${currentUrl}: ${err.message}`);
+    }
+  }
+  
+  if (candidates.length > 0) {
+    warnings.push(`Crawling discovered ${candidates.length} additional URLs (crawled ${pagesCrawled} pages)`);
+  } else {
+    warnings.push(`Crawling found no additional URLs after checking ${pagesCrawled} pages`);
+  }
+  
+  return candidates;
+}
+
 function buildDiscoverySummary({ requestId, warnings, fallbackUsed, sourceCounts, priorityCoverage }) {
   return {
     requestId,
@@ -695,12 +848,15 @@ async function processTarget(target, outDir) {
   let ranked = normalizeAndScoreCandidates(sitemapRaw, scanRequest.canonicalHost);
 
   let fallbackUsed = false;
+  let crawlUsed = false;
   let fallbackRaw = [];
+  let crawlRaw = [];
   const priorityCoverage = aggregatePriorityCoverage(ranked);
   const missingCriticalPriority = !priorityCoverage.homepage
     || !priorityCoverage.search
     || !priorityCoverage.accessibility;
 
+  // First fallback: homepage link extraction
   if (ranked.length < scanRequest.requestedCount || missingCriticalPriority) {
     fallbackUsed = true;
     fallbackRaw = await discoverFromHomepage(scanRequest.normalizedUrl, warnings);
@@ -710,16 +866,33 @@ async function processTarget(target, outDir) {
     );
   }
   
+  // Second fallback: recursive crawling if still not enough URLs
+  if (ranked.length < scanRequest.requestedCount) {
+    crawlUsed = true;
+    crawlRaw = await discoverFromCrawl(
+      scanRequest.normalizedUrl,
+      scanRequest.canonicalHost,
+      scanRequest.requestedCount,
+      ranked,
+      warnings
+    );
+    ranked = normalizeAndScoreCandidates(
+      [...ranked, ...crawlRaw],
+      scanRequest.canonicalHost,
+    );
+  }
+  
   ranked = ensureCriticalPages(ranked, scanRequest.normalizedUrl);
 
   const discoverySummary = buildDiscoverySummary({
     requestId: scanRequest.requestId,
     warnings,
-    fallbackUsed,
+    fallbackUsed: fallbackUsed || crawlUsed,
     sourceCounts: {
       raw: {
         sitemap: sitemapRaw.length,
         'homepage-fallback': fallbackRaw.length,
+        crawl: crawlRaw.length,
       },
       accepted: ranked.reduce((counts, item) => {
         counts[item.source] = (counts[item.source] ?? 0) + 1;

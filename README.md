@@ -22,6 +22,21 @@ See **[GITHUB_PAGES_WARNING_FIX.md](GITHUB_PAGES_WARNING_FIX.md)** for detailed 
 - Normalizes `www` and non-`www` versions of the same host so each run stays in a single canonical site scope.
 - Reuses cached results for faster repeat runs and lets you clear cached entries.
 
+## URL Discovery Strategy
+
+The tool uses a multi-stage approach to discover URLs, ensuring it reaches the requested count:
+
+1. **Sitemap discovery**: Checks robots.txt and common sitemap locations (`/sitemap.xml`, `/sitemap_index.xml`, `/sitemap/sitemap.xml`)
+2. **Homepage link extraction**: Extracts all links from the homepage if sitemap results are insufficient
+3. **Recursive crawling**: If still not enough URLs, the tool crawls linked pages:
+   - Prioritizes footer links first (where accessibility statements are typically found)
+   - Then crawls main navigation links
+   - Continues recursively up to 2 levels deep
+   - Fetches up to 10 pages to discover additional URLs
+   - Only includes HTML pages within the same canonical domain
+
+This multi-stage approach ensures the tool can reach the minimum requested URL count even for sites with limited sitemaps or search visibility.
+
 ## Intended use
 
 - Accessibility sampling and audit preparation.
@@ -84,6 +99,11 @@ URL sync behavior:
 
 - Query params (`domainUrl`, `requestedCount`) prefill the form on load.
 - When form values change, the page updates the URL query string in place so links can be shared.
+- **URL Parameters**:
+  - `domainUrl`: The domain or URL to scan (e.g., `?domainUrl=gsa.gov`)
+  - `requestedCount`: Number of URLs to return (default: 100, max: 200)
+  - Example: `?domainUrl=gsa.gov&requestedCount=150`
+  - These parameters allow you to customize the scan without using the UI form
 
 Manual run options:
 
