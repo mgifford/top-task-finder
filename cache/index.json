@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-02-28T15:24:39.290Z",
+  "generatedAt": "2026-02-28T15:28:42.181Z",
   "targets": [
     {
-      "fileName": "london.gov.uk-100.json",
-      "canonicalHost": "london.gov.uk",
+      "fileName": "administracion.gob.es-100.json",
+      "canonicalHost": "administracion.gob.es",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-02-28T15:24:39.284Z",
+      "generatedAt": "2026-02-28T15:28:42.179Z",
       "warnings": []
     }
   ]
