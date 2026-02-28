@@ -7,6 +7,8 @@ const DEFAULT_REQUESTED_COUNT = 100;
 const MAX_REQUESTED_COUNT = 200;
 const MAX_SITEMAP_DOCS = 24;
 const CRITICAL_PAGE_SCORE = 1000;
+const MAX_CRAWL_DEPTH = 2; // Maximum depth to crawl
+const MAX_PAGES_TO_CRAWL = 10; // Maximum number of pages to fetch
 
 function parseArgs(argv) {
   const parsed = {};
@@ -193,9 +195,11 @@ function extractHrefValues(htmlText, baseUrl) {
 
 function extractPrioritizedLinks(htmlText, baseUrl) {
   // Extract links prioritized by location: footer first, then nav, then all others
-  const footerLinks = [];
-  const navLinks = [];
-  const otherLinks = [];
+  // Note: Uses regex-based extraction which works for most well-formed HTML.
+  // This is a pragmatic approach that avoids dependencies on HTML parser libraries.
+  const footerLinksSet = new Set();
+  const navLinksSet = new Set();
+  const otherLinksSet = new Set();
   
   // Simple regex-based approach to identify sections
   // Footer patterns: <footer>, </footer>, id="footer", class="footer"
@@ -213,9 +217,7 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
     while (match) {
       try {
         const url = new URL(match[1], baseUrl).href;
-        if (!footerLinks.includes(url)) {
-          footerLinks.push(url);
-        }
+        footerLinksSet.add(url);
       } catch {
         // ignore invalid links
       }
@@ -230,8 +232,8 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
     while (match) {
       try {
         const url = new URL(match[1], baseUrl).href;
-        if (!navLinks.includes(url) && !footerLinks.includes(url)) {
-          navLinks.push(url);
+        if (!footerLinksSet.has(url)) {
+          navLinksSet.add(url);
         }
       } catch {
         // ignore invalid links
@@ -243,10 +245,14 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
   // Extract all other links not in footer/nav
   const allLinks = extractHrefValues(htmlText, baseUrl);
   allLinks.forEach(url => {
-    if (!footerLinks.includes(url) && !navLinks.includes(url)) {
-      otherLinks.push(url);
+    if (!footerLinksSet.has(url) && !navLinksSet.has(url)) {
+      otherLinksSet.add(url);
     }
   });
+  
+  const footerLinks = Array.from(footerLinksSet);
+  const navLinks = Array.from(navLinksSet);
+  const otherLinks = Array.from(otherLinksSet);
   
   return {
     footerLinks,
@@ -648,9 +654,6 @@ async function discoverFromHomepage(baseUrl, warnings) {
 }
 
 async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existingCandidates, warnings) {
-  const MAX_CRAWL_DEPTH = 2; // Maximum depth to crawl
-  const MAX_PAGES_TO_CRAWL = 10; // Maximum number of pages to fetch
-  
   const visited = new Set();
   const candidates = [];
   const queue = [];
