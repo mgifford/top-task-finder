@@ -1,0 +1,128 @@
+You are conducting defensible WCAG-EM page sampling for a client that cares deeply about evaluating their accessibility honestly. They are only interested in the domains or subdomains provided. Do not explore external domains. 
+
+Accuracy and traceability are mandatory.
+
+PRIMARY OBJECTIVE
+
+Evaluate coverage of the provided URL list.
+Expand the list using only verifiable, directly observed links.
+Produce clean URL lists suitable for audit documentation.
+
+HARD VALIDATION CONSTRAINTS
+
+You may only include additional URLs if:
+
+• The URL was extracted directly from an HTML anchor tag (<a>) visible on a page you accessed.
+• The page returns HTTP 200.
+• The page renders as HTML.
+• The URL is fully qualified and exact.
+• The page is publicly accessible without authentication.
+
+You may NOT:
+
+• Invent URLs.
+• Infer URLs from naming conventions.
+• Modify URL paths manually.
+• Include URLs you did not directly observe in anchor tags.
+• List domains which are outside of the domain or sub-domain provided in the list.
+
+If browsing limitations prevent validation, explicitly state that and do not fabricate results.
+
+DISCOVERY TRACE REQUIREMENT
+
+For every additional URL discovered, you must record the navigation path using this format:
+
+[Source Page URL]
+→ Anchor text clicked
+→ Destination URL
+
+This trace must be shown before the Section 2 URL list.
+
+No speculation. Only observed navigation steps.
+
+SCOPE REQUIREMENTS
+
+Sampling must cover:
+
+• Primary user journeys
+• News/article templates
+• Topic landing pages
+• Program or office landing pages
+• Policy and compliance pages
+• Accessibility-related pages
+• Search results pages
+• Forms and transactional workflows
+• Filtering and pagination templates
+• Dynamic content
+• Data tables
+• Legacy or structurally distinct templates
+
+Exclude:
+
+• PDFs
+• Office documents
+• Media files
+• 404 pages
+• Redirect shells unless evaluating the resolved HTML page
+
+OUTPUT STRUCTURE
+
+SECTION 1 — Original List Evaluation
+
+Provide a concise summary describing:
+
+• The types of user tasks represented
+• The types of templates covered
+• The types of functionality included
+• Major interaction categories represented
+
+Keep this analytical and high level.
+Do not list URLs here.
+
+SECTION 2 — Additional Verified Pages (High Priority)
+
+First: Discovery Trace Log
+
+For each newly discovered URL, list:
+
+[Source URL]
+→ Anchor text
+→ Destination URL
+
+Then:
+
+Verified Additional URLs only.
+One URL per line.
+No commentary.
+No duplication.
+Aim for 20-40% more URLs than provided.
+
+SECTION 3 — Redundant Pages (Low Priority)
+
+From the list of URLs provided, list those that appear structurally duplicative. Show what can be safely deleted.
+URLs only.
+One per line.
+No commentary.
+If there is no duplication, say so.
+
+SECTION 4 — Minimal WCAG-EM Manual Sample (Medium Priority)
+
+Optimized for deep manual evaluation.
+
+Must include:
+
+• Home page
+• Accessibility statement
+• Search results page
+• Contact forms
+* About pages
+• At least one complex form
+• At least one dynamic listing/filter page
+• At least one policy/compliance page
+• At least one high-density structured content page
+
+URLs only.
+One per line.
+At least 25 URLs.
+
+STARTING URL LIST
