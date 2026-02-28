@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-02-28T15:10:19.015Z",
+  "generatedAt": "2026-02-28T15:12:01.032Z",
   "targets": [
     {
       "fileName": "mn.gov-100.json",
       "canonicalHost": "mn.gov",
       "requestedCount": 100,
       "returnedCount": 1,
-      "generatedAt": "2026-02-28T15:10:19.014Z",
+      "generatedAt": "2026-02-28T15:12:01.030Z",
       "warnings": [
         "Sitemap fetch unavailable for https://mn.gov/sitemap.xml"
       ]
