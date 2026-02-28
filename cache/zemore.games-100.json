@@ -1,0 +1,70 @@
+{
+  "requestId": "cache-1772252167054-64230",
+  "selectedUrls": [
+    "https://zemore.games/",
+    "https://zemore.games/services",
+    "https://zemore.games/contact",
+    "https://zemore.games/about",
+    "https://zemore.games/games",
+    "https://zemore.games/privacy",
+    "https://zemore.games/submit",
+    "https://zemore.games/values"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 8,
+  "randomShareCount": 0,
+  "shortfallCount": 92,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": true,
+    "about": true,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 8,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 8,
+  "discoverySummary": {
+    "requestId": "cache-1772252167054-64230",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://zemore.games/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 32
+      },
+      "accepted": {
+        "homepage-fallback": 8
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": true,
+      "about": true,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T04:16:07.929Z",
+  "generatedBy": "github-action-cache"
+}
