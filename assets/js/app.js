@@ -543,7 +543,8 @@ async function handleCopyPrompt() {
     showNotification('LLM prompt with URLs has been copied');
   } catch (error) {
     console.error('Clipboard copy failed:', error);
-    renderError('Unable to copy. Check browser clipboard permissions.');
+    const message = error.message || 'Unable to copy prompt. Please try again.';
+    renderError(message);
   }
 }
 
