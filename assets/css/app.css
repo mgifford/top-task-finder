@@ -493,6 +493,13 @@ textarea:focus-visible {
   animation: notificationSlideIn 0.3s ease;
 }
 
+@media (max-width: 640px) {
+  .notification-modal {
+    top: 1rem;
+    width: 95%;
+  }
+}
+
 .notification-modal[hidden] {
   display: none;
 }
