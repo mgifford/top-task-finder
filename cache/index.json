@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-02-28T14:58:07.721Z",
+  "generatedAt": "2026-02-28T14:58:49.009Z",
   "targets": [
     {
-      "fileName": "toronto.ca-100.json",
-      "canonicalHost": "toronto.ca",
+      "fileName": "barcelona.cat-100.json",
+      "canonicalHost": "barcelona.cat",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T14:58:07.719Z",
-      "warnings": [
-        "Sitemap fetch unavailable for https://toronto.ca/sitemap.xml",
-        "Homepage fallback unavailable."
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-02-28T14:58:49.008Z",
+      "warnings": []
     }
   ]
 }
