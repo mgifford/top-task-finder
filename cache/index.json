@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-02-28T15:31:22.674Z",
+  "generatedAt": "2026-02-28T15:43:09.712Z",
   "targets": [
     {
-      "fileName": "governo.it-100.json",
-      "canonicalHost": "governo.it",
+      "fileName": "gsa.gov-100.json",
+      "canonicalHost": "gsa.gov",
       "requestedCount": 100,
-      "returnedCount": 68,
-      "generatedAt": "2026-02-28T15:31:22.672Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T15:43:09.711Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://governo.it/sitemap.xml"
+        "Sitemap fetch unavailable for https://gsa.gov/sitemap.xml",
+        "Homepage fallback unavailable."
       ]
     }
   ]

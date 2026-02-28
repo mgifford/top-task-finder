@@ -63,7 +63,7 @@ function detectPrioritySignals(pathname) {
     search: /(^|\/)search(\/|$)|find/.test(normalized),
     // Multilingual accessibility support for all 24 official EU languages
     // Pattern matches both accented and non-accented versions to handle URL encoding variations
-    accessibility: /accessibility|a11y|accesibilidad|accessibilit[eé]|barrierefreiheit|zug[aä]nglichkeit|accessibilit[aà]|acessibilidade|toegankelijkheid|dost[eę]pno[sś][cć]|accesibilitate|προσβασιμότητα|p[rř][ií]stupnost|akad[aá]lymentess[eé]g|hozz[aá]f[eé]rhetős[eé]g|tillg[aä]nglighet|достъпност|tilg[aæ]ngelighed|saavutettavuus|pr[ií]stupnos[tť]|inrochtaineacht|pristupa[cč]nost|prieinamumas|dostopnost|pieejam[ií]ba|ligip[aä]{2}setavus|a[cċ]{2}essibbilt[aà]/.test(normalized),
+    accessibility: /accessibility|a11y|accesibilidad|accessibilit[eé]|barrierefreiheit|zug[aä]nglichkeit|accessibilit[aà]|acessibilidade|toegankelijkheid|dost[eę]pno[sś][cć]|accesibilitate|προσβασιμότητα|p[rř][ií]stupnost|akad[aá]lymentess[eé]g|hozz[aá]f[eé]rhetős[eé]g|tillg[aä]nglighet|достъпност|tilg[aæ]ngelighed|saavutettavuus|pr[ií]stupnos[tť]|inrochtaineacht|pristupa[cč]nost|prieinamumas|dostopnost|pieejam[ií]b[aā]|ligip[aä]{2}setavus|a[cċ]{2}essibbilt[aà]/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
   };
 }
