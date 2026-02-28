@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-02-28T14:50:34.990Z",
+  "generatedAt": "2026-02-28T14:58:07.721Z",
   "targets": [
     {
-      "fileName": "canada.ca-100.json",
-      "canonicalHost": "canada.ca",
+      "fileName": "toronto.ca-100.json",
+      "canonicalHost": "toronto.ca",
       "requestedCount": 100,
       "returnedCount": 1,
-      "generatedAt": "2026-02-28T14:50:34.988Z",
+      "generatedAt": "2026-02-28T14:58:07.719Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://canada.ca/sitemap.xml",
+        "Sitemap fetch unavailable for https://toronto.ca/sitemap.xml",
         "Homepage fallback unavailable."
       ]
     }
