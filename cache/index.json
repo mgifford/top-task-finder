@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-02-28T18:04:08.784Z",
+  "generatedAt": "2026-02-28T19:27:14.683Z",
   "targets": [
     {
-      "fileName": "novascotia.ca-100.json",
-      "canonicalHost": "novascotia.ca",
+      "fileName": "nsf.gov-100.json",
+      "canonicalHost": "nsf.gov",
       "requestedCount": 100,
-      "returnedCount": 80,
-      "generatedAt": "2026-02-28T18:04:08.781Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 77 additional URLs (crawled 5 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-02-28T19:27:14.671Z",
+      "warnings": []
     }
   ]
 }

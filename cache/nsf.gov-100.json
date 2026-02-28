@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772222638716-13515",
+  "requestId": "cache-1772306832090-80553",
   "selectedUrls": [
     "https://nsf.gov/",
     "https://nsf.gov/news/nsf-releases-usap-sahcs-findings-report",
@@ -120,9 +120,9 @@
     "primary": 100,
     "additional": 0
   },
-  "totalDiscoveredPages": 19748,
+  "totalDiscoveredPages": 19747,
   "discoverySummary": {
-    "requestId": "cache-1772222638716-13515",
+    "requestId": "cache-1772306832090-80553",
     "sourcesAttempted": [
       "sitemap"
     ],
@@ -134,10 +134,11 @@
     "sourceCounts": {
       "raw": {
         "sitemap": 19748,
-        "homepage-fallback": 0
+        "homepage-fallback": 0,
+        "crawl": 0
       },
       "accepted": {
-        "sitemap": 19748
+        "sitemap": 19747
       }
     },
     "priorityCoverage": {
@@ -152,6 +153,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T20:04:03.300Z",
+  "generatedAt": "2026-02-28T19:27:14.671Z",
   "generatedBy": "github-action-cache"
 }
