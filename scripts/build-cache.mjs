@@ -75,10 +75,17 @@ function isWithinCanonicalScope(candidateUrl, canonicalHost) {
 }
 
 const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
+const RSS_FEED_PATTERN = /\/(feed|rss|atom)(\/|$)/i;
 
 function isLikelyHtmlUrl(urlValue) {
   const parsed = typeof urlValue === 'string' ? new URL(urlValue) : new URL(urlValue.href);
-  return !NON_HTML_EXTENSION_PATTERN.test(parsed.pathname);
+  if (NON_HTML_EXTENSION_PATTERN.test(parsed.pathname)) {
+    return false;
+  }
+  if (RSS_FEED_PATTERN.test(parsed.pathname)) {
+    return false;
+  }
+  return true;
 }
 
 function detectPrioritySignals(pathname) {
@@ -86,7 +93,9 @@ function detectPrioritySignals(pathname) {
   return {
     homepage: normalized === '/' || normalized === '',
     search: /(^|\/)search(\/|$)|find/.test(normalized),
-    accessibility: /accessibility|a11y/.test(normalized),
+    // Multilingual accessibility support for all 24 official EU languages
+    // Pattern matches both accented and non-accented versions to handle URL encoding variations
+    accessibility: /accessibility|a11y|accesibilidad|accessibilit[eé]|barrierefreiheit|zug[aä]nglichkeit|accessibilit[aà]|acessibilidade|toegankelijkheid|dost[eę]pno[sś][cć]|accesibilitate|προσβασιμότητα|p[rř][ií]stupnost|akad[aá]lymentess[eé]g|hozz[aá]f[eé]rhetős[eé]g|tillg[aä]nglighet|достъпност|tilg[aæ]ngelighed|saavutettavuus|pr[ií]stupnos[tť]|inrochtaineacht|pristupa[cč]nost|prieinamumas|dostopnost|pieejam[ií]ba|ligip[aä]{2}setavus|a[cċ]{2}essibbilt[aà]/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
     contact: /(^|\/)contact(\/|$)/.test(normalized),
     about: /(^|\/)about(\/|$)/.test(normalized),
