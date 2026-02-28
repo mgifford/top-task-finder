@@ -1,13 +1,19 @@
 {
-  "generatedAt": "2026-02-28T19:53:01.727Z",
+  "generatedAt": "2026-02-28T20:52:34.050Z",
   "targets": [
     {
-      "fileName": "nsf.gov-100.json",
-      "canonicalHost": "nsf.gov",
+      "fileName": "valitsus.ee-100.json",
+      "canonicalHost": "valitsus.ee",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T19:53:01.726Z",
-      "warnings": []
+      "returnedCount": 99,
+      "generatedAt": "2026-02-28T20:52:34.048Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://valitsus.ee/privaatsuspoliitika-tingimused: HTTP 403 Forbidden",
+        "Failed to crawl https://valitsus.ee/en: HTTP 403 Forbidden",
+        "Crawling discovered 99 additional URLs (crawled 3 pages)"
+      ]
     }
   ]
 }
