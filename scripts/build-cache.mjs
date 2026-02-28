@@ -175,7 +175,8 @@ function xmlLooksLikeSitemapIndex(xmlText) {
 
 function extractHrefValues(htmlText, baseUrl) {
   const values = [];
-  const pattern = /<a[^>]+href=["']([^"'#]+)["']/gim;
+  // Match href attribute in <a> tags, whether it's the first attribute or not
+  const pattern = /<a\s+[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
   let match = pattern.exec(htmlText);
   while (match) {
     try {
