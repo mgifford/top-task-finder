@@ -1,11 +1,16 @@
 {
-  "requestId": "cache-1772291288348-11438",
+  "requestId": "cache-1772301680188-78171",
   "selectedUrls": [
     "https://colorado.gov/",
     "https://colorado.gov/accessibility-standards",
+    "https://colorado.gov/governor/accessibility-and-accommodations",
     "https://colorado.gov/registered-services",
     "https://colorado.gov/services",
+    "https://colorado.gov/governor/search",
     "https://colorado.gov/supported-browsers",
+    "https://colorado.gov/governor/environment-and-renewables",
+    "https://colorado.gov/governor/proclamations-or-letter-request",
+    "https://colorado.gov/governor/scheduling-request",
     "https://colorado.gov/articles",
     "https://colorado.gov/business",
     "https://colorado.gov/contact-us",
@@ -18,15 +23,45 @@
     "https://colorado.gov/linking-policy",
     "https://colorado.gov/residents",
     "https://colorado.gov/visitors",
-    "https://colorado.gov/governor/economy"
+    "https://colorado.gov/governor/economy",
+    "https://colorado.gov/government-agencies",
+    "https://colorado.gov/government-branches",
+    "https://colorado.gov/governor/ask-help",
+    "https://colorado.gov/governor/bill-tracker",
+    "https://colorado.gov/governor/boards-commissions",
+    "http://colorado.gov/apps/feedback/contactUs.faces",
+    "https://colorado.gov/apps/dps/mvvs/",
+    "https://colorado.gov/apps/dor/driver/history/",
+    "https://colorado.gov/apps/dor/gip/index.jsf",
+    "https://colorado.gov/apps/dor/dmv/driver/monitor/index.faces",
+    "https://colorado.gov/governor/flag-status",
+    "https://colorado.gov/governor/news/lt-governor-primavera-tours-us-olympic-paralympic-museum-colorado-springs-highlights",
+    "https://colorado.gov/governor/news/governor-polis-signs-bill-law-boosting-innovation-agriculture-and-protecting-colorado-forests",
+    "https://colorado.gov/governor/key-issues",
+    "https://colorado.gov/governor/newsletter",
+    "https://colorado.gov/governor/news/governor-polis-announces-lieutenant-governor-primavera-interim-behavioral-health-commissioner",
+    "https://colorado.gov/governor/cabinet",
+    "https://colorado.gov/governor/contact-us",
+    "https://colorado.gov/governor/internships",
+    "https://colorado.gov/governor/education",
+    "https://colorado.gov/governor/news",
+    "https://colorado.gov/governor/lt-governor-primavera",
+    "https://colorado.gov/governor/news/governor-polis-visits-community-college-aurora-celebrate-new-center-applied-science-and",
+    "https://colorado.gov/governor/CORA",
+    "https://colorado.gov/governor/share-comments",
+    "https://colorado.gov/governor/health",
+    "https://colorado.gov/governor/media-resources",
+    "https://colorado.gov/governor/executive-orders",
+    "https://colorado.gov/governor/first-gentleman",
+    "https://colorado.gov/governor/gov-polis"
   ],
   "requestedCount": 100,
-  "returnedCount": 18,
+  "returnedCount": 53,
   "randomShareCount": 0,
-  "shortfallCount": 82,
+  "shortfallCount": 47,
   "priorityCoverage": {
     "homepage": true,
-    "search": false,
+    "search": true,
     "accessibility": true,
     "topTask": true,
     "contact": false,
@@ -35,12 +70,12 @@
     "resources": false
   },
   "languageDistribution": {
-    "primary": 18,
+    "primary": 53,
     "additional": 0
   },
-  "totalDiscoveredPages": 18,
+  "totalDiscoveredPages": 53,
   "discoverySummary": {
-    "requestId": "cache-1772291288348-11438",
+    "requestId": "cache-1772301680188-78171",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -52,20 +87,23 @@
     "cacheHit": false,
     "cacheCleared": false,
     "warnings": [
-      "Sitemap fetch unavailable for https://colorado.gov/sitemap.xml"
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 53 additional URLs (crawled 10 pages)"
     ],
     "sourceCounts": {
       "raw": {
         "sitemap": 0,
-        "homepage-fallback": 49
+        "homepage-fallback": 49,
+        "crawl": 53
       },
       "accepted": {
-        "homepage-fallback": 18
+        "homepage-fallback": 18,
+        "crawl": 35
       }
     },
     "priorityCoverage": {
       "homepage": true,
-      "search": false,
+      "search": true,
       "accessibility": true,
       "topTask": true,
       "contact": false,
@@ -75,6 +113,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-28T15:08:09.347Z",
+  "generatedAt": "2026-02-28T18:01:24.322Z",
   "generatedBy": "github-action-cache"
 }

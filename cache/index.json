@@ -1,17 +1,15 @@
 {
-  "generatedAt": "2026-02-28T17:24:23.330Z",
+  "generatedAt": "2026-02-28T18:01:24.324Z",
   "targets": [
     {
-      "fileName": "gov.gr-100.json",
-      "canonicalHost": "gov.gr",
+      "fileName": "colorado.gov-100.json",
+      "canonicalHost": "colorado.gov",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T17:24:23.328Z",
+      "returnedCount": 53,
+      "generatedAt": "2026-02-28T18:01:24.322Z",
       "warnings": [
         "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: fetch failed",
-        "Failed to crawl https://gov.gr/: fetch failed",
-        "Crawling found no additional URLs after checking 0 pages"
+        "Crawling discovered 53 additional URLs (crawled 10 pages)"
       ]
     }
   ]
