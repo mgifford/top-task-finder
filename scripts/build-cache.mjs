@@ -752,12 +752,20 @@ async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existin
   return candidates;
 }
 
-function buildDiscoverySummary({ requestId, warnings, fallbackUsed, sourceCounts, priorityCoverage }) {
+function buildDiscoverySummary({ requestId, warnings, fallbackUsed, crawlUsed, sourceCounts, priorityCoverage }) {
+  const sourcesAttempted = ['sitemap'];
+  if (fallbackUsed) {
+    sourcesAttempted.push('homepage-fallback');
+  }
+  if (crawlUsed) {
+    sourcesAttempted.push('crawl');
+  }
+  
   return {
     requestId,
-    sourcesAttempted: fallbackUsed ? ['sitemap', 'homepage-fallback'] : ['sitemap'],
-    fallbackUsed,
-    fallbackTriggerReasons: fallbackUsed ? ['shortfall-or-priority-gap'] : [],
+    sourcesAttempted,
+    fallbackUsed: fallbackUsed || crawlUsed,
+    fallbackTriggerReasons: (fallbackUsed || crawlUsed) ? ['shortfall-or-priority-gap'] : [],
     cacheHit: false,
     cacheCleared: false,
     warnings,
@@ -887,7 +895,8 @@ async function processTarget(target, outDir) {
   const discoverySummary = buildDiscoverySummary({
     requestId: scanRequest.requestId,
     warnings,
-    fallbackUsed: fallbackUsed || crawlUsed,
+    fallbackUsed,
+    crawlUsed,
     sourceCounts: {
       raw: {
         sitemap: sitemapRaw.length,
