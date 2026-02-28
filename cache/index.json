@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-28T19:27:14.683Z",
+  "generatedAt": "2026-02-28T19:32:17.514Z",
   "targets": [
     {
-      "fileName": "nsf.gov-100.json",
-      "canonicalHost": "nsf.gov",
+      "fileName": "government.nl-100.json",
+      "canonicalHost": "government.nl",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T19:27:14.671Z",
-      "warnings": []
+      "returnedCount": 58,
+      "generatedAt": "2026-02-28T19:32:17.513Z",
+      "warnings": [
+        "Crawling discovered 57 additional URLs (crawled 3 pages)"
+      ]
     }
   ]
 }

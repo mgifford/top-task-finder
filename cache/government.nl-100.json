@@ -1,0 +1,124 @@
+{
+  "requestId": "cache-1772307135349-55975",
+  "selectedUrls": [
+    "https://government.nl/",
+    "https://government.nl/accessibility",
+    "https://government.nl/contact/public-information-service",
+    "https://government.nl/reporting-a-vulnerability",
+    "https://government.nl/contact",
+    "https://government.nl/latest/weblogs/the-work-of-the-ministry-of-foreign-affairs/2026/situation-middle-east-news",
+    "https://government.nl/help",
+    "https://government.nl/topics/housing/rented-housing/applying-for-housing-benefit",
+    "https://government.nl/contact/making-a-complaint",
+    "https://government.nl/contact/press-information",
+    "https://government.nl/contact/whatsapp",
+    "https://government.nl/archive",
+    "https://government.nl/cookies",
+    "https://government.nl/copyright",
+    "https://government.nl/documents",
+    "https://government.nl/government",
+    "https://government.nl/latest",
+    "https://government.nl/latest/news/2025/12/01/long-term-policy-on-asylum-support-for-refugees-from-ukraine",
+    "https://government.nl/latest/news/2026/02/19/the-netherlands-continues-to-support-ukraine",
+    "https://government.nl/ministries",
+    "https://government.nl/privacy",
+    "https://government.nl/sitemap",
+    "https://government.nl/topics",
+    "https://government.nl/government/governments-plans-in-plain-language",
+    "https://government.nl/government/members-of-cabinet",
+    "https://government.nl/latest/news",
+    "https://government.nl/topics/identification-documents/requirements-for-photos",
+    "https://government.nl/topics/themes/building-and-housing",
+    "https://government.nl/topics/themes/economy",
+    "https://government.nl/topics/themes/education",
+    "https://government.nl/topics/themes/family-health-and-care",
+    "https://government.nl/topics/themes/government-and-democracy",
+    "https://government.nl/topics/themes/international-cooperation",
+    "https://government.nl/topics/themes/justice-security-and-defence",
+    "https://government.nl/latest/weblogs",
+    "https://government.nl/ministries/ministry-of-agriculture-fisheries-food-security-and-nature",
+    "https://government.nl/ministries/ministry-of-defence",
+    "https://government.nl/ministries/ministry-of-economic-affairs-and-climate-policy",
+    "https://government.nl/ministries/ministry-of-education-culture-and-science",
+    "https://government.nl/ministries/ministry-of-finance",
+    "https://government.nl/ministries/ministry-of-foreign-affairs",
+    "https://government.nl/ministries/ministry-of-general-affairs",
+    "https://government.nl/ministries/ministry-of-health-welfare-and-sport",
+    "https://government.nl/ministries/ministry-of-infrastructure-and-water-management",
+    "https://government.nl/documents/forms/2016/06/17/consent-letter-for-minors-travelling-abroad",
+    "https://government.nl/latest/news/2025/12/02/agreement-between-the-netherlands-and-indonesia-on-the-return-of-two-dutch-prisoners",
+    "https://government.nl/latest/news/2025/12/17/netherlands-to-host-international-claims-commission-for-ukraine",
+    "https://government.nl/latest/news/2026/02/03/the-dutch-state-sells-part-of-tennet-germany-to-the-german-state",
+    "https://government.nl/latest/news/2026/02/23/jetten-government-sworn-in",
+    "https://government.nl/topics/themes/nature-and-the-environment",
+    "https://government.nl/topics/themes/work",
+    "https://government.nl/ministries/ministry-of-the-interior-and-kingdom-relations",
+    "https://government.nl/topics/themes/taxes-benefits-and-allowances",
+    "https://government.nl/topics/themes/transport",
+    "https://government.nl/topics/themes/migration-and-travel",
+    "https://government.nl/topics/immigration-to-the-netherlands/options-for-entrepreneurs-and-employees-from-abroad/highly-skilled-migrants",
+    "https://government.nl/topics/valuation-of-immovable-property/how-can-i-check-the-woz-value-is-correct",
+    "https://government.nl/topics/working-hours/question-and-answer/public-holidays-in-the-netherlands"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 58,
+  "randomShareCount": 0,
+  "shortfallCount": 42,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": true,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 58,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 58,
+  "discoverySummary": {
+    "requestId": "cache-1772307135349-55975",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 57 additional URLs (crawled 3 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 1,
+        "homepage-fallback": 47,
+        "crawl": 57
+      },
+      "accepted": {
+        "homepage-fallback": 42,
+        "crawl": 15,
+        "sitemap": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": true,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T19:32:17.513Z",
+  "generatedBy": "github-action-cache"
+}
