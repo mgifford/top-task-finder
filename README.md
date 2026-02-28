@@ -234,3 +234,14 @@ If you encounter issues with the Pages deployment:
 4. **View detailed logs**: Click into failed jobs to see detailed error messages
 
 See [PAGES_FIX.md](PAGES_FIX.md) for details about the artifact upload timeout issue that was resolved by creating this custom workflow.
+
+### Cache-busting for static assets
+
+To prevent browser caching issues when deploying updates, all static assets (JavaScript and CSS files) include a version parameter that changes with each build:
+
+- Uses Jekyll's `site.time` variable to generate a Unix timestamp
+- Appended as a query parameter (e.g., `/assets/js/app.js?v=1772307810`)
+- Automatically updates on every build without manual intervention
+- Ensures users always receive the latest version of the code after deployment
+
+This is particularly important for the LLM prompt feature, which loads content from an external text file. Without cache-busting, users might continue to see old JavaScript code that contains outdated prompts rather than fetching the new prompt template.
