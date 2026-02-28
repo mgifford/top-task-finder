@@ -1,0 +1,67 @@
+{
+  "requestId": "cache-1772295514911-39112",
+  "selectedUrls": [
+    "https://gsa.gov/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 1,
+  "randomShareCount": 0,
+  "shortfallCount": 99,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 1,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 1,
+  "discoverySummary": {
+    "requestId": "cache-1772295514911-39112",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Homepage fallback unavailable: fetch failed",
+      "Failed to crawl https://gsa.gov/: fetch failed",
+      "Crawling found no additional URLs after checking 0 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 0,
+        "crawl": 0
+      },
+      "accepted": {
+        "critical-pages": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T16:18:34.962Z",
+  "generatedBy": "github-action-cache"
+}
