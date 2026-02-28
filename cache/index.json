@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-02-28T15:03:29.628Z",
+  "generatedAt": "2026-02-28T15:05:42.586Z",
   "targets": [
     {
-      "fileName": "georgia.gov-100.json",
-      "canonicalHost": "georgia.gov",
+      "fileName": "government.se-100.json",
+      "canonicalHost": "government.se",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-02-28T15:03:29.625Z",
-      "warnings": []
+      "generatedAt": "2026-02-28T15:05:42.584Z",
+      "warnings": [
+        "Sitemap fetch unavailable for https://government.se/sitemap.xml"
+      ]
     }
   ]
 }
