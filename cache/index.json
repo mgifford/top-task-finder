@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-02-28T16:47:27.980Z",
+  "generatedAt": "2026-02-28T17:22:59.684Z",
   "targets": [
     {
-      "fileName": "accessible.canada.ca-100.json",
-      "canonicalHost": "accessible.canada.ca",
+      "fileName": "w3.org-100.json",
+      "canonicalHost": "w3.org",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T16:47:27.979Z",
-      "warnings": []
+      "returnedCount": 63,
+      "generatedAt": "2026-02-28T17:22:59.682Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling discovered 37 additional URLs (crawled 1 pages)"
+      ]
     }
   ]
 }

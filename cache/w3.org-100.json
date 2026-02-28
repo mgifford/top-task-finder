@@ -1,0 +1,127 @@
+{
+  "requestId": "cache-1772299378741-61422",
+  "selectedUrls": [
+    "https://w3.org/",
+    "https://w3.org/help/search/",
+    "https://w3.org/mission/accessibility/",
+    "https://w3.org/reports/",
+    "https://w3.org/contact/",
+    "https://w3.org/about/",
+    "https://w3.org/help/",
+    "https://w3.org/support-us/",
+    "https://w3.org/about/corporation/",
+    "https://w3.org/about/diversity/",
+    "https://w3.org/about/leadership/",
+    "https://w3.org/about/positive-work-environment/",
+    "https://w3.org/about/press-media/",
+    "https://w3.org/resources/",
+    "https://w3.org/standards/about/",
+    "https://w3.org/news/2026/first-public-working-draft-and-supporting-notes-epub-annotations-1-0/",
+    "https://w3.org/International/i18n-drafts/nav/about",
+    "https://w3.org/blog/",
+    "https://w3.org/careers/",
+    "https://w3.org/developers/",
+    "https://w3.org/ecosystems/",
+    "https://w3.org/email/",
+    "https://w3.org/evangelists/",
+    "https://w3.org/events/",
+    "https://w3.org/get-involved/",
+    "https://w3.org/groups/",
+    "https://w3.org/guide/",
+    "https://w3.org/invited-experts/",
+    "https://w3.org/ja/",
+    "https://w3.org/liaisons/",
+    "https://w3.org/Member/",
+    "https://w3.org/membership/",
+    "https://w3.org/mission/",
+    "https://w3.org/news-events/",
+    "https://w3.org/news/",
+    "https://w3.org/policies/",
+    "https://w3.org/press-releases/",
+    "https://w3.org/staff/",
+    "https://w3.org/standards/",
+    "https://w3.org/TR/",
+    "https://w3.org/translations/",
+    "https://w3.org/zh-hans/",
+    "https://w3.org/copyright/document-license/",
+    "https://w3.org/developers/tools/",
+    "https://w3.org/ecosystems/e-commerce/",
+    "https://w3.org/ecosystems/media/",
+    "https://w3.org/ecosystems/publishing/",
+    "https://w3.org/get-involved/promote/",
+    "https://w3.org/membership/list/",
+    "https://w3.org/mission/internationalization/",
+    "https://w3.org/mission/privacy/",
+    "https://w3.org/mission/security/",
+    "https://w3.org/news-events/w3c-tpac/",
+    "https://w3.org/policies/code-of-conduct/",
+    "https://w3.org/standards/review/",
+    "https://w3.org/standards/types/",
+    "https://w3.org/users/myprofile/",
+    "https://w3.org/WAI/fundamentals/",
+    "https://w3.org/groups/other/tag/",
+    "https://w3.org/news/2026/css-snapshot-2026-published-as-a-group-note/",
+    "https://w3.org/news/2026/first-public-working-draft-selectors-level-5/",
+    "https://w3.org/news/2026/second-w3c-team-appointment-to-the-tag/",
+    "https://w3.org/press-releases/2025/new-logo/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 63,
+  "randomShareCount": 0,
+  "shortfallCount": 37,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": true,
+    "accessibility": true,
+    "topTask": true,
+    "contact": true,
+    "about": true,
+    "help": true,
+    "resources": true
+  },
+  "languageDistribution": {
+    "primary": 63,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 63,
+  "discoverySummary": {
+    "requestId": "cache-1772299378741-61422",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 37 additional URLs (crawled 1 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 93,
+        "crawl": 37
+      },
+      "accepted": {
+        "homepage-fallback": 63
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": true,
+      "accessibility": true,
+      "topTask": true,
+      "contact": true,
+      "about": true,
+      "help": true,
+      "resources": true
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T17:22:59.682Z",
+  "generatedBy": "github-action-cache"
+}
