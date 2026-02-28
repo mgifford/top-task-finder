@@ -161,22 +161,38 @@ function scoreCandidateUrl(normalizedUrl, source) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url, {
-    redirect: 'follow',
-    headers: {
-      'user-agent': 'top-task-finder-cache-builder/1.0 (+https://github.com/mgifford/top-task-finder)',
-      accept: 'text/html,application/xml,text/xml;q=0.9,*/*;q=0.8',
-    },
-  });
+  try {
+    const response = await fetch(url, {
+      redirect: 'follow',
+      headers: {
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+        'accept-language': 'en-US,en;q=0.9',
+        'accept-encoding': 'gzip, deflate, br',
+        'cache-control': 'no-cache',
+        'pragma': 'no-cache',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'none',
+        'upgrade-insecure-requests': '1',
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`Request failed (${response.status}) for ${url}`);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status} ${response.statusText}`);
+    }
+
+    return {
+      text: await response.text(),
+      finalUrl: response.url,
+    };
+  } catch (err) {
+    // Provide more context for network and HTTP errors
+    if (err.message.includes('HTTP ')) {
+      throw err; // Already has good error message
+    }
+    throw new Error(`fetch failed: ${err.message}`);
   }
-
-  return {
-    text: await response.text(),
-    finalUrl: response.url,
-  };
 }
 
 function extractXmlLocValues(xmlText) {
@@ -218,16 +234,16 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
   const footerLinksSet = new Set();
   const navLinksSet = new Set();
   const otherLinksSet = new Set();
-  
+
   // Simple regex-based approach to identify sections
   // Footer patterns: <footer>, </footer>, id="footer", class="footer"
   const footerPattern = /<footer[^>]*>[\s\S]*?<\/footer>/gi;
   const footerMatches = htmlText.match(footerPattern) || [];
-  
-  // Nav patterns: <nav>, </nav>, id="nav", class="nav"  
+
+  // Nav patterns: <nav>, </nav>, id="nav", class="nav"
   const navPattern = /<nav[^>]*>[\s\S]*?<\/nav>/gi;
   const navMatches = htmlText.match(navPattern) || [];
-  
+
   // Extract links from footer sections
   footerMatches.forEach(section => {
     const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
@@ -242,7 +258,7 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
       match = pattern.exec(section);
     }
   });
-  
+
   // Extract links from nav sections
   navMatches.forEach(section => {
     const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
@@ -259,7 +275,7 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
       match = pattern.exec(section);
     }
   });
-  
+
   // Extract all other links not in footer/nav
   const allLinks = extractHrefValues(htmlText, baseUrl);
   allLinks.forEach(url => {
@@ -267,11 +283,11 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
       otherLinksSet.add(url);
     }
   });
-  
+
   const footerLinks = Array.from(footerLinksSet);
   const navLinks = Array.from(navLinksSet);
   const otherLinks = Array.from(otherLinksSet);
-  
+
   return {
     footerLinks,
     navLinks,
@@ -359,19 +375,19 @@ function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
   // Updated to allow year patterns followed by dashes, underscores, slashes, or end of path
   const yearPattern = /[-_/]((?:19|20)\d{2})(?:[-_]((?:19|20)\d{2}))?(?=[-_/?#]|$)/g;
   const groupedByPattern = new Map();
-  
+
   candidates.forEach((candidate) => {
     const url = candidate.url;
     const parsed = new URL(url);
     const pathname = parsed.pathname;
-    
+
     // Create a normalized pattern by replacing all year occurrences with {YEAR}
     const patternKey = pathname.replace(yearPattern, '-{YEAR}');
-    
+
     // Check if this URL has any year patterns
     const hasYearPattern = yearPattern.test(pathname);
     yearPattern.lastIndex = 0; // Reset regex state
-    
+
     if (!hasYearPattern) {
       // No year pattern, treat as unique
       if (!groupedByPattern.has(url)) {
@@ -379,53 +395,53 @@ function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
       }
       return;
     }
-    
+
     // Group by the pattern
     const fullKey = `${parsed.hostname}${patternKey}`;
     if (!groupedByPattern.has(fullKey)) {
       groupedByPattern.set(fullKey, []);
     }
-    
+
     groupedByPattern.get(fullKey).push(candidate);
   });
-  
+
   const result = [];
-  
+
   groupedByPattern.forEach((group, key) => {
     // If the group has maxRecentItems or fewer, keep all
     if (group.length <= maxRecentItems) {
       result.push(...group);
       return;
     }
-    
+
     // Sort by the most recent year found in the URL
     const sortedByYear = group.sort((a, b) => {
       // Extract all years from each URL
       const yearsA = [];
       const yearsB = [];
-      
+
       let match;
       const patternA = /[-_/]((?:19|20)\d{2})/g;
       while ((match = patternA.exec(a.url)) !== null) {
         yearsA.push(parseInt(match[1], 10));
       }
-      
+
       const patternB = /[-_/]((?:19|20)\d{2})/g;
       while ((match = patternB.exec(b.url)) !== null) {
         yearsB.push(parseInt(match[1], 10));
       }
-      
+
       // Use the maximum year from each URL for comparison
       const maxYearA = yearsA.length > 0 ? Math.max(...yearsA) : 0;
       const maxYearB = yearsB.length > 0 ? Math.max(...yearsB) : 0;
-      
+
       return maxYearB - maxYearA;
     });
-    
+
     // Keep only the most recent N items
     result.push(...sortedByYear.slice(0, maxRecentItems));
   });
-  
+
   return result;
 }
 
@@ -433,26 +449,26 @@ function applyUrlDiversityLimits(sortedCandidates) {
   const selected = [];
   const skipped = [];
   const selectedFirstSegments = new Set();
-  
+
   // Track counts for efficient O(n) performance
   const firstSegmentCounts = new Map();
   const depth3PrefixCounts = new Map();
   const segmentCounts = new Map(); // Track individual segment repetition across all positions
-  
+
   // Limits for diversity
   const MAX_FIRST_SEGMENT = 15;
   const MAX_DEPTH3_PREFIX = 3;
   const MAX_INDIVIDUAL_SEGMENT = 10; // Max URLs containing any single segment
-  
+
   // Process candidates in order of their score
   sortedCandidates.forEach((candidate) => {
     const parsed = new URL(candidate.url);
     const segments = parsed.pathname.split('/').filter(Boolean);
-    
+
     // Always include homepage and search pages
     const isHomepage = candidate.prioritySignals?.homepage;
     const isSearch = candidate.prioritySignals?.search;
-    
+
     if (isHomepage || isSearch) {
       selected.push(candidate);
       // Track segments from selected URLs
@@ -466,36 +482,36 @@ function applyUrlDiversityLimits(sortedCandidates) {
       });
       return;
     }
-    
+
     // Check if this URL shares path segments with already selected URLs
     let shouldSkip = false;
-    
+
     // For URLs with at least one segment, check if the first segment is already seen
     if (segments.length >= 1) {
       const firstSegment = segments[0];
-      
+
       // If we've already selected a URL with this first segment,
       // limit to MAX_FIRST_SEGMENT URLs per first-level segment to ensure diversity
       if (selectedFirstSegments.has(firstSegment)) {
         const countWithSameFirstSegment = firstSegmentCounts.get(firstSegment) || 0;
-        
+
         if (countWithSameFirstSegment >= MAX_FIRST_SEGMENT) {
           shouldSkip = true;
         }
       }
     }
-    
+
     // For deeper URLs (3+ segments), apply stricter limits on prefixes
     if (!shouldSkip && segments.length >= 3) {
       const depth3Prefix = '/' + segments.slice(0, 3).join('/');
       const countWithSamePrefix = depth3PrefixCounts.get(depth3Prefix) || 0;
-      
+
       // Limit to MAX_DEPTH3_PREFIX URLs per 3-segment prefix
       if (countWithSamePrefix >= MAX_DEPTH3_PREFIX) {
         shouldSkip = true;
       }
     }
-    
+
     // Check for individual segment repetition across all path positions
     // This catches patterns like "health-services" or "caregiver-support" appearing in many URLs
     if (!shouldSkip) {
@@ -507,7 +523,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
         }
       }
     }
-    
+
     if (shouldSkip) {
       skipped.push(candidate);
     } else {
@@ -538,7 +554,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
 
 function ensureCriticalPages(candidates, baseUrl) {
   const hasHomepage = candidates.some(c => c.prioritySignals?.homepage);
-  
+
   if (!hasHomepage) {
     const homepageUrl = new URL('/', baseUrl.origin).href;
     candidates.unshift({
@@ -557,7 +573,7 @@ function ensureCriticalPages(candidates, baseUrl) {
       },
     });
   }
-  
+
   return candidates;
 }
 
@@ -606,7 +622,7 @@ async function findSitemapUrl(baseUrl, warnings) {
 async function discoverFromSitemap(baseUrl, warnings) {
   const candidates = [];
   const initialSitemapUrl = await findSitemapUrl(baseUrl, warnings);
-  
+
   if (!initialSitemapUrl) {
     warnings.push('No sitemap found at common locations or robots.txt');
     return candidates;
@@ -656,11 +672,11 @@ async function discoverFromHomepage(baseUrl, warnings) {
     // Use the final URL after redirects as the base for resolving relative links
     const effectiveBaseUrl = finalUrl || baseUrl.href;
     const links = extractHrefValues(html, effectiveBaseUrl);
-    
+
     if (links.length === 0) {
       warnings.push(`Homepage fallback found 0 links from ${effectiveBaseUrl}`);
     }
-    
+
     return links.map((url) => ({
       url,
       source: 'homepage-fallback',
@@ -675,63 +691,63 @@ async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existin
   const visited = new Set();
   const candidates = [];
   const queue = [];
-  
+
   // Track which URLs we already have
   const existingUrls = new Set(existingCandidates.map(c => c.url));
-  
+
   // Start by crawling the homepage
   queue.push({ url: baseUrl.href, depth: 0 });
-  
+
   let pagesCrawled = 0;
-  
+
   while (queue.length > 0 && pagesCrawled < MAX_PAGES_TO_CRAWL) {
     const { url: currentUrl, depth } = queue.shift();
-    
+
     // Skip if already visited or too deep
     if (visited.has(currentUrl) || depth > MAX_CRAWL_DEPTH) {
       continue;
     }
-    
+
     visited.add(currentUrl);
-    
+
     try {
       const { text: html, finalUrl } = await fetchText(currentUrl);
       pagesCrawled++;
-      
+
       const effectiveBaseUrl = finalUrl || currentUrl;
       const { footerLinks, navLinks, otherLinks } = extractPrioritizedLinks(html, effectiveBaseUrl);
-      
+
       // Process links in priority order: footer first, then nav, then others
       const prioritizedLinks = [
         ...footerLinks.map(url => ({ url, priority: 'footer' })),
         ...navLinks.map(url => ({ url, priority: 'nav' })),
         ...otherLinks.map(url => ({ url, priority: 'other' })),
       ];
-      
+
       for (const { url: linkUrl, priority } of prioritizedLinks) {
         // Check if it's in scope and HTML
         if (!isWithinCanonicalScope(linkUrl, canonicalHost) || !isLikelyHtmlUrl(linkUrl)) {
           continue;
         }
-        
+
         // Skip if we already have this URL
         if (existingUrls.has(linkUrl) || candidates.some(c => c.url === linkUrl)) {
           continue;
         }
-        
+
         // Add to candidates
         candidates.push({
           url: linkUrl,
           source: 'crawl',
         });
-        
+
         existingUrls.add(linkUrl);
-        
+
         // Queue for further crawling if from footer or nav and not too deep
         if (depth < MAX_CRAWL_DEPTH && (priority === 'footer' || priority === 'nav')) {
           queue.push({ url: linkUrl, depth: depth + 1 });
         }
-        
+
         // Stop if we've found enough URLs
         if (existingCandidates.length + candidates.length >= requestedCount) {
           warnings.push(`Crawling discovered ${candidates.length} additional URLs (crawled ${pagesCrawled} pages)`);
@@ -742,22 +758,33 @@ async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existin
       warnings.push(`Failed to crawl ${currentUrl}: ${err.message}`);
     }
   }
-  
+
   if (candidates.length > 0) {
     warnings.push(`Crawling discovered ${candidates.length} additional URLs (crawled ${pagesCrawled} pages)`);
   } else {
     warnings.push(`Crawling found no additional URLs after checking ${pagesCrawled} pages`);
   }
-  
+
   return candidates;
 }
 
-function buildDiscoverySummary({ requestId, warnings, fallbackUsed, sourceCounts, priorityCoverage }) {
+function buildDiscoverySummary({ requestId, warnings, fallbackUsed, crawlUsed, sourceCounts, priorityCoverage }) {
+  const sourcesAttempted = ['sitemap'];
+  if (fallbackUsed) {
+    sourcesAttempted.push('homepage-fallback');
+  }
+  if (crawlUsed) {
+    sourcesAttempted.push('crawl');
+  }
+
   return {
     requestId,
-    sourcesAttempted: fallbackUsed ? ['sitemap', 'homepage-fallback'] : ['sitemap'],
-    fallbackUsed,
-    fallbackTriggerReasons: fallbackUsed ? ['shortfall-or-priority-gap'] : [],
+    sourcesAttempted,
+    // fallbackUsed indicates whether ANY fallback mechanism was triggered
+    // (either homepage-fallback or crawl or both). For specific details,
+    // see sourcesAttempted array.
+    fallbackUsed: fallbackUsed || crawlUsed,
+    fallbackTriggerReasons: (fallbackUsed || crawlUsed) ? ['shortfall-or-priority-gap'] : [],
     cacheHit: false,
     cacheCleared: false,
     warnings,
@@ -785,9 +812,9 @@ function createScanRequest(domainUrl, requestedCount) {
 function buildResult(scanRequest, rankedCandidates, discoverySummary) {
   const deduplicatedCandidates = deduplicateYearBasedUrls(rankedCandidates, 3);
   const diversityResult = applyUrlDiversityLimits(deduplicatedCandidates);
-  
+
   let finalCandidates = diversityResult.selected;
-  
+
   // If we don't have enough URLs, backfill from skipped ones
   if (finalCandidates.length < scanRequest.requestedCount && diversityResult.skipped.length > 0) {
     const needed = scanRequest.requestedCount - finalCandidates.length;
@@ -796,10 +823,10 @@ function buildResult(scanRequest, rankedCandidates, discoverySummary) {
       .map(item => ({ item, sort: Math.random() }))
       .sort((a, b) => a.sort - b.sort)
       .map(({ item }) => item);
-    
+
     finalCandidates = [...finalCandidates, ...shuffled.slice(0, needed)];
   }
-  
+
   const selectedUrls = finalCandidates
     .slice(0, scanRequest.requestedCount)
     .map((candidate) => candidate.url);
@@ -865,7 +892,7 @@ async function processTarget(target, outDir) {
       scanRequest.canonicalHost,
     );
   }
-  
+
   // Second fallback: recursive crawling if still not enough URLs
   if (ranked.length < scanRequest.requestedCount) {
     crawlUsed = true;
@@ -881,13 +908,14 @@ async function processTarget(target, outDir) {
       scanRequest.canonicalHost,
     );
   }
-  
+
   ranked = ensureCriticalPages(ranked, scanRequest.normalizedUrl);
 
   const discoverySummary = buildDiscoverySummary({
     requestId: scanRequest.requestId,
     warnings,
-    fallbackUsed: fallbackUsed || crawlUsed,
+    fallbackUsed,
+    crawlUsed,
     sourceCounts: {
       raw: {
         sitemap: sitemapRaw.length,
