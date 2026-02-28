@@ -1,17 +1,13 @@
 {
-  "generatedAt": "2026-02-28T16:46:53.107Z",
+  "generatedAt": "2026-02-28T16:47:27.980Z",
   "targets": [
     {
-      "fileName": "mn.gov-100.json",
-      "canonicalHost": "mn.gov",
+      "fileName": "accessible.canada.ca-100.json",
+      "canonicalHost": "accessible.canada.ca",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T16:46:53.106Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback found 0 links from http://validate.perfdrive.com/d5bd5333eafe8b0ccd6023ba818d1aa6/?ssa=10dcbd8d-d921-46aa-8dc5-fbc6046cf561&ssb=27012210013&ssc=https%3A%2F%2Fmn.gov%2Fportal%2F&ssi=e63f4170-bf56-47fd-955b-13aaef88af47&ssk=support@shieldsquare.com&ssm=43291526699212875108062326822778&ssn=4bf920d34ca6e1ff56d61ae5068380f33f4c77383883-91e6-454f-8b63da&sso=46842bf1-101bb5a4ac23d0b462f483f919afd99f5a014d77b37220ed&ssp=32677729421772230200177225525427889&ssq=94710389721291467631697212533420238270699&ssr=NjQuMjM2LjEzNC4xOA==&sst=top-task-finder-cache-builder/1.0%20(+https://github.com/mgifford/top-task-finder)&ssu=&ssv=&ssw=&ssx=W10=",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-02-28T16:47:27.979Z",
+      "warnings": []
     }
   ]
 }
