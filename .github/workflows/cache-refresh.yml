@@ -48,4 +48,11 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh generated URL cache"
+          # Pull with rebase to handle concurrent workflow runs
+          if ! git pull --rebase origin main; then
+            echo "Rebase failed - likely due to concurrent workflow runs"
+            git rebase --abort
+            echo "Please re-run this workflow to retry with latest changes"
+            exit 1
+          fi
           git push
