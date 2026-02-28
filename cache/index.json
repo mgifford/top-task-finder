@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-02-28T15:08:09.348Z",
+  "generatedAt": "2026-02-28T15:10:19.015Z",
   "targets": [
     {
-      "fileName": "colorado.gov-100.json",
-      "canonicalHost": "colorado.gov",
+      "fileName": "mn.gov-100.json",
+      "canonicalHost": "mn.gov",
       "requestedCount": 100,
-      "returnedCount": 18,
-      "generatedAt": "2026-02-28T15:08:09.347Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T15:10:19.014Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://colorado.gov/sitemap.xml"
+        "Sitemap fetch unavailable for https://mn.gov/sitemap.xml"
       ]
     }
   ]
