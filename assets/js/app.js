@@ -14,6 +14,8 @@ const DEFAULT_REQUESTED_COUNT = 100;
 const FALLBACK_MAX_URLS = 200;
 const FALLBACK_POLL_INTERVAL_MS = 8000;
 const FALLBACK_POLL_TIMEOUT_MS = 900000;
+const NOTIFICATION_DURATION_MS = 10000;
+const NOTIFICATION_ANIMATION_MS = 300;
 
 const state = {
   defaultRequestedCount: DEFAULT_REQUESTED_COUNT,
@@ -581,10 +583,11 @@ function showNotification(message) {
 
   notificationMessage.textContent = message;
   notificationModal.removeAttribute('hidden');
+  notificationModal.focus();
 
   notificationTimeout = setTimeout(() => {
     hideNotification();
-  }, 10000);
+  }, NOTIFICATION_DURATION_MS);
 }
 
 function hideNotification() {
@@ -598,7 +601,7 @@ function hideNotification() {
   setTimeout(() => {
     notificationModal.setAttribute('hidden', '');
     notificationModal.classList.remove('hiding');
-  }, 300);
+  }, NOTIFICATION_ANIMATION_MS);
 }
 
 // Allow keyboard dismissal of notification
