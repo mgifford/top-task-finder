@@ -514,7 +514,8 @@ async function handleCopy() {
 
     await navigator.clipboard.writeText(text);
     showNotification('URLs have been copied');
-  } catch {
+  } catch (error) {
+    console.error('Clipboard copy failed:', error);
     renderError('Unable to copy. Check browser clipboard permissions.');
   }
 }
@@ -552,6 +553,7 @@ Please provide your recommended evaluation list with brief rationale for each se
     await navigator.clipboard.writeText(prompt);
     showNotification('LLM prompt with URLs has been copied');
   } catch (error) {
+    console.error('Clipboard copy failed:', error);
     renderError('Unable to copy. Check browser clipboard permissions.');
   }
 }
