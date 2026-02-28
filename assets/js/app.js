@@ -529,7 +529,7 @@ async function handleCopyPrompt() {
 
     const prompt = `You are an accessibility expert focused on improving website accessibility and user experience.
 
-TASK: I want to refine a list of top tasks that highlight what users will likely want to do on this site. Please:
+TASK: I want to refine a list of pages that represent the key user journeys and content areas on this site. Please:
 
 1. Review the URLs provided below
 2. Explore the site structure and content
@@ -551,7 +551,7 @@ Please provide your recommended evaluation list with brief rationale for each se
 
     await navigator.clipboard.writeText(prompt);
     showNotification('LLM prompt with URLs has been copied');
-  } catch {
+  } catch (error) {
     renderError('Unable to copy. Check browser clipboard permissions.');
   }
 }
