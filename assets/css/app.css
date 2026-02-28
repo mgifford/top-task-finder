@@ -506,6 +506,10 @@ textarea:focus-visible {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.notification-modal.hiding {
+  animation: notificationFadeOut 0.3s ease forwards;
+}
+
 [data-theme="dark"] .notification-content {
   background-color: #1e4620;
   color: #a3e4a3;

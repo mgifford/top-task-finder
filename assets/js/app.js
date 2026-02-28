@@ -593,11 +593,11 @@ function hideNotification() {
     notificationTimeout = null;
   }
   
-  notificationModal.style.animation = 'notificationFadeOut 0.3s ease';
+  notificationModal.classList.add('hiding');
   
   setTimeout(() => {
     notificationModal.setAttribute('hidden', '');
-    notificationModal.style.animation = '';
+    notificationModal.classList.remove('hiding');
   }, 300);
 }
 
