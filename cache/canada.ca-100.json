@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772289930498-94825",
+  "requestId": "cache-1772290213929-97311",
   "selectedUrls": [
     "https://canada.ca/"
   ],
@@ -23,7 +23,7 @@
   },
   "totalDiscoveredPages": 1,
   "discoverySummary": {
-    "requestId": "cache-1772289930498-94825",
+    "requestId": "cache-1772290213929-97311",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -59,6 +59,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-28T14:45:51.615Z",
+  "generatedAt": "2026-02-28T14:50:34.988Z",
   "generatedBy": "github-action-cache"
 }
