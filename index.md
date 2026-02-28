@@ -95,4 +95,11 @@ title: Accessible Top Task URL Finder
   </div>
 </div>
 
+<!-- Notification Modal -->
+<div id="notification-modal" class="notification-modal" role="alert" aria-live="assertive" tabindex="-1" hidden>
+  <div class="notification-content">
+    <p id="notification-message"></p>
+  </div>
+</div>
+
 <script type="module" src="{{ '/assets/js/app.js' | relative_url }}"></script>

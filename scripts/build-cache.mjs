@@ -170,7 +170,10 @@ async function fetchText(url) {
     throw new Error(`Request failed (${response.status}) for ${url}`);
   }
 
-  return response.text();
+  return {
+    text: await response.text(),
+    finalUrl: response.url,
+  };
 }
 
 function extractXmlLocValues(xmlText) {
@@ -190,7 +193,9 @@ function xmlLooksLikeSitemapIndex(xmlText) {
 
 function extractHrefValues(htmlText, baseUrl) {
   const values = [];
-  const pattern = /<a[^>]+href=["']([^"'#]+)["']/gim;
+  // Match href attribute in <a> tags, whether it's the first attribute or not
+  // Use \s* to allow <a href=...> or <a href=...> (with or without space)
+  const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
   let match = pattern.exec(htmlText);
   while (match) {
     try {
@@ -484,9 +489,58 @@ function ensureCriticalPages(candidates, baseUrl) {
   return candidates;
 }
 
+async function findSitemapUrl(baseUrl, warnings) {
+  // Try common sitemap locations
+  const sitemapCandidates = [
+    new URL('/sitemap.xml', baseUrl.origin).href,
+    new URL('/sitemap_index.xml', baseUrl.origin).href,
+    new URL('/sitemap/sitemap.xml', baseUrl.origin).href,
+  ];
+
+  // Try to get sitemap from robots.txt
+  try {
+    const robotsUrl = new URL('/robots.txt', baseUrl.origin).href;
+    const { text: robotsText } = await fetchText(robotsUrl);
+    const sitemapMatch = robotsText.match(/^Sitemap:\s*(.+)$/im);
+    if (sitemapMatch) {
+      const sitemapFromRobots = sitemapMatch[1].trim();
+      // Add to beginning of candidates if not already present
+      if (!sitemapCandidates.includes(sitemapFromRobots)) {
+        sitemapCandidates.unshift(sitemapFromRobots);
+      }
+    }
+  } catch (err) {
+    // robots.txt not available, continue with default candidates
+  }
+
+  // Try each candidate until we find one that works
+  for (const candidateUrl of sitemapCandidates) {
+    try {
+      const { text } = await fetchText(candidateUrl);
+      // Check if it looks like XML/sitemap - use case-insensitive checks
+      const normalized = text.trim().toLowerCase();
+      if (normalized.startsWith('<?xml') || normalized.includes('<urlset') || normalized.includes('<sitemapindex')) {
+        return candidateUrl;
+      }
+    } catch (err) {
+      // This candidate didn't work, try the next one
+    }
+  }
+
+  // No sitemap found
+  return null;
+}
+
 async function discoverFromSitemap(baseUrl, warnings) {
   const candidates = [];
-  const queue = [new URL('/sitemap.xml', baseUrl.origin).href];
+  const initialSitemapUrl = await findSitemapUrl(baseUrl, warnings);
+  
+  if (!initialSitemapUrl) {
+    warnings.push('No sitemap found at common locations or robots.txt');
+    return candidates;
+  }
+
+  const queue = [initialSitemapUrl];
   const visited = new Set();
 
   while (queue.length > 0 && visited.size < MAX_SITEMAP_DOCS) {
@@ -498,7 +552,7 @@ async function discoverFromSitemap(baseUrl, warnings) {
     visited.add(sitemapUrl);
 
     try {
-      const xmlText = await fetchText(sitemapUrl);
+      const { text: xmlText } = await fetchText(sitemapUrl);
       const locValues = extractXmlLocValues(xmlText);
 
       if (xmlLooksLikeSitemapIndex(xmlText)) {
@@ -512,8 +566,8 @@ async function discoverFromSitemap(baseUrl, warnings) {
           candidates.push({ url, source: 'sitemap' });
         });
       }
-    } catch {
-      warnings.push(`Sitemap fetch unavailable for ${sitemapUrl}`);
+    } catch (err) {
+      warnings.push(`Sitemap fetch failed for ${sitemapUrl}: ${err.message}`);
     }
   }
 
@@ -526,13 +580,21 @@ async function discoverFromSitemap(baseUrl, warnings) {
 
 async function discoverFromHomepage(baseUrl, warnings) {
   try {
-    const html = await fetchText(baseUrl.href);
-    return extractHrefValues(html, baseUrl.href).map((url) => ({
+    const { text: html, finalUrl } = await fetchText(baseUrl.href);
+    // Use the final URL after redirects as the base for resolving relative links
+    const effectiveBaseUrl = finalUrl || baseUrl.href;
+    const links = extractHrefValues(html, effectiveBaseUrl);
+    
+    if (links.length === 0) {
+      warnings.push(`Homepage fallback found 0 links from ${effectiveBaseUrl}`);
+    }
+    
+    return links.map((url) => ({
       url,
       source: 'homepage-fallback',
     }));
-  } catch {
-    warnings.push('Homepage fallback unavailable.');
+  } catch (err) {
+    warnings.push(`Homepage fallback unavailable: ${err.message}`);
     return [];
   }
 }

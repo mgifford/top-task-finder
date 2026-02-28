@@ -480,3 +480,73 @@ textarea:focus-visible {
   font-weight: 600;
   color: var(--color-text);
 }
+
+/* Notification Modal styles */
+.notification-modal {
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2000;
+  width: 90%;
+  max-width: 500px;
+  animation: notificationSlideIn 0.3s ease;
+}
+
+@media (max-width: 640px) {
+  .notification-modal {
+    top: 1rem;
+    width: 95%;
+  }
+}
+
+.notification-modal[hidden] {
+  display: none;
+}
+
+.notification-content {
+  background-color: #d4edda;
+  color: #155724;
+  border: 2px solid #28a745;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.notification-modal.hiding {
+  animation: notificationFadeOut 0.3s ease forwards;
+}
+
+[data-theme="dark"] .notification-content {
+  background-color: #1e4620;
+  color: #a3e4a3;
+  border-color: #28a745;
+}
+
+.notification-content p {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+@keyframes notificationSlideIn {
+  from {
+    transform: translate(-50%, -100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes notificationFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+}
