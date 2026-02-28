@@ -49,9 +49,10 @@ jobs:
           fi
           git commit -m "chore: refresh generated URL cache"
           # Pull with rebase to handle concurrent workflow runs
-          git pull --rebase origin main || {
-            echo "Rebase conflict detected, aborting and retrying"
+          if ! git pull --rebase origin main; then
+            echo "Rebase failed - likely due to concurrent workflow runs"
             git rebase --abort
-            git pull --rebase origin main
-          }
+            echo "Please re-run this workflow to retry with latest changes"
+            exit 1
+          fi
           git push

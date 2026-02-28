@@ -176,7 +176,8 @@ function xmlLooksLikeSitemapIndex(xmlText) {
 function extractHrefValues(htmlText, baseUrl) {
   const values = [];
   // Match href attribute in <a> tags, whether it's the first attribute or not
-  const pattern = /<a\s+[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
+  // Use \s* to allow <a href=...> or <a href=...> (with or without space)
+  const pattern = /<a\s[^>]*href=["']([^"'#]+)["'][^>]*>/gim;
   let match = pattern.exec(htmlText);
   while (match) {
     try {
@@ -498,8 +499,9 @@ async function findSitemapUrl(baseUrl, warnings) {
   for (const candidateUrl of sitemapCandidates) {
     try {
       const { text } = await fetchText(candidateUrl);
-      // Check if it looks like XML
-      if (text.trim().startsWith('<?xml') || text.includes('<urlset') || text.includes('<sitemapindex')) {
+      // Check if it looks like XML/sitemap - use case-insensitive checks
+      const normalized = text.trim().toLowerCase();
+      if (normalized.startsWith('<?xml') || normalized.includes('<urlset') || normalized.includes('<sitemapindex')) {
         return candidateUrl;
       }
     } catch (err) {
