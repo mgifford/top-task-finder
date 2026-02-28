@@ -1,9 +1,39 @@
 {
-  "requestId": "cache-1772225956422-6011",
+  "requestId": "cache-1772301847610-56364",
   "selectedUrls": [
     "https://novascotia.ca/",
+    "https://novascotia.ca/apply-funding-support-internship-youth-interested-healthcare-careers-equity-youth-health-experience-program-fund",
+    "https://novascotia.ca/apply-operating-subsidies-community-housing-community-housing-operating-support-program",
     "https://novascotia.ca/programs-and-services",
     "https://novascotia.ca/programs-and-services/registry-joint-stock-companies",
+    "https://novascotia.ca/access-services-online/",
+    "https://novascotia.ca/accountability-reporting-government-investment-funds",
+    "https://novascotia.ca/annual-production-statistics-report-aquaculture-licence",
+    "https://novascotia.ca/apply-child-abuse-register-search",
+    "https://novascotia.ca/apply-feeding-communities-fund-grant",
+    "https://novascotia.ca/apply-funding-arts-and-culture-activities-community-culture-innovation-fund",
+    "https://novascotia.ca/apply-funding-build-export-capacity-culture-sector-creative-industries-fund",
+    "https://novascotia.ca/apply-funding-community-housing-capital-repairs-community-housing-infrastructure-and-repair-program",
+    "https://novascotia.ca/apply-funding-create-affordable-housing-affordable-housing-development-program",
+    "https://novascotia.ca/apply-funding-help-communities-address-food-literacy-community-food-access-and-literacy-fund",
+    "https://novascotia.ca/apply-funding-help-communities-move-more-active-communities-fund",
+    "https://novascotia.ca/apply-loan-buy-multi-unit-residential-properties-non-market-community-housing-community-housing-acquisition-program",
+    "https://novascotia.ca/apply-loan-help-down-payment-your-first-home-down-payment-assistance-program",
+    "https://novascotia.ca/apply-project-funding-community-economic-development-fund",
+    "https://novascotia.ca/apply-receive-financial-assistance-help-cover-expenses-during-apprenticeship-technical-training",
+    "https://novascotia.ca/book-appointment-access-nova-scotia",
+    "https://novascotia.ca/make-payment-your-collection-services-account",
+    "https://novascotia.ca/pay-fine-ticket",
+    "https://novascotia.ca/report-disclose-wrongdoing-employees-government-or-public-sector-bodies",
+    "https://novascotia.ca/fr/programmes-et-services",
+    "https://novascotia.ca/programs-and-services/911-emergency",
+    "https://novascotia.ca/programs-and-services/benefit-resources-government-employees-retirees-and-member-employers",
+    "https://novascotia.ca/programs-and-services/building-safety",
+    "https://novascotia.ca/programs-and-services/business-licensing",
+    "https://novascotia.ca/programs-and-services/canada-nova-scotia-targeted-housing-benefit",
+    "https://novascotia.ca/programs-and-services/condominium-registry",
+    "https://novascotia.ca/programs-and-services/consumer-protection",
+    "https://novascotia.ca/programs-and-services/corporate-training-and-development-lms",
     "https://novascotia.ca/budget/",
     "https://novascotia.ca/contact-us",
     "https://novascotia.ca/copyright",
@@ -23,12 +53,39 @@
     "https://novascotia.ca/topic/industry-and-economy",
     "https://novascotia.ca/topic/law-justice-and-safety",
     "https://novascotia.ca/topic/money-tax-and-benefits",
-    "https://novascotia.ca/just/regulations/consregs.htm"
+    "https://novascotia.ca/just/regulations/consregs.htm",
+    "https://novascotia.ca/access-locations/",
+    "https://novascotia.ca/canada-community-building-fund-municipalities",
+    "https://novascotia.ca/capital-investment-tax-credit",
+    "https://novascotia.ca/change-your-address-health-card",
+    "https://novascotia.ca/change-your-address-registry-motor-vehicles",
+    "https://novascotia.ca/digital-animation-tax-credit",
+    "https://novascotia.ca/digital-media-tax-credit",
+    "https://novascotia.ca/economic-and-demographic-data-dailystats",
+    "https://novascotia.ca/equity-tax-credit-community-economic-development-investment-funds",
+    "https://novascotia.ca/fertility-and-surrogacy-tax-credit",
+    "https://novascotia.ca/get-help-environmental-approvals-business-relationship-managers",
+    "https://novascotia.ca/get-help-starting-business-business-navigators",
+    "https://novascotia.ca/documents/code-conduct-employees-government-and-public-sector-bodies",
+    "https://novascotia.ca/documents/commercial-assessment-phase-guide",
+    "https://novascotia.ca/documents/disaster-financial-assistance-fact-sheet",
+    "https://novascotia.ca/fr/conditions-dutilisation",
+    "https://novascotia.ca/fr/droit-dauteur",
+    "https://novascotia.ca/fr/enonce-de-confidentialite",
+    "https://novascotia.ca/programs/clean-economy-grant/",
+    "https://novascotia.ca/programs/clean-economy-scholarship/",
+    "https://novascotia.ca/programs/community-solar/",
+    "https://novascotia.ca/programs/energy-training/",
+    "https://novascotia.ca/programs-and-services/diversity-and-inclusion",
+    "https://novascotia.ca/programs-and-services/employee-and-family-assistance-program-efap",
+    "https://novascotia.ca/programs-and-services/disclosure-program",
+    "https://novascotia.ca/programs-and-services/driver-knowledge-tests",
+    "https://novascotia.ca/programs-and-services/emergency-services-provider-fund"
   ],
   "requestedCount": 100,
-  "returnedCount": 23,
+  "returnedCount": 80,
   "randomShareCount": 0,
-  "shortfallCount": 77,
+  "shortfallCount": 20,
   "priorityCoverage": {
     "homepage": true,
     "search": false,
@@ -36,16 +93,16 @@
     "topTask": true,
     "contact": false,
     "about": false,
-    "help": false,
+    "help": true,
     "resources": false
   },
   "languageDistribution": {
-    "primary": 23,
+    "primary": 80,
     "additional": 0
   },
-  "totalDiscoveredPages": 23,
+  "totalDiscoveredPages": 80,
   "discoverySummary": {
-    "requestId": "cache-1772225956422-6011",
+    "requestId": "cache-1772301847610-56364",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -57,15 +114,18 @@
     "cacheHit": false,
     "cacheCleared": false,
     "warnings": [
-      "Sitemap fetch unavailable for https://novascotia.ca/sitemap.xml"
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 77 additional URLs (crawled 5 pages)"
     ],
     "sourceCounts": {
       "raw": {
         "sitemap": 0,
-        "homepage-fallback": 36
+        "homepage-fallback": 36,
+        "crawl": 77
       },
       "accepted": {
-        "homepage-fallback": 23
+        "homepage-fallback": 23,
+        "crawl": 57
       }
     },
     "priorityCoverage": {
@@ -75,11 +135,11 @@
       "topTask": true,
       "contact": false,
       "about": false,
-      "help": false,
+      "help": true,
       "resources": false
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T20:59:17.228Z",
+  "generatedAt": "2026-02-28T18:04:08.781Z",
   "generatedBy": "github-action-cache"
 }
