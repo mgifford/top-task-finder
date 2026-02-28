@@ -1,15 +1,17 @@
 {
-  "generatedAt": "2026-02-28T17:22:59.684Z",
+  "generatedAt": "2026-02-28T17:24:23.330Z",
   "targets": [
     {
-      "fileName": "w3.org-100.json",
-      "canonicalHost": "w3.org",
+      "fileName": "gov.gr-100.json",
+      "canonicalHost": "gov.gr",
       "requestedCount": 100,
-      "returnedCount": 63,
-      "generatedAt": "2026-02-28T17:22:59.682Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T17:24:23.328Z",
       "warnings": [
         "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 37 additional URLs (crawled 1 pages)"
+        "Homepage fallback unavailable: fetch failed",
+        "Failed to crawl https://gov.gr/: fetch failed",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
