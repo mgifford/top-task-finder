@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-02-28T14:45:51.617Z",
+  "generatedAt": "2026-02-28T14:47:24.683Z",
   "targets": [
     {
-      "fileName": "canada.ca-100.json",
-      "canonicalHost": "canada.ca",
+      "fileName": "energy.gov-100.json",
+      "canonicalHost": "energy.gov",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T14:45:51.615Z",
+      "returnedCount": 69,
+      "generatedAt": "2026-02-28T14:47:24.682Z",
       "warnings": [
-        "Sitemap fetch unavailable for https://canada.ca/sitemap.xml",
-        "Homepage fallback unavailable."
+        "Sitemap traversal limit reached; skipped additional sitemap files."
       ]
     }
   ]

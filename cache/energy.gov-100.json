@@ -1,0 +1,131 @@
+{
+  "requestId": "cache-1772290043249-94192",
+  "selectedUrls": [
+    "https://energy.gov/",
+    "https://energy.gov/cio/accessibility-standard-statement",
+    "https://energy.gov/gdo/funding-opportunities-and-requests-information",
+    "https://energy.gov/apprenticeships-workforce-development",
+    "https://energy.gov/budget-performance",
+    "https://energy.gov/commercialization",
+    "https://energy.gov/contact-us",
+    "https://energy.gov/design",
+    "https://energy.gov/digital-engagement-and-media",
+    "https://energy.gov/EDF",
+    "https://energy.gov/funding-opportunities",
+    "https://energy.gov/genesis",
+    "https://energy.gov/internships-fellowships",
+    "https://energy.gov/mission",
+    "https://energy.gov/newsroom",
+    "https://energy.gov/notice-court-orders",
+    "https://energy.gov/open-government",
+    "https://energy.gov/our-leadership-offices",
+    "https://energy.gov/power-marketing-administrations",
+    "https://energy.gov/save",
+    "https://energy.gov/state-american-energy-promises-made-promises-kept",
+    "https://energy.gov/topics",
+    "https://energy.gov/us-department-energy-national-laboratories",
+    "https://energy.gov/us-energy-information-administration-eia",
+    "https://energy.gov/web-policies",
+    "https://energy.gov/whistleblower-protection-and-nondisclosure-agreements",
+    "https://energy.gov/work-us-department-energy",
+    "https://energy.gov/articles/energy-department-announces-1715-million-expand-us-geothermal-energy",
+    "https://energy.gov/articles/energy-department-announces-largest-loan-department-history-delivering-over-7-billion",
+    "https://energy.gov/articles/energy-department-approves-export-expansion-corpus-christi-lng",
+    "https://energy.gov/articles/fact-sheet-energy-department-lowering-electricity-costs-georgia-and-alabama",
+    "https://energy.gov/articles/fact-sheet-president-trump-restoring-prosperity-safety-and-security-united-states-and",
+    "https://energy.gov/articles/us-department-energy-reverses-biden-lng-pause-restores-trump-energy-dominance-agenda",
+    "https://energy.gov/ceser/does-use-federal-power-act-emergency-authority",
+    "https://energy.gov/ceser/emergency-response-hub-0",
+    "https://energy.gov/cio/department-energy-information-quality-guidelines",
+    "https://energy.gov/cio/privacy-program",
+    "https://energy.gov/energysaver/energy-saver",
+    "https://energy.gov/femp/federal-energy-management-program-funding-opportunities",
+    "https://energy.gov/gc/freedom-information-act",
+    "https://energy.gov/hgeo/hgeo-solicitations-and-business-opportunities",
+    "https://energy.gov/ig/office-inspector-general",
+    "https://energy.gov/indianenergy/current-funding-and-technical-assistance-opportunities",
+    "https://energy.gov/lm/history",
+    "https://energy.gov/mesc/funding",
+    "https://energy.gov/nnsa/national-nuclear-security-administration",
+    "https://energy.gov/OMEI/office-civil-rights-and-equal-employment-opportunity",
+    "https://energy.gov/science/department-energy-nobel-laureates",
+    "https://energy.gov/science/office-science-funding-opportunities",
+    "https://energy.gov/topics/2025-doe-403-orders",
+    "https://energy.gov/topics/advancing-innovation-technology-transitions-and-early-investments",
+    "https://energy.gov/topics/american-manufacturing",
+    "https://energy.gov/topics/artificial-intelligence",
+    "https://energy.gov/topics/cybersecurity",
+    "https://energy.gov/topics/earth-systems-modeling",
+    "https://energy.gov/topics/energy-security",
+    "https://energy.gov/topics/energy-workforce",
+    "https://energy.gov/topics/environmental-and-legacy-management",
+    "https://energy.gov/about-us/web-policies/privacy",
+    "https://energy.gov/cio/articles/vulnerability-disclosure-policy",
+    "https://energy.gov/eere/funding/eere-funding-opportunities",
+    "https://energy.gov/scep/wap/weatherization-assistance-program",
+    "https://energy.gov/topics/national-science-bowl",
+    "https://energy.gov/topics/grid-deployment-and-transmission",
+    "https://energy.gov/topics/puerto-rico-grid-resilience-and-modernization",
+    "https://energy.gov/topics/tribal-energy-access",
+    "https://energy.gov/topics/research-technology-and-economic-security",
+    "https://energy.gov/topics/extreme-weather-resiliency",
+    "https://energy.gov/topics/nuclear-security"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 69,
+  "randomShareCount": 0,
+  "shortfallCount": 31,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 69,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 69,
+  "discoverySummary": {
+    "requestId": "cache-1772290043249-94192",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap traversal limit reached; skipped additional sitemap files."
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 102
+      },
+      "accepted": {
+        "homepage-fallback": 69
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T14:47:24.682Z",
+  "generatedBy": "github-action-cache"
+}
