@@ -39,7 +39,7 @@ The investigation revealed several other government sites with the same issue:
 **Issue**: Using a bot-like user-agent caused sites to block or redirect the crawler.
 
 **Fix**: Updated `fetchText` function to use browser-like headers:
-- User-Agent: Chrome 121 on Windows 10
+- User-Agent: Chrome version 121.0.0.0 on Windows 10
 - Accept headers matching a real browser
 - Security fetch metadata headers (sec-fetch-*)
 - Accept-Language, Accept-Encoding, and other standard browser headers
