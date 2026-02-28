@@ -1,15 +1,16 @@
 {
-  "generatedAt": "2026-02-28T18:01:24.324Z",
+  "generatedAt": "2026-02-28T18:02:29.201Z",
   "targets": [
     {
-      "fileName": "colorado.gov-100.json",
-      "canonicalHost": "colorado.gov",
+      "fileName": "mydmv.colorado.gov-100.json",
+      "canonicalHost": "mydmv.colorado.gov",
       "requestedCount": 100,
-      "returnedCount": 53,
-      "generatedAt": "2026-02-28T18:01:24.322Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-02-28T18:02:29.199Z",
       "warnings": [
         "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 53 additional URLs (crawled 10 pages)"
+        "Homepage fallback found 0 links from https://mydmv.colorado.gov/?Check=1",
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]

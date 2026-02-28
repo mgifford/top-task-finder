@@ -1,0 +1,66 @@
+{
+  "requestId": "cache-1772301748314-99011",
+  "selectedUrls": [
+    "https://mydmv.colorado.gov/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 1,
+  "randomShareCount": 0,
+  "shortfallCount": 99,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 1,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 1,
+  "discoverySummary": {
+    "requestId": "cache-1772301748314-99011",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Homepage fallback found 0 links from https://mydmv.colorado.gov/?Check=1",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 0,
+        "crawl": 0
+      },
+      "accepted": {
+        "critical-pages": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T18:02:29.199Z",
+  "generatedBy": "github-action-cache"
+}
