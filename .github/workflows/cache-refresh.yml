@@ -48,4 +48,10 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh generated URL cache"
+          # Pull with rebase to handle concurrent workflow runs
+          git pull --rebase origin main || {
+            echo "Rebase conflict detected, aborting and retrying"
+            git rebase --abort
+            git pull --rebase origin main
+          }
           git push
