@@ -1,0 +1,116 @@
+{
+  "requestId": "cache-1772290199403-39235",
+  "selectedUrls": [
+    "https://ottawa.ca/",
+    "https://ottawa.ca/en/terms-use/accessibility",
+    "https://ottawa.ca/en/family-and-social-services",
+    "https://ottawa.ca/en/3-1-1/services-phone-e-mail-and-person",
+    "https://ottawa.ca/en/client-services/city-ottawa-client-service-centres",
+    "https://ottawa.ca/en/3-1-1/report-or-request/garbage-and-recycling",
+    "https://ottawa.ca/en/3-1-1/report-or-request/parking",
+    "https://ottawa.ca/en/3-1-1/report-or-request/property-damage-or-maintenance",
+    "https://ottawa.ca/en",
+    "https://ottawa.ca/fr",
+    "https://ottawa.ca/en/3-1-1",
+    "https://ottawa.ca/en/arts-heritage-and-events",
+    "https://ottawa.ca/fr/form/feedback",
+    "https://ottawa.ca/fr/forms/feedback",
+    "https://ottawa.ca/fr/3-1-1/signaler-ou-demander/dechets-et-recyclage",
+    "https://ottawa.ca/fr/3-1-1/signaler-ou-demander/entretien-de-propriete",
+    "https://ottawa.ca/fr/3-1-1/signaler-ou-demander/entretien-des-routes-et-trottoirs",
+    "https://ottawa.ca/en/recreation-and-parks",
+    "https://ottawa.ca/en/planning-development-and-construction",
+    "https://ottawa.ca/en/terms-use/privacy",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/was-ottawa-1826-just-wild-west",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/complete-your-vacant-unit-tax-declaration-march-19",
+    "https://ottawa.ca/en/node/3000156",
+    "https://ottawa.ca/en/node/3000146",
+    "https://ottawa.ca/en/garbage-and-recycling",
+    "https://ottawa.ca/en/city-hall/council-committees-and-boards/agendas-minutes-and-videos",
+    "https://ottawa.ca/en/health-and-public-safety",
+    "https://ottawa.ca/en/terms-use/disclaimer",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/your-waste-collection-day-may-change-starting-march-30",
+    "https://ottawa.ca/en/forms/feedback",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/city-seeking-public-input-commemorative-naming-proposals-1",
+    "https://ottawa.ca/en/living-ottawa",
+    "https://ottawa.ca/en/node/3000176",
+    "https://ottawa.ca/en/mayor-and-city-councillors",
+    "https://ottawa.ca/en/node/3000126",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/celebrating-black-history-month-ottawa",
+    "https://ottawa.ca/en/city-hall/council-committees-and-boards/committees-and-boards",
+    "https://ottawa.ca/en/business",
+    "https://ottawa.ca/en/mayors-corner",
+    "https://ottawa.ca/en/city-hall/city-news/protocols",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/para-transpo-talk-sessions-march-2-4",
+    "https://ottawa.ca/en/city-hall",
+    "https://ottawa.ca/fr/3-1-1/signaler-ou-demander/stationnement",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/make-difference-where-you-live-become-waste-reduction-champion-0",
+    "https://ottawa.ca/en/3-1-1/report-or-request/road-and-sidewalk-maintenance",
+    "https://ottawa.ca/en/node/3000166",
+    "https://ottawa.ca/en/node/3000196",
+    "https://ottawa.ca/en/node/3000296",
+    "https://ottawa.ca/en/city-hall/city-news/newsroom/ottawa-public-health-reminds-families-update-routine-childhood-vaccination-records",
+    "https://ottawa.ca/en/parking-roads-and-travel",
+    "https://ottawa.ca/en/newsroom",
+    "https://ottawa.ca/en/form/feedback",
+    "https://ottawa.ca/en/jobs-city"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 53,
+  "randomShareCount": 0,
+  "shortfallCount": 47,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 53,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 53,
+  "discoverySummary": {
+    "requestId": "cache-1772290199403-39235",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap fetch unavailable for https://ottawa.ca/sitemap.xml"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 77
+      },
+      "accepted": {
+        "critical-pages": 1,
+        "homepage-fallback": 52
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-02-28T14:50:00.031Z",
+  "generatedBy": "github-action-cache"
+}

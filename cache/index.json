@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-02-28T14:47:49.451Z",
+  "generatedAt": "2026-02-28T14:50:00.032Z",
   "targets": [
     {
-      "fileName": "gov.uk-100.json",
-      "canonicalHost": "gov.uk",
+      "fileName": "ottawa.ca-100.json",
+      "canonicalHost": "ottawa.ca",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-02-28T14:47:49.449Z",
+      "returnedCount": 53,
+      "generatedAt": "2026-02-28T14:50:00.031Z",
       "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files."
+        "Sitemap fetch unavailable for https://ottawa.ca/sitemap.xml"
       ]
     }
   ]
