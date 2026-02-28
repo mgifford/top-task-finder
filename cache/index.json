@@ -1,26 +1,17 @@
 {
-  "generatedAt": "2026-02-28T15:45:33.837Z",
-  "targets": [
-    {
-      "fileName": "gsa.gov-100.json",
-      "canonicalHost": "gsa.gov",
-      "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T15:45:33.836Z",
-      "warnings": [
-        "Sitemap fetch unavailable for https://gsa.gov/sitemap.xml",
-        "Homepage fallback unavailable."
-  "generatedAt": "2026-02-28T15:42:10.672Z",
+  "generatedAt": "2026-02-28T16:14:52.546Z",
   "targets": [
     {
       "fileName": "gov.gr-100.json",
       "canonicalHost": "gov.gr",
       "requestedCount": 100,
       "returnedCount": 1,
-      "generatedAt": "2026-02-28T15:42:10.670Z",
+      "generatedAt": "2026-02-28T16:14:52.544Z",
       "warnings": [
         "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: fetch failed"
+        "Homepage fallback unavailable: fetch failed",
+        "Failed to crawl https://gov.gr/: fetch failed",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
