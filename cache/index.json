@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-02-28T15:43:09.712Z",
+  "generatedAt": "2026-02-28T15:45:33.837Z",
   "targets": [
     {
       "fileName": "gsa.gov-100.json",
       "canonicalHost": "gsa.gov",
       "requestedCount": 100,
       "returnedCount": 1,
-      "generatedAt": "2026-02-28T15:43:09.711Z",
+      "generatedAt": "2026-02-28T15:45:33.836Z",
       "warnings": [
         "Sitemap fetch unavailable for https://gsa.gov/sitemap.xml",
         "Homepage fallback unavailable."

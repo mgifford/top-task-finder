@@ -93,8 +93,17 @@ function detectPrioritySignals(pathname) {
   return {
     homepage: normalized === '/' || normalized === '',
     search: /(^|\/)search(\/|$)|find/.test(normalized),
-    // Multilingual accessibility support for all 24 official EU languages
-    // Pattern matches both accented and non-accented versions to handle URL encoding variations
+    // Multilingual accessibility support for all 24 official EU languages:
+    // English (accessibility, a11y), Spanish (accesibilidad), French (accessibilité/accessibilite),
+    // German (barrierefreiheit, zugänglichkeit/zuganglichkeit), Italian (accessibilità/accessibilita),
+    // Portuguese (acessibilidade), Dutch (toegankelijkheid), Polish (dostępność/dostepnosc),
+    // Romanian (accesibilitate), Greek (προσβασιμότητα), Czech (přístupnost/pristupnost),
+    // Hungarian (akadálymentesség/akadalymentesseg, hozzáférhetőség/hozzaferhetos­eg),
+    // Swedish (tillgänglighet/tillganglighet), Bulgarian (достъпност), Danish (tilgængelighed/tilgangelighed),
+    // Finnish (saavutettavuus), Slovak (prístupnosť/pristupnost), Irish (inrochtaineacht),
+    // Croatian (pristupačnost/pristupacnost), Lithuanian (prieinamumas), Slovenian (dostopnost),
+    // Latvian (pieejamība/pieejamiba), Estonian (ligipääsetavus/ligipaasetavus), Maltese (aċċessibbiltà/accessibbilta)
+    // Pattern matches both accented and ASCII-normalized versions to handle URL encoding variations
     accessibility: /accessibility|a11y|accesibilidad|accessibilit[eé]|barrierefreiheit|zug[aä]nglichkeit|accessibilit[aà]|acessibilidade|toegankelijkheid|dost[eę]pno[sś][cć]|accesibilitate|προσβασιμότητα|p[rř][ií]stupnost|akad[aá]lymentess[eé]g|hozz[aá]f[eé]rhetős[eé]g|tillg[aä]nglighet|достъпност|tilg[aæ]ngelighed|saavutettavuus|pr[ií]stupnos[tť]|inrochtaineacht|pristupa[cč]nost|prieinamumas|dostopnost|pieejam[ií]b[aā]|ligip[aä]{2}setavus|a[cċ]{2}essibbilt[aà]/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
     contact: /(^|\/)contact(\/|$)/.test(normalized),
