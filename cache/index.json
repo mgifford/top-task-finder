@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-02-28T14:58:49.009Z",
+  "generatedAt": "2026-02-28T15:01:54.107Z",
   "targets": [
     {
-      "fileName": "barcelona.cat-100.json",
-      "canonicalHost": "barcelona.cat",
+      "fileName": "france.fr-100.json",
+      "canonicalHost": "france.fr",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-02-28T14:58:49.008Z",
+      "generatedAt": "2026-02-28T15:01:54.106Z",
       "warnings": []
     }
   ]
