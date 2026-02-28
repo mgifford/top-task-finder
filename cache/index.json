@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-02-28T15:03:21.544Z",
+  "generatedAt": "2026-02-28T15:03:29.628Z",
   "targets": [
     {
-      "fileName": "toronto.ca-100.json",
-      "canonicalHost": "toronto.ca",
+      "fileName": "georgia.gov-100.json",
+      "canonicalHost": "georgia.gov",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-02-28T15:03:21.542Z",
-      "warnings": [
-        "Sitemap fetch unavailable for https://toronto.ca/sitemap.xml",
-        "Homepage fallback unavailable."
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-02-28T15:03:29.625Z",
+      "warnings": []
     }
   ]
 }
