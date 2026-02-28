@@ -780,6 +780,9 @@ function buildDiscoverySummary({ requestId, warnings, fallbackUsed, crawlUsed, s
   return {
     requestId,
     sourcesAttempted,
+    // fallbackUsed indicates whether ANY fallback mechanism was triggered
+    // (either homepage-fallback or crawl or both). For specific details,
+    // see sourcesAttempted array.
     fallbackUsed: fallbackUsed || crawlUsed,
     fallbackTriggerReasons: (fallbackUsed || crawlUsed) ? ['shortfall-or-priority-gap'] : [],
     cacheHit: false,
