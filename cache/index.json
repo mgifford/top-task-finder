@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-03-01T22:01:14.389Z",
+  "generatedAt": "2026-03-01T22:12:05.066Z",
   "targets": [
     {
-      "fileName": "re-scripted.com-100.json",
-      "canonicalHost": "re-scripted.com",
+      "fileName": "youtube.com-100.json",
+      "canonicalHost": "youtube.com",
       "requestedCount": 100,
-      "returnedCount": 31,
-      "generatedAt": "2026-03-01T22:01:14.388Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-03-01T22:12:05.063Z",
       "warnings": [
-        "Crawling found no additional URLs after checking 1 pages"
+        "Sitemap fetch failed for https://www.youtube.com/csai-match/sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://socialimpact.youtube.com/sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.youtube.com/go/family/sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.youtube.com/yt/terms/sitemap.xml: HTTP 404 Not Found"
       ]
     }
   ]
