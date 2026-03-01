@@ -1,18 +1,15 @@
 {
-  "generatedAt": "2026-02-28T20:52:34.050Z",
+  "generatedAt": "2026-03-01T21:45:22.874Z",
   "targets": [
     {
-      "fileName": "valitsus.ee-100.json",
-      "canonicalHost": "valitsus.ee",
+      "fileName": "salcosta.dev-100.json",
+      "canonicalHost": "salcosta.dev",
       "requestedCount": 100,
-      "returnedCount": 99,
-      "generatedAt": "2026-02-28T20:52:34.048Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-03-01T21:45:22.873Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: HTTP 403 Forbidden",
-        "Failed to crawl https://valitsus.ee/privaatsuspoliitika-tingimused: HTTP 403 Forbidden",
-        "Failed to crawl https://valitsus.ee/en: HTTP 403 Forbidden",
-        "Crawling discovered 99 additional URLs (crawled 3 pages)"
+        "Homepage fallback found 0 links from https://salcosta.dev/",
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
