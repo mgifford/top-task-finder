@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-03-01T21:56:32.207Z",
+  "generatedAt": "2026-03-01T21:59:01.392Z",
   "targets": [
     {
-      "fileName": "nexxt.com.au-100.json",
-      "canonicalHost": "nexxt.com.au",
+      "fileName": "rawlab.co-100.json",
+      "canonicalHost": "rawlab.co",
       "requestedCount": 100,
-      "returnedCount": 37,
-      "generatedAt": "2026-03-01T21:56:32.205Z",
+      "returnedCount": 22,
+      "generatedAt": "2026-03-01T21:59:01.391Z",
       "warnings": [
-        "Crawling discovered 10 additional URLs (crawled 6 pages)"
+        "No sitemap found at common locations or robots.txt",
+        "Crawling discovered 22 additional URLs (crawled 7 pages)"
       ]
     }
   ]

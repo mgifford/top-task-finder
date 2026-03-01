@@ -1,0 +1,88 @@
+{
+  "requestId": "cache-1772402338551-68409",
+  "selectedUrls": [
+    "https://rawlab.co/",
+    "https://rawlab.co/services/build",
+    "https://rawlab.co/services/design",
+    "https://rawlab.co/services/grow",
+    "https://rawlab.co/about-us",
+    "https://rawlab.co/pricing",
+    "https://rawlab.co/privacy-policy",
+    "https://rawlab.co/project-0",
+    "https://rawlab.co/start-a-project",
+    "https://rawlab.co/stow",
+    "https://rawlab.co/studio",
+    "https://rawlab.co/temporal-website",
+    "https://rawlab.co/terms-conditions",
+    "https://rawlab.co/work",
+    "https://rawlab.co/work-with-us",
+    "https://rawlab.co/work?category=Branding",
+    "https://rawlab.co/work?category=Product+design",
+    "https://rawlab.co/work?category=Social+network",
+    "https://rawlab.co/work?category=Web+design",
+    "https://rawlab.co/projects/lui",
+    "https://rawlab.co/projects/noru",
+    "https://rawlab.co/projects/xo"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 22,
+  "randomShareCount": 0,
+  "shortfallCount": 78,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 22,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 22,
+  "discoverySummary": {
+    "requestId": "cache-1772402338551-68409",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 22 additional URLs (crawled 7 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 61,
+        "crawl": 22
+      },
+      "accepted": {
+        "homepage-fallback": 19,
+        "crawl": 3
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-01T21:59:01.391Z",
+  "generatedBy": "github-action-cache"
+}
