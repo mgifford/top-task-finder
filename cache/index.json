@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-03-01T22:14:56.242Z",
+  "generatedAt": "2026-03-01T22:17:00.589Z",
   "targets": [
     {
-      "fileName": "cloudscape.design-100.json",
-      "canonicalHost": "cloudscape.design",
+      "fileName": "github.com-100.json",
+      "canonicalHost": "github.com",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-01T22:14:56.241Z",
-      "warnings": []
+      "returnedCount": 77,
+      "generatedAt": "2026-03-01T22:17:00.587Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
+      ]
     }
   ]
 }
