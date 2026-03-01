@@ -1,18 +1,13 @@
 {
-  "generatedAt": "2026-03-01T22:12:05.066Z",
+  "generatedAt": "2026-03-01T22:14:56.242Z",
   "targets": [
     {
-      "fileName": "youtube.com-100.json",
-      "canonicalHost": "youtube.com",
+      "fileName": "cloudscape.design-100.json",
+      "canonicalHost": "cloudscape.design",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-01T22:12:05.063Z",
-      "warnings": [
-        "Sitemap fetch failed for https://www.youtube.com/csai-match/sitemap.xml: HTTP 404 Not Found",
-        "Sitemap fetch failed for https://socialimpact.youtube.com/sitemap.xml: HTTP 404 Not Found",
-        "Sitemap fetch failed for https://www.youtube.com/go/family/sitemap.xml: HTTP 404 Not Found",
-        "Sitemap fetch failed for https://www.youtube.com/yt/terms/sitemap.xml: HTTP 404 Not Found"
-      ]
+      "generatedAt": "2026-03-01T22:14:56.241Z",
+      "warnings": []
     }
   ]
 }
