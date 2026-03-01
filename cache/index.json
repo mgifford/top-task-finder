@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-03-01T22:17:00.589Z",
+  "generatedAt": "2026-03-01T22:58:35.690Z",
   "targets": [
     {
-      "fileName": "github.com-100.json",
-      "canonicalHost": "github.com",
+      "fileName": "hamilton.ca-100.json",
+      "canonicalHost": "hamilton.ca",
       "requestedCount": 100,
-      "returnedCount": 77,
-      "generatedAt": "2026-03-01T22:17:00.587Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-01T22:58:35.689Z",
+      "warnings": []
     }
   ]
 }
