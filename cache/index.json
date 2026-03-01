@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-03-01T21:45:22.874Z",
+  "generatedAt": "2026-03-01T21:56:32.207Z",
   "targets": [
     {
-      "fileName": "salcosta.dev-100.json",
-      "canonicalHost": "salcosta.dev",
+      "fileName": "nexxt.com.au-100.json",
+      "canonicalHost": "nexxt.com.au",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-03-01T21:45:22.873Z",
+      "returnedCount": 37,
+      "generatedAt": "2026-03-01T21:56:32.205Z",
       "warnings": [
-        "Homepage fallback found 0 links from https://salcosta.dev/",
-        "Crawling found no additional URLs after checking 1 pages"
+        "Crawling discovered 10 additional URLs (crawled 6 pages)"
       ]
     }
   ]

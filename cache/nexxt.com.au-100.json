@@ -1,0 +1,103 @@
+{
+  "requestId": "cache-1772402181625-19447",
+  "selectedUrls": [
+    "https://nexxt.com.au/",
+    "https://nexxt.com.au/jira-to-azure-devops-migration-services/",
+    "https://nexxt.com.au/office-365-consulting-services-australia/",
+    "https://nexxt.com.au/services/",
+    "https://nexxt.com.au/contact/",
+    "https://nexxt.com.au/20-years-of-agile-manifesto/",
+    "https://nexxt.com.au/about-us/",
+    "https://nexxt.com.au/beyond-traditional-hiring-how-to-build-an-agile-future-ready-project-team/",
+    "https://nexxt.com.au/change-management-consulting-brisbane/",
+    "https://nexxt.com.au/coaching-and-uplift/",
+    "https://nexxt.com.au/decision-velocity-business-2025/",
+    "https://nexxt.com.au/digital-transformation-consulting/",
+    "https://nexxt.com.au/insights-inner/",
+    "https://nexxt.com.au/insights/",
+    "https://nexxt.com.au/it-consultant-brisbane-sme-guide/",
+    "https://nexxt.com.au/microsoft-teams-training/",
+    "https://nexxt.com.au/privacy-policy/",
+    "https://nexxt.com.au/project-delivery-assurance-audit/",
+    "https://nexxt.com.au/project-delivery/",
+    "https://nexxt.com.au/running-a-workshop-part-2-the-art-of-skillful-facilitation/",
+    "https://nexxt.com.au/scaling-tech-teams-brisbane-staff-augmentation-vs-outsourcing/",
+    "https://nexxt.com.au/sharepoint-consultation-brisbane/",
+    "https://nexxt.com.au/sitemap/",
+    "https://nexxt.com.au/staff-augmentation-vs-traditional-hiring-brisbane-2/",
+    "https://nexxt.com.au/terms-and-conditions/",
+    "https://nexxt.com.au/thank-you/",
+    "https://nexxt.com.au/the-seven-deadly-wastes-of-lean/",
+    "https://nexxt.com.au/transformation-and-change/",
+    "https://nexxt.com.au/workflow-automation/",
+    "https://nexxt.com.au/author/mnitish0gmail-com/",
+    "https://nexxt.com.au/category/blog/",
+    "https://nexxt.com.au/category/uncategorized/",
+    "https://nexxt.com.au/elementor-hf/home-footer/",
+    "https://nexxt.com.au/elementor-hf/home-v1-header/",
+    "https://nexxt.com.au/elementor-hf/home-v2-header/",
+    "https://nexxt.com.au/agile-20-years-on",
+    "https://nexxt.com.au/insights/2/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 37,
+  "randomShareCount": 0,
+  "shortfallCount": 63,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": true,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 37,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 37,
+  "discoverySummary": {
+    "requestId": "cache-1772402181625-19447",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 10 additional URLs (crawled 6 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 35,
+        "homepage-fallback": 49,
+        "crawl": 10
+      },
+      "accepted": {
+        "sitemap": 35,
+        "homepage-fallback": 1,
+        "crawl": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": true,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-01T21:56:32.205Z",
+  "generatedBy": "github-action-cache"
+}
