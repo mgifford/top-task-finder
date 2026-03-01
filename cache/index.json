@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-03-01T21:59:01.392Z",
+  "generatedAt": "2026-03-01T22:01:14.389Z",
   "targets": [
     {
-      "fileName": "rawlab.co-100.json",
-      "canonicalHost": "rawlab.co",
+      "fileName": "re-scripted.com-100.json",
+      "canonicalHost": "re-scripted.com",
       "requestedCount": 100,
-      "returnedCount": 22,
-      "generatedAt": "2026-03-01T21:59:01.391Z",
+      "returnedCount": 31,
+      "generatedAt": "2026-03-01T22:01:14.388Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 22 additional URLs (crawled 7 pages)"
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]

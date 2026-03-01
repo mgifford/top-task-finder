@@ -1,0 +1,96 @@
+{
+  "requestId": "cache-1772402472323-47754",
+  "selectedUrls": [
+    "https://re-scripted.com/",
+    "https://re-scripted.com/?page_id=19",
+    "https://re-scripted.com/our-tailored-services/",
+    "https://re-scripted.com/services/",
+    "https://re-scripted.com/services/consulting/",
+    "https://re-scripted.com/services/curriculum-design/",
+    "https://re-scripted.com/services/instructional-coaching/",
+    "https://re-scripted.com/services/professional-growth/",
+    "https://re-scripted.com/services/tailored-services/",
+    "https://re-scripted.com/work/teacher-support-for-sex-ed-curriculum-design/",
+    "https://re-scripted.com/about-us/",
+    "https://re-scripted.com/ideas/",
+    "https://re-scripted.com/our-work/",
+    "https://re-scripted.com/terms-and-conditions/",
+    "https://re-scripted.com/author/caitlin/",
+    "https://re-scripted.com/author/site_admin/",
+    "https://re-scripted.com/author/stephanie/",
+    "https://re-scripted.com/idea-categories/cat-category-3/",
+    "https://re-scripted.com/idea-categories/category-1/",
+    "https://re-scripted.com/idea-categories/category-2/",
+    "https://re-scripted.com/ideas/curriculum-and-gender/",
+    "https://re-scripted.com/ideas/difficult-knowledge-sexual-violence-prevention-curricula/",
+    "https://re-scripted.com/ideas/girls-minus-boys-challenging-heteronormativity/",
+    "https://re-scripted.com/ideas/girls-single-sex-schools-and-postfeminist-fantasies/",
+    "https://re-scripted.com/ideas/pink-brains-yes-neurosexism/",
+    "https://re-scripted.com/work/a-self-paced-sex-ed-curriculum-during-pandemic/",
+    "https://re-scripted.com/work/feminist-social-justice-curriculum-in-all-girls-high-school/",
+    "https://re-scripted.com/work/gender-and-curriculum-in-all-girls-school-professional-development/",
+    "https://re-scripted.com/work/rescripted-x-sex-positive-families/",
+    "https://re-scripted.com/work/sex-education-for-6-8-year-old-girls/",
+    "https://re-scripted.com/contact/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 31,
+  "randomShareCount": 0,
+  "shortfallCount": 69,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": true,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 31,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 31,
+  "discoverySummary": {
+    "requestId": "cache-1772402472323-47754",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 29,
+        "homepage-fallback": 39,
+        "crawl": 0
+      },
+      "accepted": {
+        "sitemap": 29,
+        "homepage-fallback": 2
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": true,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-01T22:01:14.388Z",
+  "generatedBy": "github-action-cache"
+}
