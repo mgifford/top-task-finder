@@ -646,4 +646,12 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+// Allow other modules (e.g. local-ai.js) to trigger notifications via a custom event
+document.addEventListener('local-ai:notify', (event) => {
+  const message = event.detail && event.detail.message;
+  if (message) {
+    showNotification(message);
+  }
+});
+
 initialize();
