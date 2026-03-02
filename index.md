@@ -46,6 +46,7 @@ title: Accessible Top Task URL Finder
       <button id="copy-prompt" type="button">Copy Prompt for LLM</button>
       <button id="rescan-urls" type="button" class="secondary" hidden>Clear cache and rescan</button>
     </div>
+    <textarea id="llmPrompt" hidden aria-hidden="true"></textarea>
   </section>
 
   <div class="disclaimer">
@@ -104,3 +105,4 @@ title: Accessible Top Task URL Finder
 </div>
 
 <script type="module" src="{{ '/assets/js/app.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
+<script type="module" src="{{ '/assets/js/local-ai.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
