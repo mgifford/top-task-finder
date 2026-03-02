@@ -40,6 +40,7 @@ const copyPromptButton = document.getElementById('copy-prompt');
 const findUrlsButton = document.getElementById('find-urls');
 const rescanUrlsButton = document.getElementById('rescan-urls');
 const pageEstimate = document.getElementById('page-estimate');
+const llmPromptArea = document.getElementById('llmPrompt');
 const modal = document.getElementById('top-task-modal');
 const openModalButton = document.getElementById('open-modal');
 const closeModalButton = document.getElementById('close-modal');
@@ -70,9 +71,11 @@ function renderServerCrawlStatus(message) {
 }
 
 function renderResult(result) {
-  outputArea.value = Array.isArray(result.selectedUrls)
+  const urls = Array.isArray(result.selectedUrls)
     ? result.selectedUrls.join('\n')
     : '';
+  outputArea.value = urls;
+  llmPromptArea.value = urls;
   
   // Display page estimate if available
   if (result.totalDiscoveredPages) {
@@ -83,6 +86,7 @@ function renderResult(result) {
 
 function clearResultPresentation() {
   outputArea.value = '';
+  llmPromptArea.value = '';
   cacheState.textContent = '';
   pageEstimate.textContent = '';
   renderServerCrawlStatus('');
