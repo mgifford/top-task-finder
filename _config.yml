@@ -1,5 +1,6 @@
 title: Top Task Finder
 description: Generate representative URL lists for accessibility and top-task review.
+url: "https://mgifford.github.io"
 markdown: kramdown
 theme: minima
 plugins:

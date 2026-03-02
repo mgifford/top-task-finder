@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-label="Top Task Finder – Generate representative URL lists for accessibility and top-task review">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a4a7a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d6efd;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7dd3fc;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="627" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="1050" cy="100" r="200" fill="#ffffff" fill-opacity="0.04" />
+  <circle cx="1100" cy="500" r="150" fill="#ffffff" fill-opacity="0.04" />
+  <circle cx="100" cy="550" r="180" fill="#ffffff" fill-opacity="0.04" />
+
+  <!-- Accent bar -->
+  <rect x="80" y="200" width="8" height="120" rx="4" fill="url(#accent)" />
+
+  <!-- Main title -->
+  <text x="114" y="272" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="700" fill="#ffffff" letter-spacing="-1">Top Task Finder</text>
+
+  <!-- Subtitle -->
+  <text x="114" y="335" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#bfdbfe" letter-spacing="0">Generate representative URL lists for accessibility</text>
+  <text x="114" y="375" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" font-weight="400" fill="#bfdbfe" letter-spacing="0">and top-task review.</text>
+
+  <!-- URL badge -->
+  <rect x="80" y="490" width="520" height="60" rx="30" fill="#ffffff" fill-opacity="0.12" />
+  <text x="340" y="528" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="500" fill="#e0f2fe" text-anchor="middle" letter-spacing="0.5">mgifford.github.io/top-task-finder</text>
+
+  <!-- Search/magnifier icon -->
+  <g transform="translate(920, 220)" fill="none" stroke="#7dd3fc" stroke-width="8" stroke-linecap="round">
+    <circle cx="80" cy="80" r="60" />
+    <line x1="124" y1="124" x2="160" y2="160" />
+  </g>
+
+  <!-- Checkmark/list lines representing URLs -->
+  <g transform="translate(870, 330)" fill="#7dd3fc" opacity="0.7">
+    <rect x="0" y="0" width="220" height="10" rx="5" />
+    <rect x="0" y="28" width="180" height="10" rx="5" />
+    <rect x="0" y="56" width="200" height="10" rx="5" />
+    <rect x="0" y="84" width="160" height="10" rx="5" />
+    <rect x="0" y="112" width="190" height="10" rx="5" />
+  </g>
+</svg>
