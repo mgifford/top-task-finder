@@ -49,6 +49,8 @@ export function isWithinCanonicalScope(candidateUrl, canonicalHost) {
 
 const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
 const RSS_FEED_PATTERN = /\/(feed|rss|atom)(\/|$)/i;
+// NOTE: Must be kept in sync with server-side pattern in scripts/build-cache.mjs
+const TRACKING_PARAM_PATTERN = /^(utm_[a-z_]+|fbclid|gclid|gclsrc|msclkid|dclid|_hsenc|_hsmi|hsa_[a-z_]+|mc_eid|mkt_tok|__s|igshid|twclid|epik|s_cid)$/i;
 const SOURCE_BASE_WEIGHTS = {
   sitemap: 40,
   search: 28,
@@ -76,6 +78,16 @@ function detectPrioritySignals(pathname) {
     accessibility: /accessibility|a11y|accesibilidad|accessibilit[eé]|barrierefreiheit|zug[aä]nglichkeit|accessibilit[aà]|acessibilidade|toegankelijkheid|dost[eę]pno[sś][cć]|accesibilitate|προσβασιμότητα|p[rř][ií]stupnost|akad[aá]lymentess[eé]g|hozz[aá]f[eé]rhetős[eé]g|tillg[aä]nglighet|достъпност|tilg[aæ]ngelighed|saavutettavuus|pr[ií]stupnos[tť]|inrochtaineacht|pristupa[cč]nost|prieinamumas|dostopnost|pieejam[ií]b[aā]|ligip[aä]{2}setavus|a[cċ]{2}essibbilt[aà]/.test(normalized),
     topTask: /services?|apply|pay|register|renew|book|report|request|top-?tasks?/.test(normalized),
   };
+}
+
+function stripTrackingParams(parsedUrl) {
+  const paramsToDelete = [];
+  parsedUrl.searchParams.forEach((_, key) => {
+    if (TRACKING_PARAM_PATTERN.test(key)) {
+      paramsToDelete.push(key);
+    }
+  });
+  paramsToDelete.forEach((key) => parsedUrl.searchParams.delete(key));
 }
 
 function isLikelyHtmlUrl(urlValue) {
@@ -200,6 +212,7 @@ function normalizeAndScoreCandidates(candidates, canonicalHost) {
     }
 
     parsed.hash = '';
+    stripTrackingParams(parsed);
     const dedupeKey = buildNormalizedKey(parsed);
     const scoring = scoreCandidateUrl(parsed, source);
     const existing = acceptedByKey.get(dedupeKey);
