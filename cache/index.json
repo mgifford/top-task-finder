@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-03T19:38:45.699Z",
+  "generatedAt": "2026-03-03T19:52:06.614Z",
   "targets": [
     {
-      "fileName": "hp.com-100.json",
-      "canonicalHost": "hp.com",
+      "fileName": "edmonton.ca-100.json",
+      "canonicalHost": "edmonton.ca",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-03T19:38:45.697Z",
+      "generatedAt": "2026-03-03T19:52:06.612Z",
       "warnings": []
     }
   ]
