@@ -4,8 +4,6 @@
  * Supports:
  *  - Chrome 2026 Built-in AI (LanguageModel global API) when available
  *  - Chrome/Firefox/Edge legacy Prompt API (window.ai.languageModel) as fallback
- *  - Firefox AI Chatbot sidebar fallback (clipboard copy + instructions)
- *  - Edge Copilot sidebar fallback (clipboard copy + instructions)
  *
  * Emits detailed console diagnostics at every step to help troubleshoot
  * API availability issues across browsers.
@@ -172,17 +170,18 @@ async function setupLocalAIIntegration() {
         `${LOG_PREFIX} Firefox detected but no AI API found.\n` +
         '  The Prompt API is experimental in Firefox.\n' +
         '  For Firefox Nightly: open about:config and set dom.ai.chatbot.enabled = true.\n' +
-        '  Alternatively, use the Firefox AI Chatbot sidebar manually\n' +
+        '  To analyze URLs with the Firefox AI Chatbot sidebar, use the\n' +
+        '  "Copy Prompt for LLM" button on the page, then paste into the sidebar\n' +
         '  (open via the sidebar button or View → Firefox Labs → AI Chatbot).'
       );
-      injectSidebarFallbackButton('firefox');
     } else if (browser === 'edge') {
       console.info(
         `${LOG_PREFIX} Edge detected but no AI API found.\n` +
         '  The Prompt API is not currently exposed via JavaScript in Edge.\n' +
-        '  Use the Edge Copilot sidebar (Ctrl+Shift+.) to process prompts manually.'
+        '  To analyze URLs with the Edge Copilot sidebar, use the\n' +
+        '  "Copy Prompt for LLM" button on the page, then paste into Copilot\n' +
+        '  (open via Ctrl+Shift+.).'
       );
-      injectSidebarFallbackButton('edge');
     } else {
       console.info(`${LOG_PREFIX} Unrecognised browser – Prompt API not available.`);
     }
@@ -375,46 +374,6 @@ function injectStreamingAnalysisSection(api, afterElement) {
   afterElement.after(summarizeBtn);
   summarizeBtn.after(statusEl);
   statusEl.after(summaryOutput);
-}
-
-/**
- * Inject a sidebar-fallback button for browsers (Firefox, Edge) that have an
- * AI chatbot sidebar but no JavaScript API.  The button copies the full WCAG-EM
- * prompt to the clipboard and shows instructions for pasting into the sidebar.
- */
-function injectSidebarFallbackButton(browser) {
-  const existingBtn = document.getElementById('copy-prompt');
-  if (!existingBtn) return;
-
-  const isEdge = browser === 'edge';
-  const btnLabel = isEdge ? 'Copy Prompt for Edge Copilot' : 'Copy Prompt for Firefox AI';
-  const successMsg = isEdge
-    ? 'Prompt copied! Open the Edge Copilot sidebar (Ctrl+Shift+.) and paste with Ctrl+V.'
-    : 'Prompt copied! Open the Firefox AI Chatbot sidebar and paste with Ctrl+V.';
-
-  const sidebarBtn = document.createElement('button');
-  sidebarBtn.id = `copy-for-${browser}-ai`;
-  sidebarBtn.type = 'button';
-  sidebarBtn.textContent = btnLabel;
-
-  sidebarBtn.addEventListener('click', async () => {
-    const llmPromptArea = document.getElementById('llmPrompt');
-    const rawPrompt = llmPromptArea ? llmPromptArea.value.trim() : '';
-    if (!rawPrompt) {
-      showLocalAINotification('Generate the task list first!');
-      return;
-    }
-
-    try {
-      await navigator.clipboard.writeText(rawPrompt);
-      showLocalAINotification(successMsg);
-    } catch (err) {
-      console.error(`${LOG_PREFIX} Clipboard error:`, err);
-      showLocalAINotification('Could not copy to clipboard. Please copy the prompt manually.');
-    }
-  });
-
-  existingBtn.after(sidebarBtn);
 }
 
 setupLocalAIIntegration();
