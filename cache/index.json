@@ -1,14 +1,13 @@
 {
-  "generatedAt": "2026-03-05T13:42:31.106Z",
+  "generatedAt": "2026-03-05T13:45:58.265Z",
   "targets": [
     {
-      "fileName": "vaccines.gov-100.json",
-      "canonicalHost": "vaccines.gov",
+      "fileName": "civicactions.com-100.json",
+      "canonicalHost": "civicactions.com",
       "requestedCount": 100,
-      "returnedCount": 2,
-      "generatedAt": "2026-03-05T13:42:31.105Z",
+      "returnedCount": 45,
+      "generatedAt": "2026-03-05T13:45:58.263Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
         "Crawling discovered 1 additional URLs (crawled 1 pages)"
       ]
     }

@@ -1,0 +1,109 @@
+{
+  "requestId": "cache-1772718357563-11934",
+  "selectedUrls": [
+    "https://civicactions.com/",
+    "https://civicactions.com/accessibility-statement/",
+    "https://civicactions.com/press/2022-04-21-civicactions-announces-Ryerson-partnership-digital-accessibility/",
+    "https://civicactions.com/services/",
+    "https://civicactions.com/services2/",
+    "https://civicactions.com/case-studies/cms-web-experience-services/",
+    "https://civicactions.com/contact/",
+    "https://civicactions.com/press/2024-01-16-CivicActions-Announces-Impact-Report/",
+    "https://civicactions.com/services/ditap/",
+    "https://civicactions.com/services/ditap/register/",
+    "https://civicactions.com/case-studies/globalnet-platform-support/",
+    "https://civicactions.com/careers/",
+    "https://civicactions.com/case-studies/",
+    "https://civicactions.com/contracting/",
+    "https://civicactions.com/feedback/",
+    "https://civicactions.com/licensing/",
+    "https://civicactions.com/press/",
+    "https://civicactions.com/privacy/",
+    "https://civicactions.com/styles/",
+    "https://civicactions.com/sustainability/",
+    "https://civicactions.com/team/",
+    "https://civicactions.com/case-studies/cms-design-challenge-mvp/",
+    "https://civicactions.com/case-studies/cybergeek/",
+    "https://civicactions.com/case-studies/dept-of-education-system-lifecycle-development-management/",
+    "https://civicactions.com/case-studies/Drupal-10/",
+    "https://civicactions.com/case-studies/fcc-website-modernization/",
+    "https://civicactions.com/case-studies/georgia-workforce-open-data/",
+    "https://civicactions.com/case-studies/nsf-website-redesign/",
+    "https://civicactions.com/press/2/",
+    "https://civicactions.com/press/2020-03-02-civicactions-wins-cms-contract/",
+    "https://civicactions.com/press/2020-08-14-civicactions-certified-to-deliver-ditap/",
+    "https://civicactions.com/press/2020-11-09-civicactions-acquires-openconcept/",
+    "https://civicactions.com/press/2021-05-03-civicactions-wins-nsf-recompete/",
+    "https://civicactions.com/press/2021-05-11-civicactions-wins-department-of-ed-recompete/",
+    "https://civicactions.com/press/2021-07-08-gsa-engages-civicactions-to-modernize-vpat/",
+    "https://civicactions.com/case-studies/nyc-metro-transit-digital-clocks/",
+    "https://civicactions.com/press/2022-01-05-civicactions-named-govtech-100-top-government-technology-companies-list/",
+    "https://civicactions.com/press/2021-07-19-civicactions-announces-va-ditap-graduation/",
+    "https://civicactions.com/press/2024-07-09-CivicActions-Appoints-Mike-Gifford/",
+    "https://civicactions.com/case-studies/va-alt-text/",
+    "https://civicactions.com/case-studies/va-cms-modernization/",
+    "https://civicactions.com/press/2021-09-08-civicactions-announces-ditap-grads-across-federal-agencies/",
+    "https://civicactions.com/press/3/",
+    "https://civicactions.com/case-studies/open-acr/",
+    "https://civicactions.com/press/2024-01-05-CivicActions-Partners-with-aamdsif/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 45,
+  "randomShareCount": 0,
+  "shortfallCount": 55,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": true,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 45,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 45,
+  "discoverySummary": {
+    "requestId": "cache-1772718357563-11934",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 1 additional URLs (crawled 1 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 45,
+        "homepage-fallback": 56,
+        "crawl": 1
+      },
+      "accepted": {
+        "sitemap": 45
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": true,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-05T13:45:58.263Z",
+  "generatedBy": "github-action-cache"
+}
