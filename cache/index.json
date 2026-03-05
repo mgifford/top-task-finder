@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-03-05T18:04:08.536Z",
+  "generatedAt": "2026-03-05T18:08:44.967Z",
   "targets": [
     {
-      "fileName": "elsevier.com-100.json",
-      "canonicalHost": "elsevier.com",
+      "fileName": "elseelsevier.comvier.com-100.json",
+      "canonicalHost": "elseelsevier.comvier.com",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-05T18:04:08.534Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-03-05T18:08:44.964Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: fetch failed: fetch failed",
+        "Failed to crawl https://elseelsevier.comvier.com/: fetch failed: fetch failed",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }
