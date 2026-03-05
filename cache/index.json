@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-03-05T14:39:01.960Z",
+  "generatedAt": "2026-03-05T15:17:16.229Z",
   "targets": [
     {
-      "fileName": "web.aaatraq.com-100.json",
-      "canonicalHost": "web.aaatraq.com",
+      "fileName": "ten7.com-100.json",
+      "canonicalHost": "ten7.com",
       "requestedCount": 100,
-      "returnedCount": 62,
-      "generatedAt": "2026-03-05T14:39:01.958Z",
-      "warnings": [
-        "Homepage fallback found 0 links from https://web.aaatraq.com/",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-05T15:17:16.226Z",
+      "warnings": []
     }
   ]
 }
