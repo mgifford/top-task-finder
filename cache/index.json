@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-03-05T13:45:58.265Z",
+  "generatedAt": "2026-03-05T13:46:34.299Z",
   "targets": [
     {
-      "fileName": "civicactions.com-100.json",
-      "canonicalHost": "civicactions.com",
+      "fileName": "miro.com-100.json",
+      "canonicalHost": "miro.com",
       "requestedCount": 100,
-      "returnedCount": 45,
-      "generatedAt": "2026-03-05T13:45:58.263Z",
-      "warnings": [
-        "Crawling discovered 1 additional URLs (crawled 1 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-05T13:46:34.295Z",
+      "warnings": []
     }
   ]
 }
