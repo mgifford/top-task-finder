@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-03-05T15:27:07.599Z",
+  "generatedAt": "2026-03-05T16:11:28.773Z",
   "targets": [
     {
-      "fileName": "ready.gov-100.json",
-      "canonicalHost": "ready.gov",
+      "fileName": "chewy.com-100.json",
+      "canonicalHost": "chewy.com",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-05T15:27:07.597Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-03-05T16:11:28.771Z",
+      "warnings": [
+        "Sitemap traversal limit reached; skipped additional sitemap files.",
+        "Homepage fallback unavailable: HTTP 429 Too Many Requests",
+        "Failed to crawl https://chewy.com/: HTTP 429 Too Many Requests",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }

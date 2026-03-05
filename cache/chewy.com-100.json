@@ -1,0 +1,68 @@
+{
+  "requestId": "cache-1772727083378-88684",
+  "selectedUrls": [
+    "https://chewy.com/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 1,
+  "randomShareCount": 0,
+  "shortfallCount": 99,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 1,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 1,
+  "discoverySummary": {
+    "requestId": "cache-1772727083378-88684",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap traversal limit reached; skipped additional sitemap files.",
+      "Homepage fallback unavailable: HTTP 429 Too Many Requests",
+      "Failed to crawl https://chewy.com/: HTTP 429 Too Many Requests",
+      "Crawling found no additional URLs after checking 0 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 0,
+        "crawl": 0
+      },
+      "accepted": {
+        "critical-pages": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-05T16:11:28.771Z",
+  "generatedBy": "github-action-cache"
+}
