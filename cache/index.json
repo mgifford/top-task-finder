@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-05T23:06:12.608Z",
+  "generatedAt": "2026-03-06T07:18:31.150Z",
   "targets": [
     {
-      "fileName": "indicator.media-100.json",
-      "canonicalHost": "indicator.media",
+      "fileName": "valleyrelocation.com-100.json",
+      "canonicalHost": "valleyrelocation.com",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-05T23:06:12.607Z",
+      "generatedAt": "2026-03-06T07:18:31.148Z",
       "warnings": []
     }
   ]
