@@ -1,0 +1,66 @@
+{
+  "requestId": "cache-1773080298250-80537",
+  "selectedUrls": [
+    "https://mailto:info@samplayskeys.com/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 1,
+  "randomShareCount": 0,
+  "shortfallCount": 99,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 1,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 1,
+  "discoverySummary": {
+    "requestId": "cache-1773080298250-80537",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 14,
+        "crawl": 0
+      },
+      "accepted": {
+        "homepage-fallback": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-09T18:18:18.781Z",
+  "generatedBy": "github-action-cache"
+}
