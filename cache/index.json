@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-03-09T16:25:51.024Z",
+  "generatedAt": "2026-03-09T17:26:16.370Z",
   "targets": [
     {
-      "fileName": "blackflysolutions.ca-100.json",
-      "canonicalHost": "blackflysolutions.ca",
+      "fileName": "bundeswirtschaftsministerium.de-100.json",
+      "canonicalHost": "bundeswirtschaftsministerium.de",
       "requestedCount": 100,
-      "returnedCount": 97,
-      "generatedAt": "2026-03-09T16:25:51.022Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-03-09T17:26:16.369Z",
       "warnings": [
-        "Crawling discovered 3 additional URLs (crawled 1 pages)"
+        "No sitemap found at common locations or robots.txt"
       ]
     }
   ]
