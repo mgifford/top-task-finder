@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-09T14:43:59.003Z",
+  "generatedAt": "2026-03-09T15:11:21.420Z",
   "targets": [
     {
-      "fileName": "pkp.sfu.ca-100.json",
-      "canonicalHost": "pkp.sfu.ca",
+      "fileName": "iog.ca-100.json",
+      "canonicalHost": "iog.ca",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-09T14:43:59.001Z",
+      "generatedAt": "2026-03-09T15:11:21.418Z",
       "warnings": []
     }
   ]
