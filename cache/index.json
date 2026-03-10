@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-03-10T18:56:16.636Z",
+  "generatedAt": "2026-03-10T23:57:05.122Z",
   "targets": [
     {
-      "fileName": "bundesregierung.de-100.json",
-      "canonicalHost": "bundesregierung.de",
+      "fileName": "cnib.ca-100.json",
+      "canonicalHost": "cnib.ca",
       "requestedCount": 100,
-      "returnedCount": 56,
-      "generatedAt": "2026-03-10T18:56:16.635Z",
-      "warnings": [
-        "Crawling discovered 45 additional URLs (crawled 1 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-10T23:57:05.119Z",
+      "warnings": []
     }
   ]
 }
