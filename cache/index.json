@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-03-10T14:40:30.059Z",
+  "generatedAt": "2026-03-10T18:56:16.636Z",
   "targets": [
     {
-      "fileName": "labor.maryland.gov-100.json",
-      "canonicalHost": "labor.maryland.gov",
+      "fileName": "bundesregierung.de-100.json",
+      "canonicalHost": "bundesregierung.de",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-10T14:40:30.058Z",
-      "warnings": []
+      "returnedCount": 56,
+      "generatedAt": "2026-03-10T18:56:16.635Z",
+      "warnings": [
+        "Crawling discovered 45 additional URLs (crawled 1 pages)"
+      ]
     }
   ]
 }

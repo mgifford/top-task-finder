@@ -1,0 +1,121 @@
+{
+  "requestId": "cache-1773168973908-26805",
+  "selectedUrls": [
+    "https://bundesregierung.de/",
+    "https://bundesregierung.de/breg-de/barrierefreiheit?view=",
+    "https://bundesregierung.de/breg-de/barrierefreiheit/barrierefreiheit-feedback?view=",
+    "https://bundesregierung.de/breg-de/service",
+    "https://bundesregierung.de/breg-de/service/archiv-bundesregierung",
+    "https://bundesregierung.de/breg-de/service/bundeskanzler-auf-tiktok",
+    "https://bundesregierung.de/breg-de/service/bundeskanzler-in-den-sozialen-medien",
+    "https://bundesregierung.de/breg-de/service/bundesregierung-in-den-sozialen-medien",
+    "https://bundesregierung.de/breg-de/service/datenschutzhinweis",
+    "https://bundesregierung.de/breg-de/service/datenschutzhinweis?view=",
+    "https://bundesregierung.de/breg-de/service/fragen-und-anworten",
+    "https://bundesregierung.de/breg-en",
+    "https://bundesregierung.de/breg-fr",
+    "https://bundesregierung.de/breg-de/mediathek/videos",
+    "https://bundesregierung.de/breg-de/nachhaltigkeit/nachhaltigkeitspolitik?view=",
+    "https://bundesregierung.de/breg-de/gebaerdensprache?view=",
+    "https://bundesregierung.de/breg-de/suche/992800!search?f=1495774:320914",
+    "https://bundesregierung.de/breg-de/bundesregierung/bundeskabinett",
+    "https://bundesregierung.de/breg-de/leichte-sprache?view=",
+    "https://bundesregierung.de/breg-de/bundesregierung",
+    "https://bundesregierung.de/breg-de/bundesregierung/kabinettsthemen",
+    "https://bundesregierung.de/breg-de/aktuelles/artikel",
+    "https://bundesregierung.de/breg-de/bundesregierung/bundeskanzleramt/kabinettssitzungen",
+    "https://bundesregierung.de/breg-de/bundesregierung/bundeskanzleramt",
+    "https://bundesregierung.de/breg-de/mediathek/fotos",
+    "https://bundesregierung.de/breg-de/aktuelles/unterstuetzung-syrien-2325592",
+    "https://bundesregierung.de/breg-de/bundesregierung/bundespresseamt",
+    "https://bundesregierung.de/breg-de/aktuelles/kanzler-iran-2402566",
+    "https://bundesregierung.de/breg-de/aktuelles/pressemitteilungen",
+    "https://bundesregierung.de/breg-de/aktuelles/merz-babis-antrittsbesuch-2409996",
+    "https://bundesregierung.de/breg-de/service/kontakt",
+    "https://bundesregierung.de/breg-de/aktuelles/merz-trump-treffen-usa-2409474",
+    "https://bundesregierung.de/breg-de/aktuelles/unterstuetzung-israel-2228198",
+    "https://bundesregierung.de/breg-de/suche/2290066-2290066",
+    "https://bundesregierung.de/breg-de/suche/992800!search?query=Bundesregierung",
+    "https://bundesregierung.de/breg-de/aktuelles/kanzler-statement-naher-osten-2409172",
+    "https://bundesregierung.de/breg-de/mediathek",
+    "https://bundesregierung.de/breg-de/impressum?view=",
+    "https://bundesregierung.de/breg-de/service/newsletter-und-abos/bulletin",
+    "https://bundesregierung.de/breg-de/mediathek/pressefotos",
+    "https://bundesregierung.de/breg-de",
+    "https://bundesregierung.de/breg-de/bundesregierung/bundesministerien",
+    "https://bundesregierung.de/breg-de/aktuelles/deutschland-hilft-der-ukraine-2160274",
+    "https://bundesregierung.de/breg-de/service/kontakt/kontaktformular?view=",
+    "https://bundesregierung.de/breg-de/service/newsletter-und-abos?view=",
+    "https://bundesregierung.de/breg-de/service/datenschutzhinweis/datenschutzerklaerung-1532494",
+    "https://bundesregierung.de/breg-de/schwerpunkte/das-kann-deutschland",
+    "https://bundesregierung.de/breg-de/service/portraetbilder-autogrammkarten-bestellen",
+    "https://bundesregierung.de/breg-de/aktuelles/pressekonferenzen-und-reden",
+    "https://bundesregierung.de/breg-de/uebersicht-internetseite-bundesregierung?view=",
+    "https://bundesregierung.de/breg-de/schwerpunkte",
+    "https://bundesregierung.de/breg-de/aktuelles/pressekonferenz-kanzler-merz-muenchner-spitzengespraech-2409900",
+    "https://bundesregierung.de/breg-de/leichte-sprache/navigations-hinweise-leichte-sprache?view=",
+    "https://bundesregierung.de/breg-de/service/kontakt?view=",
+    "https://bundesregierung.de/breg-de/aktuelles",
+    "https://bundesregierung.de/breg-de/service/newsletter-und-abos"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 56,
+  "randomShareCount": 0,
+  "shortfallCount": 44,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 56,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 56,
+  "discoverySummary": {
+    "requestId": "cache-1773168973908-26805",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 45 additional URLs (crawled 1 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 144,
+        "crawl": 45
+      },
+      "accepted": {
+        "critical-pages": 1,
+        "homepage-fallback": 55
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-10T18:56:16.635Z",
+  "generatedBy": "github-action-cache"
+}
