@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-03-10T23:57:05.122Z",
+  "generatedAt": "2026-03-11T00:00:34.205Z",
   "targets": [
     {
-      "fileName": "cnib.ca-100.json",
-      "canonicalHost": "cnib.ca",
+      "fileName": "armani.com-100.json",
+      "canonicalHost": "armani.com",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-10T23:57:05.119Z",
-      "warnings": []
+      "returnedCount": 53,
+      "generatedAt": "2026-03-11T00:00:34.204Z",
+      "warnings": [
+        "Sitemap traversal limit reached; skipped additional sitemap files.",
+        "Crawling discovered 52 additional URLs (crawled 10 pages)"
+      ]
     }
   ]
 }

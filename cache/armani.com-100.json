@@ -1,0 +1,120 @@
+{
+  "requestId": "cache-1773187223687-74360",
+  "selectedUrls": [
+    "https://armani.com/",
+    "https://armani.com/en-us/legal/accessibility-apps/",
+    "https://armani.com/en-us/legal/accessibility/",
+    "https://armani.com/en-us/help/payments/",
+    "https://armani.com/en-us/help/",
+    "https://armani.com/en-us/help/contact-us/",
+    "https://armani.com/en-us/help/faq/",
+    "https://armani.com/en-us/help/returns-policy/",
+    "https://armani.com/en-us/help/shipping/",
+    "https://armani.com/en-us/",
+    "https://armani.com/my-account",
+    "https://armani.com/armani-exchange/experience/",
+    "https://armani.com/en-us/authenticity/",
+    "https://armani.com/ea7/experience/man/",
+    "https://armani.com/emporio-armani/experience/man/",
+    "https://armani.com/giorgio-armani/experience/man/",
+    "https://armani.com/en-us/ea7/gifts/man/all-gifts/",
+    "https://armani.com/en-us/legal/privacy-policy/",
+    "https://armani.com/en-us/giorgio-armani/experience/woman/",
+    "https://armani.com/en-us/armani-exchange/gifts/man/",
+    "https://armani.com/en-us/ea7/experience/woman/",
+    "https://armani.com/en-us/ea7/experience/",
+    "https://armani.com/en-us/armani-clubs/experience/",
+    "https://armani.com/en-us/legal/cookie-policy/",
+    "https://armani.com/en-us/digital-card/",
+    "https://armani.com/en-us/armani-exchange/gifts/woman/",
+    "https://armani.com/en-us/giorgio-armani/experience/armani-beauty/",
+    "https://armani.com/en-us/giorgio-armani/experience/",
+    "https://armani.com/en-us/armani-casa/experience/",
+    "https://armani.com/en-us/emporio-armani/experience/man/",
+    "https://armani.com/en-us/emporio-armani/experience/woman/",
+    "https://armani.com/en-us/armani-exchange/man/highlights/fall-winter-collection/",
+    "https://armani.com/en-us/armani-restaurant/experience/",
+    "https://armani.com/en-us/giorgio-armani/experience/man/",
+    "https://armani.com/en-us/emporio-armani/gifts/woman/all-gifts/",
+    "https://armani.com/en-us/giorgio-armani/gifts/woman/",
+    "https://armani.com/en-us/unidays/",
+    "https://armani.com/en-us/ea7/experience/man/",
+    "https://armani.com/en-us/giorgio-armani/gifts/man/all-gifts/",
+    "https://armani.com/en-us/gifts/",
+    "https://armani.com/en-us/emporio-armani/gifts/man/all-gifts/",
+    "https://armani.com/en-us/ea7/gifts/woman/all-gifts/",
+    "https://armani.com/en-us/armani-exchange/woman/highlights/spring-summer-collection/",
+    "https://armani.com/en-us/legal/terms-and-condition-sales/",
+    "https://armani.com/en-us/my-account/",
+    "https://armani.com/en-us/legal/terms-and-condition-use/",
+    "https://armani.com/en-us/armani-fiori/experience/",
+    "https://armani.com/en-us/track/orders/",
+    "https://armani.com/en-us/track/returns/",
+    "https://armani.com/en-us/armani-exchange/experience/",
+    "https://armani.com/en-us/emporio-armani/experience/",
+    "https://armani.com/en-us/armani-exchange/man/highlights/spring-summer-collection/",
+    "https://armani.com/en-us/armani-exchange/woman/highlights/fall-winter-collection/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 53,
+  "randomShareCount": 0,
+  "shortfallCount": 47,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 53,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 53,
+  "discoverySummary": {
+    "requestId": "cache-1773187223687-74360",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Sitemap traversal limit reached; skipped additional sitemap files.",
+      "Crawling discovered 52 additional URLs (crawled 10 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 62,
+        "crawl": 52
+      },
+      "accepted": {
+        "critical-pages": 1,
+        "homepage-fallback": 41,
+        "crawl": 11
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-11T00:00:34.204Z",
+  "generatedBy": "github-action-cache"
+}
