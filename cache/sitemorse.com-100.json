@@ -1,0 +1,88 @@
+{
+  "requestId": "cache-1773229345577-56453",
+  "selectedUrls": [
+    "https://sitemorse.com/",
+    "https://sitemorse.com/contact/",
+    "https://sitemorse.com/about/",
+    "https://sitemorse.com/accessibility/",
+    "https://sitemorse.com/clients/",
+    "https://sitemorse.com/contact-confirm/",
+    "https://sitemorse.com/our-mission/",
+    "https://sitemorse.com/our-principles/",
+    "https://sitemorse.com/privacy/",
+    "https://sitemorse.com/rel-archived/",
+    "https://sitemorse.com/replacing-hope-confidence/",
+    "https://sitemorse.com/sitemorse/",
+    "https://sitemorse.com/terms/",
+    "https://sitemorse.com/support/",
+    "https://sitemorse.com/assessments/",
+    "https://sitemorse.com/benchmarks/",
+    "https://sitemorse.com/blog/",
+    "https://sitemorse.com/careers/",
+    "https://sitemorse.com/check",
+    "https://sitemorse.com/index/",
+    "https://sitemorse.com/pricing/",
+    "https://sitemorse.com/security",
+    "https://sitemorse.com/webinars/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 23,
+  "randomShareCount": 0,
+  "shortfallCount": 77,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": false,
+    "contact": true,
+    "about": true,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 23,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 23,
+  "discoverySummary": {
+    "requestId": "cache-1773229345577-56453",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 3 additional URLs (crawled 4 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 12,
+        "homepage-fallback": 25,
+        "crawl": 3
+      },
+      "accepted": {
+        "sitemap": 12,
+        "homepage-fallback": 11
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": false,
+      "contact": true,
+      "about": true,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-11T11:42:27.828Z",
+  "generatedBy": "github-action-cache"
+}

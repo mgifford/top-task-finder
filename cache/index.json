@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-03-11T00:07:31.372Z",
+  "generatedAt": "2026-03-11T11:42:27.829Z",
   "targets": [
     {
-      "fileName": "flightemissions.eu-100.json",
-      "canonicalHost": "flightemissions.eu",
+      "fileName": "sitemorse.com-100.json",
+      "canonicalHost": "sitemorse.com",
       "requestedCount": 100,
-      "returnedCount": 11,
-      "generatedAt": "2026-03-11T00:07:31.371Z",
+      "returnedCount": 23,
+      "generatedAt": "2026-03-11T11:42:27.828Z",
       "warnings": [
-        "Crawling discovered 11 additional URLs (crawled 7 pages)"
+        "Crawling discovered 3 additional URLs (crawled 4 pages)"
       ]
     }
   ]
