@@ -211,8 +211,8 @@ async function setupLocalAIIntegration() {
 
   // Model can be downloaded on demand – trigger and track progress
   if (aiStatus.status === 'downloadable') {
-    console.info(`${LOG_PREFIX} Model needs to be downloaded. Triggering download...`);
-    showLocalAINotification('Downloading AI model (4 GB+). This may take a while…');
+    // console.info(`${LOG_PREFIX} Model needs to be downloaded. Triggering download...`);
+    // showLocalAINotification('Downloading AI model (4 GB+). This may take a while…');
 
     try {
       // Create a session solely to trigger and monitor the model download;
