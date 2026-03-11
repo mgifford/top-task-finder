@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-03-11T11:42:27.829Z",
+  "generatedAt": "2026-03-11T17:24:36.444Z",
   "targets": [
     {
-      "fileName": "sitemorse.com-100.json",
-      "canonicalHost": "sitemorse.com",
+      "fileName": "edf-feph.org-100.json",
+      "canonicalHost": "edf-feph.org",
       "requestedCount": 100,
-      "returnedCount": 23,
-      "generatedAt": "2026-03-11T11:42:27.828Z",
-      "warnings": [
-        "Crawling discovered 3 additional URLs (crawled 4 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-11T17:24:36.442Z",
+      "warnings": []
     }
   ]
 }
