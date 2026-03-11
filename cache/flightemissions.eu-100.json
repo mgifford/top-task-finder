@@ -1,0 +1,77 @@
+{
+  "requestId": "cache-1773187646856-18828",
+  "selectedUrls": [
+    "https://flightemissions.eu/en/accessibility-statement",
+    "https://flightemissions.eu/",
+    "https://flightemissions.eu/en",
+    "https://flightemissions.eu/en/cookie-policy",
+    "https://flightemissions.eu/en/data-aggregators",
+    "https://flightemissions.eu/en/frequently-asked-questions",
+    "https://flightemissions.eu/en/participating-airlines",
+    "https://flightemissions.eu/en/eu-flight-emissions-label-fel",
+    "https://flightemissions.eu/en/download/44",
+    "https://flightemissions.eu/en/download/57",
+    "https://flightemissions.eu/en/download/58"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 11,
+  "randomShareCount": 0,
+  "shortfallCount": 89,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 11,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 11,
+  "discoverySummary": {
+    "requestId": "cache-1773187646856-18828",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 11 additional URLs (crawled 7 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 6,
+        "homepage-fallback": 24,
+        "crawl": 11
+      },
+      "accepted": {
+        "sitemap": 6,
+        "crawl": 4,
+        "homepage-fallback": 1
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-11T00:07:31.371Z",
+  "generatedBy": "github-action-cache"
+}

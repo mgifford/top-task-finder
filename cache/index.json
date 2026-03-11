@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-03-11T00:00:34.205Z",
+  "generatedAt": "2026-03-11T00:07:31.372Z",
   "targets": [
     {
-      "fileName": "armani.com-100.json",
-      "canonicalHost": "armani.com",
+      "fileName": "flightemissions.eu-100.json",
+      "canonicalHost": "flightemissions.eu",
       "requestedCount": 100,
-      "returnedCount": 53,
-      "generatedAt": "2026-03-11T00:00:34.204Z",
+      "returnedCount": 11,
+      "generatedAt": "2026-03-11T00:07:31.371Z",
       "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files.",
-        "Crawling discovered 52 additional URLs (crawled 10 pages)"
+        "Crawling discovered 11 additional URLs (crawled 7 pages)"
       ]
     }
   ]
