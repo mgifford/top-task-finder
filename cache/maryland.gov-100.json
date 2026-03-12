@@ -1,0 +1,117 @@
+{
+  "requestId": "cache-1773317892209-75129",
+  "selectedUrls": [
+    "https://maryland.gov/",
+    "https://maryland.gov/accessibility-policy",
+    "https://maryland.gov/services",
+    "https://maryland.gov/business-and-work/service-and-volunteerism",
+    "https://maryland.gov/services/certificates-and-public-records",
+    "https://maryland.gov/services/driving-and-transportation",
+    "https://maryland.gov/services/education",
+    "https://maryland.gov/services/public-safety",
+    "https://maryland.gov/services/recreational-permits-and-licenses",
+    "https://maryland.gov/services/taxes",
+    "https://maryland.gov/services/driving-and-transportation/boating",
+    "https://maryland.gov/services/driving-and-transportation/commuting",
+    "https://maryland.gov/services/driving-and-transportation/drivers-and-motor-vehicles",
+    "https://maryland.gov/business-and-work/job-and-career-support",
+    "https://maryland.gov/403",
+    "https://maryland.gov/404",
+    "https://maryland.gov/benefits",
+    "https://maryland.gov/business-and-work",
+    "https://maryland.gov/privacy-and-security-policy",
+    "https://maryland.gov/terms-use",
+    "https://maryland.gov/visit-and-explore",
+    "https://maryland.gov/welcome-maryland",
+    "https://maryland.gov/your-government",
+    "https://maryland.gov/benefits/families-and-children",
+    "https://maryland.gov/benefits/financial-assistance",
+    "https://maryland.gov/benefits/food-and-nutrition",
+    "https://maryland.gov/benefits/health-and-medical",
+    "https://maryland.gov/benefits/housing-and-property",
+    "https://maryland.gov/benefits/older-adults",
+    "https://maryland.gov/benefits/partners",
+    "https://maryland.gov/benefits/people-disabilities",
+    "https://maryland.gov/benefits/unemployment",
+    "https://maryland.gov/business-and-work/doing-business-maryland",
+    "https://maryland.gov/business-and-work/doing-business-maryland-government",
+    "https://maryland.gov/business-and-work/professional-licenses-and-permits",
+    "https://maryland.gov/business-and-work/state-employees",
+    "https://maryland.gov/business-and-work/unemployment-employers-and-businesses",
+    "https://maryland.gov/visit-and-explore/explore-maryland",
+    "https://maryland.gov/visit-and-explore/move-maryland",
+    "https://maryland.gov/your-government/elections-and-voting",
+    "https://maryland.gov/your-government/federal-representatives",
+    "https://maryland.gov/your-government/government-documents",
+    "https://maryland.gov/your-government/public-records",
+    "https://maryland.gov/your-government/state-agencies-and-departments",
+    "https://maryland.gov/your-government/state-government",
+    "https://maryland.gov/services/taxes/property-taxes-and-ground-rent",
+    "https://maryland.gov/services/public-safety/emergency-preparedness",
+    "https://maryland.gov/services/public-safety/environment",
+    "https://maryland.gov/services/taxes/individual-taxes",
+    "https://maryland.gov/benefits/veterans",
+    "https://maryland.gov/services/driving-and-transportation/public-transportation",
+    "https://maryland.gov/services/public-safety/safety-and-crime-prevention",
+    "https://maryland.gov/services/taxes/business-taxes"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 53,
+  "randomShareCount": 0,
+  "shortfallCount": 47,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 53,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 53,
+  "discoverySummary": {
+    "requestId": "cache-1773317892209-75129",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 47 additional URLs (crawled 4 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 53,
+        "homepage-fallback": 107,
+        "crawl": 47
+      },
+      "accepted": {
+        "sitemap": 53
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-12T12:18:14.250Z",
+  "generatedBy": "github-action-cache"
+}
