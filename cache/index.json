@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-03-11T17:24:36.444Z",
+  "generatedAt": "2026-03-12T07:20:34.062Z",
   "targets": [
     {
-      "fileName": "edf-feph.org-100.json",
-      "canonicalHost": "edf-feph.org",
+      "fileName": "mytreda.com-100.json",
+      "canonicalHost": "mytreda.com",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-11T17:24:36.442Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-03-12T07:20:34.058Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://mytreda.com/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }
