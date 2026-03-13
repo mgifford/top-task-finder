@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-13T16:36:34.301Z",
+  "generatedAt": "2026-03-13T17:16:09.036Z",
   "targets": [
     {
-      "fileName": "welcometofrance.com-100.json",
-      "canonicalHost": "welcometofrance.com",
+      "fileName": "gnb.ca-100.json",
+      "canonicalHost": "gnb.ca",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-13T16:36:34.293Z",
+      "generatedAt": "2026-03-13T17:16:09.034Z",
       "warnings": []
     }
   ]
