@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-03-13T14:28:28.395Z",
+  "generatedAt": "2026-03-13T16:02:23.076Z",
   "targets": [
     {
-      "fileName": "fosdem.org-100.json",
-      "canonicalHost": "fosdem.org",
+      "fileName": "mn.gov-100.json",
+      "canonicalHost": "mn.gov",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-13T14:28:28.389Z",
-      "warnings": []
+      "generatedAt": "2026-03-13T16:02:23.074Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt"
+      ]
     }
   ]
 }
