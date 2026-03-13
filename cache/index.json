@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-03-12T12:18:14.252Z",
+  "generatedAt": "2026-03-13T13:28:43.496Z",
   "targets": [
     {
-      "fileName": "maryland.gov-100.json",
-      "canonicalHost": "maryland.gov",
+      "fileName": "nfb.org-100.json",
+      "canonicalHost": "nfb.org",
       "requestedCount": 100,
-      "returnedCount": 53,
-      "generatedAt": "2026-03-12T12:18:14.250Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-03-13T13:28:43.494Z",
       "warnings": [
-        "Crawling discovered 47 additional URLs (crawled 4 pages)"
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://nfb.org/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
