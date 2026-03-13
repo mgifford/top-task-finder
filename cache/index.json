@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-03-13T17:16:09.036Z",
+  "generatedAt": "2026-03-13T17:31:51.121Z",
   "targets": [
     {
-      "fileName": "gnb.ca-100.json",
-      "canonicalHost": "gnb.ca",
+      "fileName": "princeedwardisland.ca-100.json",
+      "canonicalHost": "princeedwardisland.ca",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-13T17:16:09.034Z",
-      "warnings": []
+      "generatedAt": "2026-03-13T17:31:51.120Z",
+      "warnings": [
+        "Homepage fallback found 0 links from https://www.princeedwardisland.ca/"
+      ]
     }
   ]
 }
