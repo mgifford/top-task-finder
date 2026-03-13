@@ -16,6 +16,7 @@ const FALLBACK_POLL_INTERVAL_MS = 8000;
 const FALLBACK_POLL_TIMEOUT_MS = 900000;
 const NOTIFICATION_DURATION_MS = 10000;
 const NOTIFICATION_ANIMATION_MS = 300;
+const FEW_RESULTS_THRESHOLD = 1;
 
 const state = {
   defaultRequestedCount: DEFAULT_REQUESTED_COUNT,
@@ -64,6 +65,16 @@ function renderStatus(kind, message) {
 
 function renderError(message) {
   renderStatus('error', message);
+}
+
+function maybeWarnFewResults(result) {
+  const urlCount = Array.isArray(result?.selectedUrls) ? result.selectedUrls.length : 0;
+  if (urlCount <= FEW_RESULTS_THRESHOLD) {
+    renderStatus(
+      'warning',
+      'We are sorry that we were unable to return any additional URLs. Please try another URL, or press the \u201cCopy Prompt for LLM\u201d button below, and paste the results into whatever AI you prefer. This should return a better list of URLs.'
+    );
+  }
 }
 
 function renderServerCrawlStatus(message) {
@@ -420,6 +431,7 @@ async function runServerCrawlAndLoad(scanRequest, forceRescan) {
     renderCachedResult(trigger.immediateResult, 'Generated server cache');
     saveCacheRecord(scanRequest, trigger.immediateResult);
     renderStatus('success', 'Popular URLs are ready.');
+    maybeWarnFewResults(trigger.immediateResult);
     renderServerCrawlStatus('Done.');
     return;
   }
@@ -438,6 +450,7 @@ async function runServerCrawlAndLoad(scanRequest, forceRescan) {
   renderCachedResult(result, 'Generated server cache');
   saveCacheRecord(scanRequest, result);
   renderStatus('success', 'Popular URLs are ready.');
+  maybeWarnFewResults(result);
   renderServerCrawlStatus('Done.');
 }
 
@@ -448,6 +461,7 @@ async function resolveResult(scanRequest, { forceRescan } = { forceRescan: false
       renderCachedResult(generated, 'Generated cache');
       saveCacheRecord(scanRequest, generated);
       renderStatus('success', 'Loaded cached popular URLs.');
+      maybeWarnFewResults(generated);
       return;
     }
 
@@ -455,6 +469,7 @@ async function resolveResult(scanRequest, { forceRescan } = { forceRescan: false
     if (local) {
       renderCachedResult(local, 'Local cache');
       renderStatus('success', 'Loaded cached popular URLs.');
+      maybeWarnFewResults(local);
       return;
     }
   }
