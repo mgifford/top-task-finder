@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-03-14T16:02:26.401Z",
+  "generatedAt": "2026-03-14T16:37:24.301Z",
   "targets": [
     {
-      "fileName": "doit.maryland.gov-100.json",
-      "canonicalHost": "doit.maryland.gov",
+      "fileName": "commerce.maryland.gov-100.json",
+      "canonicalHost": "commerce.maryland.gov",
       "requestedCount": 100,
-      "returnedCount": 44,
-      "generatedAt": "2026-03-14T16:02:26.400Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-14T16:37:24.299Z",
+      "warnings": []
     }
   ]
 }
