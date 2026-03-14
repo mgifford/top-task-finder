@@ -1,0 +1,109 @@
+{
+  "requestId": "cache-1773504143517-75831",
+  "selectedUrls": [
+    "https://doit.maryland.gov/",
+    "https://doit.maryland.gov/services/Website-and-Applications/Pages/Accessibility-Testing-and-Training.aspx",
+    "https://doit.maryland.gov/initiatives/digital-accessibility-initiative/Pages/default.aspx",
+    "https://doit.maryland.gov/policies/Accessibility/Pages/default.aspx",
+    "https://doit.maryland.gov/services/Pages/default.aspx",
+    "https://doit.maryland.gov/About-DoIT/Press/pages/maryland-plans-to-modernize-state-government-services-detailed-in-newly-released-it-master-plan.aspx",
+    "https://doit.maryland.gov/services/ai/Pages/default.aspx",
+    "https://doit.maryland.gov/services/chbs/Pages/default.aspx",
+    "https://doit.maryland.gov/services/Communications/Pages/default.aspx",
+    "https://doit.maryland.gov/services/cybersecurity/Pages/default.aspx",
+    "https://doit.maryland.gov/services/data/Pages/default.aspx",
+    "https://doit.maryland.gov/services/NetworkandWiFiServices/Pages/default.aspx",
+    "https://doit.maryland.gov/About-DoIT",
+    "https://doit.maryland.gov/MITDP-Oversight",
+    "https://doit.maryland.gov/About-DoIT/Boards-Committees-Commissions",
+    "https://doit.maryland.gov/About-DoIT/Leadership",
+    "https://doit.maryland.gov/About-DoIT/Offices",
+    "https://doit.maryland.gov/About-DoIT/Portfolio-Officers",
+    "https://doit.maryland.gov/About-DoIT/Press",
+    "https://doit.maryland.gov/About-DoIT/Press/pages/State-of-Maryland-Adopts-Modernized-Cybersecurity-and-Privacy-Framework.aspx",
+    "https://doit.maryland.gov/About-DoIT/Press/pages/vulnerability-disclosure-program.aspx",
+    "https://doit.maryland.gov/contracts/DoIT-Contracts/Pages/DoIT-Contracts.aspx",
+    "https://doit.maryland.gov/MITDP-Oversight/Pages/process.aspx",
+    "https://doit.maryland.gov/initiatives/Pages/Plain-Language-Initiative.aspx",
+    "https://doit.maryland.gov/policies/Pages/default.aspx",
+    "https://doit.maryland.gov/policies/ai/Pages/default.aspx",
+    "https://doit.maryland.gov/contracts/Statewide-Contracts/Pages/Statewide-Contracts.aspx",
+    "https://doit.maryland.gov/services/cybersecurity/vulnerability_disclosure_program/Pages/default.aspx",
+    "https://doit.maryland.gov/About-DoIT/Offices/Office-of-Security-Management/Pages/Information-Security-Officers.aspx",
+    "https://doit.maryland.gov/policies/telework/Pages/default.aspx",
+    "https://doit.maryland.gov/services/Website-and-Applications/Pages/default.aspx",
+    "https://doit.maryland.gov/initiatives/Pages/Maryland_Data_Literacy_Program.aspx",
+    "https://doit.maryland.gov/MITDP-Oversight/Pages/SDLC.aspx",
+    "https://doit.maryland.gov/Pages/Contact-Us.aspx",
+    "https://doit.maryland.gov/services/OfficeTechandProductivity/Pages/default.aspx",
+    "https://doit.maryland.gov/policies/Departmental/Pages/default.aspx",
+    "https://doit.maryland.gov/contracts/Doing-Business-with-DoIT/Pages/default.aspx",
+    "https://doit.maryland.gov/policies/hardware/Pages/default.aspx",
+    "https://doit.maryland.gov/MITDP-Oversight/Pages/template.aspx",
+    "https://doit.maryland.gov/policies/mitdp/Pages/default.aspx",
+    "https://doit.maryland.gov/About-DoIT/Portfolio-Officers/Pages/Portfolio-Officers.aspx",
+    "https://doit.maryland.gov/policies/Websites-and-Data/Pages/default.aspx",
+    "https://doit.maryland.gov/contracts/Pages/IT-Contracts-Procurement.aspx",
+    "https://doit.maryland.gov/policies/ci/Pages/default.aspx"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 44,
+  "randomShareCount": 0,
+  "shortfallCount": 56,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 44,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 44,
+  "discoverySummary": {
+    "requestId": "cache-1773504143517-75831",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 64,
+        "crawl": 0
+      },
+      "accepted": {
+        "homepage-fallback": 44
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-14T16:02:26.400Z",
+  "generatedBy": "github-action-cache"
+}

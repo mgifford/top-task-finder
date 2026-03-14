@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-03-13T17:31:51.121Z",
+  "generatedAt": "2026-03-14T16:02:26.401Z",
   "targets": [
     {
-      "fileName": "princeedwardisland.ca-100.json",
-      "canonicalHost": "princeedwardisland.ca",
+      "fileName": "doit.maryland.gov-100.json",
+      "canonicalHost": "doit.maryland.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-13T17:31:51.120Z",
+      "returnedCount": 44,
+      "generatedAt": "2026-03-14T16:02:26.400Z",
       "warnings": [
-        "Homepage fallback found 0 links from https://www.princeedwardisland.ca/"
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
