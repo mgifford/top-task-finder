@@ -1,0 +1,43 @@
+name: Accessibility Scan
+
+on:
+  # Run automatically after every successful Pages deploy
+  workflow_run:
+    workflows: ["Deploy Jekyll site to Pages"]
+    types:
+      - completed
+  # Also run on the first day of every month at 00:00 UTC
+  schedule:
+    - cron: '0 0 1 * *'
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  scan:
+    name: axe-core scan (github/accessibility-scanner)
+    runs-on: ubuntu-latest
+    # Minimal GITHUB_TOKEN permissions; the action uses secrets.GH_TOKEN (a PAT) for all API calls.
+    permissions:
+      contents: read
+    # For workflow_run events, skip if the Pages deploy did not succeed
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Scan GitHub Pages for accessibility issues
+        uses: github/accessibility-scanner@v2
+        with:
+          # Newline-delimited list of URLs to scan
+          urls: |
+            https://mgifford.github.io/top-task-finder/
+          # Repository where accessibility issues will be filed
+          repository: mgifford/top-task-finder
+          # Fine-grained PAT with actions:write, contents:write, issues:write,
+          # pull-requests:write, and metadata:read permissions.
+          # Create the secret at:
+          #   Settings → Secrets and variables → Actions → New repository secret
+          # Name it GH_TOKEN.
+          token: ${{ secrets.GH_TOKEN }}
+          # Cache file name used to track results across runs
+          cache_key: a11y-cache-top-task-finder
+          # Set to false (and ensure GitHub Copilot is available) to have
+          # Copilot automatically propose fixes for flagged issues.
+          skip_copilot_assignment: true
