@@ -312,14 +312,34 @@ Verify:
 
 #### CI/CD Integration
 
-Consider adding accessibility tests to CI pipeline:
+Automated axe-core scanning runs on every successful deployment to GitHub Pages
+and on the first day of each month via the
+[`.github/workflows/a11y-scan.yml`](../.github/workflows/a11y-scan.yml) workflow,
+which uses the [github/accessibility-scanner](https://github.com/github/accessibility-scanner)
+action. Any violations found are automatically filed as GitHub Issues.
+
+**Requirements for the workflow:**
+
+- A fine-grained Personal Access Token (PAT) stored as the `GH_TOKEN` repository
+  secret with the following permissions on this repository:
+  `actions: write`, `contents: write`, `issues: write`, `pull-requests: write`,
+  `metadata: read`.
+- To enable AI-powered fix suggestions from GitHub Copilot, set
+  `skip_copilot_assignment: false` in the workflow file (requires an active
+  GitHub Copilot subscription).
+
+The workflow can also be triggered manually from the **Actions** tab at any time.
 
 ```yaml
-# Example GitHub Actions workflow
-- name: Run accessibility tests
-  run: |
-    npm install -g pa11y-ci
-    pa11y-ci --sitemap https://mgifford.github.io/top-task-finder/sitemap.xml
+# .github/workflows/a11y-scan.yml (abbreviated)
+- uses: github/accessibility-scanner@v2
+  with:
+    urls: |
+      https://mgifford.github.io/top-task-finder/
+    repository: mgifford/top-task-finder
+    token: ${{ secrets.GH_TOKEN }}
+    cache_key: a11y-cache-top-task-finder
+    skip_copilot_assignment: true
 ```
 
 ### User Testing
