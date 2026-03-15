@@ -16,9 +16,12 @@ jobs:
   scan:
     name: axe-core scan (github/accessibility-scanner)
     runs-on: ubuntu-latest
-    # Minimal GITHUB_TOKEN permissions; the action uses secrets.GH_TOKEN (a PAT) for all API calls.
+    # GITHUB_TOKEN permissions required by github/accessibility-scanner.
+    # If a fine-grained PAT is stored as GH_TOKEN, it will be used instead via the token fallback below.
     permissions:
-      contents: read
+      contents: write
+      issues: write
+      pull-requests: write
     # For workflow_run events, skip if the Pages deploy did not succeed
     if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -30,14 +33,14 @@ jobs:
             https://mgifford.github.io/top-task-finder/
           # Repository where accessibility issues will be filed
           repository: mgifford/top-task-finder
-          # Fine-grained PAT with actions:write, contents:write, issues:write,
-          # pull-requests:write, and metadata:read permissions.
-          # Create the secret at:
-          #   Settings → Secrets and variables → Actions → New repository secret
-          # Name it GH_TOKEN.
-          token: ${{ secrets.GH_TOKEN }}
+          # Use a fine-grained PAT (GH_TOKEN secret) when available; otherwise fall back to
+          # the built-in GITHUB_TOKEN (which has the permissions granted above).
+          # To create GH_TOKEN: Settings → Secrets and variables → Actions → New repository secret
+          # Required PAT scopes: actions:write, contents:write, issues:write, pull-requests:write, metadata:read
+          token: ${{ secrets.GH_TOKEN || github.token }}
           # Cache file name used to track results across runs
           cache_key: a11y-cache-top-task-finder
           # Set to false (and ensure GitHub Copilot is available) to have
           # Copilot automatically propose fixes for flagged issues.
           skip_copilot_assignment: true
+          include_screenshots: false
