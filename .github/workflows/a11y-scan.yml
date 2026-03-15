@@ -42,5 +42,5 @@ jobs:
           cache_key: a11y-cache-top-task-finder
           # Set to false (and ensure GitHub Copilot is available) to have
           # Copilot automatically propose fixes for flagged issues.
-          skip_copilot_assignment: true
-          include_screenshots: false
+          skip_copilot_assignment: false
+          include_screenshots: true

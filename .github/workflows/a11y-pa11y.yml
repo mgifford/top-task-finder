@@ -1,0 +1,89 @@
+name: Accessibility Report (pa11y)
+
+on:
+  # Run automatically after every successful Pages deploy
+  workflow_run:
+    workflows: ["Deploy Jekyll site to Pages"]
+    types:
+      - completed
+  # Also run on the first day of every month at 00:00 UTC
+  schedule:
+    - cron: '0 0 1 * *'
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  pa11y:
+    name: pa11y accessibility report
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    # For workflow_run events, skip if the Pages deploy did not succeed
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Install pa11y-ci and reporter
+        run: npm install -g pa11y-ci pa11y-ci-reporter-html
+
+      - name: Run pa11y-ci scan
+        id: scan
+        # Exit 0 so later steps always run; the report will show violations.
+        run: |
+          mkdir -p pa11y-report
+          pa11y-ci \
+            --reporter json \
+            --threshold 0 \
+            https://mgifford.github.io/top-task-finder/ \
+            > pa11y-report/results.json 2>pa11y-report/scan.log || true
+
+      - name: Generate HTML report
+        run: |
+          pa11y-ci-reporter-html \
+            --source pa11y-report/results.json \
+            --destination pa11y-report \
+            || true
+
+      - name: Write GitHub Actions job summary
+        run: |
+          node - <<'EOF'
+          const fs = require('fs');
+          const path = 'pa11y-report/results.json';
+          if (!fs.existsSync(path)) {
+            process.stdout.write('## ♿ pa11y Accessibility Report\n\nNo results file found.\n');
+            process.exit(0);
+          }
+          const raw = fs.readFileSync(path, 'utf8');
+          let data;
+          try { data = JSON.parse(raw); } catch (e) {
+            process.stdout.write('## ♿ pa11y Accessibility Report\n\nCould not parse results: ' + e.message + '\n\n```\n' + raw + '\n```\n');
+            process.exit(0);
+          }
+          const urls = Object.keys(data.results || {});
+          let total = 0;
+          let summary = '## ♿ pa11y Accessibility Report\n\n';
+          summary += '| URL | Issues |\n|---|---|\n';
+          for (const url of urls) {
+            const issues = (data.results[url] || []).length;
+            total += issues;
+            const icon = issues === 0 ? '✅' : '⚠️';
+            summary += `| ${url} | ${icon} ${issues} |\n`;
+          }
+          summary += '\n';
+          if (total === 0) {
+            summary += '✅ **No accessibility issues detected.**\n';
+          } else {
+            summary += `⚠️ **${total} accessibility issue(s) found across ${urls.length} page(s).** Download the HTML report artifact for full details.\n`;
+          }
+          const output = process.env.GITHUB_STEP_SUMMARY;
+          if (output) {
+            fs.appendFileSync(output, summary);
+          } else {
+            process.stdout.write(summary);
+          }
+          EOF
+
+      - name: Upload pa11y report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pa11y-accessibility-report
+          path: pa11y-report/
+          retention-days: 30
