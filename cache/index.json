@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-03-14T16:37:24.301Z",
+  "generatedAt": "2026-03-16T18:14:58.981Z",
   "targets": [
     {
-      "fileName": "commerce.maryland.gov-100.json",
-      "canonicalHost": "commerce.maryland.gov",
+      "fileName": "un.org-100.json",
+      "canonicalHost": "un.org",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-14T16:37:24.299Z",
-      "warnings": []
+      "returnedCount": 7,
+      "generatedAt": "2026-03-16T18:14:58.979Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling discovered 6 additional URLs (crawled 1 pages)"
+      ]
     }
   ]
 }

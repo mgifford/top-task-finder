@@ -1,0 +1,73 @@
+{
+  "requestId": "cache-1773684896799-52669",
+  "selectedUrls": [
+    "https://un.org/",
+    "https://un.org/ar/",
+    "https://un.org/en/",
+    "https://un.org/es/",
+    "https://un.org/fr/",
+    "https://un.org/ru/",
+    "https://un.org/zh/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 7,
+  "randomShareCount": 0,
+  "shortfallCount": 93,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 7,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 7,
+  "discoverySummary": {
+    "requestId": "cache-1773684896799-52669",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 6 additional URLs (crawled 1 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 12,
+        "crawl": 6
+      },
+      "accepted": {
+        "critical-pages": 1,
+        "homepage-fallback": 6
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-16T18:14:58.979Z",
+  "generatedBy": "github-action-cache"
+}
