@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-03-16T18:17:50.004Z",
+  "generatedAt": "2026-03-16T19:28:18.527Z",
   "targets": [
     {
-      "fileName": "thegreenwebfoundation.org-100.json",
-      "canonicalHost": "thegreenwebfoundation.org",
+      "fileName": "nh.gov-100.json",
+      "canonicalHost": "nh.gov",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-03-16T18:17:50.003Z",
+      "generatedAt": "2026-03-16T19:28:18.525Z",
       "warnings": []
     }
   ]
