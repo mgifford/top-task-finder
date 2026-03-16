@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-03-16T18:14:58.981Z",
+  "generatedAt": "2026-03-16T18:17:50.004Z",
   "targets": [
     {
-      "fileName": "un.org-100.json",
-      "canonicalHost": "un.org",
+      "fileName": "thegreenwebfoundation.org-100.json",
+      "canonicalHost": "thegreenwebfoundation.org",
       "requestedCount": 100,
-      "returnedCount": 7,
-      "generatedAt": "2026-03-16T18:14:58.979Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 6 additional URLs (crawled 1 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-16T18:17:50.003Z",
+      "warnings": []
     }
   ]
 }
