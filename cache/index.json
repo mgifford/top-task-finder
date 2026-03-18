@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-03-16T19:28:18.527Z",
+  "generatedAt": "2026-03-18T15:21:16.860Z",
   "targets": [
     {
-      "fileName": "nh.gov-100.json",
-      "canonicalHost": "nh.gov",
+      "fileName": "10x.gsa.gov-100.json",
+      "canonicalHost": "10x.gsa.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-16T19:28:18.525Z",
-      "warnings": []
+      "returnedCount": 50,
+      "generatedAt": "2026-03-18T15:21:16.859Z",
+      "warnings": [
+        "Crawling discovered 1 additional URLs (crawled 1 pages)"
+      ]
     }
   ]
 }
