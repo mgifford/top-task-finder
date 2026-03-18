@@ -1,52 +1,13 @@
 {
-  "generatedAt": "2026-03-18T19:32:19.591Z",
+  "generatedAt": "2026-03-18T19:34:42.094Z",
   "targets": [
     {
-      "fileName": "cloud.gov-100.json",
-      "canonicalHost": "cloud.gov",
+      "fileName": "cbp.gov-100.json",
+      "canonicalHost": "cbp.gov",
       "requestedCount": 100,
-      "returnedCount": 73,
-      "generatedAt": "2026-03-18T19:32:19.590Z",
-      "warnings": [
-        "Failed to crawl https://cloud.gov/support/support: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/sign-up: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/apps: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/pages: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/workshop: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/pricing: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/security: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/support/contact: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/support: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/sign-up: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/apps: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/pages: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/workshop: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/pricing: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/security: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/contact/contact: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/support: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/sign-up: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/apps: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/pages: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/workshop: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/pricing: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/security: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/sign-up/contact: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/support: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/sign-up: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/apps: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/pages: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/workshop: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/pricing: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/security: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/apps/contact: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/pages/support: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/pages/sign-up: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/pages/apps: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/pages/pages: HTTP 404 Not Found",
-        "Failed to crawl https://cloud.gov/pages/workshop: HTTP 404 Not Found",
-        "Crawling discovered 72 additional URLs (crawled 10 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-18T19:34:42.093Z",
+      "warnings": []
     }
   ]
 }
