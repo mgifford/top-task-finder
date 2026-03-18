@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-03-18T15:21:16.860Z",
+  "generatedAt": "2026-03-18T15:23:38.490Z",
   "targets": [
     {
-      "fileName": "10x.gsa.gov-100.json",
-      "canonicalHost": "10x.gsa.gov",
+      "fileName": "armypubs.army.mil-100.json",
+      "canonicalHost": "armypubs.army.mil",
       "requestedCount": 100,
-      "returnedCount": 50,
-      "generatedAt": "2026-03-18T15:21:16.859Z",
+      "returnedCount": 92,
+      "generatedAt": "2026-03-18T15:23:38.489Z",
       "warnings": [
-        "Crawling discovered 1 additional URLs (crawled 1 pages)"
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
