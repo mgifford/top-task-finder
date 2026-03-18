@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-03-18T19:34:42.094Z",
+  "generatedAt": "2026-03-18T19:36:16.962Z",
   "targets": [
     {
-      "fileName": "cbp.gov-100.json",
-      "canonicalHost": "cbp.gov",
+      "fileName": "code.mil-100.json",
+      "canonicalHost": "code.mil",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-18T19:34:42.093Z",
-      "warnings": []
+      "returnedCount": 5,
+      "generatedAt": "2026-03-18T19:36:16.960Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
+      ]
     }
   ]
 }
