@@ -157,6 +157,35 @@ Edit [config/runtime.json](config/runtime.json):
 
 After this, clicking `Find Popular URLs` will automatically trigger the worker on cache miss.
 
+## AI Disclosure
+
+This section documents how artificial intelligence has been used in this project, covering development, runtime behaviour, and browser-based features.
+
+### AI used to build and maintain this project
+
+| Date | Model | Task |
+|------|-------|------|
+| 2026-03 | Claude Sonnet (Anthropic) | Added AI disclosure section to `README.md` and AI disclosure instruction to `AGENTS.md` |
+
+AI coding agents are used to build and maintain this project. The [`AGENTS.md`](AGENTS.md) file provides guidance for these agents and lists the specific instructions they follow. Any AI agent that makes changes to this repository is required to add an entry to the table above describing the model and what it did.
+
+### AI used when running the program (browser-based, optional)
+
+The application includes optional **on-device AI** powered by **Chrome's built-in Gemini Nano** model via the [LanguageModel API](https://developer.chrome.com/docs/ai/built-in). This feature requires Chrome with the relevant experimental flags enabled and the Gemini Nano model downloaded. No data is sent to an external server; all inference runs locally in the browser.
+
+When the model is available, two AI-powered buttons appear in the interface:
+
+- **Copy LLM Improved List** — sends the generated WCAG-EM prompt to Gemini Nano to clean, deduplicate, and professionally format the task list, then copies the result to the clipboard.
+- **Summarize Site Tasks with AI** — sends the discovered URL list to Gemini Nano and streams back the top 5 identified user tasks.
+
+The application also supports the legacy `window.ai.languageModel` API as a fallback for older browser builds that exposed the Prompt API under a different namespace.
+
+If the browser does not support either API, the AI buttons are not shown and the application works fully without any AI features.
+
+### "Copy Prompt for LLM" feature
+
+The **Copy Prompt for LLM** button generates a structured WCAG-EM accessibility-evaluation prompt and copies it to the clipboard. This prompt is designed to be pasted into any external LLM tool of the user's choice (such as ChatGPT, Claude, Gemini, or similar). The application does not select or connect to any specific external LLM; the choice of tool is entirely up to the user. No URLs or content are sent anywhere by this button — it only writes text to the clipboard.
+
 ## Troubleshooting
 
 ### Console errors about missing JavaScript modules
