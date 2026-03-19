@@ -160,3 +160,4 @@ Before opening a pull request:
 2. Confirm all accessibility requirements above are met.
 3. Update [`ACCESSIBILITY.md`](ACCESSIBILITY.md) if your change adds or modifies accessibility-relevant behaviour.
 4. Update [`README.md`](README.md) if your change affects setup, configuration, or user-facing behaviour.
+5. **AI disclosure**: If you are an AI agent making changes to this repository, update the `## AI Disclosure` section in [`README.md`](README.md) to record which LLM was used and what it did. Each entry must include the model name, the version or date if known, and a description of the specific task it performed. Do not add entries for AI tools that were not actually used.
