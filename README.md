@@ -157,6 +157,16 @@ Edit [config/runtime.json](config/runtime.json):
 
 After this, clicking `Find Popular URLs` will automatically trigger the worker on cache miss.
 
+## If you find this useful
+
+If this tool has helped you, here are a few ways you can support it and help others discover it:
+
+- **Tell a friend** — share it with colleagues, auditors, or anyone involved in accessibility or UX research.
+- **Add a star** — starring the [repository on GitHub](https://github.com/mgifford/top-task-finder) helps others find the project.
+- **Write an issue** — share how you used it in your design, discovery, or accessibility process. Your story helps us improve the tool and shows others how it can be applied.
+
+This tool was developed thanks to [CivicActions](https://civicactions.com) — who support open source, human-centred design, and accessibility.
+
 ## AI Disclosure
 
 This section documents how artificial intelligence has been used in this project, covering development, runtime behaviour, and browser-based features.
@@ -165,6 +175,7 @@ This section documents how artificial intelligence has been used in this project
 
 | Date | Model | Task |
 |------|-------|------|
+| 2026-03 | Claude Sonnet (Anthropic) | Added "If you find this useful" community support section and CivicActions attribution to `README.md` |
 | 2026-03 | Claude Sonnet (Anthropic) | Added AI disclosure section to `README.md` and AI disclosure instruction to `AGENTS.md` |
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Wrote `docs/technical-guide-url-discovery.md` — technical guide covering the Cloudflare Worker API, DuckDuckGo HTML search integration, URL discovery pipeline, domain size estimation methodology, and LLM prompt variations |
 
