@@ -1,161 +1,58 @@
 # Top Task Finder
 
-Top Task Finder generates a representative list of URLs from a public website to support accessibility and top-task review.
+**Top Task Finder** helps you quickly generate a representative, prioritized list of URLs from any public website — perfect for accessibility audits, top-task reviews, and UX research.
 
-## ⚠️ GitHub Pages Configuration Required
+🔗 **[Try it now — no sign-up required](https://mgifford.github.io/top-task-finder/)**
 
-**If you see a warning about "github-pages gem can't satisfy your Gemfile's dependencies":**
-
-This repository uses a custom Jekyll 4.3+ workflow. To eliminate the warning, you must configure GitHub Pages to use GitHub Actions:
-
-1. Go to **Settings** → **Pages**
-2. Under **"Build and deployment"**, change **Source** to **"GitHub Actions"**
-
-See **[GITHUB_PAGES_WARNING_FIX.md](GITHUB_PAGES_WARNING_FIX.md)** for detailed instructions.
+---
 
 ## What it does
 
-- Accepts a site URL and target number of pages.
-- Produces an editable, one-URL-per-line list you can copy into other workflows.
-- Prioritizes high-value pages (for example: homepage, search, accessibility, and task-oriented pages) while keeping a random share for broader coverage.
-- Automatically deduplicates year-based URL patterns (e.g., annual reports, yearly plans) to keep only the most recent 3 items of each series.
-- Normalizes `www` and non-`www` versions of the same host so each run stays in a single canonical site scope.
-- Reuses cached results for faster repeat runs and lets you clear cached entries.
+Enter a website URL, choose how many pages you want, and click **Find Popular URLs**. In seconds you get a clean, editable list of that site's most important pages, ready to paste into your audit workflow.
 
-## URL Discovery Strategy
+- **Smart prioritization** — homepage, navigation, accessibility, and task-oriented pages are ranked higher.
+- **Pre-built cache** — popular domains are cached nightly so results appear instantly.
+- **Ready to copy** — the output is plain text, one URL per line, editable before you copy it.
+- **LLM-ready** — a built-in "Copy Prompt for LLM" button formats the list into a structured WCAG-EM accessibility-evaluation prompt for use with any AI tool you like.
+- **Works on any public site** — government portals, NGO sites, corporate pages, and everything in between.
 
-The tool uses a multi-stage approach to discover URLs, ensuring it reaches the requested count:
+---
 
-1. **Sitemap discovery**: Checks robots.txt and common sitemap locations (`/sitemap.xml`, `/sitemap_index.xml`, `/sitemap/sitemap.xml`)
-2. **Homepage link extraction**: Extracts all links from the homepage if sitemap results are insufficient
-3. **Recursive crawling**: If still not enough URLs, the tool crawls linked pages:
-   - Prioritizes footer links first (where accessibility statements are typically found)
-   - Then crawls main navigation links
-   - Continues recursively up to 2 levels deep
-   - Fetches up to 10 pages to discover additional URLs
-   - Only includes HTML pages within the same canonical domain
+## Who it's for
 
-This multi-stage approach ensures the tool can reach the minimum requested URL count even for sites with limited sitemaps or search visibility.
+- **Accessibility auditors** building a representative sample for WCAG reviews and WCAG-EM reports.
+- **UX researchers** validating top tasks and content coverage.
+- **Product teams** doing lightweight, repeatable URL inventory for content-heavy sites.
+- **Anyone** who needs a quick representative list of pages from a domain.
 
-## Intended use
+---
 
-- Accessibility sampling and audit preparation.
-- Top-task validation and UX content review.
-- Lightweight, repeatable URL list generation for public-sector and content-heavy sites.
+## How to use it
 
-## Output
+1. Go to **[mgifford.github.io/top-task-finder](https://mgifford.github.io/top-task-finder/)**.
+2. Enter a site URL (e.g., `gsa.gov`) and choose a page count.
+3. Click **Find Popular URLs**.
+4. Edit the list if needed, then copy it into your workflow.
 
-- Primary output is plain text: one URL per line.
-- The list is editable before copying.
-- If fewer in-scope URLs are found than requested, the tool reports the shortfall.
+You can also share a pre-filled link using URL parameters:
 
-## URL Deduplication
+```
+https://mgifford.github.io/top-task-finder/?domainUrl=gsa.gov&requestedCount=50
+```
 
-The tool automatically reduces duplication in year-based URL patterns to provide a more useful sample for testing:
+---
 
-- **Year pattern detection**: Identifies URLs with year markers like `-2024`, `/2022`, `_2020`, or year ranges like `-2023-2024`
-- **Smart grouping**: Groups similar URLs by their pattern (e.g., all "annual-report-YEAR" URLs are grouped together)
-- **Recent focus**: Keeps only the 3 most recent items from each group to maintain historical context without overwhelming the list
-- **Example**: If a site has annual reports from 2017-2024, only the 2024, 2023, and 2022 versions are included
+## Fork it and make it yours
 
-This feature is particularly useful for government sites and organizations with extensive archives of annual reports, accessibility statements, and other time-series content.
+Want to run your own instance or pre-cache results for domains you care about?
 
-## Current scope
+1. **Fork** this repository.
+2. Follow the **[Setup and Configuration Guide](docs/setup-guide.md)** to configure GitHub Pages, the nightly cache workflow, and the optional Cloudflare Worker trigger.
+3. Add your target domains to [`config/cache-targets.json`](config/cache-targets.json) and the nightly workflow will keep them fresh.
 
-- Works on one canonical host per run.
-- Treats `www.example.org` and `example.org` as the same host.
-- Subdomain expansion is intentionally out of scope for v1.
+The whole stack is open source — Jekyll for the front-end, a small Node.js script for URL discovery, GitHub Actions for automation, and an optional Cloudflare Worker for triggering server-side crawls.
 
-## Local preview note
-
-- `index.md` uses Jekyll front matter (`layout: default`), so plain static servers may show raw Markdown instead of the final page shell.
-- For a GitHub Pages-like local preview, run via Jekyll (for example: `bundle exec jekyll serve`) and open the served site URL.
-- Jekyll setup files in this repo:
-	- [_config.yml](_config.yml)
-	- [_layouts/default.html](_layouts/default.html)
-	- [Gemfile](Gemfile)
-
-## GitHub Action generated cache
-
-- Workflow: [.github/workflows/cache-refresh.yml](.github/workflows/cache-refresh.yml)
-- Generator script: [scripts/build-cache.mjs](scripts/build-cache.mjs)
-- Target config: [config/cache-targets.json](config/cache-targets.json)
-- Output files: [cache/index.json](cache/index.json) and host/count artifacts like `cache/gsa.gov-75.json`
-
-How it works:
-
-- A nightly workflow (and manual `workflow_dispatch`) builds URL selections server-side.
-- Generated JSON artifacts are committed to `main`.
-- The browser app first checks `/cache/{canonicalHost}-{requestedCount}.json`; when present, it uses that result before live browser discovery.
-
-Interactive server crawl from the page:
-
-- Enter only a domain/URL and click `Find Popular URLs`.
-- The app first checks generated cache, then browser cache.
-- If no cache exists, it automatically starts a server crawl through the configured Cloudflare endpoint, waits for completion, and loads results into the page.
-- Once results are shown, a `Clear cache and rescan` option appears.
-
-URL sync behavior:
-
-- Query params (`domainUrl`, `requestedCount`) prefill the form on load.
-- When form values change, the page updates the URL query string in place so links can be shared.
-- **URL Parameters**:
-  - `domainUrl`: The domain or URL to scan (e.g., `?domainUrl=gsa.gov`)
-  - `requestedCount`: Number of URLs to return (default: 100, max: 200)
-  - Example: `?domainUrl=gsa.gov&requestedCount=150`
-  - These parameters allow you to customize the scan without using the UI form
-
-Manual run options:
-
-- Run workflow from GitHub UI and optionally pass `domain_url` + `requested_count`.
-- Or run locally:
-	- `node scripts/build-cache.mjs --targets config/cache-targets.json --out cache`
-	- `node scripts/build-cache.mjs --domain-url https://gsa.gov --requested-count 75 --out cache`
-
-## Cloudflare serverless trigger setup
-
-Files included:
-
-- Worker source: [cloudflare/src/worker.js](cloudflare/src/worker.js)
-- Wrangler config: [cloudflare/wrangler.toml](cloudflare/wrangler.toml)
-- Site runtime config: [config/runtime.json](config/runtime.json)
-
-### 1) Create GitHub token for worker secret
-
-Create a fine-grained personal access token with access to this repository and permissions:
-
-- Actions: Read and write
-- Contents: Read and write
-
-### 2) Deploy worker
-
-From the `cloudflare/` directory:
-
-- `npm install -g wrangler` (if not already installed)
-- `wrangler login`
-- `wrangler secret put GITHUB_TOKEN`
-- `wrangler deploy`
-
-### 3) Configure allowed origin and repo vars (if needed)
-
-Defaults are set in [cloudflare/wrangler.toml](cloudflare/wrangler.toml):
-
-- `GITHUB_OWNER`
-- `GITHUB_REPO`
-- `GITHUB_WORKFLOW_FILE`
-- `GITHUB_WORKFLOW_REF`
-- `ALLOWED_ORIGIN`
-
-Adjust these before deploy if your repo/page location differs.
-
-### 4) Point the site to your worker endpoint
-
-Edit [config/runtime.json](config/runtime.json):
-
-- Set `cloudflareTriggerEndpoint` to your deployed worker URL + `/trigger-crawl`
-- Example: `https://top-task-finder-trigger.<your-subdomain>.workers.dev/trigger-crawl`
-
-After this, clicking `Find Popular URLs` will automatically trigger the worker on cache miss.
+---
 
 ## If you find this useful
 
@@ -166,6 +63,19 @@ If this tool has helped you, here are a few ways you can support it and help oth
 - **Write an issue** — share how you used it in your design, discovery, or accessibility process. Your story helps us improve the tool and shows others how it can be applied.
 
 This tool was developed thanks to [CivicActions](https://civicactions.com) — who support open source, human-centred design, and accessibility.
+
+---
+
+## Learn more
+
+| Resource | What's in it |
+|---|---|
+| [docs/setup-guide.md](docs/setup-guide.md) | Forking, local development, Cloudflare Worker setup, GitHub Actions cache, troubleshooting |
+| [docs/technical-guide-url-discovery.md](docs/technical-guide-url-discovery.md) | URL discovery pipeline, scoring algorithm, domain size estimation, LLM prompt variations |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md) | WCAG compliance standards, colour contrast values, keyboard navigation, ARIA patterns |
+| [AGENTS.md](AGENTS.md) | Guidance for AI coding agents contributing to this repository |
+
+---
 
 ## AI Disclosure
 
@@ -178,6 +88,7 @@ This section documents how artificial intelligence has been used in this project
 | 2026-03 | Claude Sonnet (Anthropic) | Added "If you find this useful" community support section and CivicActions attribution to `README.md` |
 | 2026-03 | Claude Sonnet (Anthropic) | Added AI disclosure section to `README.md` and AI disclosure instruction to `AGENTS.md` |
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Wrote `docs/technical-guide-url-discovery.md` — technical guide covering the Cloudflare Worker API, DuckDuckGo HTML search integration, URL discovery pipeline, domain size estimation methodology, and LLM prompt variations |
+| 2026-03 | Claude Sonnet 4.5 (Anthropic) | Rewrote `README.md` to be welcoming and user-focused; moved technical setup content to `docs/setup-guide.md` |
 
 AI coding agents are used to build and maintain this project. The [`AGENTS.md`](AGENTS.md) file provides guidance for these agents and lists the specific instructions they follow. Any AI agent that makes changes to this repository is required to add an entry to the table above describing the model and what it did.
 
@@ -197,92 +108,3 @@ If the browser does not support either API, the AI buttons are not shown and the
 ### "Copy Prompt for LLM" feature
 
 The **Copy Prompt for LLM** button generates a structured WCAG-EM accessibility-evaluation prompt and copies it to the clipboard. This prompt is designed to be pasted into any external LLM tool of the user's choice (such as ChatGPT, Claude, Gemini, or similar). The application does not select or connect to any specific external LLM; the choice of tool is entirely up to the user. No URLs or content are sent anywhere by this button — it only writes text to the clipboard.
-
-## Troubleshooting
-
-### Console errors about missing JavaScript modules
-
-If you see console errors like:
-```
-Uncaught SyntaxError: Cannot use import statement outside a module (at content.js:1:1)
-Uncaught SyntaxError: Unexpected token 'export' (at all-focusable-elements.js:1:1)
-Uncaught SyntaxError: Unexpected token 'export' (at button-toggle.js:3:1)
-```
-
-These errors are **not from this repository**. They typically come from:
-- Browser extensions (e.g., accessibility checkers, development tools)
-- Other browser tabs or applications injecting scripts
-- Browser developer tools or plugins
-
-This application uses ES6 modules correctly with `type="module"` in the script tag. The custom `_layouts/default.html` overrides the Jekyll minima theme to prevent unwanted script injection.
-
-**To diagnose**: Open the browser developer console and check which files are being loaded. The only scripts this site loads are:
-- `/assets/js/app.js` (as a module)
-- Imports from `/assets/js/selection.js`, `/assets/js/cache.js`, and `/assets/js/discovery.js`
-
-### CORS errors when triggering server crawl
-
-If you see CORS errors like:
-```
-Access to fetch at 'https://...' has been blocked by CORS policy
-```
-
-**Cause**: The `cloudflareTriggerEndpoint` URL in `config/runtime.json` must include the `/trigger-crawl` path.
-
-**Fix**: Ensure the endpoint URL ends with `/trigger-crawl`:
-```json
-{
-  "cloudflareTriggerEndpoint": "https://your-worker.workers.dev/trigger-crawl"
-}
-```
-
-The application now includes detailed console logging to help debug these issues. Open the browser console to see:
-- Runtime configuration when loaded
-- Request payload when triggering server crawl
-- Response status and payload from the server
-- Detailed error messages for network failures
-
-## GitHub Pages Deployment
-
-This site is deployed to GitHub Pages using a custom Jekyll workflow.
-
-### Workflow file
-
-- [.github/workflows/jekyll-pages.yml](.github/workflows/jekyll-pages.yml)
-
-### How it works
-
-- The workflow runs automatically on every push to the `main` branch
-- Can also be triggered manually from the Actions tab
-- Builds the Jekyll site with proper base path configuration
-- Uploads the built site as a Pages artifact
-- Deploys to GitHub Pages using the `deploy-pages` action
-
-### Features
-
-- **Bundler caching**: Speeds up builds by caching Ruby dependencies
-- **Proper permissions**: Uses scoped permissions for security
-- **Concurrency control**: Prevents multiple simultaneous deployments
-- **Manual triggers**: Can be run on-demand via workflow_dispatch
-
-### Troubleshooting deployment issues
-
-If you encounter issues with the Pages deployment:
-
-1. **Check workflow runs**: Go to the Actions tab and check the latest workflow run
-2. **Retry failed workflows**: Click "Re-run failed jobs" if there was a transient error
-3. **Check Pages settings**: Ensure Settings → Pages → Build and deployment source is set to "GitHub Actions"
-4. **View detailed logs**: Click into failed jobs to see detailed error messages
-
-See [PAGES_FIX.md](PAGES_FIX.md) for details about the artifact upload timeout issue that was resolved by creating this custom workflow.
-
-### Cache-busting for static assets
-
-To prevent browser caching issues when deploying updates, all static assets (JavaScript and CSS files) include a version parameter that changes with each build:
-
-- Uses Jekyll's `site.time` variable to generate a Unix timestamp
-- Appended as a query parameter (e.g., `/assets/js/app.js?v=1772307810`)
-- Automatically updates on every build without manual intervention
-- Ensures users always receive the latest version of the code after deployment
-
-This is particularly important for the LLM prompt feature, which loads content from an external text file. Without cache-busting, users might continue to see old JavaScript code that contains outdated prompts rather than fetching the new prompt template.
