@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-03-18T19:36:16.962Z",
+  "generatedAt": "2026-03-21T11:35:51.303Z",
   "targets": [
     {
-      "fileName": "code.mil-100.json",
-      "canonicalHost": "code.mil",
+      "fileName": "proton.me-100.json",
+      "canonicalHost": "proton.me",
       "requestedCount": 100,
-      "returnedCount": 5,
-      "generatedAt": "2026-03-18T19:36:16.960Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-03-21T11:35:51.297Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling found no additional URLs after checking 1 pages"
+        "Sitemap traversal limit reached; skipped additional sitemap files."
       ]
     }
   ]
