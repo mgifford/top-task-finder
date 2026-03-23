@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-03-21T11:35:51.303Z",
+  "generatedAt": "2026-03-23T00:25:31.226Z",
   "targets": [
     {
-      "fileName": "proton.me-100.json",
-      "canonicalHost": "proton.me",
+      "fileName": "economie.gouv.fr-100.json",
+      "canonicalHost": "economie.gouv.fr",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-21T11:35:51.297Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-03-23T00:25:31.224Z",
       "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files."
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://economie.gouv.fr/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
