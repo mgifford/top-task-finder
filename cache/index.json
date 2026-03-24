@@ -1,18 +1,13 @@
 {
-  "generatedAt": "2026-03-23T00:25:31.226Z",
+  "generatedAt": "2026-03-24T01:25:57.327Z",
   "targets": [
     {
-      "fileName": "economie.gouv.fr-100.json",
-      "canonicalHost": "economie.gouv.fr",
+      "fileName": "cookieyes.com-100.json",
+      "canonicalHost": "cookieyes.com",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-03-23T00:25:31.224Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: HTTP 403 Forbidden",
-        "Failed to crawl https://economie.gouv.fr/: HTTP 403 Forbidden",
-        "Crawling found no additional URLs after checking 0 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-24T01:25:57.325Z",
+      "warnings": []
     }
   ]
 }
