@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-03-25T15:22:50.534Z",
+  "generatedAt": "2026-03-25T23:56:17.200Z",
   "targets": [
     {
-      "fileName": "adapt-offshore.org-100.json",
-      "canonicalHost": "adapt-offshore.org",
+      "fileName": "bixal.com-100.json",
+      "canonicalHost": "bixal.com",
       "requestedCount": 100,
-      "returnedCount": 10,
-      "generatedAt": "2026-03-25T15:22:50.533Z",
-      "warnings": [
-        "Homepage fallback unavailable: fetch failed: fetch failed",
-        "Crawling discovered 10 additional URLs (crawled 7 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-03-25T23:56:17.199Z",
+      "warnings": []
     }
   ]
 }
