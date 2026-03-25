@@ -1,0 +1,76 @@
+{
+  "requestId": "cache-1774452158207-67379",
+  "selectedUrls": [
+    "https://adapt-offshore.org/",
+    "https://adapt-offshore.org/about",
+    "https://adapt-offshore.org/support",
+    "https://adapt-offshore.org/membership",
+    "https://adapt-offshore.org/privacy",
+    "https://adapt-offshore.org/terms",
+    "https://adapt-offshore.org/support?tab=equipment",
+    "https://adapt-offshore.org/support?tab=monetary",
+    "https://adapt-offshore.org/support?tab=services",
+    "https://adapt-offshore.org/support?tab=volunteer"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 10,
+  "randomShareCount": 0,
+  "shortfallCount": 90,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": true,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 10,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 10,
+  "discoverySummary": {
+    "requestId": "cache-1774452158207-67379",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Homepage fallback unavailable: fetch failed: fetch failed",
+      "Crawling discovered 10 additional URLs (crawled 7 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 6,
+        "homepage-fallback": 0,
+        "crawl": 10
+      },
+      "accepted": {
+        "sitemap": 6,
+        "crawl": 4
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": true,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-25T15:22:50.533Z",
+  "generatedBy": "github-action-cache"
+}
