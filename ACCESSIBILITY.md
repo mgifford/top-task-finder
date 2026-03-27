@@ -42,23 +42,25 @@ All text and interactive elements meet WCAG AA contrast requirements:
 
 ### Light Theme Colors
 
-- **Primary text**: `#1f2328` on `#ffffff` (15.3:1)
-- **Secondary text**: `#57606a` on `#ffffff` (7.0:1)
-- **Primary button**: `#ffffff` on `#0969da` (7.4:1)
-- **Links**: `#0969da` on `#ffffff` (7.4:1)
-- **Info status**: `#0a3069` on `#ddf4ff` (10.2:1)
-- **Success status**: `#116329` on `#dafbe1` (8.1:1)
-- **Error status**: `#82071e` on `#ffebe9` (7.2:1)
+Colors use the CivicActions brand palette. See [STYLES.md § 3.1](./STYLES.md#31-design-tokens) for the full token reference.
+
+- **Primary text**: `#171717` on `#ffffff` (18.1:1)
+- **Secondary text**: `#454545` on `#ffffff` (9.7:1)
+- **Primary button**: `#ffffff` on `#1a4480` (8.6:1)
+- **Links**: `#1a4480` on `#ffffff` (8.6:1)
+- **Info status**: `#162e51` on `#e8f0fc` (9.8:1)
+- **Success status**: `#1b5e20` on `#ecf3ec` (8.0:1)
+- **Error status**: `#8b0a03` on `#fce8e7` (7.5:1)
 
 ### Dark Theme Colors
 
-- **Primary text**: `#e6edf3` on `#0d1117` (13.8:1)
-- **Secondary text**: `#8d96a0` on `#0d1117` (6.8:1)
-- **Primary button**: `#ffffff` on `#2f81f7` (6.2:1)
-- **Links**: `#58a6ff` on `#0d1117` (8.5:1)
-- **Info status**: `#9ec8ff` on `#051d4d` (7.8:1)
-- **Success status**: `#7ee787` on `#033a16` (8.9:1)
-- **Error status**: `#ff7b72` on `#490202` (9.1:1)
+- **Primary text**: `#e9e9e9` on `#1b1b1b` (14.5:1)
+- **Secondary text**: `#a9aeb1` on `#1b1b1b` (7.2:1)
+- **Primary button**: `#1b1b1b` on `#73b3e7` (7.5:1)
+- **Links**: `#73b3e7` on `#1b1b1b` (7.5:1)
+- **Info status**: `#b3d4f5` on `#162e51` (8.1:1)
+- **Success status**: `#a3d9a5` on `#1b3a1f` (7.0:1)
+- **Error status**: `#f4a09d` on `#3d1110` (8.2:1)
 
 All color combinations exceed WCAG AA requirements for their respective text sizes.
 

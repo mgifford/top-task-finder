@@ -89,6 +89,7 @@ This section documents how artificial intelligence has been used in this project
 | 2026-03 | Claude Sonnet (Anthropic) | Added AI disclosure section to `README.md` and AI disclosure instruction to `AGENTS.md` |
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Wrote `docs/technical-guide-url-discovery.md` — technical guide covering the Cloudflare Worker API, DuckDuckGo HTML search integration, URL discovery pipeline, domain size estimation methodology, and LLM prompt variations |
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Rewrote `README.md` to be welcoming and user-focused; moved technical setup content to `docs/setup-guide.md` |
+| 2026-03 | Claude Sonnet 4.6 (Anthropic) | Created `STYLES.md` documenting CivicActions brand design and content standards; updated `assets/css/app.css` to use CivicActions brand color palette; updated `ACCESSIBILITY.md` color contrast values to reflect new palette |
 
 AI coding agents are used to build and maintain this project. The [`AGENTS.md`](AGENTS.md) file provides guidance for these agents and lists the specific instructions they follow. Any AI agent that makes changes to this repository is required to add an entry to the table above describing the model and what it did.
 
