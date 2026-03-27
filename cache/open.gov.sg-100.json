@@ -1,0 +1,86 @@
+{
+  "requestId": "cache-1774581813775-77103",
+  "selectedUrls": [
+    "https://open.gov.sg/",
+    "https://open.gov.sg/search/",
+    "https://open.gov.sg/about-us/",
+    "https://open.gov.sg/careers/",
+    "https://open.gov.sg/for-developers/",
+    "https://open.gov.sg/how-we-build/",
+    "https://open.gov.sg/media/",
+    "https://open.gov.sg/our-leadership/",
+    "https://open.gov.sg/partner-with-us/",
+    "https://open.gov.sg/privacy-statement/",
+    "https://open.gov.sg/terms-of-use/",
+    "https://open.gov.sg/careers/aicv/",
+    "https://open.gov.sg/careers/hiring/",
+    "https://open.gov.sg/careers/what-we-do/",
+    "https://open.gov.sg/for-developers/open-source/",
+    "https://open.gov.sg/careers/what-we-do/corporate-team/",
+    "https://open.gov.sg/careers/what-we-do/internships/",
+    "https://open.gov.sg/careers/what-we-do/policy-and-transformation/",
+    "https://open.gov.sg/careers/what-we-do/product-design/",
+    "https://open.gov.sg/careers/what-we-do/product-management/",
+    "https://open.gov.sg/careers/what-we-do/product-operations/",
+    "https://open.gov.sg/careers/what-we-do/software-engineer/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 22,
+  "randomShareCount": 0,
+  "shortfallCount": 78,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": true,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 22,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 22,
+  "discoverySummary": {
+    "requestId": "cache-1774581813775-77103",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 12 additional URLs (crawled 9 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 22,
+        "homepage-fallback": 45,
+        "crawl": 12
+      },
+      "accepted": {
+        "sitemap": 22
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": true,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-27T03:23:47.577Z",
+  "generatedBy": "github-action-cache"
+}

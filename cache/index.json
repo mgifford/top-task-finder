@@ -1,13 +1,15 @@
 {
-  "generatedAt": "2026-03-25T23:56:17.200Z",
+  "generatedAt": "2026-03-27T03:23:47.579Z",
   "targets": [
     {
-      "fileName": "bixal.com-100.json",
-      "canonicalHost": "bixal.com",
+      "fileName": "open.gov.sg-100.json",
+      "canonicalHost": "open.gov.sg",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-03-25T23:56:17.199Z",
-      "warnings": []
+      "returnedCount": 22,
+      "generatedAt": "2026-03-27T03:23:47.577Z",
+      "warnings": [
+        "Crawling discovered 12 additional URLs (crawled 9 pages)"
+      ]
     }
   ]
 }
