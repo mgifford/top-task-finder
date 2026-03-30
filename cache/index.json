@@ -1,15 +1,15 @@
 {
-  "generatedAt": "2026-03-30T16:42:05.897Z",
+  "generatedAt": "2026-03-30T20:39:24.712Z",
   "targets": [
     {
-      "fileName": "parksforcalifornia.org-100.json",
-      "canonicalHost": "parksforcalifornia.org",
+      "fileName": "oregon.gov-100.json",
+      "canonicalHost": "oregon.gov",
       "requestedCount": 100,
-      "returnedCount": 18,
-      "generatedAt": "2026-03-30T16:42:05.896Z",
+      "returnedCount": 81,
+      "generatedAt": "2026-03-30T20:39:24.711Z",
       "warnings": [
         "No sitemap found at common locations or robots.txt",
-        "Crawling found no additional URLs after checking 1 pages"
+        "Crawling discovered 83 additional URLs (crawled 8 pages)"
       ]
     }
   ]
