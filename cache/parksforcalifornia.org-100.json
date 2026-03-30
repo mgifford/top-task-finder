@@ -1,0 +1,83 @@
+{
+  "requestId": "cache-1774888924786-45486",
+  "selectedUrls": [
+    "https://parksforcalifornia.org/",
+    "https://parksforcalifornia.org/about/",
+    "https://parksforcalifornia.org/administration",
+    "https://parksforcalifornia.org/advisorycouncil/",
+    "https://parksforcalifornia.org/communities/",
+    "https://parksforcalifornia.org/focusgroups/",
+    "https://parksforcalifornia.org/methods/",
+    "https://parksforcalifornia.org/outdoorequity/",
+    "https://parksforcalifornia.org/park_equity",
+    "https://parksforcalifornia.org/parkaccess_home/",
+    "https://parksforcalifornia.org/parkaccess/",
+    "https://parksforcalifornia.org/percapita/",
+    "https://parksforcalifornia.org/planning_guide",
+    "https://parksforcalifornia.org/projects/",
+    "https://parksforcalifornia.org/scorp/",
+    "https://parksforcalifornia.org/sitemap/",
+    "https://parksforcalifornia.org/scorp/2015",
+    "https://parksforcalifornia.org/scorp/2021"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 18,
+  "randomShareCount": 0,
+  "shortfallCount": 82,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": true,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 18,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 18,
+  "discoverySummary": {
+    "requestId": "cache-1774888924786-45486",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 29,
+        "crawl": 0
+      },
+      "accepted": {
+        "homepage-fallback": 18
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": true,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-30T16:42:05.896Z",
+  "generatedBy": "github-action-cache"
+}

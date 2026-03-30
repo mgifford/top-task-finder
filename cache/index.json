@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-03-27T03:23:47.579Z",
+  "generatedAt": "2026-03-30T16:42:05.897Z",
   "targets": [
     {
-      "fileName": "open.gov.sg-100.json",
-      "canonicalHost": "open.gov.sg",
+      "fileName": "parksforcalifornia.org-100.json",
+      "canonicalHost": "parksforcalifornia.org",
       "requestedCount": 100,
-      "returnedCount": 22,
-      "generatedAt": "2026-03-27T03:23:47.577Z",
+      "returnedCount": 18,
+      "generatedAt": "2026-03-30T16:42:05.896Z",
       "warnings": [
-        "Crawling discovered 12 additional URLs (crawled 9 pages)"
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
