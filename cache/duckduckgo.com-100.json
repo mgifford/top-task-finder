@@ -1,0 +1,88 @@
+{
+  "requestId": "cache-1774976894871-9382",
+  "selectedUrls": [
+    "https://duckduckgo.com/",
+    "https://duckduckgo.com/about",
+    "https://duckduckgo.com/acceptable-use",
+    "https://duckduckgo.com/app",
+    "https://duckduckgo.com/bangs",
+    "https://duckduckgo.com/compare-privacy",
+    "https://duckduckgo.com/donations",
+    "https://duckduckgo.com/email",
+    "https://duckduckgo.com/hiring",
+    "https://duckduckgo.com/how-we-hire",
+    "https://duckduckgo.com/how-we-work",
+    "https://duckduckgo.com/mac",
+    "https://duckduckgo.com/newbang",
+    "https://duckduckgo.com/newsletter",
+    "https://duckduckgo.com/press",
+    "https://duckduckgo.com/privacy",
+    "https://duckduckgo.com/pro",
+    "https://duckduckgo.com/settings",
+    "https://duckduckgo.com/terms",
+    "https://duckduckgo.com/updates",
+    "https://duckduckgo.com/windows",
+    "https://duckduckgo.com/set-as-default",
+    "https://duckduckgo.com/windows?origin=funnel_home___hero"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 23,
+  "randomShareCount": 0,
+  "shortfallCount": 77,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": true,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 23,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 23,
+  "discoverySummary": {
+    "requestId": "cache-1774976894871-9382",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 26,
+        "homepage-fallback": 13,
+        "crawl": 0
+      },
+      "accepted": {
+        "sitemap": 21,
+        "homepage-fallback": 2
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": true,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-03-31T17:08:15.243Z",
+  "generatedBy": "github-action-cache"
+}

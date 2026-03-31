@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-03-30T20:39:24.712Z",
+  "generatedAt": "2026-03-31T17:08:15.245Z",
   "targets": [
     {
-      "fileName": "oregon.gov-100.json",
-      "canonicalHost": "oregon.gov",
+      "fileName": "duckduckgo.com-100.json",
+      "canonicalHost": "duckduckgo.com",
       "requestedCount": 100,
-      "returnedCount": 81,
-      "generatedAt": "2026-03-30T20:39:24.711Z",
+      "returnedCount": 23,
+      "generatedAt": "2026-03-31T17:08:15.243Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 83 additional URLs (crawled 8 pages)"
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
