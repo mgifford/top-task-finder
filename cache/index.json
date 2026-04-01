@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-03-31T17:08:15.245Z",
+  "generatedAt": "2026-04-01T21:02:54.965Z",
   "targets": [
     {
-      "fileName": "duckduckgo.com-100.json",
-      "canonicalHost": "duckduckgo.com",
+      "fileName": "nc.gov-100.json",
+      "canonicalHost": "nc.gov",
       "requestedCount": 100,
-      "returnedCount": 23,
-      "generatedAt": "2026-03-31T17:08:15.243Z",
+      "returnedCount": 93,
+      "generatedAt": "2026-04-01T21:02:54.964Z",
       "warnings": [
-        "Crawling found no additional URLs after checking 1 pages"
+        "Crawling discovered 7 additional URLs (crawled 1 pages)"
       ]
     }
   ]
