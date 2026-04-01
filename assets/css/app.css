@@ -517,6 +517,7 @@ textarea:focus-visible {
 .page-estimate {
   font-weight: 600;
   color: var(--color-text);
+  margin-bottom: 0.5rem;
 }
 
 /* AI streaming summary output */
