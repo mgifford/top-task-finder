@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-04-01T21:02:54.965Z",
+  "generatedAt": "2026-04-01T21:24:13.907Z",
   "targets": [
     {
-      "fileName": "nc.gov-100.json",
-      "canonicalHost": "nc.gov",
+      "fileName": "groundhog-day.com-100.json",
+      "canonicalHost": "groundhog-day.com",
       "requestedCount": 100,
-      "returnedCount": 93,
-      "generatedAt": "2026-04-01T21:02:54.964Z",
-      "warnings": [
-        "Crawling discovered 7 additional URLs (crawled 1 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-04-01T21:24:13.905Z",
+      "warnings": []
     }
   ]
 }
