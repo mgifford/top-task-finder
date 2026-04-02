@@ -153,4 +153,11 @@ describe('clearCacheForHost', () => {
     clearCacheForHost('https://www.example.com');
     assert.equal(loadCacheRecord(makeScanRequest('example.com', 100)), null);
   });
+
+  it('accepts a URL object instead of a string', () => {
+    saveCacheRecord(makeScanRequest('example.com', 100), { v: 1 });
+    const urlObj = new URL('https://example.com');
+    clearCacheForHost(urlObj);
+    assert.equal(loadCacheRecord(makeScanRequest('example.com', 100)), null);
+  });
 });

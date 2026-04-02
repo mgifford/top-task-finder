@@ -273,6 +273,17 @@ describe('createUrlSelectionResult', () => {
     assert.deepEqual(result.languageDistribution, {});
   });
 
+  it('defaults randomShareCount and shortfallCount to undefined when omitted', () => {
+    const result = createUrlSelectionResult({
+      requestId: 'r',
+      requestedCount: 10,
+      returnedCount: 0,
+      discoverySummary,
+    });
+    assert.equal(result.randomShareCount, undefined);
+    assert.equal(result.shortfallCount, undefined);
+  });
+
   it('includes a generatedAt ISO timestamp', () => {
     const result = createUrlSelectionResult({
       requestId: 'r',

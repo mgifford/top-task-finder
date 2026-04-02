@@ -452,6 +452,34 @@ describe('scoreCandidateUrl', () => {
     const deep = scoreCandidateUrl(new URL('https://example.com/a/b/c/d/e/f/g'), 'sitemap');
     assert.ok(shallow.score > deep.score);
   });
+
+  it('boosts a contact page over an ordinary page', () => {
+    const ordinary = scoreCandidateUrl(new URL('https://example.com/news'), 'sitemap');
+    const contact = scoreCandidateUrl(new URL('https://example.com/contact'), 'sitemap');
+    assert.ok(contact.score > ordinary.score, 'contact page should score higher');
+    assert.equal(contact.prioritySignals.contact, true);
+  });
+
+  it('boosts an about page over an ordinary page', () => {
+    const ordinary = scoreCandidateUrl(new URL('https://example.com/news'), 'sitemap');
+    const about = scoreCandidateUrl(new URL('https://example.com/about'), 'sitemap');
+    assert.ok(about.score > ordinary.score, 'about page should score higher');
+    assert.equal(about.prioritySignals.about, true);
+  });
+
+  it('boosts a help/support page over an ordinary page', () => {
+    const ordinary = scoreCandidateUrl(new URL('https://example.com/news'), 'sitemap');
+    const help = scoreCandidateUrl(new URL('https://example.com/help'), 'sitemap');
+    assert.ok(help.score > ordinary.score, 'help page should score higher');
+    assert.equal(help.prioritySignals.help, true);
+  });
+
+  it('boosts a resources page over an ordinary page', () => {
+    const ordinary = scoreCandidateUrl(new URL('https://example.com/news'), 'sitemap');
+    const resources = scoreCandidateUrl(new URL('https://example.com/resources'), 'sitemap');
+    assert.ok(resources.score > ordinary.score, 'resources page should score higher');
+    assert.equal(resources.prioritySignals.resources, true);
+  });
 });
 
 // ---------------------------------------------------------------------------
@@ -869,6 +897,26 @@ describe('applyUrlDiversityLimits', () => {
     }));
     const { skipped } = applyUrlDiversityLimits(candidates);
     assert.ok(skipped.length > 0);
+  });
+
+  it('enforces the MAX_INDIVIDUAL_SEGMENT limit (10 per unique segment value)', () => {
+    // 12 URLs all containing the path segment "common".
+    // Once 10 have been selected, that segment's count reaches MAX_INDIVIDUAL_SEGMENT (10)
+    // and subsequent URLs sharing it are skipped – before the MAX_FIRST_SEGMENT (15) cap fires.
+    const candidates = Array.from({ length: 12 }, (_, i) => ({
+      url: `https://example.com/common/page-${i}`,
+      score: 50 - i,
+      prioritySignals: { homepage: false, search: false },
+    }));
+    const { selected, skipped } = applyUrlDiversityLimits(candidates);
+    assert.ok(
+      selected.length <= 10,
+      `selected.length (${selected.length}) should be ≤ 10 (MAX_INDIVIDUAL_SEGMENT)`,
+    );
+    assert.ok(
+      skipped.length >= 2,
+      `skipped.length (${skipped.length}) should be ≥ 2`,
+    );
   });
 });
 
