@@ -2,15 +2,16 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const DEFAULT_REQUESTED_COUNT = 100;
-const MAX_REQUESTED_COUNT = 200;
-const MAX_SITEMAP_DOCS = 24;
-const CRITICAL_PAGE_SCORE = 1000;
-const MAX_CRAWL_DEPTH = 2; // Maximum depth to crawl
-const MAX_PAGES_TO_CRAWL = 10; // Maximum number of pages to fetch
+export const DEFAULT_REQUESTED_COUNT = 100;
+export const MAX_REQUESTED_COUNT = 200;
+export const MAX_SITEMAP_DOCS = 24;
+export const CRITICAL_PAGE_SCORE = 1000;
+export const MAX_CRAWL_DEPTH = 2; // Maximum depth to crawl
+export const MAX_PAGES_TO_CRAWL = 10; // Maximum number of pages to fetch
 
-function parseArgs(argv) {
+export function parseArgs(argv) {
   const parsed = {};
   for (let index = 2; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -32,7 +33,7 @@ function parseArgs(argv) {
   return parsed;
 }
 
-function canonicalizeHost(hostname) {
+export function canonicalizeHost(hostname) {
   const normalized = String(hostname || '').toLowerCase();
   if (normalized.startsWith('www.')) {
     return normalized.slice(4);
@@ -40,7 +41,7 @@ function canonicalizeHost(hostname) {
   return normalized;
 }
 
-function normalizeInputUrl(rawValue) {
+export function normalizeInputUrl(rawValue) {
   const trimmed = String(rawValue || '').trim();
   if (!trimmed) {
     throw new Error('domainUrl is required');
@@ -56,7 +57,7 @@ function normalizeInputUrl(rawValue) {
   return parsed;
 }
 
-function clampRequestedCount(value) {
+export function clampRequestedCount(value) {
   const parsed = Number(value);
   if (!Number.isInteger(parsed) || parsed < 1) {
     return DEFAULT_REQUESTED_COUNT;
@@ -64,24 +65,24 @@ function clampRequestedCount(value) {
   return Math.min(MAX_REQUESTED_COUNT, parsed);
 }
 
-function buildNormalizedKey(urlLike) {
+export function buildNormalizedKey(urlLike) {
   const parsed = typeof urlLike === 'string' ? new URL(urlLike) : new URL(urlLike.href);
   const cleanPath = parsed.pathname.replace(/\/$/, '') || '/';
   const query = parsed.search ? parsed.search : '';
   return `${canonicalizeHost(parsed.hostname)}${cleanPath}${query}`;
 }
 
-function isWithinCanonicalScope(candidateUrl, canonicalHost) {
+export function isWithinCanonicalScope(candidateUrl, canonicalHost) {
   const parsed = typeof candidateUrl === 'string' ? new URL(candidateUrl) : new URL(candidateUrl.href);
   return canonicalizeHost(parsed.hostname) === canonicalizeHost(canonicalHost);
 }
 
-const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
-const RSS_FEED_PATTERN = /\/(feed|rss|atom)(\/|$)/i;
+export const NON_HTML_EXTENSION_PATTERN = /\.(?:png|jpe?g|gif|webp|svg|ico|pdf|doc|docx|xml|xlsx|xls|pptx?|zip|gz|mp4|mp3|woff2?|ttf|eot|json|csv)$/i;
+export const RSS_FEED_PATTERN = /\/(feed|rss|atom)(\/|$)/i;
 // NOTE: Must be kept in sync with client-side pattern in assets/js/discovery.js
-const TRACKING_PARAM_PATTERN = /^(utm_[a-z_]+|fbclid|gclid|gclsrc|msclkid|dclid|_hsenc|_hsmi|hsa_[a-z_]+|mc_eid|mkt_tok|__s|igshid|twclid|epik|s_cid)$/i;
+export const TRACKING_PARAM_PATTERN = /^(utm_[a-z_]+|fbclid|gclid|gclsrc|msclkid|dclid|_hsenc|_hsmi|hsa_[a-z_]+|mc_eid|mkt_tok|__s|igshid|twclid|epik|s_cid)$/i;
 
-function stripTrackingParams(parsedUrl) {
+export function stripTrackingParams(parsedUrl) {
   const paramsToDelete = [];
   parsedUrl.searchParams.forEach((_, key) => {
     if (TRACKING_PARAM_PATTERN.test(key)) {
@@ -91,7 +92,7 @@ function stripTrackingParams(parsedUrl) {
   paramsToDelete.forEach((key) => parsedUrl.searchParams.delete(key));
 }
 
-function isLikelyHtmlUrl(urlValue) {
+export function isLikelyHtmlUrl(urlValue) {
   const parsed = typeof urlValue === 'string' ? new URL(urlValue) : new URL(urlValue.href);
   if (NON_HTML_EXTENSION_PATTERN.test(parsed.pathname)) {
     return false;
@@ -102,7 +103,7 @@ function isLikelyHtmlUrl(urlValue) {
   return true;
 }
 
-function detectPrioritySignals(pathname) {
+export function detectPrioritySignals(pathname) {
   const normalized = pathname.toLowerCase();
   return {
     homepage: normalized === '/' || normalized === '',
@@ -127,14 +128,14 @@ function detectPrioritySignals(pathname) {
   };
 }
 
-const SOURCE_BASE_WEIGHTS = {
+export const SOURCE_BASE_WEIGHTS = {
   sitemap: 40,
   'homepage-fallback': 20,
   crawl: 15,
   unknown: 10,
 };
 
-function scoreCandidateUrl(normalizedUrl, source) {
+export function scoreCandidateUrl(normalizedUrl, source) {
   const sourceWeight = SOURCE_BASE_WEIGHTS[source] ?? SOURCE_BASE_WEIGHTS.unknown;
   const pathSegments = normalizedUrl.pathname.split('/').filter(Boolean).length;
   const depthWeight = Math.max(0, 15 - pathSegments * 2);
@@ -207,7 +208,7 @@ async function fetchText(url) {
   }
 }
 
-function extractXmlLocValues(xmlText) {
+export function extractXmlLocValues(xmlText) {
   const values = [];
   const pattern = /<loc>\s*([^<]+?)\s*<\/loc>/gim;
   let match = pattern.exec(xmlText);
@@ -218,11 +219,11 @@ function extractXmlLocValues(xmlText) {
   return values;
 }
 
-function xmlLooksLikeSitemapIndex(xmlText) {
+export function xmlLooksLikeSitemapIndex(xmlText) {
   return /<sitemapindex[\s>]/i.test(xmlText);
 }
 
-function extractHrefValues(htmlText, baseUrl) {
+export function extractHrefValues(htmlText, baseUrl) {
   const values = [];
   // Match href attribute in <a> tags, whether it's the first attribute or not
   // Use \s* to allow <a href=...> or <a href=...> (with or without space)
@@ -239,7 +240,7 @@ function extractHrefValues(htmlText, baseUrl) {
   return values;
 }
 
-function extractPrioritizedLinks(htmlText, baseUrl) {
+export function extractPrioritizedLinks(htmlText, baseUrl) {
   // Extract links prioritized by location: footer first, then nav, then all others
   // Note: Uses regex-based extraction which works for most well-formed HTML.
   // This is a pragmatic approach that avoids dependencies on HTML parser libraries.
@@ -308,7 +309,7 @@ function extractPrioritizedLinks(htmlText, baseUrl) {
   };
 }
 
-function normalizeAndScoreCandidates(candidates, canonicalHost) {
+export function normalizeAndScoreCandidates(candidates, canonicalHost) {
   const acceptedByKey = new Map();
 
   candidates.forEach((candidate) => {
@@ -358,7 +359,7 @@ function normalizeAndScoreCandidates(candidates, canonicalHost) {
   });
 }
 
-function aggregatePriorityCoverage(candidates) {
+export function aggregatePriorityCoverage(candidates) {
   return candidates.reduce(
     (coverage, candidate) => ({
       homepage: coverage.homepage || Boolean(candidate.prioritySignals?.homepage),
@@ -383,7 +384,7 @@ function aggregatePriorityCoverage(candidates) {
   );
 }
 
-function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
+export function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
   // Match year patterns: -2020, -2020-2021, /2020, _2020, etc.
   // Updated to allow year patterns followed by dashes, underscores, slashes, or end of path
   const yearPattern = /[-_/]((?:19|20)\d{2})(?:[-_]((?:19|20)\d{2}))?(?=[-_/?#]|$)/g;
@@ -458,7 +459,7 @@ function deduplicateYearBasedUrls(candidates, maxRecentItems = 3) {
   return result;
 }
 
-function applyUrlDiversityLimits(sortedCandidates) {
+export function applyUrlDiversityLimits(sortedCandidates) {
   const selected = [];
   const skipped = [];
   const selectedFirstSegments = new Set();
@@ -565,7 +566,7 @@ function applyUrlDiversityLimits(sortedCandidates) {
   };
 }
 
-function ensureCriticalPages(candidates, baseUrl) {
+export function ensureCriticalPages(candidates, baseUrl) {
   const hasHomepage = candidates.some(c => c.prioritySignals?.homepage);
 
   if (!hasHomepage) {
@@ -781,7 +782,7 @@ async function discoverFromCrawl(baseUrl, canonicalHost, requestedCount, existin
   return candidates;
 }
 
-function buildDiscoverySummary({ requestId, warnings, fallbackUsed, crawlUsed, sourceCounts, priorityCoverage }) {
+export function buildDiscoverySummary({ requestId, warnings, fallbackUsed, crawlUsed, sourceCounts, priorityCoverage }) {
   const sourcesAttempted = ['sitemap'];
   if (fallbackUsed) {
     sourcesAttempted.push('homepage-fallback');
@@ -866,7 +867,7 @@ function buildResult(scanRequest, rankedCandidates, discoverySummary) {
   };
 }
 
-function slugForTarget(scanRequest) {
+export function slugForTarget(scanRequest) {
   return `${canonicalizeHost(scanRequest.canonicalHost)}-${scanRequest.requestedCount}.json`;
 }
 
@@ -992,7 +993,9 @@ async function main() {
   console.log(`Wrote cache index: ${indexPath}`);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  main().catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });
+}

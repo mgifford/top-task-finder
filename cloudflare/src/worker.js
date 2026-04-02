@@ -1,7 +1,7 @@
 const MAX_URL_COUNT = 200;
 const MIN_URL_COUNT = 1;
 
-function buildCorsHeaders(origin, env) {
+export function buildCorsHeaders(origin, env) {
   const allowedOrigin = env.ALLOWED_ORIGIN || '*';
   const value = allowedOrigin === '*' ? '*' : origin;
   return {
@@ -22,7 +22,7 @@ function jsonResponse(body, status, corsHeaders) {
   });
 }
 
-function clampRequestedCount(value) {
+export function clampRequestedCount(value) {
   const parsed = Number(value);
   if (!Number.isInteger(parsed)) {
     return 100;
@@ -30,7 +30,7 @@ function clampRequestedCount(value) {
   return Math.min(MAX_URL_COUNT, Math.max(MIN_URL_COUNT, parsed));
 }
 
-function normalizeDomainUrl(raw) {
+export function normalizeDomainUrl(raw) {
   const trimmed = String(raw || '').trim();
   if (!trimmed) {
     throw new Error('domainUrl is required.');
