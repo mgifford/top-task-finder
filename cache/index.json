@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-04-01T21:24:13.907Z",
+  "generatedAt": "2026-04-03T16:34:34.111Z",
   "targets": [
     {
-      "fileName": "groundhog-day.com-100.json",
-      "canonicalHost": "groundhog-day.com",
+      "fileName": "simpler.grants.gov-100.json",
+      "canonicalHost": "simpler.grants.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-04-01T21:24:13.905Z",
-      "warnings": []
+      "returnedCount": 9,
+      "generatedAt": "2026-04-03T16:34:34.109Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling found no additional URLs after checking 1 pages"
+      ]
     }
   ]
 }

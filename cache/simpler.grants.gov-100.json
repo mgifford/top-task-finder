@@ -1,0 +1,74 @@
+{
+  "requestId": "cache-1775234073782-98061",
+  "selectedUrls": [
+    "https://simpler.grants.gov/",
+    "https://simpler.grants.gov/search",
+    "https://simpler.grants.gov/developers",
+    "https://simpler.grants.gov/events",
+    "https://simpler.grants.gov/newsletter",
+    "https://simpler.grants.gov/roadmap",
+    "https://simpler.grants.gov/subscribe",
+    "https://simpler.grants.gov/vision",
+    "https://simpler.grants.gov/api/auth/login"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 9,
+  "randomShareCount": 0,
+  "shortfallCount": 91,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": true,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 9,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 9,
+  "discoverySummary": {
+    "requestId": "cache-1775234073782-98061",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 37,
+        "crawl": 0
+      },
+      "accepted": {
+        "homepage-fallback": 9
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": true,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-04-03T16:34:34.109Z",
+  "generatedBy": "github-action-cache"
+}
