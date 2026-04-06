@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-04-03T16:34:34.111Z",
+  "generatedAt": "2026-04-06T21:33:39.763Z",
   "targets": [
     {
-      "fileName": "simpler.grants.gov-100.json",
-      "canonicalHost": "simpler.grants.gov",
+      "fileName": "argentina.gob.ar-100.json",
+      "canonicalHost": "argentina.gob.ar",
       "requestedCount": 100,
-      "returnedCount": 9,
-      "generatedAt": "2026-04-03T16:34:34.109Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-04-06T21:33:39.761Z",
+      "warnings": []
     }
   ]
 }
