@@ -38,6 +38,8 @@ const serverCrawlStatus = document.getElementById('server-crawl-status');
 const outputArea = document.getElementById('url-output');
 const copyButton = document.getElementById('copy-results');
 const copyPromptButton = document.getElementById('copy-prompt');
+const scanHtmlButton = document.getElementById('scan-html');
+const scanAltButton = document.getElementById('scan-alt');
 const findUrlsButton = document.getElementById('find-urls');
 const rescanUrlsButton = document.getElementById('rescan-urls');
 const pageEstimate = document.getElementById('page-estimate');
@@ -93,6 +95,12 @@ function renderResult(result) {
     const estimate = formatPageEstimate(result.totalDiscoveredPages);
     pageEstimate.textContent = `Estimated site size: ${estimate}`;
   }
+
+  // Show scan buttons if there are results
+  if (urls) {
+    scanHtmlButton.hidden = false;
+    scanAltButton.hidden = false;
+  }
 }
 
 function clearResultPresentation() {
@@ -102,6 +110,8 @@ function clearResultPresentation() {
   pageEstimate.textContent = '';
   renderServerCrawlStatus('');
   rescanUrlsButton.hidden = true;
+  scanHtmlButton.hidden = true;
+  scanAltButton.hidden = true;
 }
 
 function parseRequestedCount(rawValue) {
@@ -567,6 +577,33 @@ async function handleCopyPrompt() {
   }
 }
 
+async function handleScanHtml() {
+  const urls = outputArea.value.trim();
+  if (!urls) return;
+  
+  // Copy to clipboard as a courtesy/fallback
+  await navigator.clipboard.writeText(urls);
+  showNotification('URLs copied. Opening HTML scanner...');
+  
+  // Use a slight delay to allow notification to be seen
+  setTimeout(() => {
+    window.open(`https://mgifford.github.io/open-scans/?urls=${encodeURIComponent(urls)}`, '_blank');
+  }, 500);
+}
+
+async function handleScanAlt() {
+  const urls = outputArea.value.trim();
+  if (!urls) return;
+  
+  // Copy to clipboard as a courtesy/fallback
+  await navigator.clipboard.writeText(urls);
+  showNotification('URLs copied. Opening Alt-Text scanner...');
+  
+  setTimeout(() => {
+    window.open(`https://mgifford.github.io/alt-text-scan/?urls=${encodeURIComponent(urls)}`, '_blank');
+  }, 500);
+}
+
 async function initialize() {
   await Promise.all([loadLimitsConfig(), loadRuntimeConfig()]);
   updateLimitHelp();
@@ -589,6 +626,8 @@ async function initialize() {
 scanForm.addEventListener('submit', handleSubmit);
 copyButton.addEventListener('click', handleCopy);
 copyPromptButton.addEventListener('click', handleCopyPrompt);
+scanHtmlButton.addEventListener('click', handleScanHtml);
+scanAltButton.addEventListener('click', handleScanAlt);
 rescanUrlsButton.addEventListener('click', handleRescan);
 domainInput.addEventListener('input', updateUrlFromForm);
 

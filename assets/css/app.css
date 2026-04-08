@@ -232,7 +232,7 @@ textarea:focus-visible {
   }
 
   .actions {
-    grid-template-columns: repeat(3, minmax(0, max-content));
+    grid-template-columns: repeat(auto-fill, minmax(max-content, 1fr));
     justify-content: flex-start;
   }
 }

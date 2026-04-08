@@ -44,6 +44,8 @@ title: Accessible Top Task URL Finder
     <div class="actions">
       <button id="copy-results" type="button">Copy URLs</button>
       <button id="copy-prompt" type="button">Copy Prompt for LLM</button>
+      <button id="scan-html" type="button" class="secondary" hidden>Scan HTML</button>
+      <button id="scan-alt" type="button" class="secondary" hidden>Scan Alt Text</button>
       <button id="rescan-urls" type="button" class="secondary" hidden>Clear cache and rescan</button>
     </div>
     <textarea id="llmPrompt" hidden aria-hidden="true"></textarea>

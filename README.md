@@ -14,6 +14,7 @@ Enter a website URL, choose how many pages you want, and click **Find Popular UR
 - **Pre-built cache** — popular domains are cached nightly so results appear instantly.
 - **Ready to copy** — the output is plain text, one URL per line, editable before you copy it.
 - **LLM-ready** — a built-in "Copy Prompt for LLM" button formats the list into a structured WCAG-EM accessibility-evaluation prompt for use with any AI tool you like.
+- **Next-step integration** — direct links to deep-scan your discovered URLs with specialized tools like **[Open Scans](https://mgifford.github.io/open-scans/)** (HTML) and **[Alt-Text Scan](https://mgifford.github.io/alt-text-scan/)**.
 - **Works on any public site** — government portals, NGO sites, corporate pages, and everything in between.
 
 ---
@@ -33,6 +34,7 @@ Enter a website URL, choose how many pages you want, and click **Find Popular UR
 2. Enter a site URL (e.g., `gsa.gov`) and choose a page count.
 3. Click **Find Popular URLs**.
 4. Edit the list if needed, then copy it into your workflow.
+5. Use the **Scan HTML** or **Scan Alt Text** buttons to immediately start a deep audit of your selected pages.
 
 You can also share a pre-filled link using URL parameters:
 
@@ -90,6 +92,7 @@ This section documents how artificial intelligence has been used in this project
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Wrote `docs/technical-guide-url-discovery.md` — technical guide covering the Cloudflare Worker API, DuckDuckGo HTML search integration, URL discovery pipeline, domain size estimation methodology, and LLM prompt variations |
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Rewrote `README.md` to be welcoming and user-focused; moved technical setup content to `docs/setup-guide.md` |
 | 2026-03 | Claude Sonnet 4.6 (Anthropic) | Created `STYLES.md` documenting CivicActions brand design and content standards; updated `assets/css/app.css` to use CivicActions brand color palette; updated `ACCESSIBILITY.md` color contrast values to reflect new palette |
+| 2026-04 | Gemini 3 Flash (Google) | Added "Next Steps" workflow integration with `open-scans` and `alt-text-scan` tools; updated `index.md`, `assets/js/app.js`, and `assets/css/app.css` to support new scanner actions |
 
 AI coding agents are used to build and maintain this project. The [`AGENTS.md`](AGENTS.md) file provides guidance for these agents and lists the specific instructions they follow. Any AI agent that makes changes to this repository is required to add an entry to the table above describing the model and what it did.
 

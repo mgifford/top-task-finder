@@ -112,8 +112,11 @@ All interactive elements are fully keyboard accessible:
 3. Find Popular URLs button
 4. URL results textarea
 5. Copy URLs button
-6. Clear cache and rescan button (when visible)
-7. Footer GitHub link
+6. Copy Prompt for LLM button
+7. Scan HTML button
+8. Scan Alt Text button
+9. Clear cache and rescan button (when visible)
+10. Footer GitHub link
 
 ### Keyboard Shortcuts
 
