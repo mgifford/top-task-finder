@@ -111,4 +111,4 @@ If the browser does not support either API, the AI buttons are not shown and the
 
 ### "Copy Prompt for LLM" feature
 
-The **Copy Prompt for LLM** button generates a structured WCAG-EM accessibility-evaluation prompt and copies it to the clipboard. This prompt is designed to be pasted into any external LLM tool of the user's choice (such as ChatGPT, Claude, Gemini, or similar). The application does not select or connect to any specific external LLM; the choice of tool is entirely up to the user. No URLs or content are sent anywhere by this button — it only writes text to the clipboard.
+The **Copy Prompt for LLM** button generates a structured WCAG-EM accessibility-evaluation prompt and copies it to the clipboard. This prompt is designed to be pasted into any external LLM tool of the user's choice (such as ChatGPT, Claude, Gemini, Ollama, or similar). The application does not select or connect to any specific external LLM; the choice of tool is entirely up to the user. No URLs or content are sent anywhere by this button — it only writes text to the clipboard.

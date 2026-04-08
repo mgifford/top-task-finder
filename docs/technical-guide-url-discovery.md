@@ -390,7 +390,7 @@ prompts** for the browser's built-in on-device AI.
 **How it is used**: When the user clicks *"Copy Prompt for LLM"*, the browser
 fetches this file, appends the list of discovered URLs, and copies the combined
 text to the clipboard. The user then pastes it into any AI assistant (ChatGPT,
-Claude, Copilot, Gemini, etc.).
+Claude, Copilot, Gemini, Ollama, etc.).
 
 **What the prompt asks the AI to do**:
 

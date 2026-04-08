@@ -6,14 +6,14 @@ title: Accessible Top Task URL Finder
 <main class="container" aria-labelledby="page-title">
   <header class="hero">
     <h1 id="page-title">Find Popular URLs</h1>
-    <p class="lead">Enter a website URL and get a representative, editable list of pages for review.</p>
+    <p class="lead">Enter a website address to get a list of pages for review.</p>
   </header>
 
   <section class="panel" aria-labelledby="scan-form-title">
     <h2 id="scan-form-title">Website</h2>
     <form id="scan-form" novalidate>
       <div class="field">
-        <label for="domain-url">Domain name / URL (required)</label>
+        <label for="domain-url">Website address (URL)</label>
         <input id="domain-url" name="domainUrl" type="url" placeholder="https://example.org" required />
         <p id="limit-help" class="hint" aria-live="polite"></p>
       </div>
@@ -38,7 +38,7 @@ title: Accessible Top Task URL Finder
 
   <section class="panel" aria-labelledby="results-title">
     <h2 id="results-title">URL Results</h2>
-    <p class="hint">This list represents a diverse selection of popular and important pages from the website, prioritizing the homepage, search, accessibility pages, and top task pages while limiting deep subdirectories to increase variety across the site.</p>
+    <p class="hint">This list includes important pages like the homepage, search, and accessibility information. We limit similar pages to give you a better variety from across the site.</p>
     <p id="page-estimate" class="hint" aria-live="polite"></p>
     <textarea id="url-output" rows="14" spellcheck="false" placeholder="One URL per line will appear here."></textarea>
     <div class="actions">
@@ -52,7 +52,7 @@ title: Accessible Top Task URL Finder
   </section>
 
   <div class="disclaimer">
-    <p><strong>Note:</strong> This tool provides a quick way to sample popular URLs from a website, but it is <em>not</em> a replacement for proper Top Task research methodology. <button type="button" id="open-modal" class="disclaimer-link">Learn more about Top Tasks</button>.</p>
+    <p><strong>Note:</strong> This tool helps you quickly find popular pages, but it is not a full Top Task research study. <button type="button" id="open-modal" class="disclaimer-link">Learn more about Top Tasks</button>.</p>
   </div>
 </main>
 
@@ -64,10 +64,10 @@ title: Accessible Top Task URL Finder
       <button id="close-modal" class="modal-close" aria-label="Close dialog">&times;</button>
     </div>
     <div class="modal-body">
-      <p>This tool provides a quick sample of popular URLs, but <strong>it is not a substitute for proper Top Task research</strong>. Top Task research is a rigorous methodology for identifying what matters most to your users.</p>
+      <p>This tool gives you a quick sample of popular pages, but <strong>it is not a full Top Task study</strong>. Top Task research is a detailed way to find out what matters most to your users.</p>
       
       <h3>Why Proper Top Task Research Matters</h3>
-      <p>True Top Task identification involves:</p>
+      <p>True Top Task research includes:</p>
       <ul>
         <li>Direct user research and surveys</li>
         <li>Analysis of user intent and goals</li>
@@ -88,7 +88,7 @@ title: Accessible Top Task URL Finder
       </ul>
       
       <h3>When This Tool Can Help</h3>
-      <p>While not a replacement for proper research, this tool can be useful for:</p>
+      <p>While not a replacement for full research, this tool can help with:</p>
       <ul>
         <li>Quick content audits</li>
         <li>Getting a sense of site structure</li>

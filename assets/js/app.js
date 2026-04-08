@@ -74,7 +74,7 @@ function maybeWarnFewResults(result) {
   if (urlCount <= FEW_RESULTS_THRESHOLD) {
     renderStatus(
       'warning',
-      'We are sorry that we were unable to return any additional URLs. Please try another URL, or press the \u201cCopy Prompt for LLM\u201d button below, and paste the results into whatever AI you prefer. This should return a better list of URLs.'
+      'We couldn\u2019t find any more pages. Please try another address, or click \u201cCopy Prompt for LLM\u201d and paste the results into an AI tool like ChatGPT or Ollama. This can help you get a better list.'
     );
   }
 }
