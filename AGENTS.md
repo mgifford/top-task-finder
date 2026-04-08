@@ -135,12 +135,13 @@ When modifying workflows that commit files back to the repository, use `git pull
 
 ## Testing
 
-There is no automated unit-test suite. Validation is done through:
+```bash
+# Run all tests
+node --test tests/*.test.mjs
 
-1. **Jekyll build** (`bundle exec jekyll build`) — confirms no template errors.
-2. **Accessibility audit** — run Lighthouse, axe DevTools, or pa11y against the live or locally served site (see [`ACCESSIBILITY.md § Testing Guidelines`](ACCESSIBILITY.md#testing-guidelines)).
-3. **Manual keyboard and screen-reader walkthrough** — follow the checklist in [`ACCESSIBILITY.md § Manual Testing`](ACCESSIBILITY.md#manual-testing).
-4. **Cache script** — run `node scripts/build-cache.mjs` against a known domain and verify the output JSON structure.
+# Run a single test file
+node --test tests/discovery.test.mjs
+```
 
 ---
 
@@ -152,9 +153,15 @@ There is no automated unit-test suite. Validation is done through:
 
 ---
 
-## Contributing
+## Gotchas
 
-Before opening a pull request:
+- **`canonicalizeHost` is duplicated**: `assets/js/app.js:53-59` duplicates the function from `assets/js/discovery.js`. Prefer importing from discovery.js.
+- **`NON_HTML_EXTENSION_PATTERN` mismatch**: Client (`discovery.js:50`) is missing `json` that server (`build-cache.mjs:80`) has. Keep them in sync.
+- **DuckDuckGo dependency**: `discovery.js:363` uses DuckDuckGo HTML search which may be blocked/rate-limited. Not critical but may need fallback in production.
+
+---
+
+## Before Opening a Pull Request
 
 1. Verify the Jekyll site builds without errors (`bundle exec jekyll build`).
 2. Confirm all accessibility requirements above are met.
