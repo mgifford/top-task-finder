@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-04-06T21:33:39.763Z",
+  "generatedAt": "2026-04-17T17:11:09.480Z",
   "targets": [
     {
-      "fileName": "argentina.gob.ar-100.json",
-      "canonicalHost": "argentina.gob.ar",
+      "fileName": "cityofkingston.ca-100.json",
+      "canonicalHost": "cityofkingston.ca",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-04-06T21:33:39.761Z",
+      "generatedAt": "2026-04-17T17:11:09.479Z",
       "warnings": []
     }
   ]
