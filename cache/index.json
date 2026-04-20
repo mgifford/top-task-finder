@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-04-17T17:11:09.480Z",
+  "generatedAt": "2026-04-20T18:04:46.394Z",
   "targets": [
     {
-      "fileName": "cityofkingston.ca-100.json",
-      "canonicalHost": "cityofkingston.ca",
+      "fileName": "ufo50.miraheze.org-100.json",
+      "canonicalHost": "ufo50.miraheze.org",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-04-17T17:11:09.479Z",
+      "generatedAt": "2026-04-20T18:04:46.392Z",
       "warnings": []
     }
   ]
