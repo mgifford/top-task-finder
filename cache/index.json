@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-04-20T18:04:46.394Z",
+  "generatedAt": "2026-04-22T10:12:17.026Z",
   "targets": [
     {
-      "fileName": "ufo50.miraheze.org-100.json",
-      "canonicalHost": "ufo50.miraheze.org",
+      "fileName": "adur-worthing.gov.uk-100.json",
+      "canonicalHost": "adur-worthing.gov.uk",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-04-20T18:04:46.392Z",
-      "warnings": []
+      "returnedCount": 56,
+      "generatedAt": "2026-04-22T10:12:17.024Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Crawling discovered 56 additional URLs (crawled 3 pages)"
+      ]
     }
   ]
 }

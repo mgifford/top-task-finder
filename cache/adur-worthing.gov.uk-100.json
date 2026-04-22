@@ -1,0 +1,122 @@
+{
+  "requestId": "cache-1776852731561-64590",
+  "selectedUrls": [
+    "https://adur-worthing.gov.uk/",
+    "https://adur-worthing.gov.uk/accessibility/",
+    "https://adur-worthing.gov.uk/facebook/",
+    "https://adur-worthing.gov.uk/payments/",
+    "https://adur-worthing.gov.uk/report-it/",
+    "https://adur-worthing.gov.uk/elections-and-voting/apply-for-a-postal-or-proxy-vote/",
+    "https://adur-worthing.gov.uk/elections-and-voting/register-to-vote/",
+    "https://adur-worthing.gov.uk/residents/other-services/",
+    "https://adur-worthing.gov.uk/cost-of-living-support/",
+    "https://adur-worthing.gov.uk/report-website-problem/?problem-page-url=%2Faccessibility%2F",
+    "https://adur-worthing.gov.uk/benefits/",
+    "https://adur-worthing.gov.uk/bin-day/",
+    "https://adur-worthing.gov.uk/businesses/",
+    "https://adur-worthing.gov.uk/consultations/",
+    "https://adur-worthing.gov.uk/contact-us/",
+    "https://adur-worthing.gov.uk/cookies/",
+    "https://adur-worthing.gov.uk/council-tax/",
+    "https://adur-worthing.gov.uk/elections-and-voting/",
+    "https://adur-worthing.gov.uk/environmental-health/",
+    "https://adur-worthing.gov.uk/housing/",
+    "https://adur-worthing.gov.uk/instagram/",
+    "https://adur-worthing.gov.uk/jobs/",
+    "https://adur-worthing.gov.uk/leisure/",
+    "https://adur-worthing.gov.uk/licensing-consultations/",
+    "https://adur-worthing.gov.uk/news/",
+    "https://adur-worthing.gov.uk/parking/",
+    "https://adur-worthing.gov.uk/planning/",
+    "https://adur-worthing.gov.uk/privacy-notice/",
+    "https://adur-worthing.gov.uk/recycling-and-waste/",
+    "https://adur-worthing.gov.uk/residents/",
+    "https://adur-worthing.gov.uk/streets-and-travel/",
+    "https://adur-worthing.gov.uk/the-councils/",
+    "https://adur-worthing.gov.uk/translation/",
+    "https://adur-worthing.gov.uk/twitter/",
+    "https://adur-worthing.gov.uk/visitors/",
+    "https://adur-worthing.gov.uk/youtube/",
+    "https://adur-worthing.gov.uk/about-the-councils/neighbouring-councils/",
+    "https://adur-worthing.gov.uk/cookies/cookie-settings/",
+    "https://adur-worthing.gov.uk/council-tax/moving-and-changes/",
+    "https://adur-worthing.gov.uk/elections-and-voting/photographic-voter-id/",
+    "https://adur-worthing.gov.uk/news/pr26-035.html",
+    "https://adur-worthing.gov.uk/news/pr26-036.html",
+    "https://adur-worthing.gov.uk/news/pr26-037.html",
+    "https://adur-worthing.gov.uk/elections-and-voting/upcoming-elections/elections-07-05-2026/",
+    "https://adur-worthing.gov.uk/planning/applications/view/",
+    "https://adur-worthing.gov.uk/about-the-councils/",
+    "https://adur-worthing.gov.uk/adur-community-grants/",
+    "https://adur-worthing.gov.uk/email/?email-page-url=%2Faccessibility%2F&amp;email-page-to-address=webmaster@adur-worthing.gov.uk&amp;email-show-postal-address=&amp;ra=",
+    "https://adur-worthing.gov.uk/about-the-councils/website/",
+    "https://adur-worthing.gov.uk/benefits/privacy-notice-self-isolation-grants/",
+    "https://adur-worthing.gov.uk/benefits/privacy-notice/",
+    "https://adur-worthing.gov.uk/building-control/privacy-notice/",
+    "https://adur-worthing.gov.uk/business-rates/privacy-notice/",
+    "https://adur-worthing.gov.uk/contact-us/privacy-notice/",
+    "https://adur-worthing.gov.uk/about-the-councils/legal/data-protection/",
+    "https://adur-worthing.gov.uk/beaches-and-foreshore/coastal-office/privacy-notice/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 56,
+  "randomShareCount": 0,
+  "shortfallCount": 44,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": true,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 56,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 56,
+  "discoverySummary": {
+    "requestId": "cache-1776852731561-64590",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "No sitemap found at common locations or robots.txt",
+      "Crawling discovered 56 additional URLs (crawled 3 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 71,
+        "crawl": 56
+      },
+      "accepted": {
+        "homepage-fallback": 44,
+        "crawl": 12
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": true,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-04-22T10:12:17.024Z",
+  "generatedBy": "github-action-cache"
+}
