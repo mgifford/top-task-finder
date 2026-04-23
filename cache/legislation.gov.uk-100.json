@@ -1,0 +1,99 @@
+{
+  "requestId": "cache-1776913218528-25223",
+  "selectedUrls": [
+    "http://legislation.gov.uk/",
+    "http://legislation.gov.uk/accessibility",
+    "http://legislation.gov.uk/search",
+    "http://legislation.gov.uk/search/point-in-time",
+    "http://legislation.gov.uk/help",
+    "http://legislation.gov.uk/about-us",
+    "http://legislation.gov.uk/changestolegislation",
+    "http://legislation.gov.uk/contact-us",
+    "http://legislation.gov.uk/explore",
+    "http://legislation.gov.uk/faqs",
+    "http://legislation.gov.uk/glossary",
+    "http://legislation.gov.uk/new",
+    "http://legislation.gov.uk/sitemap",
+    "http://legislation.gov.uk/usefullinks",
+    "http://legislation.gov.uk/explore/ni",
+    "http://legislation.gov.uk/explore/scotland",
+    "http://legislation.gov.uk/explore/uk",
+    "http://legislation.gov.uk/explore/wales",
+    "http://legislation.gov.uk/new/ni",
+    "http://legislation.gov.uk/new/scotland",
+    "http://legislation.gov.uk/new/uk",
+    "http://legislation.gov.uk/new/wales",
+    "https://legislation.gov.uk/contributors",
+    "https://legislation.gov.uk/cookiepolicy",
+    "https://legislation.gov.uk/cy/",
+    "https://legislation.gov.uk/new-design",
+    "https://legislation.gov.uk/privacynotice",
+    "https://legislation.gov.uk/research-tools",
+    "https://legislation.gov.uk/new/uksi",
+    "https://legislation.gov.uk/explore/legislatures/eu",
+    "https://legislation.gov.uk/explore/legislatures/ni",
+    "https://legislation.gov.uk/explore/legislatures/scotland",
+    "https://legislation.gov.uk/explore/legislatures/uk",
+    "https://legislation.gov.uk/explore/legislatures/wales"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 34,
+  "randomShareCount": 0,
+  "shortfallCount": 66,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": true,
+    "accessibility": true,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": true,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 34,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 34,
+  "discoverySummary": {
+    "requestId": "cache-1776913218528-25223",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling discovered 21 additional URLs (crawled 1 pages)"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 23,
+        "homepage-fallback": 44,
+        "crawl": 21
+      },
+      "accepted": {
+        "sitemap": 22,
+        "homepage-fallback": 12
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": true,
+      "accessibility": true,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": true,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-04-23T03:00:20.369Z",
+  "generatedBy": "github-action-cache"
+}
