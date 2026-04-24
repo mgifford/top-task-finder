@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-04-23T03:00:20.370Z",
+  "generatedAt": "2026-04-24T18:12:43.610Z",
   "targets": [
     {
-      "fileName": "legislation.gov.uk-100.json",
-      "canonicalHost": "legislation.gov.uk",
+      "fileName": "data.cms.gov-100.json",
+      "canonicalHost": "data.cms.gov",
       "requestedCount": 100,
-      "returnedCount": 34,
-      "generatedAt": "2026-04-23T03:00:20.369Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-04-24T18:12:43.608Z",
       "warnings": [
-        "Crawling discovered 21 additional URLs (crawled 1 pages)"
+        "Homepage fallback found 0 links from https://data.cms.gov/"
       ]
     }
   ]
