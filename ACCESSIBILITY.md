@@ -108,15 +108,16 @@ All interactive elements are fully keyboard accessible:
 ### Navigation Order
 
 1. Theme toggle button (fixed position)
-2. Domain URL input
-3. Find Popular URLs button
-4. URL results textarea
-5. Copy URLs button
-6. Copy Prompt for LLM button
-7. Scan HTML button
-8. Scan Alt Text button
-9. Clear cache and rescan button (when visible)
-10. Footer GitHub link
+2. Suite navigation links (Top Task Finder, Open Scans, Alt Text Scan)
+3. Domain URL input
+4. Find Popular URLs button
+5. URL results textarea
+6. Copy URLs button
+7. Copy Prompt for LLM button
+8. Scan HTML button
+9. Scan Alt Text button
+10. Clear cache and rescan button (when visible)
+11. Footer GitHub link
 
 ### Keyboard Shortcuts
 
@@ -149,8 +150,10 @@ The application uses appropriate ARIA attributes throughout:
   - Server crawl status
   - Hint text for form limits
 - **`role="status"`**: Status region for progress messages
-- **`aria-label`**: Descriptive labels for icon-only buttons
+- **`aria-label`**: Descriptive labels for icon-only buttons and landmark regions
   - Theme toggle button dynamically updates
+  - Suite navigation: `aria-label="Accessibility tools suite"` on `<nav>` element
+- **`aria-current="page"`**: Marks the active link in the suite navigation bar
 - **`aria-hidden="true"`**: Decorative SVG icons hidden from screen readers
 - **`spellcheck="false"`**: Disabled on URL output textarea
 
@@ -180,6 +183,7 @@ All form inputs have explicit `<label>` elements with `for` attributes:
 The application uses semantic HTML5 elements:
 
 - **`<main>`**: Primary content container with `role` implicit
+- **`<nav>`**: Suite navigation bar linking related accessibility tools
 - **`<header>`**: Hero section with page title
 - **`<section>`**: Distinct content sections
 - **`<form>`**: Form structure with proper validation
