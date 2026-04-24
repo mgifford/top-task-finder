@@ -93,7 +93,7 @@ This section documents how artificial intelligence has been used in this project
 | 2026-03 | Claude Sonnet 4.5 (Anthropic) | Rewrote `README.md` to be welcoming and user-focused; moved technical setup content to `docs/setup-guide.md` |
 | 2026-03 | Claude Sonnet 4.6 (Anthropic) | Created `STYLES.md` documenting CivicActions brand design and content standards; updated `assets/css/app.css` to use CivicActions brand color palette; updated `ACCESSIBILITY.md` color contrast values to reflect new palette |
 | 2026-04 | Gemini 3 Flash (Google) | Added "Next Steps" workflow integration with `open-scans` and `alt-text-scan` tools; updated `index.md`, `assets/js/app.js`, and `assets/css/app.css` to support new scanner actions |
-| 2026-04 | Claude Sonnet 4.5 (Anthropic) | Added suite navigation bar linking Top Task Finder, Open Scans, and Alt Text Scan; updated `_layouts/default.html`, `assets/css/app.css`, and `ACCESSIBILITY.md` |
+| 2026-04 | Claude Sonnet 4.5 (Anthropic) | Added suite navigation bar linking Top Task Finder, Open Scans, and Alt Text Scan; updated `_layouts/default.html`, `assets/css/app.css`, and `ACCESSIBILITY.md`. Created `DEFINITION_OF_DONE.md` — project definition of done covering URL discovery, accessibility, downstream tool integration, CI/automation, performance, and a CivicActions acceptance checklist. |
 
 AI coding agents are used to build and maintain this project. The [`AGENTS.md`](AGENTS.md) file provides guidance for these agents and lists the specific instructions they follow. Any AI agent that makes changes to this repository is required to add an entry to the table above describing the model and what it did.
 
