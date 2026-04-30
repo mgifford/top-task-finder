@@ -1,5 +1,5 @@
 {
-  "requestId": "cache-1772222308446-95842",
+  "requestId": "cache-1777576374628-26271",
   "selectedUrls": [
     "https://medicare.gov/",
     "https://medicare.gov/about-us/accessibility-nondiscrimination-notice",
@@ -43,6 +43,7 @@
     "https://medicare.gov/basics/costs/pay-premiums/medicare-easy-pay",
     "https://medicare.gov/basics/costs/pay-premiums/online-bill-pay",
     "https://medicare.gov/basics/get-started-with-medicare/using-medicare/how-to-get-medicare-services",
+    "https://medicare.gov/account/login/help",
     "https://medicare.gov/basics/costs/help",
     "https://medicare.gov/basics/forms-publications-mailings/mailings/costs-and-coverage/change-in-social-security-payment",
     "https://medicare.gov/care-compare/resources/about-this-tool",
@@ -60,6 +61,7 @@
     "https://medicare.gov/eligibilitypremiumcalc",
     "https://medicare.gov/glossary",
     "https://medicare.gov/go-digital",
+    "https://medicare.gov/health-apps",
     "https://medicare.gov/health-drug-plans",
     "https://medicare.gov/index",
     "https://medicare.gov/medical-equipment-suppliers",
@@ -78,6 +80,10 @@
     "https://medicare.gov/about-us/using-this-site",
     "https://medicare.gov/account/create-account",
     "https://medicare.gov/account/login",
+    "https://medicare.gov/health-apps/flexpa",
+    "https://medicare.gov/health-apps/healthex",
+    "https://medicare.gov/health-apps/january.ai",
+    "https://medicare.gov/health-apps/welldoc",
     "https://medicare.gov/health-drug-plans/coordination",
     "https://medicare.gov/health-drug-plans/health-plans",
     "https://medicare.gov/health-drug-plans/medigap",
@@ -94,13 +100,7 @@
     "https://medicare.gov/health-drug-plans/health-plans/your-health-plan-options",
     "https://medicare.gov/health-drug-plans/medigap/ready-to-buy",
     "https://medicare.gov/medigap-supplemental-insurance-plans/",
-    "https://medicare.gov/sitemap",
-    "https://medicare.gov/health-drug-plans/part-d/basics/choose-coverage",
-    "https://medicare.gov/providers-services/claims-appeals-complaints/claims/share-your-medicare-claims",
-    "https://medicare.gov/coverage/pre-exposure-prophylaxis-prep-for-hiv-prevention",
-    "https://medicare.gov/health-drug-plans/part-d/basics",
-    "https://medicare.gov/coverage/kidney-transplants",
-    "https://medicare.gov/publications/12085-opioid-treatment-programs.pdf-0"
+    "https://medicare.gov/sitemap"
   ],
   "requestedCount": 100,
   "returnedCount": 100,
@@ -120,9 +120,9 @@
     "primary": 100,
     "additional": 0
   },
-  "totalDiscoveredPages": 445,
+  "totalDiscoveredPages": 446,
   "discoverySummary": {
-    "requestId": "cache-1772222308446-95842",
+    "requestId": "cache-1777576374628-26271",
     "sourcesAttempted": [
       "sitemap",
       "homepage-fallback"
@@ -136,12 +136,13 @@
     "warnings": [],
     "sourceCounts": {
       "raw": {
-        "sitemap": 936,
-        "homepage-fallback": 42
+        "sitemap": 921,
+        "homepage-fallback": 43,
+        "crawl": 0
       },
       "accepted": {
         "critical-pages": 1,
-        "sitemap": 442,
+        "sitemap": 443,
         "homepage-fallback": 2
       }
     },
@@ -157,6 +158,6 @@
     },
     "scoreDiagnostics": {}
   },
-  "generatedAt": "2026-02-27T19:58:28.988Z",
+  "generatedAt": "2026-04-30T19:12:55.426Z",
   "generatedBy": "github-action-cache"
 }
