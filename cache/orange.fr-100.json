@@ -1,0 +1,69 @@
+{
+  "requestId": "cache-1779789787848-40809",
+  "selectedUrls": [
+    "https://orange.fr/",
+    "https://orange.fr/plan-site",
+    "https://orange.fr/portail"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 3,
+  "randomShareCount": 0,
+  "shortfallCount": 97,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 3,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 3,
+  "discoverySummary": {
+    "requestId": "cache-1779789787848-40809",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Homepage fallback found 0 links from https://www.orange.fr/portail",
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 2,
+        "homepage-fallback": 0,
+        "crawl": 0
+      },
+      "accepted": {
+        "critical-pages": 1,
+        "sitemap": 2
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-05-26T10:03:12.815Z",
+  "generatedBy": "github-action-cache"
+}

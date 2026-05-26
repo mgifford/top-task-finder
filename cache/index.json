@@ -1,13 +1,16 @@
 {
-  "generatedAt": "2026-04-30T19:12:55.427Z",
+  "generatedAt": "2026-05-26T10:03:12.816Z",
   "targets": [
     {
-      "fileName": "medicare.gov-100.json",
-      "canonicalHost": "medicare.gov",
+      "fileName": "orange.fr-100.json",
+      "canonicalHost": "orange.fr",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-04-30T19:12:55.426Z",
-      "warnings": []
+      "returnedCount": 3,
+      "generatedAt": "2026-05-26T10:03:12.815Z",
+      "warnings": [
+        "Homepage fallback found 0 links from https://www.orange.fr/portail",
+        "Crawling found no additional URLs after checking 1 pages"
+      ]
     }
   ]
 }
