@@ -1,17 +1,13 @@
 {
-  "generatedAt": "2026-06-01T12:30:13.643Z",
+  "generatedAt": "2026-06-01T12:33:50.836Z",
   "targets": [
     {
-      "fileName": "openpaymentsdata.cms.gov-100.json",
-      "canonicalHost": "openpaymentsdata.cms.gov",
+      "fileName": "healthcare.gov-100.json",
+      "canonicalHost": "healthcare.gov",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-06-01T12:30:13.642Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback found 0 links from https://openpaymentsdata.cms.gov/",
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-06-01T12:33:50.835Z",
+      "warnings": []
     }
   ]
 }
