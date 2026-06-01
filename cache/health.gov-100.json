@@ -1,0 +1,91 @@
+{
+  "requestId": "cache-1780317784327-48098",
+  "selectedUrls": [
+    "https://health.gov/",
+    "https://health.gov/careers/how-apply-jobs-oash",
+    "https://health.gov/about-oash",
+    "https://health.gov/all-american-fitness-challenge-competition",
+    "https://health.gov/careers",
+    "https://health.gov/grants",
+    "https://health.gov/office-assistant-secretary-health",
+    "https://health.gov/priorities",
+    "https://health.gov/about-oash/contact-us",
+    "https://health.gov/about-oash/io-programs-initiatives",
+    "https://health.gov/about-oash/news",
+    "https://health.gov/about-oash/oash-leadership",
+    "https://health.gov/about-oash/oash-regional-offices",
+    "https://health.gov/about-oash/office-assistant-secretary-health-organizational-chart",
+    "https://health.gov/advisory-committees/presidential-advisory-council-combating-antibiotic-resistant-bacteria-paccarb",
+    "https://health.gov/careers/current-job-opportunities",
+    "https://health.gov/careers/events-webinars",
+    "https://health.gov/careers/future-job-opportunities",
+    "https://health.gov/careers/pathways-program",
+    "https://health.gov/careers/understanding-your-eligibility",
+    "https://health.gov/grants/challenge-competitions",
+    "https://health.gov/grants/co-sponsorships",
+    "https://health.gov/grants/contracts",
+    "https://health.gov/grants/important-dates",
+    "https://health.gov/grants/lifecycle",
+    "https://health.gov/our-work/nutrition-physical-activity/dietary-guidelines"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 26,
+  "randomShareCount": 0,
+  "shortfallCount": 74,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": true,
+    "contact": false,
+    "about": false,
+    "help": false,
+    "resources": false
+  },
+  "languageDistribution": {
+    "primary": 26,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 26,
+  "discoverySummary": {
+    "requestId": "cache-1780317784327-48098",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 1,
+        "homepage-fallback": 100,
+        "crawl": 0
+      },
+      "accepted": {
+        "sitemap": 1,
+        "homepage-fallback": 25
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": true,
+      "contact": false,
+      "about": false,
+      "help": false,
+      "resources": false
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-06-01T12:43:05.352Z",
+  "generatedBy": "github-action-cache"
+}
