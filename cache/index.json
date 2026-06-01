@@ -1,13 +1,23 @@
 {
-  "generatedAt": "2026-06-01T12:33:50.836Z",
+  "generatedAt": "2026-06-01T12:37:27.310Z",
   "targets": [
     {
-      "fileName": "healthcare.gov-100.json",
-      "canonicalHost": "healthcare.gov",
+      "fileName": "cdc.gov-100.json",
+      "canonicalHost": "cdc.gov",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-06-01T12:33:50.835Z",
-      "warnings": []
+      "generatedAt": "2026-06-01T12:37:27.308Z",
+      "warnings": [
+        "Sitemap fetch failed for https://www.cdc.gov/contact/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/covid19-school-testing/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/covidtreatment/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/covidvaccines/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/other/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/protect-children/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/search/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap fetch failed for https://www.cdc.gov/tratamientoscovid/wcms-auto-sitemap.xml: HTTP 404 Not Found",
+        "Sitemap traversal limit reached; skipped additional sitemap files."
+      ]
     }
   ]
 }
