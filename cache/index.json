@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-06-01T12:43:05.354Z",
+  "generatedAt": "2026-06-03T17:20:47.178Z",
   "targets": [
     {
-      "fileName": "health.gov-100.json",
-      "canonicalHost": "health.gov",
+      "fileName": "fairfaxcounty.gov-100.json",
+      "canonicalHost": "fairfaxcounty.gov",
       "requestedCount": 100,
-      "returnedCount": 26,
-      "generatedAt": "2026-06-01T12:43:05.352Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-06-03T17:20:47.176Z",
       "warnings": [
-        "Crawling found no additional URLs after checking 1 pages"
+        "No sitemap found at common locations or robots.txt"
       ]
     }
   ]
