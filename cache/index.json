@@ -1,14 +1,17 @@
 {
-  "generatedAt": "2026-06-03T17:20:47.178Z",
+  "generatedAt": "2026-06-05T15:01:49.966Z",
   "targets": [
     {
-      "fileName": "fairfaxcounty.gov-100.json",
-      "canonicalHost": "fairfaxcounty.gov",
+      "fileName": "virginia.gov-100.json",
+      "canonicalHost": "virginia.gov",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-06-03T17:20:47.176Z",
+      "returnedCount": 1,
+      "generatedAt": "2026-06-05T15:01:49.964Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt"
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: fetch failed: fetch failed",
+        "Failed to crawl https://virginia.gov/: fetch failed: fetch failed",
+        "Crawling found no additional URLs after checking 0 pages"
       ]
     }
   ]
