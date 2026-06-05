@@ -1,17 +1,14 @@
 {
-  "generatedAt": "2026-06-05T15:01:49.966Z",
+  "generatedAt": "2026-06-05T15:40:44.005Z",
   "targets": [
     {
-      "fileName": "virginia.gov-100.json",
-      "canonicalHost": "virginia.gov",
+      "fileName": "mass.gov-100.json",
+      "canonicalHost": "mass.gov",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-06-05T15:01:49.964Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-06-05T15:40:44.004Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: fetch failed: fetch failed",
-        "Failed to crawl https://virginia.gov/: fetch failed: fetch failed",
-        "Crawling found no additional URLs after checking 0 pages"
+        "Sitemap traversal limit reached; skipped additional sitemap files."
       ]
     }
   ]
