@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-06-05T15:40:44.005Z",
+  "generatedAt": "2026-06-12T08:31:20.209Z",
   "targets": [
     {
-      "fileName": "mass.gov-100.json",
-      "canonicalHost": "mass.gov",
+      "fileName": "agile.coop-100.json",
+      "canonicalHost": "agile.coop",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-06-05T15:40:44.004Z",
-      "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files."
-      ]
+      "generatedAt": "2026-06-12T08:31:20.207Z",
+      "warnings": []
     }
   ]
 }
