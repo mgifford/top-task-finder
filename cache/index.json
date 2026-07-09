@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-06-12T08:31:20.209Z",
+  "generatedAt": "2026-07-09T09:58:08.949Z",
   "targets": [
     {
-      "fileName": "agile.coop-100.json",
-      "canonicalHost": "agile.coop",
+      "fileName": "cc-coeurdegaronne.fr-100.json",
+      "canonicalHost": "cc-coeurdegaronne.fr",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-06-12T08:31:20.207Z",
+      "generatedAt": "2026-07-09T09:58:08.948Z",
       "warnings": []
     }
   ]
