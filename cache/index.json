@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-07-09T09:58:08.949Z",
+  "generatedAt": "2026-07-31T14:10:44.542Z",
   "targets": [
     {
-      "fileName": "cc-coeurdegaronne.fr-100.json",
-      "canonicalHost": "cc-coeurdegaronne.fr",
+      "fileName": "iom.int-100.json",
+      "canonicalHost": "iom.int",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-07-09T09:58:08.948Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-07-31T14:10:44.541Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://iom.int/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }
