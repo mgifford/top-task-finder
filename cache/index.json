@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-08-05T13:25:00.406Z",
+  "generatedAt": "2026-08-05T13:27:35.823Z",
   "targets": [
     {
-      "fileName": "gov.bc.ca-100.json",
-      "canonicalHost": "gov.bc.ca",
+      "fileName": "www2.gov.bc.ca-100.json",
+      "canonicalHost": "www2.gov.bc.ca",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-08-05T13:25:00.403Z",
-      "warnings": [
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-08-05T13:27:35.800Z",
+      "warnings": []
     }
   ]
 }
