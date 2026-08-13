@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-08-05T13:27:35.823Z",
+  "generatedAt": "2026-08-13T14:44:54.579Z",
   "targets": [
     {
-      "fileName": "www2.gov.bc.ca-100.json",
-      "canonicalHost": "www2.gov.bc.ca",
+      "fileName": "tarnoff.info-100.json",
+      "canonicalHost": "tarnoff.info",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-08-05T13:27:35.800Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-08-13T14:44:54.577Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://tarnoff.info/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }
