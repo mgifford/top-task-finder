@@ -1,17 +1,14 @@
 {
-  "generatedAt": "2026-08-13T14:44:54.579Z",
+  "generatedAt": "2026-08-31T16:51:59.124Z",
   "targets": [
     {
-      "fileName": "tarnoff.info-100.json",
-      "canonicalHost": "tarnoff.info",
+      "fileName": "skymovies.ir-100.json",
+      "canonicalHost": "skymovies.ir",
       "requestedCount": 100,
-      "returnedCount": 1,
-      "generatedAt": "2026-08-13T14:44:54.577Z",
+      "returnedCount": 100,
+      "generatedAt": "2026-08-31T16:51:59.117Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Homepage fallback unavailable: HTTP 403 Forbidden",
-        "Failed to crawl https://tarnoff.info/: HTTP 403 Forbidden",
-        "Crawling found no additional URLs after checking 0 pages"
+        "Sitemap traversal limit reached; skipped additional sitemap files."
       ]
     }
   ]
