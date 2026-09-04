@@ -1,14 +1,15 @@
 {
-  "generatedAt": "2026-08-31T16:51:59.124Z",
+  "generatedAt": "2026-09-04T23:54:17.714Z",
   "targets": [
     {
-      "fileName": "skymovies.ir-100.json",
-      "canonicalHost": "skymovies.ir",
+      "fileName": "webaim.org-100.json",
+      "canonicalHost": "webaim.org",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-08-31T16:51:59.117Z",
+      "returnedCount": 32,
+      "generatedAt": "2026-09-04T23:54:17.712Z",
       "warnings": [
-        "Sitemap traversal limit reached; skipped additional sitemap files."
+        "No sitemap found at common locations or robots.txt",
+        "Crawling discovered 4 additional URLs (crawled 2 pages)"
       ]
     }
   ]
