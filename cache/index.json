@@ -1,16 +1,13 @@
 {
-  "generatedAt": "2026-09-04T23:54:17.714Z",
+  "generatedAt": "2026-09-14T14:15:27.552Z",
   "targets": [
     {
-      "fileName": "webaim.org-100.json",
-      "canonicalHost": "webaim.org",
+      "fileName": "drupalasheville.com-100.json",
+      "canonicalHost": "drupalasheville.com",
       "requestedCount": 100,
-      "returnedCount": 32,
-      "generatedAt": "2026-09-04T23:54:17.712Z",
-      "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 4 additional URLs (crawled 2 pages)"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-09-14T14:15:27.550Z",
+      "warnings": []
     }
   ]
 }
