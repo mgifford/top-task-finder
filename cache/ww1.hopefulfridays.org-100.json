@@ -1,0 +1,75 @@
+{
+  "requestId": "cache-1791764744770-22644",
+  "selectedUrls": [
+    "https://ww1.hopefulfridays.org/",
+    "https://ww1.hopefulfridays.org/about/",
+    "https://ww1.hopefulfridays.org/resources/",
+    "https://ww1.hopefulfridays.org/calendar/",
+    "https://ww1.hopefulfridays.org/donate/",
+    "https://ww1.hopefulfridays.org/events/",
+    "https://ww1.hopefulfridays.org/faqs/",
+    "https://ww1.hopefulfridays.org/join/",
+    "https://ww1.hopefulfridays.org/partnerships/",
+    "https://ww1.hopefulfridays.org/team/",
+    "https://ww1.hopefulfridays.org/volunteer/"
+  ],
+  "requestedCount": 100,
+  "returnedCount": 11,
+  "randomShareCount": 0,
+  "shortfallCount": 89,
+  "priorityCoverage": {
+    "homepage": true,
+    "search": false,
+    "accessibility": false,
+    "topTask": false,
+    "contact": false,
+    "about": true,
+    "help": false,
+    "resources": true
+  },
+  "languageDistribution": {
+    "primary": 11,
+    "additional": 0
+  },
+  "totalDiscoveredPages": 11,
+  "discoverySummary": {
+    "requestId": "cache-1791764744770-22644",
+    "sourcesAttempted": [
+      "sitemap",
+      "homepage-fallback",
+      "crawl"
+    ],
+    "fallbackUsed": true,
+    "fallbackTriggerReasons": [
+      "shortfall-or-priority-gap"
+    ],
+    "cacheHit": false,
+    "cacheCleared": false,
+    "warnings": [
+      "Crawling found no additional URLs after checking 1 pages"
+    ],
+    "sourceCounts": {
+      "raw": {
+        "sitemap": 0,
+        "homepage-fallback": 81,
+        "crawl": 0
+      },
+      "accepted": {
+        "homepage-fallback": 11
+      }
+    },
+    "priorityCoverage": {
+      "homepage": true,
+      "search": false,
+      "accessibility": false,
+      "topTask": false,
+      "contact": false,
+      "about": true,
+      "help": false,
+      "resources": true
+    },
+    "scoreDiagnostics": {}
+  },
+  "generatedAt": "2026-10-12T00:25:46.969Z",
+  "generatedBy": "github-action-cache"
+}

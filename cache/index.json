@@ -1,15 +1,14 @@
 {
-  "generatedAt": "2026-10-05T14:48:51.725Z",
+  "generatedAt": "2026-10-12T00:25:46.971Z",
   "targets": [
     {
-      "fileName": "sportireland.ie-100.json",
-      "canonicalHost": "sportireland.ie",
+      "fileName": "ww1.hopefulfridays.org-100.json",
+      "canonicalHost": "ww1.hopefulfridays.org",
       "requestedCount": 100,
-      "returnedCount": 69,
-      "generatedAt": "2026-10-05T14:48:51.724Z",
+      "returnedCount": 11,
+      "generatedAt": "2026-10-12T00:25:46.969Z",
       "warnings": [
-        "No sitemap found at common locations or robots.txt",
-        "Crawling discovered 69 additional URLs (crawled 5 pages)"
+        "Crawling found no additional URLs after checking 1 pages"
       ]
     }
   ]
