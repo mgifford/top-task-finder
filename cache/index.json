@@ -1,15 +1,13 @@
 {
-  "generatedAt": "2026-10-12T00:25:46.971Z",
+  "generatedAt": "2026-11-05T14:16:21.888Z",
   "targets": [
     {
-      "fileName": "ww1.hopefulfridays.org-100.json",
-      "canonicalHost": "ww1.hopefulfridays.org",
+      "fileName": "haringey.gov.uk-100.json",
+      "canonicalHost": "haringey.gov.uk",
       "requestedCount": 100,
-      "returnedCount": 11,
-      "generatedAt": "2026-10-12T00:25:46.969Z",
-      "warnings": [
-        "Crawling found no additional URLs after checking 1 pages"
-      ]
+      "returnedCount": 100,
+      "generatedAt": "2026-11-05T14:16:21.883Z",
+      "warnings": []
     }
   ]
 }
