@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-11-05T14:16:21.888Z",
+  "generatedAt": "2026-11-05T14:16:46.641Z",
   "targets": [
     {
-      "fileName": "haringey.gov.uk-100.json",
-      "canonicalHost": "haringey.gov.uk",
+      "fileName": "luton.gov.uk-100.json",
+      "canonicalHost": "luton.gov.uk",
       "requestedCount": 100,
       "returnedCount": 100,
-      "generatedAt": "2026-11-05T14:16:21.883Z",
+      "generatedAt": "2026-11-05T14:16:46.639Z",
       "warnings": []
     }
   ]
