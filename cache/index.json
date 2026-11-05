@@ -1,13 +1,18 @@
 {
-  "generatedAt": "2026-11-05T14:27:17.540Z",
+  "generatedAt": "2026-11-05T15:02:42.076Z",
   "targets": [
     {
-      "fileName": "bbc.co.uk-100.json",
-      "canonicalHost": "bbc.co.uk",
+      "fileName": "gateshead.gov.uk-100.json",
+      "canonicalHost": "gateshead.gov.uk",
       "requestedCount": 100,
-      "returnedCount": 100,
-      "generatedAt": "2026-11-05T14:27:17.534Z",
-      "warnings": []
+      "returnedCount": 1,
+      "generatedAt": "2026-11-05T15:02:42.074Z",
+      "warnings": [
+        "No sitemap found at common locations or robots.txt",
+        "Homepage fallback unavailable: HTTP 403 Forbidden",
+        "Failed to crawl https://gateshead.gov.uk/: HTTP 403 Forbidden",
+        "Crawling found no additional URLs after checking 0 pages"
+      ]
     }
   ]
 }
